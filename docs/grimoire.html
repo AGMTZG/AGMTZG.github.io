@@ -26,7 +26,7 @@
       --green:        #6bcb8b;
       --blue:         #7db9f0;
       --sidebar-w:    272px;
-      --topnav-h:     52px;
+      --nav-h:        72px;
       --mono:         'Fira Code', 'Figtree', monospace;
     }
 
@@ -41,65 +41,91 @@
       overflow-x: hidden;
     }
 
-    /* ── TOP NAV ── */
-    .top-nav {
+    /* ── NAV (dark variant for docs) ── */
+    nav {
       position: fixed; top: 0; left: 0; right: 0;
-      height: var(--topnav-h);
+      height: var(--nav-h);
       background: rgba(10,10,10,0.95);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
-      display: flex; align-items: center;
-      padding: 0 1.5rem; gap: 1rem;
       z-index: 200;
     }
-    .top-nav-back {
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      font-size: 0.82rem; font-weight: 500; letter-spacing: 0.01em;
-      color: var(--text-soft); text-decoration: none;
-      transition: color .2s;
-      flex-shrink: 0;
+    .nav-inner {
+      height: var(--nav-h); display: flex;
+      align-items: center; justify-content: space-between;
     }
-    .top-nav-back:hover { color: var(--text); }
-    .top-nav-back svg { width: 14px; height: 14px; }
-    .top-nav-sep { color: var(--text-faint); font-size: 0.9rem; }
-    .top-nav-title {
+    .logo {
       font-family: 'Merriweather', serif;
-      font-size: 0.82rem; font-weight: 700;
-      letter-spacing: 0.06em; text-transform: uppercase;
-      color: var(--text-soft);
-      flex: 1;
+      font-size: 1.1rem; font-weight: 900;
+      color: var(--text); text-decoration: none; letter-spacing: -0.3px;
     }
-    .top-nav-badge {
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      color: var(--text-faint);
-      background: var(--surface);
-      border: 1px solid var(--border-2);
-      padding: 0.2rem 0.5rem;
-      border-radius: 4px;
-    }
-    .top-nav-gh {
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      font-size: 0.82rem; font-weight: 600;
+    .logo span { color: var(--purple); }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a {
+      font-family: 'Figtree', sans-serif;
+      font-weight: 500; font-size: 0.95rem;
       color: var(--text-soft); text-decoration: none;
-      transition: color .2s;
+      transition: color .2s; position: relative;
     }
-    .top-nav-gh:hover { color: var(--text); }
-    .top-nav-gh svg { width: 16px; height: 16px; fill: currentColor; }
+    .nav-links a::after {
+      content: ''; position: absolute;
+      bottom: -3px; left: 0; width: 0; height: 2px;
+      background: var(--purple); border-radius: 2px;
+      transition: width 0.25s ease;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+    .nav-cta {
+      width: 38px; height: 38px; background: var(--surface);
+      border: 1px solid var(--border-2); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; text-decoration: none;
+      transition: border-color .2s, transform .2s;
+    }
+    .nav-cta:hover { border-color: var(--purple); transform: scale(1.08); }
+    .nav-cta svg { width: 16px; height: 16px; fill: var(--text-soft); }
+    .hamburger {
+      display: none; flex-direction: column;
+      gap: 5px; cursor: pointer;
+      background: none; border: none; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--text-soft); border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu {
+      display: none; position: fixed;
+      top: var(--nav-h); left: 0; right: 0;
+      background: #0d0d0d;
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 2rem 2rem;
+      z-index: 199; flex-direction: column; gap: 1.2rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'Merriweather', serif;
+      font-size: 1.2rem; font-weight: 700;
+      color: var(--text); text-decoration: none; transition: color .2s;
+    }
+    .mobile-menu a:hover { color: var(--purple); }
 
     /* ── LAYOUT ── */
     .docs-layout {
       display: grid;
       grid-template-columns: var(--sidebar-w) 1fr;
       min-height: 100vh;
-      padding-top: var(--topnav-h);
+      padding-top: var(--nav-h);
     }
 
     /* ── SIDEBAR ── */
     .sidebar {
       position: sticky;
-      top: var(--topnav-h);
-      height: calc(100vh - var(--topnav-h));
+      top: var(--nav-h);
+      height: calc(100vh - var(--nav-h));
       overflow-y: auto;
       border-right: 1px solid var(--border);
       background: rgba(10,10,10,0.6);
@@ -212,7 +238,7 @@
       font-weight: 900; line-height: 1.15;
       color: var(--text);
       margin-bottom: 1rem;
-      scroll-margin-top: calc(var(--topnav-h) + 2rem);
+      scroll-margin-top: calc(var(--nav-h) + 2rem);
     }
 
     h3.doc-h3 {
@@ -440,7 +466,7 @@
     .doc-divider { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
 
     /* ── SCROLL MARGIN ── */
-    [id] { scroll-margin-top: calc(var(--topnav-h) + 1.5rem); }
+    [id] { scroll-margin-top: calc(var(--nav-h) + 1.5rem); }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
@@ -456,20 +482,7 @@
 </head>
 <body>
 
-  <!-- TOP NAV -->
-  <nav class="top-nav">
-    <a class="top-nav-back" href="../index.html">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-      Portfolio
-    </a>
-    <span class="top-nav-sep">/</span>
-    <span class="top-nav-title">Grimoire Documentation</span>
-    <span class="top-nav-badge">v1.0.0</span>
-    <a class="top-nav-gh" href="https://github.com/AGMTZG/grimoire" target="_blank">
-      <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.09.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.603-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.461-1.11-1.461-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.088 2.91.832.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.268 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.026 2.747-1.026.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.577.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
-      GitHub
-    </a>
-  </nav>
+  <div id="nav-placeholder"></div>
 
   <div class="docs-layout">
 
@@ -1336,6 +1349,9 @@ shopify theme dev --store your-store.myshopify.com
 
     </main>
   </div>
+
+  <script>window.SITE_ROOT = '../'; window.NAV_ACTIVE = 'docs';</script>
+  <script src="../snippets/nav.js"></script>
 
   <script>
     // Active TOC link based on scroll position using IntersectionObserver

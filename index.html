@@ -1004,40 +1004,7 @@
 
 <body>
 
-  <!-- ── Navigation ── -->
-  <nav id="navbar">
-    <div class="container">
-      <div class="nav-inner">
-        <a class="logo" href="#home">AGMTZG<span>.</span></a>
-
-        <ul class="nav-links">
-          <li><a href="#home" class="active">Home</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#docs">Docs</a></li>
-          <li><a href="#support">Support</a></li>
-        </ul>
-
-        <div style="display:flex;align-items:center;gap:1rem;">
-          <a class="nav-cta" href="#support" title="Get in touch">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
-            </svg>
-          </a>
-          <button class="hamburger" id="hamburger" aria-label="Menu">
-            <span></span><span></span><span></span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Mobile Menu -->
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="#home" onclick="closeMobile()">Home</a>
-    <a href="#projects" onclick="closeMobile()">Projects</a>
-    <a href="#docs" onclick="closeMobile()">Docs</a>
-    <a href="#support" onclick="closeMobile()">Support</a>
-  </div>
+  <div id="nav-placeholder"></div>
 
 
   <!-- ══════════════════════════════════════
@@ -1556,29 +1523,12 @@
 
 
   <script>
-    /* ── Nav scroll behavior ── */
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 20);
-    });
+    window.SITE_ROOT = './';
+    window.NAV_ACTIVE = 'home';
+  </script>
+  <script src="snippets/nav.js"></script>
 
-    /* ── Active nav link on scroll ── */
-    const sections = document.querySelectorAll('section[id], footer');
-    const navLinks = document.querySelectorAll('.nav-links a, .footer-links a');
-
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const id = entry.target.id || 'home';
-          navLinks.forEach(a => {
-            a.classList.toggle('active', a.getAttribute('href') === '#' + id);
-          });
-        }
-      });
-    }, { rootMargin: '-40% 0px -55% 0px' });
-
-    document.querySelectorAll('section[id]').forEach(s => observer.observe(s));
-
+  <script>
     /* ── Reveal on scroll ── */
     const reveals = document.querySelectorAll('.reveal');
     const revealObserver = new IntersectionObserver(entries => {
@@ -1602,20 +1552,6 @@
         document.getElementById(tab.dataset.panel).classList.add('active');
       });
     });
-
-    /* ── Mobile menu ── */
-    const hamburger = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobileMenu');
-
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('open');
-      mobileMenu.classList.toggle('open');
-    });
-
-    function closeMobile() {
-      hamburger.classList.remove('open');
-      mobileMenu.classList.remove('open');
-    }
 
     /* ── Contact form ── */
     function handleSubmit(e) {
