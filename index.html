@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Alberto Martinez — Software Engineer</title>
+  <title>Alberto Martinez — FullStack Developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -39,13 +39,13 @@
 
     /* ── Typography ── */
     h1, h2, h3, h4, .logo {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Merriweather', Georgia, serif;
       line-height: 1.1;
     }
 
     .section-title {
       font-size: clamp(2.4rem, 5vw, 3.8rem);
-      font-weight: 800;
+      font-weight: 900;
       color: var(--dark);
       margin-bottom: 2.5rem;
     }
@@ -178,7 +178,7 @@
     }
     .mobile-menu.open { display: flex; }
     .mobile-menu a {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Merriweather', Georgia, serif;
       font-size: 1.3rem;
       font-weight: 700;
       color: var(--dark);
@@ -214,10 +214,10 @@
 
     .hero-title {
       font-size: clamp(3.2rem, 6.5vw, 5.5rem);
-      font-weight: 800;
-      line-height: 1.0;
+      font-weight: 900;
+      line-height: 1.05;
       letter-spacing: -2px;
-      margin-bottom: 1.4rem;
+      margin-bottom: 2.8rem;
     }
     .hero-title .accent { color: var(--purple); }
 
@@ -310,7 +310,7 @@
       background: radial-gradient(circle at 30% 30%, rgba(107,33,254,0.3), transparent 60%);
     }
     .avatar-initials {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Merriweather', Georgia, serif;
       font-size: 5rem;
       font-weight: 800;
       color: white;
@@ -564,7 +564,7 @@
       display: flex;
       align-items: center;
       gap: 0.6rem;
-      font-family: 'Syne', sans-serif;
+      font-family: 'Merriweather', Georgia, serif;
       font-size: 1.2rem;
       font-weight: 700;
       margin-bottom: 0.4rem;
@@ -644,7 +644,7 @@
     .exp-panel.active { display: block; }
 
     .exp-role {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Merriweather', Georgia, serif;
       font-size: 1.3rem;
       font-weight: 700;
       margin-bottom: 0.3rem;
@@ -698,7 +698,7 @@
     }
 
     .skills-col h3 {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Merriweather', Georgia, serif;
       font-size: 1rem;
       font-weight: 700;
       margin-bottom: 1.1rem;
@@ -786,7 +786,7 @@
     .doc-icon svg { width: 22px; height: 22px; stroke: var(--purple); fill: none; stroke-width: 2; }
 
     .doc-card h3 {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Merriweather', Georgia, serif;
       font-size: 1.05rem;
       font-weight: 700;
     }
@@ -945,7 +945,7 @@
     }
 
     .footer-cta-text h3 {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Merriweather', Georgia, serif;
       font-size: 1.1rem;
       font-weight: 700;
       margin-bottom: 0.2rem;
@@ -1047,7 +1047,7 @@
         <div class="hero-left">
           <p class="hero-eyebrow reveal">Hey, I'm Alberto 👋</p>
           <h1 class="hero-title reveal reveal-delay-1">
-            <span class="accent">Software</span><br>Engineer
+            <span class="accent">FullStack</span><br>Developer
           </h1>
           <p class="hero-desc reveal reveal-delay-2">
             I build scalable backend systems and intuitive interfaces.
@@ -1086,48 +1086,50 @@
 
       <div class="projects-grid">
 
-        <!-- Meridian -->
+        <!-- Grimoire -->
         <div class="project-card reveal">
           <div class="project-thumb">
             <div class="mockup">
-              <div class="mock-meridian">
-                <div class="mock-sidebar">
-                  <div class="mock-sidebar-dot active"></div>
-                  <div class="mock-sidebar-dot"></div>
-                  <div class="mock-sidebar-dot"></div>
-                  <div class="mock-sidebar-dot"></div>
-                  <div class="mock-sidebar-dot"></div>
-                </div>
-                <div class="mock-content">
-                  <div class="mock-topbar"></div>
-                  <div class="mock-stats">
-                    <div class="mock-stat"></div>
-                    <div class="mock-stat"></div>
-                    <div class="mock-stat"></div>
+              <div class="mock-portfolio" style="background:#0f0e16;padding:16px;">
+                <!-- Shopify theme mockup: top bar + liquid template blocks -->
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+                  <div style="width:28px;height:28px;border-radius:6px;background:#6B21FE;display:flex;align-items:center;justify-content:center;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
                   </div>
-                  <div class="mock-row med"></div>
-                  <div class="mock-row purple short"></div>
-                  <div class="mock-row short"></div>
-                  <div class="mock-row med"></div>
-                  <div class="mock-row purple"></div>
-                  <div class="mock-row short"></div>
-                  <div class="mock-row med"></div>
+                  <div style="height:8px;width:50%;background:rgba(255,255,255,0.15);border-radius:3px;"></div>
+                  <div style="margin-left:auto;height:8px;width:18%;background:rgba(107,33,254,0.5);border-radius:3px;"></div>
+                </div>
+                <div style="display:grid;grid-template-columns:90px 1fr;gap:10px;height:calc(100% - 50px);">
+                  <div style="display:flex;flex-direction:column;gap:6px;">
+                    <div style="height:7px;background:rgba(107,33,254,0.6);border-radius:3px;width:80%"></div>
+                    <div style="height:7px;background:rgba(255,255,255,0.12);border-radius:3px;width:65%"></div>
+                    <div style="height:7px;background:rgba(255,255,255,0.12);border-radius:3px;width:75%"></div>
+                    <div style="height:7px;background:rgba(255,255,255,0.12);border-radius:3px;width:55%"></div>
+                    <div style="height:7px;background:rgba(255,255,255,0.12);border-radius:3px;width:70%"></div>
+                    <div style="height:7px;background:rgba(255,255,255,0.12);border-radius:3px;width:60%"></div>
+                  </div>
+                  <div style="display:flex;flex-direction:column;gap:7px;">
+                    <div style="height:50px;background:rgba(255,255,255,0.06);border-radius:6px;border:1px solid rgba(107,33,254,0.3);"></div>
+                    <div style="height:30px;background:rgba(255,255,255,0.04);border-radius:6px;"></div>
+                    <div style="height:8px;background:rgba(255,255,255,0.1);border-radius:3px;width:90%"></div>
+                    <div style="height:8px;background:rgba(255,255,255,0.07);border-radius:3px;width:70%"></div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
           <div class="project-name">
-            Meridian
+            Grimoire
             <span class="project-link-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
             </span>
           </div>
-          <p class="project-desc">Internal HR management system with modules for employees, vacations, incidents, RBAC, and 2FA authentication.</p>
+          <p class="project-desc">Minimal, modular Shopify skeleton theme built for speed and maintainability, following Shopify's best practices with Liquid templates.</p>
           <div class="project-tags">
-            <span class="tag">Laravel 11</span>
-            <span class="tag">Angular 17</span>
-            <span class="tag">PostgreSQL</span>
-            <span class="tag">Docker</span>
+            <span class="tag">Shopify</span>
+            <span class="tag">Liquid</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
           </div>
         </div>
 
@@ -1379,10 +1381,10 @@
         </p>
         <p>
           I'm most at home working across the full stack — designing a data model in the
-          morning, building an Angular component in the afternoon. I believe great software
-          comes from understanding both sides of the wire. My project <a href="#projects">Meridian</a> is a good
-          example: a complete HR platform built with Laravel and Angular, from database
-          schema to the last UI interaction.
+          morning, wiring up a Liquid template in the afternoon. I believe great software
+          comes from understanding both sides of the wire. <a href="#projects">Grimoire</a> is a good
+          example: a production-ready Shopify skeleton theme built for modularity and speed,
+          following platform best practices from the ground up.
         </p>
         <p>
           When I'm not shipping code, I'm probably reading about system design, experimenting
