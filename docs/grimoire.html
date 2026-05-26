@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentation — Grimoire Theme</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,400&family=Figtree:wght@300;400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:           #0a0a0a;
+      --surface:      #111111;
+      --surface-2:    #161616;
+      --border:       rgba(255,255,255,0.07);
+      --border-2:     rgba(255,255,255,0.12);
+      --text:         #dddbd7;
+      --text-soft:    rgba(221,219,215,0.6);
+      --text-faint:   rgba(221,219,215,0.28);
+      --purple:       #6B21FE;
+      --purple-dim:   rgba(107,33,254,0.15);
+      --amber:        #e8a45a;
+      --green:        #6bcb8b;
+      --blue:         #7db9f0;
+      --sidebar-w:    272px;
+      --topnav-h:     52px;
+      --mono:         'Fira Code', 'Figtree', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Figtree', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── TOP NAV ── */
+    .top-nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: var(--topnav-h);
+      background: rgba(10,10,10,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center;
+      padding: 0 1.5rem; gap: 1rem;
+      z-index: 200;
+    }
+    .top-nav-back {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.82rem; font-weight: 500; letter-spacing: 0.01em;
+      color: var(--text-soft); text-decoration: none;
+      transition: color .2s;
+      flex-shrink: 0;
+    }
+    .top-nav-back:hover { color: var(--text); }
+    .top-nav-back svg { width: 14px; height: 14px; }
+    .top-nav-sep { color: var(--text-faint); font-size: 0.9rem; }
+    .top-nav-title {
+      font-family: 'Merriweather', serif;
+      font-size: 0.82rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--text-soft);
+      flex: 1;
+    }
+    .top-nav-badge {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--text-faint);
+      background: var(--surface);
+      border: 1px solid var(--border-2);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+    }
+    .top-nav-gh {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.82rem; font-weight: 600;
+      color: var(--text-soft); text-decoration: none;
+      transition: color .2s;
+    }
+    .top-nav-gh:hover { color: var(--text); }
+    .top-nav-gh svg { width: 16px; height: 16px; fill: currentColor; }
+
+    /* ── LAYOUT ── */
+    .docs-layout {
+      display: grid;
+      grid-template-columns: var(--sidebar-w) 1fr;
+      min-height: 100vh;
+      padding-top: var(--topnav-h);
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      position: sticky;
+      top: var(--topnav-h);
+      height: calc(100vh - var(--topnav-h));
+      overflow-y: auto;
+      border-right: 1px solid var(--border);
+      background: rgba(10,10,10,0.6);
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.08) transparent;
+    }
+    .sidebar::-webkit-scrollbar { width: 4px; }
+    .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 2px; }
+
+    .sidebar-inner { padding: 2rem 0 4rem; }
+
+    .sidebar-brand {
+      padding: 0 1.4rem 1.6rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1.5rem;
+    }
+    .sidebar-brand-name {
+      font-family: 'Merriweather', serif;
+      font-size: 1.05rem; font-weight: 900;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--text);
+      display: block; margin-bottom: 0.3rem;
+    }
+    .sidebar-brand-sub {
+      font-size: 0.75rem; color: var(--text-faint);
+      font-family: var(--mono);
+    }
+
+    .toc-group { margin-bottom: 0.25rem; }
+    .toc-group-label {
+      display: block;
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--text-faint);
+      padding: 0.9rem 1.4rem 0.4rem;
+    }
+    .toc-link {
+      display: flex; align-items: center; gap: 0.5rem;
+      padding: 0.38rem 1.4rem;
+      font-size: 0.85rem; font-weight: 400;
+      color: var(--text-soft); text-decoration: none;
+      border-left: 2px solid transparent;
+      margin-left: 0;
+      transition: color .15s, background .15s, border-color .15s;
+      position: relative;
+    }
+    .toc-link:hover { color: var(--text); background: rgba(255,255,255,0.03); }
+    .toc-link.active {
+      color: var(--text);
+      border-left-color: var(--purple);
+      background: rgba(107,33,254,0.08);
+      font-weight: 600;
+    }
+    .toc-link .toc-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--purple); flex-shrink: 0;
+      opacity: 0;
+      transition: opacity .2s;
+    }
+    .toc-link.active .toc-dot { opacity: 1; }
+
+    .toc-sub {
+      display: flex; align-items: center; gap: 0.5rem;
+      padding: 0.28rem 1.4rem 0.28rem 2.6rem;
+      font-size: 0.8rem; color: var(--text-faint);
+      text-decoration: none; border-left: 2px solid transparent;
+      transition: color .15s, border-color .15s;
+    }
+    .toc-sub:hover { color: var(--text-soft); }
+    .toc-sub.active { color: var(--text-soft); border-left-color: rgba(107,33,254,0.4); }
+
+    /* ── CONTENT ── */
+    .docs-content {
+      max-width: 860px;
+      padding: 4rem 4rem 8rem 5rem;
+    }
+
+    /* ── SECTION ── */
+    .doc-section {
+      padding-bottom: 5rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 5rem;
+    }
+    .doc-section:last-child { border-bottom: none; }
+
+    .section-eyebrow {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--purple);
+      margin-bottom: 0.7rem;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .section-eyebrow::after {
+      content: ''; flex: none;
+      width: 24px; height: 1px;
+      background: var(--purple); opacity: 0.5;
+    }
+
+    h1.doc-h1 {
+      font-family: 'Merriweather', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900; line-height: 1.1;
+      letter-spacing: -1px;
+      color: var(--text);
+      margin-bottom: 1.2rem;
+    }
+    h1.doc-h1 .dot { color: var(--purple); }
+
+    h2.doc-h2 {
+      font-family: 'Merriweather', serif;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 900; line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 1rem;
+      scroll-margin-top: calc(var(--topnav-h) + 2rem);
+    }
+
+    h3.doc-h3 {
+      font-family: 'Merriweather', serif;
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--text); margin-bottom: 0.6rem;
+      margin-top: 2rem;
+    }
+
+    h4.doc-h4 {
+      font-family: 'Figtree', sans-serif;
+      font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-faint); margin-bottom: 0.6rem;
+      margin-top: 1.6rem;
+    }
+
+    p { color: var(--text-soft); margin-bottom: 1rem; line-height: 1.8; }
+    p:last-child { margin-bottom: 0; }
+
+    a { color: var(--purple); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    strong { color: var(--text); font-weight: 600; }
+
+    /* ── LEAD TEXT ── */
+    .doc-lead {
+      font-size: 1.05rem; color: var(--text-soft);
+      line-height: 1.85; margin-bottom: 2rem;
+      max-width: 680px;
+    }
+
+    /* ── CALLOUT ── */
+    .callout {
+      background: var(--surface);
+      border: 1px solid var(--border-2);
+      border-left: 3px solid var(--purple);
+      border-radius: 6px; padding: 1rem 1.2rem;
+      margin: 1.5rem 0; font-size: 0.9rem;
+      color: var(--text-soft);
+    }
+    .callout strong { color: var(--text); }
+    .callout.warning { border-left-color: var(--amber); }
+    .callout.tip { border-left-color: var(--green); }
+
+    /* ── CODE ── */
+    code {
+      font-family: var(--mono);
+      font-size: 0.82em;
+      color: var(--amber);
+      background: rgba(232,164,90,0.1);
+      padding: 0.15em 0.4em;
+      border-radius: 4px;
+    }
+
+    pre {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.4rem 1.6rem;
+      overflow-x: auto;
+      margin: 1.2rem 0 1.8rem;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.08) transparent;
+    }
+    pre::-webkit-scrollbar { height: 4px; }
+    pre::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); }
+
+    pre code {
+      font-family: var(--mono);
+      font-size: 0.84rem;
+      color: var(--text-soft);
+      background: transparent;
+      padding: 0; border-radius: 0;
+      line-height: 1.7;
+    }
+    .t-comment { color: var(--text-faint); font-style: italic; }
+    .t-tag     { color: var(--blue); }
+    .t-attr    { color: var(--amber); }
+    .t-str     { color: var(--green); }
+    .t-liquid  { color: #c792ea; }
+    .t-kw      { color: var(--purple); opacity: 0.85; filter: brightness(1.5); }
+    .t-fn      { color: var(--blue); }
+
+    .code-label {
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      border-bottom: none; border-radius: 10px 10px 0 0;
+      padding: 0.5rem 1rem;
+      font-family: var(--mono);
+      font-size: 0.72rem; color: var(--text-faint);
+      margin-top: 1.2rem;
+    }
+    .code-label + pre { border-radius: 0 0 10px 10px; margin-top: 0; }
+
+    /* ── PARAMS TABLE ── */
+    .params-table {
+      width: 100%; border-collapse: collapse;
+      font-size: 0.85rem; margin: 1rem 0 1.8rem;
+    }
+    .params-table th {
+      text-align: left; font-size: 0.7rem;
+      font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-faint); padding: 0.5rem 0.8rem;
+      border-bottom: 1px solid var(--border-2);
+    }
+    .params-table td {
+      padding: 0.6rem 0.8rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-soft);
+      vertical-align: top;
+    }
+    .params-table tr:last-child td { border-bottom: none; }
+    .params-table td:first-child {
+      font-family: var(--mono); font-size: 0.8rem;
+      color: var(--amber); white-space: nowrap;
+    }
+    .params-table td:nth-child(2) {
+      font-family: var(--mono); font-size: 0.75rem;
+      color: var(--blue); white-space: nowrap;
+    }
+    .param-optional { opacity: 0.55; font-style: italic; }
+
+    /* ── GRID TABLES ── */
+    .ref-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0.6rem; margin: 1.2rem 0;
+    }
+    .ref-item {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; padding: 0.8rem 1rem;
+      transition: border-color .2s;
+    }
+    .ref-item:hover { border-color: var(--border-2); }
+    .ref-item-name {
+      font-family: var(--mono); font-size: 0.8rem;
+      color: var(--amber); margin-bottom: 0.25rem;
+      display: block;
+    }
+    .ref-item-desc { font-size: 0.8rem; color: var(--text-faint); }
+
+    /* ── SECTION GROUP ── */
+    .section-group {
+      margin-bottom: 2.5rem;
+    }
+    .section-group-label {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--text-faint);
+      margin-bottom: 0.8rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-chips {
+      display: flex; flex-wrap: wrap; gap: 0.4rem;
+    }
+    .section-chip {
+      font-family: var(--mono); font-size: 0.78rem;
+      color: var(--text-soft);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.25rem 0.65rem; border-radius: 5px;
+      transition: border-color .15s, color .15s;
+    }
+    .section-chip:hover { border-color: var(--border-2); color: var(--text); }
+
+    /* ── STACK BADGE ── */
+    .badge {
+      display: inline-flex; align-items: center;
+      font-family: var(--mono); font-size: 0.72rem;
+      padding: 0.2rem 0.55rem; border-radius: 4px;
+      font-weight: 500;
+    }
+    .badge-purple { background: rgba(107,33,254,0.15); color: rgba(167,139,250,0.9); border: 1px solid rgba(107,33,254,0.2); }
+    .badge-green  { background: rgba(107,203,139,0.12); color: rgba(107,203,139,0.9); border: 1px solid rgba(107,203,139,0.2); }
+    .badge-amber  { background: rgba(232,164,90,0.12); color: rgba(232,164,90,0.9);  border: 1px solid rgba(232,164,90,0.2); }
+
+    /* ── CLI TABLE ── */
+    .cli-list { display: flex; flex-direction: column; gap: 0.8rem; margin: 1.2rem 0; }
+    .cli-item {
+      background: var(--surface-2); border: 1px solid var(--border);
+      border-radius: 8px; overflow: hidden;
+    }
+    .cli-cmd {
+      display: flex; align-items: center; gap: 0.6rem;
+      padding: 0.9rem 1.2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .cli-prompt { color: var(--text-faint); font-family: var(--mono); font-size: 0.82rem; }
+    .cli-text { font-family: var(--mono); font-size: 0.85rem; color: var(--green); }
+    .cli-desc { padding: 0.65rem 1.2rem; font-size: 0.82rem; color: var(--text-faint); }
+
+    /* ── ARCH FLOW ── */
+    .arch-flow {
+      background: var(--surface-2); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1.4rem 1.6rem;
+      margin: 1.2rem 0 1.8rem;
+      font-family: var(--mono); font-size: 0.82rem;
+      line-height: 2;
+    }
+    .af-root { color: var(--amber); }
+    .af-child { color: var(--text-soft); padding-left: 1.5rem; display: block; }
+    .af-child::before { content: '├── '; color: var(--text-faint); }
+    .af-child:last-child::before { content: '└── '; }
+    .af-comment { color: var(--text-faint); font-style: italic; }
+
+    /* ── SETTINGS TABLE ── */
+    .settings-group { margin-bottom: 2rem; }
+    .settings-group h4.doc-h4 { margin-top: 0; }
+    .settings-table { width: 100%; border-collapse: collapse; font-size: 0.83rem; }
+    .settings-table th {
+      text-align: left; font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-faint); padding: 0.45rem 0.8rem;
+      border-bottom: 1px solid var(--border-2);
+    }
+    .settings-table td {
+      padding: 0.55rem 0.8rem; border-bottom: 1px solid var(--border);
+      color: var(--text-soft); vertical-align: top;
+    }
+    .settings-table tr:last-child td { border-bottom: none; }
+    .settings-table td:first-child { font-family: var(--mono); color: var(--text-soft); font-size: 0.8rem; }
+    .settings-table td:nth-child(2) { color: var(--blue); font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
+
+    /* ── DIVIDER ── */
+    .doc-divider { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+
+    /* ── SCROLL MARGIN ── */
+    [id] { scroll-margin-top: calc(var(--topnav-h) + 1.5rem); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .docs-layout { grid-template-columns: 1fr; }
+      .sidebar {
+        position: relative; height: auto;
+        border-right: none; border-bottom: 1px solid var(--border);
+      }
+      .docs-content { padding: 2.5rem 1.5rem 5rem; }
+      .ref-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <nav class="top-nav">
+    <a class="top-nav-back" href="../index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Portfolio
+    </a>
+    <span class="top-nav-sep">/</span>
+    <span class="top-nav-title">Grimoire Documentation</span>
+    <span class="top-nav-badge">v1.0.0</span>
+    <a class="top-nav-gh" href="https://github.com/AGMTZG/grimoire" target="_blank">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.09.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.603-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.461-1.11-1.461-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.088 2.91.832.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.268 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.026 2.747-1.026.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.577.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+      GitHub
+    </a>
+  </nav>
+
+  <div class="docs-layout">
+
+    <!-- ═══════════════════════════════════════
+         SIDEBAR
+    ═══════════════════════════════════════ -->
+    <aside class="sidebar">
+      <div class="sidebar-inner">
+        <div class="sidebar-brand">
+          <span class="sidebar-brand-name">Grimoire</span>
+          <span class="sidebar-brand-sub">Shopify OS 2.0 Theme · MIT</span>
+        </div>
+
+        <nav id="toc">
+          <div class="toc-group">
+            <span class="toc-group-label">Overview</span>
+            <a class="toc-link active" href="#introduction">
+              <span class="toc-dot"></span>Introduction
+            </a>
+            <a class="toc-link" href="#getting-started">
+              <span class="toc-dot"></span>Getting Started
+            </a>
+            <a class="toc-link" href="#architecture">
+              <span class="toc-dot"></span>Architecture
+            </a>
+          </div>
+
+          <div class="toc-group">
+            <span class="toc-group-label">Reference</span>
+            <a class="toc-link" href="#snippets">
+              <span class="toc-dot"></span>Snippets
+            </a>
+            <a class="toc-sub" href="#snippet-css-variables">css-variables.liquid</a>
+            <a class="toc-sub" href="#snippet-section-title">section-title.liquid</a>
+            <a class="toc-sub" href="#snippet-image">image.liquid</a>
+            <a class="toc-sub" href="#snippet-product-card">product-card.liquid</a>
+            <a class="toc-sub" href="#snippet-meta-tags">meta-tags.liquid</a>
+            <a class="toc-link" href="#blocks">
+              <span class="toc-dot"></span>Blocks
+            </a>
+            <a class="toc-sub" href="#blocks-cs">Custom Section (cs-*)</a>
+            <a class="toc-sub" href="#blocks-faq">faq-item.liquid</a>
+            <a class="toc-sub" href="#blocks-group">group.liquid</a>
+            <a class="toc-link" href="#sections">
+              <span class="toc-dot"></span>Sections
+            </a>
+          </div>
+
+          <div class="toc-group">
+            <span class="toc-group-label">Configuration</span>
+            <a class="toc-link" href="#theme-settings">
+              <span class="toc-dot"></span>Theme Settings
+            </a>
+            <a class="toc-link" href="#cli-commands">
+              <span class="toc-dot"></span>CLI Commands
+            </a>
+          </div>
+        </nav>
+      </div>
+    </aside>
+
+    <!-- ═══════════════════════════════════════
+         CONTENT
+    ═══════════════════════════════════════ -->
+    <main class="docs-content">
+
+      <!-- ── INTRODUCTION ── -->
+      <section class="doc-section" id="introduction">
+        <div class="section-eyebrow">Overview</div>
+        <h1 class="doc-h1">Introduction<span class="dot">.</span></h1>
+        <p class="doc-lead">
+          Grimoire is a complete <strong>Shopify Online Store 2.0</strong> storefront theme — dark, editorial, and
+          production-ready. Built for lifestyle, fashion, and curated-object brands that need strong
+          visual identity and storytelling alongside robust commerce.
+        </p>
+
+        <p>
+          The theme ships with ~40 sections, 14 blocks, 9 snippets, and 14 JSON templates covering every
+          standard Shopify page type. All interactivity is written in Vanilla JS using native
+          <code>customElements.define</code> — no framework, no build step.
+        </p>
+
+        <div class="callout">
+          <strong>Not a skeleton.</strong> Grimoire started from the official Shopify Skeleton but has
+          grown far beyond it. It's a fully-featured theme ready for a real storefront — with its
+          own design language, custom element library, and CI pipeline.
+        </div>
+
+        <h3 class="doc-h3">Design language</h3>
+        <p>
+          The default palette is built around near-black surfaces (<code>#0d0d0d</code> background,
+          <code>#111111</code> cards) with warm off-white text (<code>#dddbd7</code>). UI patterns
+          throughout: uppercase eyebrows, hairline borders, luminous-border buttons, and
+          <code>--timing: 0.3s</code> smooth transitions.
+        </p>
+        <p>
+          Typography is fully configurable via Shopify's <code>font_picker</code>. Two font pickers
+          are exposed — <em>primary</em> (body/UI) and <em>heading</em> — and all variants are loaded
+          via <code>snippets/css-variables.liquid</code> which outputs them as CSS custom properties.
+        </p>
+
+        <h3 class="doc-h3">What's included</h3>
+        <div class="ref-grid" style="grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin-top: 0.8rem;">
+          <div class="ref-item" style="text-align:center; padding: 1rem 0.5rem;">
+            <span style="font-size:1.5rem; font-family:'Merriweather',serif; font-weight:900; color:var(--text); display:block;">~40</span>
+            <span class="ref-item-desc">Sections</span>
+          </div>
+          <div class="ref-item" style="text-align:center; padding: 1rem 0.5rem;">
+            <span style="font-size:1.5rem; font-family:'Merriweather',serif; font-weight:900; color:var(--text); display:block;">14</span>
+            <span class="ref-item-desc">Blocks</span>
+          </div>
+          <div class="ref-item" style="text-align:center; padding: 1rem 0.5rem;">
+            <span style="font-size:1.5rem; font-family:'Merriweather',serif; font-weight:900; color:var(--text); display:block;">9</span>
+            <span class="ref-item-desc">Snippets</span>
+          </div>
+          <div class="ref-item" style="text-align:center; padding: 1rem 0.5rem;">
+            <span style="font-size:1.5rem; font-family:'Merriweather',serif; font-weight:900; color:var(--text); display:block;">14</span>
+            <span class="ref-item-desc">Templates</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── GETTING STARTED ── -->
+      <section class="doc-section" id="getting-started">
+        <div class="section-eyebrow">Setup</div>
+        <h2 class="doc-h2">Getting Started</h2>
+        <p class="doc-lead">
+          Grimoire requires the <a href="https://shopify.dev/docs/api/shopify-cli" target="_blank">Shopify CLI</a>
+          and access to a Shopify store (development or production). No Node, no bundler, no build step.
+        </p>
+
+        <h3 class="doc-h3">Prerequisites</h3>
+        <div class="ref-grid">
+          <div class="ref-item">
+            <span class="ref-item-name">Shopify CLI ≥ 3.x</span>
+            <span class="ref-item-desc">Required for local dev and theme push</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">Shopify store</span>
+            <span class="ref-item-desc">Development store recommended for testing</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">Git</span>
+            <span class="ref-item-desc">Clone the repository locally</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">GitHub Actions (optional)</span>
+            <span class="ref-item-desc">CI/CD pipeline with Theme Check</span>
+          </div>
+        </div>
+
+        <h3 class="doc-h3">Installation</h3>
+        <div class="code-label">
+          <span>bash</span>
+          <span class="badge badge-green">clone + dev</span>
+        </div>
+        <pre><code><span class="t-comment"># 1. Clone the repository</span>
+git clone https://github.com/AGMTZG/grimoire.git
+cd grimoire
+
+<span class="t-comment"># 2. Authenticate Shopify CLI with your store</span>
+shopify auth login --store your-store.myshopify.com
+
+<span class="t-comment"># 3. Start local development server (hot reload)</span>
+shopify theme dev --store your-store.myshopify.com
+
+<span class="t-comment"># 4. Open the preview URL printed in the terminal</span></code></pre>
+
+        <div class="callout tip">
+          <strong>Tip:</strong> Use <code>shopify theme dev --open</code> to automatically open the
+          preview in your browser when the server starts.
+        </div>
+
+        <h3 class="doc-h3">First-time setup in the theme editor</h3>
+        <p>After starting <code>shopify theme dev</code>, open the theme editor and configure at minimum:</p>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li><strong>Typography</strong> — Set primary and heading font pickers under <em>Theme settings → Typography</em></li>
+          <li><strong>Colors</strong> — Adjust background, foreground, accent, and surface under <em>Theme settings → Colors</em></li>
+          <li><strong>Header</strong> — Select your navigation menu and configure transparent/opaque behavior</li>
+          <li><strong>Slideshow</strong> — Add at least one slide to the homepage slideshow section</li>
+          <li><strong>Footer</strong> — Set your logo, menus, newsletter, and social links</li>
+        </ul>
+      </section>
+
+      <!-- ── ARCHITECTURE ── -->
+      <section class="doc-section" id="architecture">
+        <div class="section-eyebrow">Internals</div>
+        <h2 class="doc-h2">Architecture</h2>
+        <p class="doc-lead">
+          Grimoire follows the standard Shopify OS 2.0 directory model.
+          <code>layout/theme.liquid</code> is the single outermost shell that wraps every page.
+        </p>
+
+        <h3 class="doc-h3">Directory structure</h3>
+        <div class="arch-flow">
+          <span class="af-root">grimoire/</span>
+          <span class="af-child">layout/         <span class="af-comment"># theme.liquid + password.liquid (2 files)</span></span>
+          <span class="af-child">sections/        <span class="af-comment"># ~40 Liquid page modules, each with {% schema %}</span></span>
+          <span class="af-child">blocks/          <span class="af-comment"># 14 nestable block files (cs-*, faq-item, group, text)</span></span>
+          <span class="af-child">snippets/        <span class="af-comment"># 9 reusable Liquid fragments, documented via {% doc %}</span></span>
+          <span class="af-child">templates/       <span class="af-comment"># 14 JSON templates — compose sections per page type</span></span>
+          <span class="af-child">config/          <span class="af-comment"># settings_schema.json — all theme editor settings</span></span>
+          <span class="af-child">locales/         <span class="af-comment"># en.default.json + en.default.schema.json</span></span>
+          <span class="af-child">assets/          <span class="af-comment"># critical.css, base.css, SVG icons, JS (6 files)</span></span>
+        </div>
+
+        <h3 class="doc-h3">Layout shell</h3>
+        <p>
+          <code>layout/theme.liquid</code> renders three top-level section groups in order:
+        </p>
+        <div class="code-label"><span>layout/theme.liquid</span></div>
+        <pre><code><span class="t-liquid">{% render 'meta-tags' %}</span>
+<span class="t-liquid">{% render 'css-variables' %}</span>
+
+<span class="t-tag">&lt;body&gt;</span>
+  <span class="t-comment">{%- sections 'header-group' -%}</span>
+  <span class="t-comment">{%- comment -%} renders: announcement-bar + header {%- endcomment -%}</span>
+
+  <span class="t-liquid">{{ content_for_layout }}</span>
+  <span class="t-comment">{# resolved by templates/*.json → which sections fire #}</span>
+
+  <span class="t-comment">{%- sections 'footer-group' -%}</span>
+  <span class="t-comment">{%- comment -%} renders: footer {%- endcomment -%}</span>
+<span class="t-tag">&lt;/body&gt;</span></code></pre>
+
+        <h3 class="doc-h3">JSON templates</h3>
+        <p>
+          Each page type is defined by a JSON template in <code>templates/</code>. The file declares
+          which sections appear and in what order — merchants can then reorder them in the theme editor
+          without touching code.
+        </p>
+        <div class="code-label"><span>templates/index.json (simplified)</span></div>
+        <pre><code>{
+  <span class="t-attr">"sections"</span>: {
+    <span class="t-attr">"slideshow"</span>: { <span class="t-attr">"type"</span>: <span class="t-str">"slideshow"</span> },
+    <span class="t-attr">"trending"</span>:  { <span class="t-attr">"type"</span>: <span class="t-str">"trending-products"</span> },
+    <span class="t-attr">"marquee"</span>:   { <span class="t-attr">"type"</span>: <span class="t-str">"marquee"</span> }
+  },
+  <span class="t-attr">"order"</span>: [<span class="t-str">"slideshow"</span>, <span class="t-str">"trending"</span>, <span class="t-str">"marquee"</span>]
+}</code></pre>
+
+        <h3 class="doc-h3">JavaScript model</h3>
+        <p>
+          All interactivity is Vanilla JS using native Custom Elements. Shared state is stored on
+          <code>window</code> objects — no module bundler, no tree-shaking, no framework overhead.
+        </p>
+
+        <div class="ref-grid">
+          <div class="ref-item">
+            <span class="ref-item-name">window.GrimoireCarousel</span>
+            <span class="ref-item-desc">Swiper instance manager for slideshows and carousels</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">window.GrimoireProduct</span>
+            <span class="ref-item-desc">PDP state: selected variant, quantity, ATC lifecycle</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">window.GrimoireQuickView</span>
+            <span class="ref-item-desc">Quick view modal state and Section Rendering fetch</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">customElements.define()</span>
+            <span class="ref-item-desc">All interactive regions registered as Custom Elements</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── SNIPPETS ── -->
+      <section class="doc-section" id="snippets">
+        <div class="section-eyebrow">Reference</div>
+        <h2 class="doc-h2">Snippets</h2>
+        <p class="doc-lead">
+          Snippets are reusable Liquid fragments rendered via <code>{% render 'name' %}</code>.
+          All snippets in Grimoire are documented with <code>{% doc %}</code> blocks —
+          parameters are typed and described inline.
+        </p>
+
+        <div class="callout">
+          Shopify's snippet scope is isolated: variables defined outside are not accessible inside
+          a rendered snippet unless passed explicitly as parameters.
+        </div>
+
+        <!-- css-variables -->
+        <hr class="doc-divider" id="snippet-css-variables">
+        <h3 class="doc-h3">css-variables.liquid</h3>
+        <p>
+          The theme's design-token hub. Loads all font variants from the Shopify CDN using
+          <code>font_face</code> and outputs every CSS custom property consumed by the theme —
+          colors, fonts, spacing, component-level tokens — inside a <code>{% style %}</code> block.
+        </p>
+        <p>
+          Rendered once, inside <code>&lt;head&gt;</code> via <code>layout/theme.liquid</code>.
+          No parameters.
+        </p>
+
+        <h4 class="doc-h4">Key tokens output</h4>
+        <div class="code-label"><span>CSS custom properties (subset)</span></div>
+        <pre><code><span class="t-comment">/* Typography */</span>
+<span class="t-attr">--font-primary--family</span>:  <span class="t-fn">{{ settings.type_primary_font.family }}</span>, fallback;
+<span class="t-attr">--font-heading--family</span>:  <span class="t-fn">{{ settings.heading_font.family }}</span>, fallback;
+
+<span class="t-comment">/* Layout */</span>
+<span class="t-attr">--page-width</span>:            <span class="t-fn">{{ settings.max_page_width }}</span>;
+<span class="t-attr">--nav-height</span>:            64px;
+<span class="t-attr">--header-total-height</span>:   calc(var(--nav-height) + var(--announcement-bar-height));
+
+<span class="t-comment">/* Colors */</span>
+<span class="t-attr">--color-background</span>:      <span class="t-fn">{{ settings.background_color | default: '#0d0d0d' }}</span>;
+<span class="t-attr">--color-foreground</span>:      <span class="t-fn">{{ settings.foreground_color | default: '#dddbd7' }}</span>;
+<span class="t-attr">--color-accent</span>:          <span class="t-fn">{{ settings.accent_color | default: '#dddbd7' }}</span>;
+<span class="t-attr">--color-surface</span>:         <span class="t-fn">{{ settings.surface_color | default: '#111111' }}</span>;
+
+<span class="t-comment">/* Timing */</span>
+<span class="t-attr">--timing</span>: 0.3s;</code></pre>
+
+        <!-- section-title -->
+        <hr class="doc-divider" id="snippet-section-title">
+        <h3 class="doc-h3">section-title.liquid</h3>
+        <p>
+          Renders an uppercase eyebrow with a hairline rule, followed by a large bold heading.
+          Optionally renders a CTA link when <code>btn_label</code> is set. Used consistently
+          across all major sections for visual coherence.
+        </p>
+
+        <h4 class="doc-h4">Parameters</h4>
+        <table class="params-table">
+          <thead><tr><th>Param</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>eyebrow</td><td>string</td><td>Small uppercase label shown above the heading with a hairline rule</td></tr>
+            <tr><td>heading</td><td>string</td><td>Main section title rendered as a large bold heading</td></tr>
+            <tr><td>heading_tag</td><td>string</td><td class="param-optional">HTML tag for the heading element. Default: <code>h2</code></td></tr>
+            <tr><td>btn_label</td><td>string</td><td class="param-optional">CTA button label. When blank, no button is rendered</td></tr>
+            <tr><td>btn_url</td><td>string</td><td class="param-optional">CTA href. Only used when <code>btn_label</code> is not blank</td></tr>
+          </tbody>
+        </table>
+
+        <div class="code-label"><span>Usage</span></div>
+        <pre><code><span class="t-comment">{# Basic usage #}</span>
+<span class="t-liquid">{% render 'section-title',
+  eyebrow: 'The Ritual Paths',
+  heading: 'Choose Your Intention'
+%}</span>
+
+<span class="t-comment">{# From section settings with CTA #}</span>
+<span class="t-liquid">{% render 'section-title',
+  eyebrow:   section.settings.eyebrow,
+  heading:   section.settings.heading,
+  btn_label: section.settings.btn_label,
+  btn_url:   section.settings.btn_url
+%}</span></code></pre>
+
+        <!-- image -->
+        <hr class="doc-divider" id="snippet-image">
+        <h3 class="doc-h3">image.liquid</h3>
+        <p>
+          Renders a responsive image using Shopify's <code>image_url</code> and <code>image_tag</code>
+          filters with automatic <code>srcset</code> generation. When <code>url</code> is provided
+          the image is wrapped in an <code>&lt;a&gt;</code> tag; otherwise a <code>&lt;div&gt;</code>.
+        </p>
+
+        <h4 class="doc-h4">Parameters</h4>
+        <table class="params-table">
+          <thead><tr><th>Param</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>image</td><td>image</td><td>The Shopify image object to render</td></tr>
+            <tr><td>url</td><td>string</td><td class="param-optional">Optional destination URL — wraps image in <code>&lt;a&gt;</code></td></tr>
+            <tr><td>class</td><td>string</td><td class="param-optional">Additional CSS class added to the wrapper element</td></tr>
+            <tr><td>width</td><td>number</td><td class="param-optional">Max resolution width for image URL generation</td></tr>
+            <tr><td>height</td><td>number</td><td class="param-optional">Max resolution height (used with <code>crop</code>)</td></tr>
+            <tr><td>crop</td><td>string</td><td class="param-optional">Crop position: <code>center</code>, <code>top</code>, <code>bottom</code>, <code>left</code>, <code>right</code></td></tr>
+          </tbody>
+        </table>
+
+        <div class="code-label"><span>Usage</span></div>
+        <pre><code><span class="t-comment">{# Simple image #}</span>
+<span class="t-liquid">{% render 'image', image: product.featured_image %}</span>
+
+<span class="t-comment">{# Linked, fixed aspect ratio #}</span>
+<span class="t-liquid">{% render 'image',
+  image:  product.featured_image,
+  url:    product.url,
+  class:  'product__image',
+  width:  1200,
+  height: 800,
+  crop:   'center'
+%}</span></code></pre>
+
+        <!-- product-card -->
+        <hr class="doc-divider" id="snippet-product-card">
+        <h3 class="doc-h3">product-card.liquid</h3>
+        <p>
+          The main product card component used across collection grids, carousels, search results,
+          and quick view. Renders product image with hover overlay, title, price, compare-at price,
+          color swatches, sale/sold-out badges, and an add-to-cart button.
+        </p>
+        <p>
+          All visual states (ATC hover, sold-out, sale badge) are controlled via CSS custom properties
+          defined in <code>css-variables.liquid</code> under the <code>--pc-*</code> namespace.
+          Styles are guard-loaded once with the <code>product_card_styles_loaded</code> assign trick.
+        </p>
+
+        <div class="callout warning">
+          <strong>Note:</strong> This snippet requires <code>product-interactions.liquid</code>
+          to be rendered on the same page for add-to-cart functionality to work.
+        </div>
+
+        <!-- meta-tags -->
+        <hr class="doc-divider" id="snippet-meta-tags">
+        <h3 class="doc-h3">meta-tags.liquid</h3>
+        <p>
+          Outputs all head meta tags: charset, viewport, canonical URL, Open Graph tags
+          (<code>og:title</code>, <code>og:type</code>, <code>og:url</code>, <code>og:description</code>,
+          <code>og:image</code>), and Twitter card tags. Page type is auto-detected to set
+          <code>og:type</code> to <code>product</code>, <code>article</code>, or <code>website</code>.
+        </p>
+        <p>No parameters. Rendered once inside <code>&lt;head&gt;</code>.</p>
+
+        <h4 class="doc-h4">Other snippets</h4>
+        <div class="ref-grid">
+          <div class="ref-item">
+            <span class="ref-item-name">product-carousel.liquid</span>
+            <span class="ref-item-desc">Swiper 11-powered product carousel with arrows and pagination</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">product-interactions.liquid</span>
+            <span class="ref-item-desc">JS Web Component wiring for variant selection, ATC, and sold-out</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">product-modal.liquid</span>
+            <span class="ref-item-desc">Quick view modal shell — loaded via Section Rendering API on demand</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">worlds-map.liquid</span>
+            <span class="ref-item-desc">Inline SVG world map used by <code>testimonials.liquid</code> to pin reviews geographically</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── BLOCKS ── -->
+      <section class="doc-section" id="blocks">
+        <div class="section-eyebrow">Reference</div>
+        <h2 class="doc-h2">Blocks</h2>
+        <p class="doc-lead">
+          Blocks are nestable units that live inside sections. Grimoire ships with 14 blocks
+          across three categories: custom section primitives (<code>cs-*</code>),
+          content blocks (<code>faq-item</code>, <code>text</code>), and the layout container
+          (<code>group</code>).
+        </p>
+        <p>
+          Blocks are declared in a section's <code>{% schema %}</code> under the <code>"blocks"</code>
+          key. Merchants add, reorder, and configure them from the theme editor.
+        </p>
+
+        <!-- cs-* blocks -->
+        <hr class="doc-divider" id="blocks-cs">
+        <h3 class="doc-h3">Custom Section Blocks — <code>cs-*</code></h3>
+        <p>
+          The <code>cs-</code> prefix identifies <strong>Custom Section</strong> building blocks —
+          composable primitives designed to be mixed inside <code>custom-section.liquid</code> and
+          similar content sections. Each exposes its styling as theme-editor controls.
+        </p>
+
+        <div class="ref-grid">
+          <div class="ref-item">
+            <span class="ref-item-name">cs-heading.liquid</span>
+            <span class="ref-item-desc">Heading with configurable tag (h1–h6), font-size, weight, color, alignment, and vertical spacing</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">cs-subheading.liquid</span>
+            <span class="ref-item-desc">Smaller heading / subtitle, same controls as cs-heading at a reduced scale</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">cs-text.liquid</span>
+            <span class="ref-item-desc">Rich text paragraph block with color and alignment controls</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">cs-button.liquid</span>
+            <span class="ref-item-desc">CTA button with size (sm/md/lg), fill style, icon toggle, icon position, and row alignment</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">cs-image.liquid</span>
+            <span class="ref-item-desc">Image block with optional link, width constraint, and border-radius controls</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">cs-video.liquid</span>
+            <span class="ref-item-desc">Embedded video block supporting Shopify-hosted video or external embed URLs</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">cs-icon-item.liquid</span>
+            <span class="ref-item-desc">Icon + label row for feature lists. Icon rendered from Shopify's icon picker or custom SVG</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">cs-quote.liquid</span>
+            <span class="ref-item-desc">Pull quote / blockquote with attribution line and optional decorative quotation mark</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">cs-badge.liquid</span>
+            <span class="ref-item-desc">Small pill/badge text element with background color and text color controls</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">cs-divider.liquid</span>
+            <span class="ref-item-desc">Horizontal rule with configurable color, thickness, and vertical margin</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">cs-spacer.liquid</span>
+            <span class="ref-item-desc">Empty space block. Height in px, responsive override for mobile</span>
+          </div>
+        </div>
+
+        <h4 class="doc-h4">Example — cs-heading schema</h4>
+        <div class="code-label"><span>blocks/cs-heading.liquid (schema excerpt)</span></div>
+        <pre><code><span class="t-liquid">{% schema %}</span>
+{
+  <span class="t-attr">"name"</span>: <span class="t-str">"Heading"</span>,
+  <span class="t-attr">"settings"</span>: [
+    { <span class="t-attr">"type"</span>: <span class="t-str">"inline_richtext"</span>, <span class="t-attr">"id"</span>: <span class="t-str">"text"</span>,       <span class="t-attr">"label"</span>: <span class="t-str">"Heading"</span> },
+    { <span class="t-attr">"type"</span>: <span class="t-str">"select"</span>,        <span class="t-attr">"id"</span>: <span class="t-str">"tag"</span>,        <span class="t-attr">"label"</span>: <span class="t-str">"Tag"</span>,     <span class="t-attr">"options"</span>: [<span class="t-str">"h1"</span>,<span class="t-str">"h2"</span>,<span class="t-str">"h3"</span>,<span class="t-str">"h4"</span>] },
+    { <span class="t-attr">"type"</span>: <span class="t-str">"range"</span>,         <span class="t-attr">"id"</span>: <span class="t-str">"font_size"</span>,   <span class="t-attr">"label"</span>: <span class="t-str">"Font size"</span>, <span class="t-attr">"min"</span>: 14, <span class="t-attr">"max"</span>: 80 },
+    { <span class="t-attr">"type"</span>: <span class="t-str">"color"</span>,         <span class="t-attr">"id"</span>: <span class="t-str">"color"</span>,       <span class="t-attr">"label"</span>: <span class="t-str">"Color"</span> },
+    { <span class="t-attr">"type"</span>: <span class="t-str">"select"</span>,        <span class="t-attr">"id"</span>: <span class="t-str">"text_align"</span>,  <span class="t-attr">"label"</span>: <span class="t-str">"Alignment"</span> },
+    { <span class="t-attr">"type"</span>: <span class="t-str">"range"</span>,         <span class="t-attr">"id"</span>: <span class="t-str">"top_spacing"</span>, <span class="t-attr">"label"</span>: <span class="t-str">"Top spacing"</span> }
+  ]
+}
+<span class="t-liquid">{% endschema %}</span></code></pre>
+
+        <!-- faq-item -->
+        <hr class="doc-divider" id="blocks-faq">
+        <h3 class="doc-h3">faq-item.liquid</h3>
+        <p>
+          A single FAQ entry: expandable question/answer pair with an optional icon (crystal, candle,
+          or moon) and a <code>category</code> string. The parent <code>faq.liquid</code> section
+          groups items by category and renders tab navigation automatically.
+        </p>
+
+        <h4 class="doc-h4">Schema settings</h4>
+        <table class="params-table">
+          <thead><tr><th>Setting ID</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>question</td><td>text</td><td>The question shown in the trigger button</td></tr>
+            <tr><td>answer</td><td>richtext</td><td>The answer revealed on expand — supports full rich text</td></tr>
+            <tr><td>category</td><td>text</td><td>Groups this item into a tab. Default: <em>General</em></td></tr>
+            <tr><td>icon</td><td>select</td><td>Decorative icon in the trigger: <code>crystal</code>, <code>candle</code>, <code>moon</code>, <code>none</code></td></tr>
+          </tbody>
+        </table>
+
+        <!-- group -->
+        <hr class="doc-divider" id="blocks-group">
+        <h3 class="doc-h3">group.liquid</h3>
+        <p>
+          A layout container that wraps other blocks in a flex row or column. Used to compose
+          multi-column layouts within a custom section without writing code.
+        </p>
+
+        <h4 class="doc-h4">Schema settings</h4>
+        <table class="params-table">
+          <thead><tr><th>Setting ID</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>layout_direction</td><td>select</td><td><code>horizontal</code> or <code>vertical</code> flex direction</td></tr>
+            <tr><td>gap</td><td>range</td><td>Gap between children in px (CSS <code>--blk-gap</code> variable)</td></tr>
+            <tr><td>alignment</td><td>select</td><td>Cross-axis alignment: <code>flex-start</code>, <code>center</code>, <code>flex-end</code></td></tr>
+            <tr><td>justify</td><td>select</td><td>Main-axis distribution: <code>flex-start</code>, <code>center</code>, <code>space-between</code></td></tr>
+            <tr><td>padding</td><td>range</td><td>Internal padding in px</td></tr>
+            <tr><td>stack_on_mobile</td><td>checkbox</td><td>Forces vertical stacking below 768px</td></tr>
+          </tbody>
+        </table>
+
+        <div class="code-label"><span>blocks/group.liquid (render)</span></div>
+        <pre><code><span class="t-tag">&lt;div</span> <span class="t-attr">class</span>=<span class="t-str">"blk-group blk-group--horizontal blk-group--stack"</span>
+     <span class="t-attr">style</span>=<span class="t-str">"--blk-gap: 24px; --blk-align: center;"</span>
+     <span class="t-liquid">{{ block.shopify_attributes }}</span><span class="t-tag">&gt;</span>
+  <span class="t-liquid">{% content_for 'blocks' %}</span>
+<span class="t-tag">&lt;/div&gt;</span></code></pre>
+      </section>
+
+      <!-- ── SECTIONS ── -->
+      <section class="doc-section" id="sections">
+        <div class="section-eyebrow">Reference</div>
+        <h2 class="doc-h2">Sections</h2>
+        <p class="doc-lead">
+          Grimoire ships ~40 Liquid sections covering global layout, full commerce flows,
+          content and marketing, blogging, and account pages. Every section exposes a
+          <code>{% schema %}</code> for the theme editor.
+        </p>
+
+        <div class="section-group">
+          <div class="section-group-label">Global Layout</div>
+          <div class="section-chips">
+            <span class="section-chip">announcement-bar.liquid</span>
+            <span class="section-chip">header.liquid</span>
+            <span class="section-chip">footer.liquid</span>
+            <span class="section-chip">password.liquid</span>
+            <span class="section-chip">404.liquid</span>
+            <span class="section-chip">breadcrumb.liquid</span>
+          </div>
+        </div>
+
+        <div class="section-group">
+          <div class="section-group-label">Home / Landing</div>
+          <div class="section-chips">
+            <span class="section-chip">slideshow.liquid</span>
+            <span class="section-chip">trending-products.liquid</span>
+            <span class="section-chip">blog-featured.liquid</span>
+            <span class="section-chip">collections.liquid</span>
+            <span class="section-chip">newsletter.liquid</span>
+            <span class="section-chip">marquee.liquid</span>
+            <span class="section-chip">countdown-timer-hero.liquid</span>
+            <span class="section-chip">image-hotspot.liquid</span>
+          </div>
+        </div>
+
+        <div class="section-group">
+          <div class="section-group-label">Commerce</div>
+          <div class="section-chips">
+            <span class="section-chip">product.liquid</span>
+            <span class="section-chip">collection.liquid</span>
+            <span class="section-chip">cart.liquid</span>
+            <span class="section-chip">search.liquid</span>
+            <span class="section-chip">product-recommendations.liquid</span>
+            <span class="section-chip">recently-viewed.liquid</span>
+            <span class="section-chip">product-benefits.liquid</span>
+          </div>
+        </div>
+
+        <div class="section-group">
+          <div class="section-group-label">Content &amp; Flexible</div>
+          <div class="section-chips">
+            <span class="section-chip">custom-section.liquid</span>
+            <span class="section-chip">custom-liquid.liquid</span>
+            <span class="section-chip">text.liquid</span>
+            <span class="section-chip">page.liquid</span>
+            <span class="section-chip">cta-with-video.liquid</span>
+            <span class="section-chip">hello-world.liquid</span>
+          </div>
+        </div>
+
+        <div class="section-group">
+          <div class="section-group-label">Blog</div>
+          <div class="section-chips">
+            <span class="section-chip">blog.liquid</span>
+            <span class="section-chip">article.liquid</span>
+            <span class="section-chip">news-grid.liquid</span>
+            <span class="section-chip">read-also.liquid</span>
+          </div>
+        </div>
+
+        <div class="section-group">
+          <div class="section-group-label">Marketing</div>
+          <div class="section-chips">
+            <span class="section-chip">oracle-quiz.liquid</span>
+            <span class="section-chip">testimonials.liquid</span>
+            <span class="section-chip">signup-flyout.liquid</span>
+            <span class="section-chip">faq.liquid</span>
+          </div>
+        </div>
+
+        <div class="section-group">
+          <div class="section-group-label">About &amp; Contact</div>
+          <div class="section-chips">
+            <span class="section-chip">contact-hero.liquid</span>
+            <span class="section-chip">contact-channels.liquid</span>
+            <span class="section-chip">contact-location.liquid</span>
+            <span class="section-chip">chronicle.liquid</span>
+            <span class="section-chip">coven.liquid</span>
+          </div>
+        </div>
+
+        <h3 class="doc-h3">Key sections explained</h3>
+
+        <h4 class="doc-h4">product.liquid — PDP</h4>
+        <p>
+          The product detail page section. Supports gallery, variant selector, quantity input,
+          buy buttons (ATC + dynamic checkout), Shop Pay installments, pickup availability,
+          JSON-LD structured data, 3D model viewer, color swatches, product benefits strip,
+          and cross-sells via <code>product-recommendations.liquid</code>.
+        </p>
+
+        <h4 class="doc-h4">collection.liquid — PLP</h4>
+        <p>
+          Product listing page with faceted filters (Shopify's native filter API), configurable
+          grid columns, sort controls, and quick view modal triggered by hover on product cards.
+        </p>
+
+        <h4 class="doc-h4">slideshow.liquid — Hero</h4>
+        <p>
+          Full-bleed homepage hero powered by <strong>Swiper 11</strong>. Each slide supports
+          background image or video, headline, subtext, and a CTA. Autoplay, crossfade, and
+          loop are configurable in the theme editor.
+        </p>
+
+        <h4 class="doc-h4">oracle-quiz.liquid</h4>
+        <p>
+          Interactive product quiz section. Merchants configure questions and answers in the
+          theme editor; the section routes customers to a recommended product or collection
+          based on their selections.
+        </p>
+      </section>
+
+      <!-- ── THEME SETTINGS ── -->
+      <section class="doc-section" id="theme-settings">
+        <div class="section-eyebrow">Configuration</div>
+        <h2 class="doc-h2">Theme Settings</h2>
+        <p class="doc-lead">
+          All global settings are defined in <code>config/settings_schema.json</code> and
+          exposed in the theme editor under <em>Theme settings</em>. Changes apply site-wide
+          via CSS custom properties in <code>css-variables.liquid</code>.
+        </p>
+
+        <div class="settings-group">
+          <h4 class="doc-h4">Colors</h4>
+          <table class="settings-table">
+            <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>background_color</td><td>color</td><td>Main page background. Default: <code>#0d0d0d</code></td></tr>
+              <tr><td>foreground_color</td><td>color</td><td>Primary text and icon color. Default: <code>#dddbd7</code></td></tr>
+              <tr><td>accent_color</td><td>color</td><td>Accent — borders, active states, primary button. Default: <code>#dddbd7</code></td></tr>
+              <tr><td>surface_color</td><td>color</td><td>Card and panel backgrounds. Default: <code>#111111</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="settings-group">
+          <h4 class="doc-h4">Typography</h4>
+          <table class="settings-table">
+            <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>type_primary_font</td><td>font_picker</td><td>Body and UI font. All weights and italic variants are loaded</td></tr>
+              <tr><td>heading_font</td><td>font_picker</td><td>Heading font — used for all <code>&lt;h1&gt;</code>–<code>&lt;h4&gt;</code> elements</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="settings-group">
+          <h4 class="doc-h4">Layout</h4>
+          <table class="settings-table">
+            <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>max_page_width</td><td>range</td><td>Maximum content width in px. Exposed as <code>--page-width</code></td></tr>
+              <tr><td>min_page_margin</td><td>range</td><td>Minimum horizontal padding in px. Exposed as <code>--page-margin</code></td></tr>
+              <tr><td>input_corner_radius</td><td>range</td><td>Border-radius for inputs and buttons in px</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="settings-group">
+          <h4 class="doc-h4">Header</h4>
+          <table class="settings-table">
+            <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>header_transparent</td><td>checkbox</td><td>Makes header transparent on page load, useful over full-bleed hero images</td></tr>
+              <tr><td>header_hide_on_scroll</td><td>checkbox</td><td>Hides the header when scrolling down, reveals on scroll up</td></tr>
+              <tr><td>main_menu</td><td>link_list</td><td>Primary navigation menu</td></tr>
+              <tr><td>logo</td><td>image_picker</td><td>Site logo. Falls back to <code>shop.name</code> text if not set</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ── CLI COMMANDS ── -->
+      <section class="doc-section" id="cli-commands">
+        <div class="section-eyebrow">Development</div>
+        <h2 class="doc-h2">CLI Commands</h2>
+        <p class="doc-lead">
+          All Grimoire development and deployment is done through the <strong>Shopify CLI</strong>.
+          No custom build scripts — the CLI handles hot reload, asset pushing, and deployment.
+        </p>
+
+        <div class="cli-list">
+          <div class="cli-item">
+            <div class="cli-cmd">
+              <span class="cli-prompt">$</span>
+              <span class="cli-text">shopify theme dev --store your-store.myshopify.com</span>
+            </div>
+            <div class="cli-desc">
+              Starts a local development server with hot reload. Changes to Liquid, CSS, and JS files
+              are reflected in the preview URL instantly. Opens on <code>http://127.0.0.1:9292</code> by default.
+            </div>
+          </div>
+
+          <div class="cli-item">
+            <div class="cli-cmd">
+              <span class="cli-prompt">$</span>
+              <span class="cli-text">shopify theme dev --open</span>
+            </div>
+            <div class="cli-desc">
+              Same as above but automatically opens the preview URL in your default browser on start.
+            </div>
+          </div>
+
+          <div class="cli-item">
+            <div class="cli-cmd">
+              <span class="cli-prompt">$</span>
+              <span class="cli-text">shopify theme push --store your-store.myshopify.com</span>
+            </div>
+            <div class="cli-desc">
+              Pushes the local theme to your Shopify store. Use <code>--publish</code> flag to make it
+              the live theme immediately. Prompts before overwriting if the theme already exists.
+            </div>
+          </div>
+
+          <div class="cli-item">
+            <div class="cli-cmd">
+              <span class="cli-prompt">$</span>
+              <span class="cli-text">shopify theme push --unpublished</span>
+            </div>
+            <div class="cli-desc">
+              Uploads the theme as an unpublished draft — safe for staging and review without
+              affecting the live store.
+            </div>
+          </div>
+
+          <div class="cli-item">
+            <div class="cli-cmd">
+              <span class="cli-prompt">$</span>
+              <span class="cli-text">shopify theme check</span>
+            </div>
+            <div class="cli-desc">
+              Runs Shopify's Theme Check linter locally. The same check runs in CI via GitHub Actions
+              on every push. Recommended before every <code>theme push</code>.
+            </div>
+          </div>
+
+          <div class="cli-item">
+            <div class="cli-cmd">
+              <span class="cli-prompt">$</span>
+              <span class="cli-text">shopify theme list --store your-store.myshopify.com</span>
+            </div>
+            <div class="cli-desc">
+              Lists all themes on the store with their IDs. Useful for targeting a specific theme
+              with <code>--theme-id</code> in push commands.
+            </div>
+          </div>
+
+          <div class="cli-item">
+            <div class="cli-cmd">
+              <span class="cli-prompt">$</span>
+              <span class="cli-text">shopify theme pull --store your-store.myshopify.com</span>
+            </div>
+            <div class="cli-desc">
+              Downloads the live theme from your store to the local directory. Useful for syncing
+              after merchant edits in the online theme editor.
+            </div>
+          </div>
+        </div>
+
+        <div class="callout">
+          <strong>GitHub Actions CI</strong> — The repository includes a CI pipeline that runs
+          <code>shopify theme check</code> on every push and pull request. See
+          <code>.github/workflows/</code> for the configuration.
+        </div>
+
+        <h3 class="doc-h3">Useful flags</h3>
+        <table class="params-table">
+          <thead><tr><th>Flag</th><th></th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>--store</td><td>string</td><td>Your store URL (<code>your-store.myshopify.com</code>)</td></tr>
+            <tr><td>--theme-id</td><td>number</td><td>Target a specific theme by ID (from <code>theme list</code>)</td></tr>
+            <tr><td>--publish</td><td>boolean</td><td>Publish the theme immediately after pushing</td></tr>
+            <tr><td>--unpublished</td><td>boolean</td><td>Push as an unpublished draft (staging-safe)</td></tr>
+            <tr><td>--open</td><td>boolean</td><td>Open the preview URL in a browser after starting dev</td></tr>
+            <tr><td>--nodelete</td><td>boolean</td><td>Prevents deleting remote files not present locally during push</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    // Active TOC link based on scroll position using IntersectionObserver
+    const tocLinks = document.querySelectorAll('.toc-link, .toc-sub');
+    const sections = document.querySelectorAll('[id]');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          tocLinks.forEach(link => {
+            link.classList.toggle(
+              'active',
+              link.getAttribute('href') === `#${id}`
+            );
+          });
+        }
+      });
+    }, {
+      rootMargin: '-20% 0px -70% 0px',
+      threshold: 0
+    });
+
+    sections.forEach(section => observer.observe(section));
+  </script>
+
+</body>
+</html>
