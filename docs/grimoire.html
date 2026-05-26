@@ -127,39 +127,43 @@
       top: calc(var(--nav-h) + 1.2rem);
       height: calc(100vh - var(--nav-h) - 1.2rem);
       width: 100%;
+      max-width: var(--sidebar-w);
       overflow-y: auto;
       overflow-x: hidden;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      background: var(--surface);
+      border-right: 1px solid var(--border);
+      background: transparent;
       scrollbar-width: thin;
       scrollbar-color: rgba(255,255,255,0.08) transparent;
-      z-index: 0;
+      isolation: isolate;
     }
     .sidebar::-webkit-scrollbar { width: 4px; }
     .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 2px; }
 
-    .sidebar-inner { padding: 0 0 4rem; }
-
-    .sidebar-brand {
-      padding: 1.6rem 1.4rem 1.4rem;
-      border-bottom: 1px solid rgba(255,255,255,0.12);
-      margin-bottom: 0.5rem;
-      background: rgba(221,219,215,0.04);
+    .sidebar-inner {
+      width: 100%;
+      max-width: 100%;
+      padding: 0 0 4rem;
     }
-    .sidebar-brand-name {
+
+    #toc {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .toc-title {
       font-family: 'Merriweather', serif;
-      font-size: 1.05rem; font-weight: 900;
-      letter-spacing: 0.08em; text-transform: uppercase;
+      font-size: 1.05rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
       color: var(--text);
-      display: block; margin-bottom: 0.35rem;
-    }
-    .sidebar-brand-sub {
-      font-size: 0.72rem; color: var(--text-faint);
-      font-family: var(--mono);
+      padding: 1.2rem 1.4rem 0.8rem;
+      margin: 0;
     }
 
-    .toc-group { margin-bottom: 0.25rem; }
+    .toc-group { margin-bottom: 0.25rem; width: 100%; }
     .toc-group-label {
       display: block;
       font-size: 0.66rem; font-weight: 700; letter-spacing: 0.13em;
@@ -168,13 +172,15 @@
     }
     .toc-link {
       display: flex; align-items: center; gap: 0.5rem;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
       padding: 0.38rem 1.4rem;
       font-size: 0.85rem; font-weight: 400;
       color: var(--text-soft); text-decoration: none;
       border-left: 2px solid transparent;
-      margin-left: 0;
+      margin: 0;
       transition: color .15s, background .15s, border-color .15s;
-      position: relative;
     }
     .toc-link:hover { color: var(--text); background: rgba(255,255,255,0.03); }
     .toc-link.active {
@@ -193,13 +199,21 @@
 
     .toc-sub {
       display: flex; align-items: center; gap: 0.5rem;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
       padding: 0.28rem 1.4rem 0.28rem 2.6rem;
       font-size: 0.8rem; color: var(--text-faint);
       text-decoration: none; border-left: 2px solid transparent;
-      transition: color .15s, border-color .15s;
+      margin: 0;
+      transition: color .15s, background .15s, border-color .15s;
     }
-    .toc-sub:hover { color: var(--text-soft); }
-    .toc-sub.active { color: var(--text-soft); border-left-color: rgba(221,219,215,0.4); }
+    .toc-sub.active {
+      color: var(--text);
+      border-left-color: var(--purple);
+      background: rgba(221,219,215,0.08);
+    }
+    .toc-sub:hover { color: var(--text); background: rgba(255,255,255,0.03); }
 
     /* ── CONTENT ── */
     .docs-content {
@@ -504,8 +518,8 @@
       }
       .sidebar {
         position: relative; top: 0; height: auto;
-        border-radius: 0;
-        border-left: none; border-right: none; border-top: none;
+        max-width: none;
+        border-right: none;
         border-bottom: 1px solid var(--border);
       }
       .docs-content { padding: 2.5rem 0 5rem; }
@@ -525,12 +539,8 @@
     ═══════════════════════════════════════ -->
     <aside class="sidebar">
       <div class="sidebar-inner">
-        <div class="sidebar-brand">
-          <span class="sidebar-brand-name">Grimoire</span>
-          <span class="sidebar-brand-sub">Shopify OS 2.0 Theme · Commercial</span>
-        </div>
-
         <nav id="toc">
+          <p class="toc-title">Grimoire</p>
           <div class="toc-group">
             <span class="toc-group-label">Overview</span>
             <a class="toc-link active" href="#introduction">
@@ -1388,28 +1398,36 @@ shopify theme dev --store your-store.myshopify.com
   <script src="../snippets/nav.js"></script>
 
   <script>
-    // Active TOC link based on scroll position using IntersectionObserver
-    const tocLinks = document.querySelectorAll('.toc-link, .toc-sub');
-    const sections = document.querySelectorAll('[id]');
+    // Active TOC link — only sections linked from the sidebar
+    const tocLinks = document.querySelectorAll('#toc .toc-link, #toc .toc-sub');
+    const sections = Array.from(tocLinks)
+      .map(function (link) {
+        var id = link.getAttribute('href');
+        return id && id.charAt(0) === '#' ? document.getElementById(id.slice(1)) : null;
+      })
+      .filter(Boolean);
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const id = entry.target.id;
-          tocLinks.forEach(link => {
-            link.classList.toggle(
-              'active',
-              link.getAttribute('href') === `#${id}`
-            );
-          });
-        }
+    var activeId = null;
+
+    function setActiveToc(id) {
+      if (!id || id === activeId) return;
+      activeId = id;
+      tocLinks.forEach(function (link) {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + id);
       });
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+      var visible = entries
+        .filter(function (e) { return e.isIntersecting; })
+        .sort(function (a, b) { return a.boundingClientRect.top - b.boundingClientRect.top; });
+      if (visible.length) setActiveToc(visible[0].target.id);
     }, {
       rootMargin: '-20% 0px -70% 0px',
       threshold: 0
     });
 
-    sections.forEach(section => observer.observe(section));
+    sections.forEach(function (section) { observer.observe(section); });
   </script>
 
   <div id="footer-placeholder"></div>
