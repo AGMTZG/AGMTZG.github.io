@@ -468,6 +468,27 @@
     /* ── SCROLL MARGIN ── */
     [id] { scroll-margin-top: calc(var(--nav-h) + 1.5rem); }
 
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+      padding: 2rem 0;
+      margin-top: 0;
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-copy { font-size: .85rem; color: var(--text-soft); }
+    .footer-back {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-weight: 600; font-size: .9rem;
+      color: var(--text-soft); text-decoration: none;
+      transition: color .2s;
+    }
+    .footer-back:hover { color: var(--purple); }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       .docs-layout { grid-template-columns: 1fr; }
@@ -477,6 +498,7 @@
       }
       .docs-content { padding: 2.5rem 1.5rem 5rem; }
       .ref-grid { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; gap: 1rem; text-align: center; }
     }
   </style>
 </head>
@@ -1377,6 +1399,11 @@ shopify theme dev --store your-store.myshopify.com
 
     sections.forEach(section => observer.observe(section));
   </script>
+
+  <div id="footer-placeholder"></div>
+
+  <script>window.FOOTER_TYPE = 'simple';</script>
+  <script src="../snippets/footer.js"></script>
 
 </body>
 </html>
