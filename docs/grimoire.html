@@ -47,8 +47,8 @@
       overflow-x: hidden;
     }
 
-    /* ── NAV (dark variant for docs) ── */
-    nav {
+    /* ── NAV (dark variant for docs) — #site-nav only, not #toc sidebar ── */
+    #site-nav {
       position: fixed; top: 0; left: 0; right: 0;
       height: var(--nav-h);
       background: rgba(10,10,10,0.95);
@@ -150,6 +150,11 @@
       flex-direction: column;
       width: 100%;
       max-width: 100%;
+      position: static;
+      height: auto;
+      background: transparent;
+      border: none;
+      z-index: auto;
     }
 
     .toc-title {
