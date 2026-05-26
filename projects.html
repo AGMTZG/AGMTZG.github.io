@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects — Alberto Martinez</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,400&family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --purple:       #6B21FE;
+      --purple-dim:   #8B5CF6;
+      --purple-pale:  #EDE9FE;
+      --bg:           #F7F7F9;
+      --bg-card:      #EDEDEF;
+      --dark:         #0F0E16;
+      --mid:          #3D3A4E;
+      --muted:        #7A7893;
+      --border:       #E2E1E8;
+      --white:        #FFFFFF;
+      --radius:       16px;
+      --nav-h:        72px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Figtree', sans-serif;
+      background: var(--bg);
+      color: var(--dark);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, .logo {
+      font-family: 'Merriweather', Georgia, serif;
+      line-height: 1.1;
+    }
+
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 2rem; }
+
+    .reveal {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.08s; }
+    .reveal-delay-2 { transition-delay: 0.16s; }
+    .reveal-delay-3 { transition-delay: 0.24s; }
+    .reveal-delay-4 { transition-delay: 0.32s; }
+    .reveal-delay-5 { transition-delay: 0.40s; }
+    .reveal-delay-6 { transition-delay: 0.48s; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: var(--nav-h);
+      background: rgba(247,247,249,0.85);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 2px 20px rgba(107,33,254,.07); }
+    .nav-inner { height: var(--nav-h); display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-size: 1.2rem; font-weight: 800; color: var(--dark); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--purple); }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a {
+      font-family: 'Figtree', sans-serif; font-weight: 500; font-size: 0.95rem;
+      color: var(--mid); text-decoration: none; transition: color 0.2s; position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -3px; left: 0;
+      width: 0; height: 2px; background: var(--purple); border-radius: 2px; transition: width 0.25s ease;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--purple); }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+    .nav-cta {
+      width: 40px; height: 40px; background: var(--dark); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; text-decoration: none; transition: background 0.2s, transform 0.2s;
+    }
+    .nav-cta:hover { background: var(--purple); transform: scale(1.08); }
+    .nav-cta svg { width: 18px; height: 18px; fill: var(--white); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--dark); border-radius: 2px; transition: transform 0.3s, opacity 0.3s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu {
+      display: none; position: fixed; top: var(--nav-h); left: 0; right: 0;
+      background: var(--bg); border-bottom: 1px solid var(--border);
+      padding: 1.5rem 2rem 2rem; z-index: 99; flex-direction: column; gap: 1.2rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-family: 'Merriweather', Georgia, serif; font-size: 1.3rem; font-weight: 700; color: var(--dark); text-decoration: none; transition: color 0.2s; }
+    .mobile-menu a:hover { color: var(--purple); }
+
+    /* ── BUTTONS ── */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.85rem 1.8rem; background: var(--purple); color: var(--white);
+      font-family: 'Figtree', sans-serif; font-weight: 600; font-size: 0.95rem;
+      text-decoration: none; border-radius: 8px; transition: background 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { background: #5910e0; transform: translateY(-2px); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.85rem 1.8rem; background: transparent; color: var(--dark);
+      font-family: 'Figtree', sans-serif; font-weight: 600; font-size: 0.95rem;
+      text-decoration: none; border: 2px solid var(--border); border-radius: 8px;
+      transition: border-color 0.2s, color 0.2s, transform 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--purple); color: var(--purple); transform: translateY(-2px); }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      padding-top: calc(var(--nav-h) + 60px);
+      padding-bottom: 60px;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+    }
+    .page-hero h1 {
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 900;
+      letter-spacing: -2px;
+      margin-bottom: 0.8rem;
+    }
+    .page-hero h1 span { color: var(--purple); }
+    .page-hero p { font-size: 1.1rem; color: var(--mid); max-width: 520px; }
+
+    /* ── SECTION HEADERS ── */
+    .section-label {
+      font-family: 'Figtree', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 0.6rem;
+    }
+    .section-heading {
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 2.5rem;
+    }
+    .section-heading span { color: var(--purple); }
+
+    /* ── FEATURED PROJECTS ── */
+    #featured { background: var(--white); padding: 80px 0; }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .project-card { cursor: pointer; display: block; text-decoration: none; color: inherit; }
+
+    .project-thumb {
+      border-radius: var(--radius);
+      background: var(--bg-card);
+      height: 280px;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 1.2rem;
+      transition: transform 0.3s;
+    }
+    .project-card:hover .project-thumb { transform: translateY(-4px); }
+
+    .project-thumb::before {
+      content: ''; position: absolute; bottom: -30px; right: -30px;
+      width: 120px; height: 120px; background: var(--purple);
+      border-radius: 14px; transform: rotate(25deg); z-index: 1;
+    }
+
+    .mockup {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center; padding: 1.5rem;
+    }
+
+    /* TaskFlow mockup */
+    .mock-task {
+      width: 100%; height: 100%; background: #1A1523; border-radius: 10px;
+      padding: 14px; display: flex; flex-direction: column; gap: 8px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15); transform: scale(0.88) translateY(10px);
+    }
+    .mock-task-header { height: 10px; background: rgba(255,255,255,0.15); border-radius: 4px; width: 40%; }
+    .mock-task-col { flex: 1; display: flex; gap: 6px; margin-top: 4px; }
+    .mock-task-lane { flex: 1; background: rgba(255,255,255,0.05); border-radius: 6px; padding: 6px; display: flex; flex-direction: column; gap: 5px; }
+    .mock-task-item { height: 22px; border-radius: 4px; background: rgba(255,255,255,0.1); }
+    .mock-task-item.accent { background: rgba(107,33,254,0.5); }
+
+    /* API mockup */
+    .mock-api {
+      width: 100%; height: 100%; background: #0F0E16; border-radius: 10px;
+      padding: 14px; box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+      transform: scale(0.88) translateY(10px); overflow: hidden;
+    }
+    .mock-api-line { height: 8px; border-radius: 3px; margin-bottom: 7px; }
+    .c-green  { background: #22c55e; width: 30%; }
+    .c-purple { background: #8B5CF6; width: 60%; }
+    .c-blue   { background: #60a5fa; width: 45%; }
+    .c-gray   { background: rgba(255,255,255,0.12); }
+    .c-orange { background: #f97316; width: 35%; }
+
+    /* Portfolio mockup */
+    .mock-portfolio {
+      width: 100%; height: 100%; background: white; border-radius: 10px;
+      padding: 14px; box-shadow: 0 8px 32px rgba(0,0,0,0.12); transform: scale(0.88) translateY(10px);
+    }
+    .mock-portfolio-nav { height: 10px; background: #f0f0f3; border-radius: 3px; width: 70%; margin-bottom: 12px; }
+    .mock-portfolio-hero {
+      height: 60px; background: linear-gradient(135deg, #EDE9FE, #f5f3ff);
+      border-radius: 8px; margin-bottom: 10px;
+      display: flex; align-items: center; padding: 10px; gap: 8px;
+    }
+    .mock-portfolio-circle { width: 36px; height: 36px; border-radius: 50%; background: var(--purple); }
+    .mock-portfolio-lines { flex: 1; display: flex; flex-direction: column; gap: 5px; }
+    .mock-portfolio-line { height: 7px; background: rgba(107,33,254,0.25); border-radius: 3px; }
+
+    .project-name {
+      display: flex; align-items: center; gap: 0.6rem;
+      font-family: 'Merriweather', Georgia, serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 0.4rem;
+    }
+    .project-link-icon {
+      width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--dark);
+      display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .project-card:hover .project-link-icon { background: var(--purple); border-color: var(--purple); }
+    .project-link-icon svg { width: 12px; height: 12px; }
+    .project-desc { color: var(--mid); font-size: 0.95rem; line-height: 1.6; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.7rem; }
+    .tag {
+      font-size: 0.78rem; font-weight: 600; padding: 0.25rem 0.7rem;
+      border-radius: 100px; background: var(--purple-pale); color: var(--purple);
+    }
+
+    /* ── GITHUB REPOS ── */
+    #open-source { background: var(--bg); padding: 80px 0; }
+
+    .repo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+    }
+
+    .repo-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .repo-card:hover {
+      border-color: var(--purple);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(107,33,254,0.1);
+    }
+
+    .repo-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .repo-lang {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 100px;
+      letter-spacing: 0.03em;
+    }
+    .lang-php     { background: #ede9fe; color: #6B21FE; }
+    .lang-python  { background: #fef9c3; color: #854d0e; }
+    .lang-csharp  { background: #d1fae5; color: #065f46; }
+    .lang-shell   { background: #e0f2fe; color: #0369a1; }
+    .lang-notes   { background: #f1f5f9; color: #475569; }
+
+    .repo-gh-icon { color: var(--muted); transition: color 0.2s; }
+    .repo-card:hover .repo-gh-icon { color: var(--purple); }
+    .repo-gh-icon svg { width: 18px; height: 18px; fill: currentColor; }
+
+    .repo-name {
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--dark);
+    }
+    .repo-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.55; flex: 1; }
+
+    .repo-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      padding-top: 0.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .repo-meta span { display: flex; align-items: center; gap: 0.3rem; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--white); border-top: 1px solid var(--border); padding: 3rem 0; }
+    .footer-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.5rem; }
+    .footer-links { display: flex; gap: 2rem; list-style: none; }
+    .footer-links a { font-size: 0.9rem; color: var(--mid); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+    .footer-links a:hover, .footer-links a.active { color: var(--purple); }
+    .social-links { display: flex; gap: 0.8rem; }
+    .social-link {
+      width: 38px; height: 38px; border: 1.5px solid var(--border); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none; color: var(--mid); transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .social-link:hover { border-color: var(--purple); color: var(--purple); background: var(--purple-pale); }
+    .social-link svg { width: 18px; height: 18px; fill: currentColor; }
+    .footer-cta {
+      border-top: 1px solid var(--border); padding-top: 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-cta-text h3 { font-family: 'Merriweather', Georgia, serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.2rem; }
+    .footer-cta-text p { font-size: 0.9rem; color: var(--muted); }
+    .footer-cta-btns { display: flex; gap: 0.8rem; }
+    .footer-copy { margin-top: 2rem; text-align: center; font-size: 0.83rem; color: var(--muted); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .projects-grid { grid-template-columns: 1fr; }
+      .repo-grid { grid-template-columns: 1fr 1fr; }
+      .footer-top { flex-direction: column; gap: 1.5rem; }
+      .footer-cta { flex-direction: column; gap: 1.5rem; text-align: center; }
+      .footer-cta-btns { justify-content: center; }
+    }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .nav-cta { display: none; }
+      .repo-grid { grid-template-columns: 1fr; }
+      .footer-links { flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="nav-placeholder"></div>
+
+  <!-- ── PAGE HERO ── -->
+  <header class="page-hero">
+    <div class="container">
+      <p class="section-label">Portfolio</p>
+      <h1>Projects<span>.</span></h1>
+      <p>Featured work and open-source contributions on GitHub.</p>
+    </div>
+  </header>
+
+  <!-- ── FEATURED ── -->
+  <section id="featured">
+    <div class="container">
+      <p class="section-label reveal">Highlighted</p>
+      <h2 class="section-heading reveal">Featured work<span>.</span></h2>
+
+      <div class="projects-grid">
+
+        <!-- Grimoire -->
+        <a class="project-card reveal" href="projects/grimoire.html">
+          <div class="project-thumb">
+            <img src="images/image.png" alt="Grimoire Shopify Theme" style="width:100%;height:100%;object-fit:cover;object-position:top;">
+          </div>
+          <div class="project-name">
+            Grimoire
+            <span class="project-link-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </span>
+          </div>
+          <p class="project-desc">Minimal, modular Shopify skeleton theme built for speed and maintainability, following Shopify's best practices with Liquid templates.</p>
+          <div class="project-tags">
+            <span class="tag">Shopify</span>
+            <span class="tag">Liquid</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+          </div>
+        </a>
+
+        <!-- TaskFlow -->
+        <a class="project-card reveal reveal-delay-1" href="projects/taskflow.html">
+          <div class="project-thumb">
+            <div class="mockup">
+              <div class="mock-task">
+                <div class="mock-task-header"></div>
+                <div class="mock-task-col">
+                  <div class="mock-task-lane">
+                    <div class="mock-task-item"></div>
+                    <div class="mock-task-item accent"></div>
+                    <div class="mock-task-item"></div>
+                  </div>
+                  <div class="mock-task-lane">
+                    <div class="mock-task-item accent"></div>
+                    <div class="mock-task-item"></div>
+                  </div>
+                  <div class="mock-task-lane">
+                    <div class="mock-task-item"></div>
+                    <div class="mock-task-item"></div>
+                    <div class="mock-task-item accent"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="project-name">
+            TaskFlow
+            <span class="project-link-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </span>
+          </div>
+          <p class="project-desc">Kanban-style project management tool with real-time collaboration, drag-and-drop boards, and team workspaces.</p>
+          <div class="project-tags">
+            <span class="tag">Node.js</span>
+            <span class="tag">React</span>
+            <span class="tag">WebSocket</span>
+            <span class="tag">MongoDB</span>
+          </div>
+        </a>
+
+        <!-- OpenGate -->
+        <a class="project-card reveal reveal-delay-2" href="projects/opengate.html">
+          <div class="project-thumb">
+            <div class="mockup">
+              <div class="mock-api">
+                <div class="mock-api-line c-green" style="width:28%"></div>
+                <div class="mock-api-line c-gray" style="width:85%;margin-top:2px"></div>
+                <div class="mock-api-line c-purple" style="width:60%;margin-top:6px"></div>
+                <div class="mock-api-line c-gray" style="width:90%"></div>
+                <div class="mock-api-line c-gray" style="width:75%"></div>
+                <div class="mock-api-line c-blue" style="width:50%;margin-top:6px"></div>
+                <div class="mock-api-line c-gray" style="width:80%"></div>
+                <div class="mock-api-line c-orange" style="width:38%;margin-top:6px"></div>
+                <div class="mock-api-line c-gray" style="width:70%"></div>
+                <div class="mock-api-line c-purple" style="width:55%"></div>
+              </div>
+            </div>
+          </div>
+          <div class="project-name">
+            OpenGate
+            <span class="project-link-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </span>
+          </div>
+          <p class="project-desc">Lightweight API gateway with JWT auth, rate limiting, request routing, and a dashboard to monitor traffic in real time.</p>
+          <div class="project-tags">
+            <span class="tag">Go</span>
+            <span class="tag">Redis</span>
+            <span class="tag">REST</span>
+            <span class="tag">JWT</span>
+          </div>
+        </a>
+
+        <!-- Portfolio -->
+        <a class="project-card reveal reveal-delay-3" href="projects/this-portfolio.html">
+          <div class="project-thumb">
+            <div class="mockup">
+              <div class="mock-portfolio">
+                <div class="mock-portfolio-nav"></div>
+                <div class="mock-portfolio-hero">
+                  <div class="mock-portfolio-circle"></div>
+                  <div class="mock-portfolio-lines">
+                    <div class="mock-portfolio-line" style="width:70%"></div>
+                    <div class="mock-portfolio-line" style="width:45%"></div>
+                  </div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:6px;margin-top:8px">
+                  <div style="height:7px;background:#f0f0f3;border-radius:3px;width:90%"></div>
+                  <div style="height:7px;background:#f0f0f3;border-radius:3px;width:75%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="project-name">
+            This Portfolio
+            <span class="project-link-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </span>
+          </div>
+          <p class="project-desc">Hand-crafted personal portfolio with zero dependencies — pure HTML, CSS, and vanilla JS. Fast, accessible, and responsive.</p>
+          <div class="project-tags">
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── OPEN SOURCE ── -->
+  <section id="open-source">
+    <div class="container">
+      <p class="section-label reveal">GitHub</p>
+      <h2 class="section-heading reveal">Open source<span>.</span></h2>
+
+      <div class="repo-grid">
+
+        <a class="repo-card reveal" href="https://github.com/AGMTZG/meridian" target="_blank" rel="noopener">
+          <div class="repo-top">
+            <span class="repo-lang lang-php">PHP</span>
+            <span class="repo-gh-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.09.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.603-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.461-1.11-1.461-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.088 2.91.832.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.268 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.026 2.747-1.026.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.577.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+            </span>
+          </div>
+          <p class="repo-name">meridian</p>
+          <p class="repo-desc">Full-featured HR management system — employees, payroll, attendance, and leave management built with Laravel.</p>
+          <div class="repo-meta">
+            <span>⭐ 1</span>
+            <span>PHP</span>
+          </div>
+        </a>
+
+        <a class="repo-card reveal reveal-delay-1" href="https://github.com/AGMTZG/llm-job-analyzer" target="_blank" rel="noopener">
+          <div class="repo-top">
+            <span class="repo-lang lang-python">Python</span>
+            <span class="repo-gh-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.09.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.603-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.461-1.11-1.461-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.088 2.91.832.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.268 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.026 2.747-1.026.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.577.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+            </span>
+          </div>
+          <p class="repo-name">llm-job-analyzer</p>
+          <p class="repo-desc">LLM-powered tool that analyzes job postings and extracts key skills, requirements, and fit scores using OpenAI.</p>
+          <div class="repo-meta">
+            <span>⭐ 0</span>
+            <span>Python</span>
+          </div>
+        </a>
+
+        <a class="repo-card reveal reveal-delay-2" href="https://github.com/AGMTZG/inventario_productos" target="_blank" rel="noopener">
+          <div class="repo-top">
+            <span class="repo-lang lang-csharp">C#</span>
+            <span class="repo-gh-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.09.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.603-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.461-1.11-1.461-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.088 2.91.832.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.268 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.026 2.747-1.026.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.577.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+            </span>
+          </div>
+          <p class="repo-name">inventario_productos</p>
+          <p class="repo-desc">Product inventory management app with CRUD operations, category filtering, and stock tracking built in C#.</p>
+          <div class="repo-meta">
+            <span>⭐ 1</span>
+            <span>C#</span>
+          </div>
+        </a>
+
+        <a class="repo-card reveal reveal-delay-3" href="https://github.com/AGMTZG/neetcode-submissions" target="_blank" rel="noopener">
+          <div class="repo-top">
+            <span class="repo-lang lang-python">Python</span>
+            <span class="repo-gh-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.09.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.603-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.461-1.11-1.461-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.088 2.91.832.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.268 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.026 2.747-1.026.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.577.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+            </span>
+          </div>
+          <p class="repo-name">neetcode-submissions</p>
+          <p class="repo-desc">My NeetCode.io problem submissions — organized DSA practice covering arrays, graphs, DP, and system design patterns.</p>
+          <div class="repo-meta">
+            <span>⭐ 1</span>
+            <span>Python</span>
+          </div>
+        </a>
+
+        <a class="repo-card reveal reveal-delay-4" href="https://github.com/AGMTZG/Killercoda" target="_blank" rel="noopener">
+          <div class="repo-top">
+            <span class="repo-lang lang-shell">Shell</span>
+            <span class="repo-gh-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.09.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.603-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.461-1.11-1.461-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.088 2.91.832.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.268 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.026 2.747-1.026.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.577.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+            </span>
+          </div>
+          <p class="repo-name">Killercoda</p>
+          <p class="repo-desc">Interactive Killercoda scenarios for Linux, Kubernetes, and DevOps practice. Hands-on terminal-based learning labs.</p>
+          <div class="repo-meta">
+            <span>⭐ 2</span>
+            <span>Shell</span>
+          </div>
+        </a>
+
+        <a class="repo-card reveal reveal-delay-5" href="https://github.com/AGMTZG/yt-dlp-interactive-wrapper-for-Ubuntu-Debian" target="_blank" rel="noopener">
+          <div class="repo-top">
+            <span class="repo-lang lang-shell">Shell</span>
+            <span class="repo-gh-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.09.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.603-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.461-1.11-1.461-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.088 2.91.832.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.268 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.026 2.747-1.026.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.577.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+            </span>
+          </div>
+          <p class="repo-name">yt-dlp-wrapper</p>
+          <p class="repo-desc">Lightweight Bash helper on top of yt-dlp. Interactive terminal menu to download audio/video in multiple formats on Linux.</p>
+          <div class="repo-meta">
+            <span>⭐ 1</span>
+            <span>Shell</span>
+          </div>
+        </a>
+
+        <a class="repo-card reveal reveal-delay-6" href="https://github.com/AGMTZG/saa-c03-prep" target="_blank" rel="noopener">
+          <div class="repo-top">
+            <span class="repo-lang lang-notes">Notes</span>
+            <span class="repo-gh-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.09.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.603-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.461-1.11-1.461-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.088 2.91.832.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.268 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.026 2.747-1.026.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.577.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+            </span>
+          </div>
+          <p class="repo-name">saa-c03-prep</p>
+          <p class="repo-desc">Study notes and exam prep for the AWS Solutions Architect Associate (SAA-C03) certification. Covers all major service domains.</p>
+          <div class="repo-meta">
+            <span>⭐ 1</span>
+            <span>Markdown</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+
+  <script>
+    window.SITE_ROOT  = './';
+    window.NAV_ACTIVE = 'projects';
+    window.FOOTER_TYPE = 'full';
+  </script>
+  <script src="snippets/nav.js"></script>
+  <script src="snippets/footer.js"></script>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
