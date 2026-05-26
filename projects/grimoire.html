@@ -134,108 +134,7 @@
       border-radius: 50%;
     }
 
-    .storefront-mock {
-      position: relative; z-index: 1;
-      width: 88%; height: 82%;
-      background: #111111;
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 14px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .sf-header {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 20px;
-      height: 40px;
-      background: #0d0d0d;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      flex-shrink: 0;
-    }
-    .sf-logo {
-      font-family: 'Merriweather', serif;
-      font-size: 11px; font-weight: 900;
-      letter-spacing: 3px;
-      color: #dddbd7;
-    }
-    .sf-nav { display: flex; gap: 14px; }
-    .sf-nav span {
-      font-size: 8px; font-weight: 600; letter-spacing: 1.5px;
-      text-transform: uppercase; color: rgba(221,219,215,0.45);
-    }
-    .sf-icons { display: flex; gap: 8px; }
-    .sf-icon-dot {
-      width: 16px; height: 7px; border-radius: 2px;
-      background: rgba(255,255,255,0.12);
-    }
-
-    .sf-hero {
-      flex: 1;
-      display: flex; flex-direction: column;
-      align-items: flex-start; justify-content: center;
-      padding: 0 28px;
-      background: linear-gradient(135deg, #0d0d0d 60%, #1a0d2e 100%);
-      position: relative;
-      overflow: hidden;
-    }
-    .sf-hero::after {
-      content: '';
-      position: absolute;
-      right: -20px; top: 50%;
-      transform: translateY(-50%);
-      width: 160px; height: 160px;
-      background: rgba(107,33,254,0.08);
-      border: 1px solid rgba(107,33,254,0.15);
-      border-radius: 6px;
-      transform: translateY(-50%) rotate(12deg);
-    }
-    .sf-eyebrow-mock {
-      font-size: 7px; font-weight: 700; letter-spacing: 2.5px;
-      text-transform: uppercase;
-      color: rgba(107,33,254,0.9);
-      margin-bottom: 8px;
-    }
-    .sf-headline {
-      font-family: 'Merriweather', serif;
-      font-size: clamp(18px, 3vw, 28px);
-      font-weight: 900; line-height: 1;
-      letter-spacing: -1px;
-      color: #dddbd7;
-      margin-bottom: 12px;
-    }
-    .sf-cta {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: transparent;
-      border: 1px solid rgba(107,33,254,0.6);
-      color: rgba(107,33,254,0.9);
-      font-size: 7px; font-weight: 700; letter-spacing: 1.5px;
-      text-transform: uppercase;
-      padding: 5px 12px; border-radius: 3px;
-    }
-
-    .sf-products {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 8px; padding: 10px 16px;
-      background: #111111;
-      flex-shrink: 0;
-    }
-    .sf-product {
-      height: 44px; border-radius: 6px;
-      background: #1a1a1a;
-      border: 1px solid rgba(255,255,255,0.05);
-      overflow: hidden; position: relative;
-    }
-    .sf-product::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 14px;
-      background: rgba(255,255,255,0.03);
-      border-top: 1px solid rgba(255,255,255,0.04);
-    }
-
-    /* SECTIONS */
+/* SECTIONS */
     .proj-section { padding: 0 0 5rem; }
     .section-label {
       font-size: .8rem; font-weight: 600; letter-spacing: .1em;
@@ -486,35 +385,7 @@
 
     <!-- MOCKUP BANNER -->
     <div class="proj-mockup">
-      <div class="storefront-mock">
-        <div class="sf-header">
-          <div class="sf-logo">GRIMOIRE</div>
-          <div class="sf-nav">
-            <span>Shop</span>
-            <span>Editorial</span>
-            <span>About</span>
-            <span>Contact</span>
-          </div>
-          <div class="sf-icons">
-            <div class="sf-icon-dot"></div>
-            <div class="sf-icon-dot"></div>
-            <div class="sf-icon-dot" style="width:10px"></div>
-          </div>
-        </div>
-        <div class="sf-hero">
-          <div class="sf-eyebrow-mock">New Collection — Arcane Objects</div>
-          <div class="sf-headline">THE<br>RITUAL<br>EDIT</div>
-          <div class="sf-cta">
-            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            Explore
-          </div>
-        </div>
-        <div class="sf-products">
-          <div class="sf-product"></div>
-          <div class="sf-product" style="background:rgba(107,33,254,0.08); border-color: rgba(107,33,254,0.2);"></div>
-          <div class="sf-product"></div>
-        </div>
-      </div>
+      <img src="../images/image.png" alt="Grimoire Shopify theme — storefront preview" style="width:100%; height:100%; object-fit:cover; object-position:top; border-radius:20px;">
     </div>
 
     <!-- OVERVIEW -->
