@@ -1448,20 +1448,117 @@
         <hr class="doc-divider" id="snippet-product-card">
         <h3 class="doc-h3">product-card.liquid</h3>
         <p>
-          The main product card component used across collection grids, carousels, search results,
-          and quick view. Renders product image with hover overlay, title, price, compare-at price,
-          color swatches, sale/sold-out badges, and an add-to-cart button.
-        </p>
-        <p>
-          All visual states (ATC hover, sold-out, sale badge) are controlled via CSS custom properties
-          defined in <code>css-variables.liquid</code> under the <code>--pc-*</code> namespace.
-          Styles are guard-loaded once with the <code>product_card_styles_loaded</code> assign trick.
+          The reusable <strong>product tile</strong> in Grimoire: image, sale/sold-out badges, title,
+          price (and compare-at when on sale), optional color swatches, and an action button. Sections
+          render it inside grids or carousels — you do not add the snippet from the theme customizer.
+          What you control as a merchant is <em>which products appear</em> in each section (collections,
+          recommendations, search results) and your catalog data (images, variants, pricing).
         </p>
 
-        <div class="callout warning">
-          <strong>Quick view &amp; swatches:</strong> Cards with <strong>open quick view on add to cart</strong>
-          need <code>product-modal.liquid</code> on the page (it loads <code>product-interactions.liquid</code>
-          automatically). Sections wire these up for you — see below.
+        <h4 class="doc-h4">What shoppers see on each card</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li><strong>Media</strong> — Square image with a subtle gradient overlay; image zooms on hover (behavior depends on hover mode below).</li>
+          <li><strong>Badges</strong> — “Sale” when the product is discounted; “Sold out” when the selected color has no available inventory.</li>
+          <li><strong>Swatches</strong> — Shown only when the product has a <strong>Color</strong> or <strong>Colour</strong> option in Shopify admin. Clicking a swatch updates the preview image, active variant, and sold-out state on that card.</li>
+          <li><strong>Title &amp; price</strong> — Linked to the product page. Compare-at price appears struck through when on sale.</li>
+          <li><strong>Action button</strong> — Either adds one unit to the cart via AJAX (cart drawer opens) or opens the quick view modal first — see the next section.</li>
+        </ul>
+
+        <h4 class="doc-h4">Add to cart: two behaviors</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Behavior</th><th>Shopper experience</th><th>Used on</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Direct add</td>
+              <td>One click adds the selected variant to the cart, updates the cart count, and opens the cart drawer.</td>
+              <td><em>Recently viewed</em> (and any card rendered without quick view).</td>
+            </tr>
+            <tr>
+              <td>Quick view first</td>
+              <td>Button opens the quick view modal so shoppers can change quantity, color, or buy before leaving the grid.</td>
+              <td><em>Collection</em>, <em>Search</em>, <em>Trending products</em>, <em>Product recommendations</em>.</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          Swatch clicks and quick view are handled by the companion snippets documented below
+          (<a href="#snippet-product-interactions">product-interactions</a>,
+          <a href="#snippet-product-modal">product-modal</a>).
+        </p>
+
+        <h4 class="doc-h4">Where product cards appear</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Section</th><th>Layout</th></tr></thead>
+          <tbody>
+            <tr><td>Collection</td><td>Responsive product grid with filters; cards use quick view.</td></tr>
+            <tr><td>Search</td><td>Product results in a grid; quick view enabled.</td></tr>
+            <tr><td>Trending products</td><td>Cards inside a <a href="#snippet-product-carousel">product carousel</a> per category tab.</td></tr>
+            <tr><td>Product recommendations</td><td>Related products carousel on the product template.</td></tr>
+            <tr><td>Recently viewed</td><td>Carousel on the product template; direct add to cart (no quick view).</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Card layout options (set by the theme)</h4>
+        <p>
+          These are passed when a section renders the card — not exposed as theme editor toggles on
+          every section today, but useful if you work with a developer:
+        </p>
+        <table class="params-table">
+          <thead><tr><th>Option</th><th>Values</th><th>Effect</th></tr></thead>
+          <tbody>
+            <tr><td>hover_mode</td><td><code>full</code> (default) · <code>media-title</code></td><td><code>media-title</code> limits zoom/hover border to the image, title row, or ATC — used on Grimoire grids.</td></tr>
+            <tr><td>variant</td><td><code>default</code> · <code>grimoire</code></td><td><code>grimoire</code> applies tighter typography scaling on large screens.</td></tr>
+            <tr><td>swatch_shape</td><td><code>circle</code> (default) · <code>rectangle</code></td><td>Shape of color swatch buttons.</td></tr>
+            <tr><td>opens_modal</td><td>true / false</td><td>When true, ATC opens quick view instead of adding immediately.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Parameters (snippet reference)</h4>
+        <p>Required fields depend on context: carousel/grid sections pass a full <code>product</code> object for swatches; minimal cards can use manual <code>title</code>, <code>price</code>, and <code>image</code> / <code>image_object</code> instead.</p>
+        <table class="params-table">
+          <thead><tr><th>Param</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>product</td><td>product</td><td>Shopify product object. Enables color swatches and unit price when present.</td></tr>
+            <tr><td>image_object</td><td>image</td><td>Shopify image for responsive <code>srcset</code>. Preferred over <code>image</code> URL string.</td></tr>
+            <tr><td>image</td><td>string</td><td>Plain image URL when no image object is available.</td></tr>
+            <tr><td>title</td><td>string</td><td>Product title shown on the card.</td></tr>
+            <tr><td>price</td><td>string</td><td>Formatted price (usually <code>money</code> filter output).</td></tr>
+            <tr><td>compare_price</td><td>string</td><td>Formatted compare-at price when <code>on_sale</code> is true.</td></tr>
+            <tr><td>on_sale</td><td>boolean</td><td>Shows sale badges and sale price styling.</td></tr>
+            <tr><td>url</td><td>string</td><td>Product URL for image, title, and fallback navigation.</td></tr>
+            <tr><td>variant_id</td><td>number</td><td>Variant added on direct ATC (<code>opens_modal</code> false).</td></tr>
+            <tr><td>available</td><td>boolean</td><td>When false, shows a sold-out label instead of the ATC button. Default: true.</td></tr>
+            <tr><td>show_vendor</td><td>boolean</td><td>Show vendor name when no color option exists. Default: true.</td></tr>
+            <tr><td>show_compare_price</td><td>boolean</td><td>Show compare-at when on sale. Default: true.</td></tr>
+            <tr><td>atc_label</td><td>string</td><td>Button label. Default: <code>View More Options</code></td></tr>
+            <tr><td>added_label</td><td>string</td><td>Shown briefly after a successful direct add. Default: <code>Added ✦</code></td></tr>
+            <tr><td>sold_out_label</td><td>string</td><td>Sold-out copy on the button area. Default: <code>Sold Out</code></td></tr>
+            <tr><td>sale_label</td><td>string</td><td>Sale badge text. Default: <code>Sale</code></td></tr>
+            <tr><td>hover_mode</td><td>string</td><td><code>full</code> or <code>media-title</code>.</td></tr>
+            <tr><td>swatch_shape</td><td>string</td><td><code>circle</code> or <code>rectangle</code>.</td></tr>
+            <tr><td>variant</td><td>string</td><td><code>default</code> or <code>grimoire</code>.</td></tr>
+            <tr><td>opens_modal</td><td>boolean</td><td>Quick view vs direct cart add.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">For theme developers</h4>
+        <div class="ref-grid">
+          <div class="ref-item">
+            <span class="ref-item-name">Markup root</span>
+            <span class="ref-item-desc"><code>.pc-card-outer</code> → <code>.pc-card</code> → media, ATC, <code>.pc-info</code> (swatches, title, prices).</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">Styles &amp; script</span>
+            <span class="ref-item-desc">Guard-loaded CSS (<code>product_card_styles_loaded</code>) and inline direct-ATC script (<code>product_card_scripts_loaded</code>). Uses global <code>--pc-*</code> tokens from <a href="#snippet-css-variables">css-variables</a>.</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">Carousel slide</span>
+            <span class="ref-item-desc">Wrap each render in <code>&lt;div class="pcar-slide"&gt;</code> when passing slides to <a href="#snippet-product-carousel">product-carousel</a>.</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">Events</span>
+            <span class="ref-item-desc">Direct add dispatches <code>cart:item-added</code> and calls <code>cartSidebarOpen</code> when the header cart drawer is present.</span>
+          </div>
         </div>
 
         <!-- product-interactions -->
