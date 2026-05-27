@@ -1155,37 +1155,126 @@
         <hr class="doc-divider" id="snippet-section-title">
         <h3 class="doc-h3">section-title.liquid</h3>
         <p>
-          Renders an uppercase eyebrow with a hairline rule, followed by a large bold heading.
-          Optionally renders a CTA link when <code>btn_label</code> is set. Used consistently
-          across all major sections for visual coherence.
+          Shared <strong>section header</strong> for Grimoire: a short label (eyebrow), a large title,
+          and an optional text link styled as a button. You will not add this snippet manually in the
+          theme editor — sections that support it expose <strong>Eyebrow</strong>, <strong>Heading</strong>,
+          and sometimes <strong>Button label</strong> / <strong>Button link</strong> fields in their own
+          settings panel. Leaving a field empty hides that part of the header (for example, heading-only
+          or eyebrow-only is valid).
         </p>
 
-        <h4 class="doc-h4">Parameters</h4>
+        <h4 class="doc-h4">What you see on the storefront</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li><strong>Eyebrow</strong> — Small caps line with horizontal rules on either side (mobile: centered with rules; desktop: left-aligned, rule extends to the right).</li>
+          <li><strong>Heading</strong> — Large display title using your Theme settings heading font; scales with viewport width.</li>
+          <li><strong>Optional CTA</strong> — Uppercase outline button with a chevron icon, shown only when a button label is set. If a link is missing, the button falls back to <code>#</code> — always set <strong>Button link</strong> when you add a label.</li>
+        </ul>
+        <p>
+          On viewports <strong>768px and wider</strong>, the heading and CTA sit on one row (title left,
+          button right). Below that breakpoint, both stack and center for easier reading on phones.
+        </p>
+
+        <h4 class="doc-h4">Where to edit it (theme customizer)</h4>
+        <p>
+          Open the section on your page and look for header fields near the top of the settings sidebar.
+          Labels vary slightly by section but usually match the table below.
+        </p>
         <table class="params-table">
-          <thead><tr><th>Param</th><th>Type</th><th>Description</th></tr></thead>
+          <thead><tr><th>Section</th><th>Customizer fields</th><th>Notes</th></tr></thead>
           <tbody>
-            <tr><td>eyebrow</td><td>string</td><td>Small uppercase label shown above the heading with a hairline rule</td></tr>
-            <tr><td>heading</td><td>string</td><td>Main section title rendered as a large bold heading</td></tr>
-            <tr><td>heading_tag</td><td>string</td><td class="param-optional">HTML tag for the heading element. Default: <code>h2</code></td></tr>
-            <tr><td>btn_label</td><td>string</td><td class="param-optional">CTA button label. When blank, no button is rendered</td></tr>
-            <tr><td>btn_url</td><td>string</td><td class="param-optional">CTA href. Only used when <code>btn_label</code> is not blank</td></tr>
+            <tr>
+              <td>Collections</td>
+              <td>Eyebrow, Heading, Button label, Button link</td>
+              <td>Homepage collection carousel header; CTA often points to <em>All collections</em>.</td>
+            </tr>
+            <tr>
+              <td>Trending products</td>
+              <td>Eyebrow, Heading, Button label, Button link</td>
+              <td>Same header pattern above category tabs and the product carousel.</td>
+            </tr>
+            <tr>
+              <td>Product recommendations</td>
+              <td>Eyebrow, Heading</td>
+              <td>On the product template below the buy box; no section CTA by default.</td>
+            </tr>
+            <tr>
+              <td>Recently viewed</td>
+              <td>Eyebrow, Heading</td>
+              <td>Product template footer strip.</td>
+            </tr>
+            <tr>
+              <td>Collection (PLP)</td>
+              <td>Eyebrow, Heading</td>
+              <td>Title area above the product grid on collection pages.</td>
+            </tr>
+            <tr>
+              <td>Cart</td>
+              <td>Eyebrow, Heading</td>
+              <td>Uses <code>h1</code> for the page title (accessibility).</td>
+            </tr>
+            <tr>
+              <td>Blog, News grid, Read also, FAQ</td>
+              <td>Eyebrow, Heading (and CTA where the section schema includes it)</td>
+              <td>Editorial and support content headers.</td>
+            </tr>
+            <tr>
+              <td>Newsletter</td>
+              <td>Eyebrow, Heading</td>
+              <td>Header is centered in this section by section-specific CSS overrides.</td>
+            </tr>
+            <tr>
+              <td>Contact (hero, channels, location), Coven</td>
+              <td>Eyebrow, Heading</td>
+              <td>Contact hero uses <code>h1</code> for the main page title.</td>
+            </tr>
+            <tr>
+              <td>Custom section</td>
+              <td>Show section title, Eyebrow, Heading, Heading tag</td>
+              <td>Toggle <strong>Show section title</strong> first; optional <code>h1</code>–<code>h4</code> for SEO on landing pages.</td>
+            </tr>
           </tbody>
         </table>
 
-        <div class="code-label"><span>Usage</span></div>
-        <pre><code><span class="t-comment">{# Basic usage #}</span>
-<span class="t-liquid">{% render 'section-title',
-  eyebrow: 'The Ritual Paths',
-  heading: 'Choose Your Intention'
-%}</span>
+        <div class="callout tip">
+          <strong>One heading per page:</strong> Only the main page title (for example Cart or Contact hero)
+          should use <code>h1</code>. Other sections on the same page should keep the default <code>h2</code>
+          unless you are building a custom layout and understand heading hierarchy.
+        </div>
 
-<span class="t-comment">{# From section settings with CTA #}</span>
-<span class="t-liquid">{% render 'section-title',
-  eyebrow:   section.settings.eyebrow,
-  heading:   section.settings.heading,
-  btn_label: section.settings.btn_label,
-  btn_url:   section.settings.btn_url
-%}</span></code></pre>
+        <h4 class="doc-h4">Parameters (snippet reference)</h4>
+        <p>
+          These values are passed by each section’s Liquid — merchants normally never edit the snippet file.
+        </p>
+        <table class="params-table">
+          <thead><tr><th>Param</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>eyebrow</td><td>string</td><td>Label above the title. Omitted from markup when blank.</td></tr>
+            <tr><td>heading</td><td>string</td><td>Main title text. Omitted when blank.</td></tr>
+            <tr><td>heading_tag</td><td>string</td><td class="param-optional">HTML tag for the title node. Default: <code>h2</code>. Use <code>h1</code> only for the primary page heading.</td></tr>
+            <tr><td>btn_label</td><td>string</td><td class="param-optional">CTA label. Button is not rendered when empty.</td></tr>
+            <tr><td>btn_url</td><td>string</td><td class="param-optional">Destination URL for the CTA. Ignored unless <code>btn_label</code> is set.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">For theme developers</h4>
+        <div class="ref-grid">
+          <div class="ref-item">
+            <span class="ref-item-name">Styles</span>
+            <span class="ref-item-desc">Co-located <code>{% stylesheet %}</code> in the snippet; uses global tokens such as <code>--primary-color</code> and <code>--font-heading--family</code>.</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">Modifier</span>
+            <span class="ref-item-desc"><code>section-title--has-cta</code> when <code>btn_label</code> is present.</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">Render</span>
+            <span class="ref-item-desc">Pass section settings: <code>{% render 'section-title', eyebrow: s.eyebrow, heading: s.heading %}</code></span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">Override pattern</span>
+            <span class="ref-item-desc">Target <code>.your-section .section-title</code> in the section’s stylesheet if a one-off layout is needed (see Newsletter).</span>
+          </div>
+        </div>
 
         <!-- image -->
         <hr class="doc-divider" id="snippet-image">
