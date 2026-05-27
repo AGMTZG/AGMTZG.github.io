@@ -962,34 +962,128 @@
         <hr class="doc-divider" id="snippet-css-variables">
         <h3 class="doc-h3">css-variables.liquid</h3>
         <p>
-          The theme's design-token hub. Loads all font variants from the Shopify CDN using
-          <code>font_face</code> and outputs every CSS custom property consumed by the theme —
-          colors, fonts, spacing, component-level tokens — inside a <code>{% style %}</code> block.
+          This snippet is Grimoire’s <strong>global style sheet in one file</strong>. It is not a section
+          you add in the customizer — it runs on every storefront page and outputs a single
+          <code>{% style %}</code> block of CSS custom properties (<code>--token-name</code>) that the rest
+          of the theme reads. Sections and snippets reference those variables instead of hard-coding colors
+          or font stacks, so a change in <strong>Theme settings</strong> can ripple across headers, cards,
+          carousels, and forms in one place.
         </p>
         <p>
-          Rendered once, inside <code>&lt;head&gt;</code> via <code>layout/theme.liquid</code>.
-          No parameters.
+          It is included in the document <code>&lt;head&gt;</code> from the main layout (and the password
+          and gift card layouts). It accepts <strong>no render parameters</strong> — only Shopify
+          <code>settings.*</code> values and fixed defaults defined in the snippet itself.
         </p>
 
-        <h4 class="doc-h4">Key tokens output</h4>
-        <div class="code-label"><span>CSS custom properties (subset)</span></div>
-        <pre><code><span class="t-comment">/* Typography */</span>
-<span class="t-attr">--font-primary--family</span>:  <span class="t-fn">{{ settings.type_primary_font.family }}</span>, fallback;
-<span class="t-attr">--font-heading--family</span>:  <span class="t-fn">{{ settings.heading_font.family }}</span>, fallback;
+        <h4 class="doc-h4">What you control vs. what is preset</h4>
+        <p>
+          Think of the tokens in two buckets. <strong>Merchant-linked</strong> properties are rebuilt from
+          your Theme settings whenever the theme loads. <strong>Component presets</strong> are tuned rgba
+          values and shadows for specific UI (cart drawer scrim, product-card hover border, carousel arrows)
+          that stay consistent with Grimoire’s dark editorial look even when you recolor the store.
+        </p>
+        <table class="params-table">
+          <thead><tr><th>Source</th><th>Examples</th><th>Effect when you change Theme settings</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Theme settings</td>
+              <td><code>--font-primary--*</code>, <code>--font-heading--*</code>, <code>--page-width</code>, <code>--page-margin</code>, <code>--color-background</code>, <code>--color-foreground</code>, <code>--color-accent</code>, <code>--color-surface</code>, <code>--style-border-radius-inputs</code></td>
+              <td>Updates immediately in the theme editor preview and on the live store after save.</td>
+            </tr>
+            <tr>
+              <td>Derived from your palette</td>
+              <td><code>--is-active-color</code>, <code>--primary-color</code>, primary button hover tokens, <code>--pc-sale-bg</code>, collection/product arrow hovers tied to <code>--color-accent</code></td>
+              <td>Accent and background choices flow into active tabs, sale badges, ATC hover, and other “highlight” states without extra settings.</td>
+            </tr>
+            <tr>
+              <td>Preset in snippet</td>
+              <td><code>--header-text-soft</code>, <code>--header-cart-overlay-bg</code>, <code>--coll-card-desc</code>, <code>--pc-overlay-start</code>, <code>--eyebrow-line-color</code>, <code>--timing</code></td>
+              <td>Not exposed in the theme editor today; they keep contrast and atmosphere stable on dark backgrounds. Future theme updates may surface more of these globally.</td>
+            </tr>
+            <tr>
+              <td>Updated at runtime</td>
+              <td><code>--nav-height</code>, <code>--announcement-bar-height</code>, <code>--header-total-height</code></td>
+              <td>Adjusted by the header and announcement bar when the menu wraps or the promo bar is enabled, so sticky offsets and spacers stay correct.</td>
+            </tr>
+          </tbody>
+        </table>
 
-<span class="t-comment">/* Layout */</span>
-<span class="t-attr">--page-width</span>:            <span class="t-fn">{{ settings.max_page_width }}</span>;
-<span class="t-attr">--nav-height</span>:            64px;
-<span class="t-attr">--header-total-height</span>:   calc(var(--nav-height) + var(--announcement-bar-height));
+        <h4 class="doc-h4">Font loading</h4>
+        <p>
+          Before the <code>:root</code> block, the snippet registers <strong>primary</strong> and
+          <strong>heading</strong> font files from Shopify’s CDN (regular, bold, italic combinations) with
+          <code>font-display: swap</code>. Picking fonts in Theme settings is enough — you do not upload
+          font files separately. Every section that uses <code>var(--font-primary--family)</code> or
+          <code>var(--font-heading--family)</code> picks up the same faces.
+        </p>
 
-<span class="t-comment">/* Colors */</span>
-<span class="t-attr">--color-background</span>:      <span class="t-fn">{{ settings.background_color | default: '#0d0d0d' }}</span>;
-<span class="t-attr">--color-foreground</span>:      <span class="t-fn">{{ settings.foreground_color | default: '#dddbd7' }}</span>;
-<span class="t-attr">--color-accent</span>:          <span class="t-fn">{{ settings.accent_color | default: '#dddbd7' }}</span>;
-<span class="t-attr">--color-surface</span>:         <span class="t-fn">{{ settings.surface_color | default: '#111111' }}</span>;
+        <h4 class="doc-h4">Token namespaces (where they show up)</h4>
+        <p>
+          Variables are grouped by comment blocks in the snippet. The prefix tells you which part of the
+          storefront consumes them:
+        </p>
+        <table class="params-table">
+          <thead><tr><th>Prefix</th><th>Storefront areas</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><code>--font-*</code>, <code>--page-*</code></td>
+              <td>Body copy, headings, max content width, horizontal padding on page shells and Custom section inner containers.</td>
+            </tr>
+            <tr>
+              <td><code>--nav-*</code>, <code>--header-*</code></td>
+              <td>Site navbar height, announcement offset, mobile drawer, search overlay, cart sidebar (surfaces, text tiers, scrims, quantity controls, checkout hover).</td>
+            </tr>
+            <tr>
+              <td><code>--color-*</code>, <code>--primary-button-*</code>, <code>--is-*-color</code>, <code>--eyebrow-line-color</code></td>
+              <td>Page background, text, cards, eyebrows and dividers, primary CTA buttons, inactive controls (tabs, icons).</td>
+            </tr>
+            <tr>
+              <td><code>--coll-*</code></td>
+              <td>Homepage <em>Collections</em> carousel: arrow buttons, collection cards (border, title, description, “Explore” link), empty image placeholder.</td>
+            </tr>
+            <tr>
+              <td><code>--tp-*</code></td>
+              <td><em>Trending products</em> category tabs and carousel arrows (inactive tab color vs. active accent).</td>
+            </tr>
+            <tr>
+              <td><code>--pc-*</code></td>
+              <td><code>product-card</code> snippet everywhere grids appear: media frame, hover border, image overlay, sale/sold-out badges, title and prices, add-to-cart states, color swatches.</td>
+            </tr>
+          </tbody>
+        </table>
 
-<span class="t-comment">/* Timing */</span>
-<span class="t-attr">--timing</span>: 0.3s;</code></pre>
+        <h4 class="doc-h4">Practical tips for merchants</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li>If a section looks “almost right” after a rebrand, start with <strong>accent</strong> and <strong>surface</strong> in Theme settings — many highlights and card backgrounds reference those tokens indirectly.</li>
+          <li>Section-specific colors (slideshow overlay, FAQ tab labels, a single banner background) are controlled in <strong>that section’s settings</strong>, not in this snippet.</li>
+          <li>You do not need to open <code>css-variables.liquid</code> for day-to-day customization. Editing it requires theme code access and is only relevant for advanced branding or agency work.</li>
+        </ul>
+
+        <div class="callout tip">
+          <strong>Spacing under a fixed header:</strong> Sections that pin content below the navigation
+          (for example FAQ filters) use <code>var(--header-total-height)</code> or <code>var(--nav-height)</code>
+          so content does not sit underneath the bar when the announcement bar or a taller logo is present.
+        </div>
+
+        <h4 class="doc-h4">For reference: snippet contract</h4>
+        <div class="ref-grid">
+          <div class="ref-item">
+            <span class="ref-item-name">Render</span>
+            <span class="ref-item-desc"><code>{% render 'css-variables' %}</code> — no arguments</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">Output</span>
+            <span class="ref-item-desc">One inline <code>&lt;style&gt;</code> block: <code>@font-face</code> rules + <code>:root { … }</code></span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">Depends on</span>
+            <span class="ref-item-desc">Theme settings IDs: <code>type_primary_font</code>, <code>heading_font</code>, <code>max_page_width</code>, <code>min_page_margin</code>, color pickers, <code>input_corner_radius</code></span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">Consumed by</span>
+            <span class="ref-item-desc"><code>assets/base.css</code>, <code>assets/critical.css</code>, section <code>{% stylesheet %}</code> blocks, and snippets such as <code>product-card</code></span>
+          </div>
+        </div>
 
         <!-- section-title -->
         <hr class="doc-divider" id="snippet-section-title">
