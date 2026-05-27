@@ -1756,8 +1756,8 @@
         <p>
           Handles <strong>search and social metadata</strong> for the storefront: browser title, meta
           description, canonical URL, Open Graph tags for link previews, Twitter card fields, and (on
-          product pages) structured data for Google. It runs once in the document <code>&lt;head&gt;</code>
-          — there is nothing to add or reorder in the theme customizer.
+          product pages) structured data for Google. It runs once in the document <code>&lt;head&gt;</code>,
+            there is nothing to add or reorder in the theme customizer.
         </p>
         <p>
           Grimoire does not expose SEO fields inside this snippet. You manage copy and images in
@@ -1788,7 +1788,7 @@
             </tr>
             <tr>
               <td>Theme settings → Favicon</td>
-              <td>Browser tab icon — output in <code>layout/theme.liquid</code>, not in this snippet.</td>
+              <td>Browser tab icon, output in <code>layout/theme.liquid</code>, not in this snippet.</td>
             </tr>
           </tbody>
         </table>
@@ -1811,7 +1811,7 @@
             </tr>
             <tr>
               <td>Password</td>
-              <td>Open Graph URL uses the store origin (password layout does not render this snippet — see below).</td>
+              <td>Open Graph URL uses the store origin (password layout does not render this snippet, see below).</td>
             </tr>
           </tbody>
         </table>
@@ -1820,7 +1820,7 @@
         <p>
           When Shopify supplies a <code>page_image</code> for the current resource, the snippet adds
           <code>og:image</code>, <code>og:image:secure_url</code>, and width/height meta tags. If no image
-          is available, social previews fall back to title and description only — upload a strong featured
+          is available, social previews fall back to title and description only, upload a strong featured
           image on products and blog posts you expect to be shared.
         </p>
 
@@ -1832,8 +1832,8 @@
 
         <h4 class="doc-h4">Where it is loaded</h4>
         <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
-          <li><code>layout/theme.liquid</code> — every normal storefront page (after favicon and CSS).</li>
-          <li><code>templates/gift_card.liquid</code> — digital gift card view.</li>
+          <li><code>layout/theme.liquid</code>: every normal storefront page (after favicon and CSS).</li>
+          <li><code>templates/gift_card.liquid</code>: digital gift card view.</li>
         </ul>
         <p>
           The <strong>password</strong> page uses <code>layout/password.liquid</code> with a fixed
@@ -1844,7 +1844,7 @@
         <div class="ref-grid">
           <div class="ref-item">
             <span class="ref-item-name">Render</span>
-            <span class="ref-item-desc"><code>{% render 'meta-tags' %}</code> — no parameters</span>
+            <span class="ref-item-desc"><code>{% render 'meta-tags' %}</code>, no parameters</span>
           </div>
           <div class="ref-item">
             <span class="ref-item-name">Source</span>
