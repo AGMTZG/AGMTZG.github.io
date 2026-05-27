@@ -2045,21 +2045,36 @@
         <hr class="doc-divider" id="blocks-faq">
         <h3 class="doc-h3">faq-item.liquid</h3>
         <p>
-          A single FAQ entry: expandable question/answer pair with an optional icon (crystal, candle,
-          or moon) and a <code>category</code> string. The parent <code>faq.liquid</code> section
-          groups items by category and renders tab navigation automatically.
+          A single accordion row used by <code>sections/faq.liquid</code>. Each block outputs a trigger
+          button and a collapsible answer panel, plus category metadata consumed by the parent section
+          for tab filtering and grouping.
         </p>
 
         <h4 class="doc-h4">Schema settings</h4>
-        <table class="params-table">
+        <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting ID</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
-            <tr><td>question</td><td>text</td><td>The question shown in the trigger button</td></tr>
-            <tr><td>answer</td><td>richtext</td><td>The answer revealed on expand — supports full rich text</td></tr>
-            <tr><td>category</td><td>text</td><td>Groups this item into a tab. Default: <em>General</em></td></tr>
-            <tr><td>icon</td><td>select</td><td>Decorative icon in the trigger: <code>crystal</code>, <code>candle</code>, <code>moon</code>, <code>none</code></td></tr>
+            <tr><td><code>icon</code></td><td>select</td><td>Leading icon in the question row. Options: <code>crystal</code>, <code>candle</code>, <code>moon</code>, <code>star</code>, <code>scroll</code>, <code>flame</code>.</td></tr>
+            <tr><td><code>question</code></td><td>text</td><td>Question text shown in the collapsible trigger button.</td></tr>
+            <tr><td><code>answer</code></td><td>richtext</td><td>Expandable answer content (paragraphs, links, emphasis, lists).</td></tr>
+            <tr><td><code>category</code></td><td>select</td><td>Tab group key used by the parent FAQ section. Built-in options: <em>General</em>, <em>Orders</em>, <em>Shipping</em>, <em>Products</em>, <em>Payments</em>, <em>Returns</em>, <em>Gifts</em>, <em>Support</em>.</td></tr>
           </tbody>
         </table>
+
+        <h4 class="doc-h4">Behavior in the FAQ section</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Part</th><th>How it works</th></tr></thead>
+          <tbody>
+            <tr><td>Category grouping</td><td>The block writes <code>data-category</code> and <code>data-category-name</code>; <code>faq.liquid</code> reads these to build category tabs and filter visible items.</td></tr>
+            <tr><td>Accessible accordion</td><td>Trigger button includes <code>aria-expanded</code> + <code>aria-controls</code>; panel uses <code>role="region"</code> + <code>aria-labelledby</code> for screen-reader linkage.</td></tr>
+            <tr><td>Stable IDs</td><td>Button/panel IDs use <code>block.id</code> (<code>faq-btn-*</code>, <code>faq-panel-*</code>) so each row remains uniquely addressable after reordering.</td></tr>
+            <tr><td>Default fallback</td><td>If a category ever resolves blank, Liquid falls back to <strong>General</strong> before slug generation.</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <strong>Content tip:</strong> Keep question phrasing short and specific (one line where possible), and move longer guidance into the <code>answer</code> rich text to preserve scannability in dense FAQ lists.
+        </div>
 
         <!-- group -->
         <hr class="doc-divider" id="blocks-group">
