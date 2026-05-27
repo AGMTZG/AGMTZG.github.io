@@ -356,7 +356,9 @@
 
     /* ── PARAMS TABLE ── */
     .params-table {
-      width: 100%; border-collapse: collapse;
+      width: 100%; max-width: 100%;
+      table-layout: fixed;
+      border-collapse: collapse;
       font-size: 0.85rem; margin: 1rem 0 1.8rem;
     }
     .params-table th {
@@ -370,15 +372,39 @@
       border-bottom: 1px solid var(--border);
       color: var(--text-soft);
       vertical-align: top;
+      overflow-wrap: anywhere;
+      word-wrap: break-word;
     }
     .params-table tr:last-child td { border-bottom: none; }
+    /* API tables (3 columns): param + type */
     .params-table td:first-child {
       font-family: var(--mono); font-size: 0.8rem;
       color: var(--amber); white-space: nowrap;
+      width: 22%;
     }
-    .params-table td:nth-child(2) {
+    .params-table td:nth-child(2):not(:last-child) {
       font-family: var(--mono); font-size: 0.75rem;
       color: var(--blue); white-space: nowrap;
+      width: 14%;
+    }
+    /* Description column (2- or 3-column tables) */
+    .params-table td:last-child {
+      white-space: normal;
+      font-family: inherit;
+      font-size: 0.85rem;
+      color: var(--text-soft);
+      line-height: 1.65;
+    }
+    /* Merchant / docs tables (2 columns) */
+    .params-table td:first-child:nth-last-child(2) {
+      width: 28%;
+      max-width: 9.5rem;
+      white-space: normal;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.5;
     }
     .param-optional { opacity: 0.55; font-style: italic; }
 
@@ -738,6 +764,11 @@
             </tr>
           </tbody>
         </table>
+        <p style="color:var(--text-soft); margin-bottom:1rem; line-height:1.75;">
+          Additional store-wide controls are planned for future theme updates—for example button styles,
+          card and product-tile treatments, motion preferences, and more header/footer defaults—so you can
+          refine the look of Grimoire entirely from the theme editor without editing code.
+        </p>
         <div class="callout tip">
           <strong>Tip:</strong> Set colors and fonts in Theme settings before fine-tuning individual sections.
           Section-level options override layout details, but they inherit the global palette and type scale.
