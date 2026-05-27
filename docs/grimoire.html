@@ -2214,6 +2214,43 @@
 
         <h3 class="doc-h3">Key sections explained</h3>
 
+        <h4 class="doc-h4">announcement-bar.liquid</h4>
+        <p>
+          A compact promotional strip rendered at the top of the <strong>Header group</strong>. It can show
+          a single message or rotate through multiple messages, making it useful for shipping thresholds,
+          limited-time offers, and operational notices.
+        </p>
+
+        <h4 class="doc-h4">Merchant controls</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>What it controls</th></tr></thead>
+          <tbody>
+            <tr><td><code>enabled</code></td><td>checkbox</td><td>Shows or hides the full announcement bar.</td></tr>
+            <tr><td><code>announcement_bg</code></td><td>color</td><td>Bar background color.</td></tr>
+            <tr><td><code>announcement_color</code></td><td>color</td><td>Base text color for messages.</td></tr>
+            <tr><td><code>announcement_accent</code></td><td>color</td><td>Link color and focus outline accent.</td></tr>
+            <tr><td><code>rotation_speed</code></td><td>range</td><td>Seconds per message when multiple blocks are present (3-10s).</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Message blocks</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Block field</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td><code>text</code></td><td>Main announcement copy.</td></tr>
+            <tr><td><code>link_url</code></td><td>Optional destination URL.</td></tr>
+            <tr><td><code>link_text</code></td><td>Optional CTA label. If empty, the entire message text becomes the link.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Runtime behavior</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li>Rotation runs only when there is more than one message block.</li>
+          <li>Auto-rotation pauses on hover, keyboard focus, and hidden browser tabs.</li>
+          <li>If the visitor prefers reduced motion, rotation and fades are disabled.</li>
+          <li>The section updates <code>--announcement-bar-height</code> dynamically so sticky offsets remain accurate.</li>
+        </ul>
+
         <h4 class="doc-h4">product.liquid — PDP</h4>
         <p>
           The product detail page section. Supports gallery, variant selector, quantity input,
