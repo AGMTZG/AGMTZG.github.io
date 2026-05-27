@@ -1989,73 +1989,57 @@
         <hr class="doc-divider" id="blocks-cs">
         <h3 class="doc-h3">Custom Section Blocks — <code>cs-*</code></h3>
         <p>
-          The <code>cs-</code> prefix identifies <strong>Custom Section</strong> building blocks —
-          composable primitives designed to be mixed inside <code>custom-section.liquid</code> and
-          similar content sections. Each exposes its styling as theme-editor controls.
+          These are the modular blocks used inside <code>custom-section.liquid</code>. Think of them as
+          a visual layout kit: headings, text, media, CTA, separators, and spacing. Merchants can stack
+          and reorder them to build landing-style content without editing code.
         </p>
 
+        <h4 class="doc-h4">Quick catalog</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Block</th><th>Best for</th><th>Main controls</th></tr></thead>
+          <tbody>
+            <tr><td><code>cs-heading</code></td><td>Primary section titles</td><td>Text, HTML tag (<code>h1</code>-<code>h4</code>), size, weight, color, alignment, top/bottom spacing</td></tr>
+            <tr><td><code>cs-subheading</code></td><td>Eyebrow or subtitle copy</td><td>Text, size, color, alignment, letter spacing, uppercase toggle, top/bottom spacing</td></tr>
+            <tr><td><code>cs-text</code></td><td>Body copy and rich text</td><td>Rich text, size, color, alignment, max width (0 = full), top/bottom spacing</td></tr>
+            <tr><td><code>cs-button</code></td><td>Primary CTA action</td><td>Label, URL, arrow icon on/off, icon side, fill hover animation, size, alignment</td></tr>
+            <tr><td><code>cs-image</code></td><td>Editorial image blocks</td><td>Image picker, alt text override, width preset, corner radius, alignment, top/bottom spacing</td></tr>
+            <tr><td><code>cs-video</code></td><td>Embedded product/story video</td><td>Shopify video or YouTube/Vimeo URL, autoplay/loop/muted, aspect ratio, radius, caption, top/bottom spacing</td></tr>
+            <tr><td><code>cs-icon-item</code></td><td>Feature/benefit points</td><td>Icon set, title, rich text, vertical/horizontal layout, alignment (vertical mode), icon size, top/bottom spacing</td></tr>
+            <tr><td><code>cs-quote</code></td><td>Testimonial-style pull quote</td><td>Quote text, author name/role, size, alignment, top/bottom spacing</td></tr>
+            <tr><td><code>cs-badge</code></td><td>Short labels (new, limited, bestseller)</td><td>Label, variant (outlined/filled/ghost), size, corner radius, alignment</td></tr>
+            <tr><td><code>cs-divider</code></td><td>Visual section breaks</td><td>Optional label, style (line/dots/ornament when label is empty), top/bottom spacing</td></tr>
+            <tr><td><code>cs-spacer</code></td><td>Vertical breathing room</td><td>Desktop height and mobile height</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Merchant behavior notes</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li><strong>Spacing pattern:</strong> Most <code>cs-*</code> blocks expose <code>top_spacing</code> and <code>bottom_spacing</code>. Keep one side at <code>0</code> when stacking many blocks to avoid double gaps.</li>
+          <li><strong>Text hierarchy:</strong> Use <code>cs-subheading</code> + <code>cs-heading</code> + <code>cs-text</code> as a predictable trio for readability.</li>
+          <li><strong>Media accessibility:</strong> Set <code>alt</code> on <code>cs-image</code> when needed; set <code>video_title</code> on <code>cs-video</code> for iframe accessibility.</li>
+          <li><strong>Video source priority:</strong> In <code>cs-video</code>, Shopify-hosted video overrides the external URL if both are set.</li>
+          <li><strong>Responsive spacing:</strong> <code>cs-spacer</code> has a dedicated mobile height, useful for tightening long desktop compositions on phones.</li>
+        </ul>
+
+        <h4 class="doc-h4">Developer implementation notes</h4>
         <div class="ref-grid">
           <div class="ref-item">
-            <span class="ref-item-name">cs-heading.liquid</span>
-            <span class="ref-item-desc">Heading with configurable tag (h1–h6), font-size, weight, color, alignment, and vertical spacing</span>
+            <span class="ref-item-name">Preset model</span>
+            <span class="ref-item-desc">Each file defines <code>{% schema %}</code> + <code>presets</code>, so blocks can be inserted from the editor drawer with sensible defaults.</span>
           </div>
           <div class="ref-item">
-            <span class="ref-item-name">cs-subheading.liquid</span>
-            <span class="ref-item-desc">Smaller heading / subtitle, same controls as cs-heading at a reduced scale</span>
+            <span class="ref-item-name">Tokenized styling</span>
+            <span class="ref-item-desc">Visual output relies on theme CSS variables (<code>--color-foreground</code>, <code>--primary-button-border</code>, font tokens), so global Theme Settings flow into every block.</span>
           </div>
           <div class="ref-item">
-            <span class="ref-item-name">cs-text.liquid</span>
-            <span class="ref-item-desc">Rich text paragraph block with color and alignment controls</span>
+            <span class="ref-item-name">Per-block CSS</span>
+            <span class="ref-item-desc">Most blocks ship with local <code>{% stylesheet %}</code> and inline style variables for settings-driven values (size, spacing, alignment).</span>
           </div>
           <div class="ref-item">
-            <span class="ref-item-name">cs-button.liquid</span>
-            <span class="ref-item-desc">CTA button with size (sm/md/lg), fill style, icon toggle, icon position, and row alignment</span>
-          </div>
-          <div class="ref-item">
-            <span class="ref-item-name">cs-image.liquid</span>
-            <span class="ref-item-desc">Image block with optional link, width constraint, and border-radius controls</span>
-          </div>
-          <div class="ref-item">
-            <span class="ref-item-name">cs-video.liquid</span>
-            <span class="ref-item-desc">Embedded video block supporting Shopify-hosted video or external embed URLs</span>
-          </div>
-          <div class="ref-item">
-            <span class="ref-item-name">cs-icon-item.liquid</span>
-            <span class="ref-item-desc">Icon + label row for feature lists. Icon rendered from Shopify's icon picker or custom SVG</span>
-          </div>
-          <div class="ref-item">
-            <span class="ref-item-name">cs-quote.liquid</span>
-            <span class="ref-item-desc">Pull quote / blockquote with attribution line and optional decorative quotation mark</span>
-          </div>
-          <div class="ref-item">
-            <span class="ref-item-name">cs-badge.liquid</span>
-            <span class="ref-item-desc">Small pill/badge text element with background color and text color controls</span>
-          </div>
-          <div class="ref-item">
-            <span class="ref-item-name">cs-divider.liquid</span>
-            <span class="ref-item-desc">Horizontal rule with configurable color, thickness, and vertical margin</span>
-          </div>
-          <div class="ref-item">
-            <span class="ref-item-name">cs-spacer.liquid</span>
-            <span class="ref-item-desc">Empty space block. Height in px, responsive override for mobile</span>
+            <span class="ref-item-name">Safe rendering</span>
+            <span class="ref-item-desc">Blocks guard against blank core content (<code>text</code>, <code>label</code>, media), preventing empty markup in merchant layouts.</span>
           </div>
         </div>
-
-        <h4 class="doc-h4">Example — cs-heading schema</h4>
-        <div class="code-label"><span>blocks/cs-heading.liquid (schema excerpt)</span></div>
-        <pre><code><span class="t-liquid">{% schema %}</span>
-{
-  <span class="t-attr">"name"</span>: <span class="t-str">"Heading"</span>,
-  <span class="t-attr">"settings"</span>: [
-    { <span class="t-attr">"type"</span>: <span class="t-str">"inline_richtext"</span>, <span class="t-attr">"id"</span>: <span class="t-str">"text"</span>,       <span class="t-attr">"label"</span>: <span class="t-str">"Heading"</span> },
-    { <span class="t-attr">"type"</span>: <span class="t-str">"select"</span>,        <span class="t-attr">"id"</span>: <span class="t-str">"tag"</span>,        <span class="t-attr">"label"</span>: <span class="t-str">"Tag"</span>,     <span class="t-attr">"options"</span>: [<span class="t-str">"h1"</span>,<span class="t-str">"h2"</span>,<span class="t-str">"h3"</span>,<span class="t-str">"h4"</span>] },
-    { <span class="t-attr">"type"</span>: <span class="t-str">"range"</span>,         <span class="t-attr">"id"</span>: <span class="t-str">"font_size"</span>,   <span class="t-attr">"label"</span>: <span class="t-str">"Font size"</span>, <span class="t-attr">"min"</span>: 14, <span class="t-attr">"max"</span>: 80 },
-    { <span class="t-attr">"type"</span>: <span class="t-str">"color"</span>,         <span class="t-attr">"id"</span>: <span class="t-str">"color"</span>,       <span class="t-attr">"label"</span>: <span class="t-str">"Color"</span> },
-    { <span class="t-attr">"type"</span>: <span class="t-str">"select"</span>,        <span class="t-attr">"id"</span>: <span class="t-str">"text_align"</span>,  <span class="t-attr">"label"</span>: <span class="t-str">"Alignment"</span> },
-    { <span class="t-attr">"type"</span>: <span class="t-str">"range"</span>,         <span class="t-attr">"id"</span>: <span class="t-str">"top_spacing"</span>, <span class="t-attr">"label"</span>: <span class="t-str">"Top spacing"</span> }
-  ]
-}
-<span class="t-liquid">{% endschema %}</span></code></pre>
 
         <!-- faq-item -->
         <hr class="doc-divider" id="blocks-faq">
