@@ -655,6 +655,7 @@
             <a class="toc-sub" href="#sections-breadcrumb-liquid">breadcrumb.liquid</a>
             <a class="toc-sub" href="#sections-slideshow-liquid">slideshow.liquid</a>
             <a class="toc-sub" href="#sections-trending-products-liquid">trending-products.liquid</a>
+            <a class="toc-sub" href="#sections-blog-featured-liquid">blog-featured.liquid</a>
           </div>
 
           <div class="toc-group">
@@ -2695,10 +2696,70 @@
         </table>
 
         <div class="callout tip">
-          <strong>Merchandising tip:</strong> Order products inside each tab’s product list in the picker —
+          <strong>Merchandising tip:</strong> Order products inside each tab’s product list in the picker,
           the section respects that order up to <code>products_to_show</code>. Use separate tabs for
           collections you want side by side (for example bestsellers vs. new arrivals) rather than one mixed list.
         </div>
+
+        <h4 class="doc-h4" id="sections-blog-featured-liquid">blog-featured.liquid</h4>
+        <p>
+          A single large “hero card” for the blog index. It highlights one post from the current blog
+          (<code>blog.articles.first</code>) as a full-width linked card with image, tags, title, author,
+          date, and excerpt. There are no blocks and no JavaScript — layout and hover effects are CSS only.
+          In the theme editor the section appears as <strong>Featured Article</strong>.
+        </p>
+
+        <h4 class="doc-h4">Merchant controls</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><code>eyebrow</code></td>
+              <td>Small label above the title (default “Featured”). Also used for the section’s <code>aria-label</code> when set.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Which article is shown</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Rule</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Article source</td>
+              <td>Always the first entry in <code>blog.articles</code> for the blog page this section sits on — there is no article picker in the schema.</td>
+            </tr>
+            <tr>
+              <td>Changing the highlight</td>
+              <td>To feature a different post, adjust which article sorts first for that blog in Shopify (for example publish date or blog sort order). The section does not read metafields or manual “featured” flags.</td>
+            </tr>
+            <tr>
+              <td>Template scope</td>
+              <td>Add this section only on the <strong>blog</strong> template where the <code>blog</code> object exists; on other templates the card will not resolve a post.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Card content</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Element</th><th>Source</th></tr></thead>
+          <tbody>
+            <tr><td>Image</td><td>Article featured image (responsive, eager-loaded) or a theme placeholder when missing.</td></tr>
+            <tr><td>Tags</td><td>Up to two article tags, shown as small uppercase chips.</td></tr>
+            <tr><td>Title</td><td>Article title (<code>&lt;h2&gt;</code> inside the card link).</td></tr>
+            <tr><td>Meta</td><td>Author name and published date (<code>&lt;time&gt;</code> with ISO datetime).</td></tr>
+            <tr><td>Excerpt</td><td>Rendered only when present; HTML is stripped and copy is truncated to 190 characters.</td></tr>
+            <tr><td>CTA</td><td>Fixed label “Read article” (not editable in theme settings).</td></tr>
+            <tr><td>Empty state</td><td>If the blog has no articles: “No articles yet — begin your Grimoire.”</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Layout notes</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li>Mobile: image on top, content below, with a bottom gradient blending image into the panel.</li>
+          <li>Desktop (769px+): two-column card — image ~56% width, content aligned to the bottom with a vertical hairline separator.</li>
+          <li>The entire card is one link to the article URL; hover scales the image slightly and brightens the border and CTA underline.</li>
+          <li>Motion: content fade-in and image zoom respect <code>prefers-reduced-motion</code>.</li>
+        </ul>
 
       </section>
 
