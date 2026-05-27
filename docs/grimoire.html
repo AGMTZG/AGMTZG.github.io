@@ -649,6 +649,7 @@
             </a>
             <a class="toc-sub" href="#sections-announcement-bar">announcement-bar.liquid</a>
             <a class="toc-sub" href="#sections-header-liquid">header.liquid</a>
+            <a class="toc-sub" href="#sections-footer-liquid">footer.liquid</a>
           </div>
 
           <div class="toc-group">
@@ -2332,6 +2333,73 @@
           <strong>Editor note:</strong> The section includes Shopify Theme Editor lifecycle hooks
           (<code>shopify:section:load</code>, <code>shopify:section:unload</code>, block select/show) to keep
           overlays, sticky wrappers, and scroll-lock behavior stable during live customization.
+        </div>
+
+        <h4 class="doc-h4" id="sections-footer-liquid">footer.liquid</h4>
+        <p>
+          The global footer combines brand identity, two navigation columns, newsletter signup, localization
+          selectors, and payment badges. It is responsive by design: accordion-style navigation on smaller screens
+          and permanently expanded columns on large desktop layouts.
+        </p>
+
+        <h4 class="doc-h4">Merchant controls</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Area</th><th>Setting IDs</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Brand</td>
+              <td><code>brand_description</code>, <code>brand_logo</code>, <code>brand_logo_text</code></td>
+              <td>Controls intro copy and logo source with text/shop-name fallback logic.</td>
+            </tr>
+            <tr>
+              <td>Social links</td>
+              <td><code>brand_facebook_url</code>, <code>brand_instagram_url</code>, <code>brand_linkedin_url</code></td>
+              <td>Renders social buttons only for configured URLs.</td>
+            </tr>
+            <tr>
+              <td>Navigation columns</td>
+              <td><code>nav_1_heading</code>, <code>nav_1_menu</code>, <code>nav_2_heading</code>, <code>nav_2_menu</code></td>
+              <td>Defines the two footer menu groups and their headings.</td>
+            </tr>
+            <tr>
+              <td>Newsletter</td>
+              <td><code>newsletter_heading</code>, <code>newsletter_description</code>, <code>newsletter_placeholder</code>, <code>newsletter_button_label</code></td>
+              <td>Controls email capture copy and button label for the customer form.</td>
+            </tr>
+            <tr>
+              <td>Shop app follow</td>
+              <td><code>show_follow_on_shop</code></td>
+              <td>Toggles the built-in Follow on Shop output.</td>
+            </tr>
+            <tr>
+              <td>Bottom bar</td>
+              <td><code>show_payment_icons</code></td>
+              <td>Toggles enabled payment method SVG badges.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Responsive layout behavior</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Breakpoint</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Mobile / tablet</td>
+              <td>Footer navigation renders as collapsible <code>&lt;details&gt;</code> accordions with plus/minus toggles.</td>
+            </tr>
+            <tr>
+              <td>Desktop (>=1280px)</td>
+              <td>Accordions are forced open and displayed as static columns; chevrons are hidden.</td>
+            </tr>
+            <tr>
+              <td>Bottom bar</td>
+              <td>Transitions from stacked alignment to horizontal/grid arrangement for copy, locale selectors, and payment icons.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <strong>Localization display:</strong> Language/country selectors only render when Shopify exposes more than one available language or country in the storefront context.
         </div>
 
       </section>
