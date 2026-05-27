@@ -657,6 +657,7 @@
             <a class="toc-sub" href="#sections-trending-products-liquid">trending-products.liquid</a>
             <a class="toc-sub" href="#sections-blog-featured-liquid">blog-featured.liquid</a>
             <a class="toc-sub" href="#sections-newsletter-liquid">newsletter.liquid</a>
+            <a class="toc-sub" href="#sections-marquee-liquid">marquee.liquid</a>
             <a class="toc-sub" href="#sections-collections-liquid">collections.liquid</a>
           </div>
 
@@ -2812,6 +2813,73 @@
           <li>Field and button are one continuous inline control; focus-within only changes border contrast.</li>
           <li>Motion is minimal and disabled under <code>prefers-reduced-motion</code>.</li>
         </ul>
+
+        <h4 class="doc-h4" id="sections-marquee-liquid">marquee.liquid</h4>
+        <p>
+          Full-width horizontal ticker for short brand lines or promos. Each <strong>Marquee item</strong>
+          block contributes one phrase; the track scrolls continuously with CSS only (no custom element
+          and no section JavaScript). Items are separated by a configurable character (default <code>✦</code>).
+        </p>
+
+        <h4 class="doc-h4">Merchant controls</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Scope</th><th>Setting</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Section</td>
+              <td><code>font_size</code> (0.7–4 rem)</td>
+              <td>Sets <code>--mq-size</code> for item text and scales vertical padding.</td>
+            </tr>
+            <tr>
+              <td>Section</td>
+              <td><code>speed</code> (8–80 s)</td>
+              <td>Duration of one full loop via <code>--mq-duration</code>; lower values scroll faster.</td>
+            </tr>
+            <tr>
+              <td>Section</td>
+              <td><code>separator</code></td>
+              <td>Glyph printed between each item (for example ✦, •, —).</td>
+            </tr>
+            <tr>
+              <td>Section</td>
+              <td><code>pause_on_hover</code></td>
+              <td>When enabled, hovering the strip pauses the animation.</td>
+            </tr>
+            <tr>
+              <td>Marquee item block</td>
+              <td><code>text</code></td>
+              <td>Single line of ticker copy (no links or rich text).</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Runtime behavior</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Feature</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Seamless loop</td>
+              <td>All blocks (plus separators) are output twice; the animation moves the track by 50% so the second copy lines up with the first.</td>
+            </tr>
+            <tr>
+              <td>Edge fade</td>
+              <td>A horizontal mask softens the left and right edges so text does not hard-cut at the viewport.</td>
+            </tr>
+            <tr>
+              <td>Accessibility</td>
+              <td>Region <code>aria-label</code> is “Announcements”; the duplicated half of the loop is marked <code>aria-hidden</code> so screen readers hear each phrase once.</td>
+            </tr>
+            <tr>
+              <td>Reduced motion</td>
+              <td>Animation stops; items wrap and center in a static row instead of scrolling.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <strong>Content tip:</strong> Keep phrases short and add enough blocks to fill the viewport width —
+          very few items can look sparse before the loop repeats. The preset ships five sample lines you can replace.
+        </div>
 
         <h4 class="doc-h4" id="sections-collections-liquid">collections.liquid</h4>
         <p>
