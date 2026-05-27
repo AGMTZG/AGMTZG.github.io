@@ -633,6 +633,9 @@
             <a class="toc-sub" href="#snippet-section-title">section-title.liquid</a>
             <a class="toc-sub" href="#snippet-image">image.liquid</a>
             <a class="toc-sub" href="#snippet-product-card">product-card.liquid</a>
+            <a class="toc-sub" href="#snippet-product-interactions">product-interactions.liquid</a>
+            <a class="toc-sub" href="#snippet-product-modal">product-modal.liquid</a>
+            <a class="toc-sub" href="#snippet-product-carousel">product-carousel.liquid</a>
             <a class="toc-sub" href="#snippet-meta-tags">meta-tags.liquid</a>
             <a class="toc-link" href="#blocks">
               <span class="toc-dot"></span>Blocks
@@ -1456,8 +1459,170 @@
         </p>
 
         <div class="callout warning">
-          <strong>Note:</strong> This snippet requires <code>product-interactions.liquid</code>
-          to be rendered on the same page for add-to-cart functionality to work.
+          <strong>Quick view &amp; swatches:</strong> Cards with <strong>open quick view on add to cart</strong>
+          need <code>product-modal.liquid</code> on the page (it loads <code>product-interactions.liquid</code>
+          automatically). Sections wire these up for you — see below.
+        </div>
+
+        <!-- product-interactions -->
+        <hr class="doc-divider" id="snippet-product-interactions">
+        <h3 class="doc-h3">product-interactions.liquid</h3>
+        <p>
+          Loads the shared <code>window.GrimoireProduct</code> script once per page. It powers
+          <strong>color swatches</strong> on product cards and routes <strong>Add to cart</strong> clicks
+          on cards configured to open quick view instead of adding immediately.
+        </p>
+        <p>
+          You do not add this snippet yourself in the theme editor. It is included automatically when
+          a section renders <code>product-modal.liquid</code>. Merchants only see the outcome: tapping a
+          swatch updates the card image and variant; tapping ATC on a quick-view card opens the modal.
+        </p>
+
+        <h4 class="doc-h4">What it does on the storefront</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li><strong>Swatch clicks</strong> — Updates the active swatch, color label, variant id on the ATC button, sold-out badge, and product image (with a short crossfade).</li>
+          <li><strong>ATC with quick view</strong> — When the card button has <code>data-opens-modal</code>, opens the quick view modal populated from that card’s data instead of navigating away.</li>
+          <li><strong>Fallback</strong> — If no modal is present, ATC falls back to the product URL on the card.</li>
+        </ul>
+
+        <h4 class="doc-h4">Sections that rely on it</h4>
+        <p>
+          Any section that calls <code>GrimoireProduct.bindCards(...)</code> after rendering cards and a modal:
+          <em>Trending products</em>, <em>Product recommendations</em>, <em>Recently viewed</em>,
+          <em>Collection</em>, and <em>Search</em>.
+        </p>
+
+        <h4 class="doc-h4">For theme developers</h4>
+        <div class="ref-grid">
+          <div class="ref-item">
+            <span class="ref-item-name">API</span>
+            <span class="ref-item-desc"><code>GrimoireProduct.bindCards(root, quickView)</code> · <code>GrimoireProduct.swapSwatchImage(...)</code></span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">Render</span>
+            <span class="ref-item-desc">No parameters. Guard-loaded via <code>product_interactions_scripts_loaded</code>.</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">Markup hooks</span>
+            <span class="ref-item-desc"><code>.pc-card-outer</code>, <code>.pc-swatch-btn</code>, <code>.pc-atc-btn[data-opens-modal]</code></span>
+          </div>
+        </div>
+
+        <!-- product-modal -->
+        <hr class="doc-divider" id="snippet-product-modal">
+        <h3 class="doc-h3">product-modal.liquid</h3>
+        <p>
+          The <strong>quick view</strong> dialog: a full-screen overlay with product image, title, price,
+          color swatches, quantity, Add to cart, Buy now, and a link to the full product page. One modal
+          shell is rendered per section that needs it (for example Trending products or Collection).
+        </p>
+
+        <h4 class="doc-h4">Merchant experience</h4>
+        <p>
+          Quick view is enabled per product card in sections that support it (for example
+          <em>Trending products</em> cards inside category blocks). In the theme editor, look for settings
+          on the section or block that control quick view / modal behavior — you do not edit
+          <code>product-modal.liquid</code> directly.
+        </p>
+        <p>
+          Label copy inside the modal (Add to cart, Buy now, View full details, Sale, Sold out, Quantity)
+          can be overridden by passing optional parameters when the section renders the snippet (defaults
+          are Grimoire-themed strings such as “Add to Grimoire”).
+        </p>
+
+        <h4 class="doc-h4">Parameters (snippet reference)</h4>
+        <table class="params-table">
+          <thead><tr><th>Param</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>section_id</td><td>string</td><td>Required. Unique id for <code>id="pm-modal-{{ section_id }}"</code> when multiple modals exist on one page.</td></tr>
+            <tr><td>atc_label</td><td>string</td><td>Add to cart button text. Default: <code>Add to Grimoire</code></td></tr>
+            <tr><td>added_label</td><td>string</td><td>Shown briefly after a successful add. Default: <code>Added ✦</code></td></tr>
+            <tr><td>sale_label</td><td>string</td><td>Sale badge text.</td></tr>
+            <tr><td>sold_out_label</td><td>string</td><td>Sold out badge text.</td></tr>
+            <tr><td>buy_label</td><td>string</td><td>Dynamic checkout / buy now button.</td></tr>
+            <tr><td>view_link_label</td><td>string</td><td>Link below buttons to the PDP.</td></tr>
+            <tr><td>qty_label</td><td>string</td><td>Quantity row label.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Where it appears</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Section</th><th>Typical use</th></tr></thead>
+          <tbody>
+            <tr><td>Trending products</td><td>One modal per section; cards in each category tab open it.</td></tr>
+            <tr><td>Product recommendations</td><td>Related products on the product template.</td></tr>
+            <tr><td>Recently viewed</td><td>Bottom strip on the product template.</td></tr>
+            <tr><td>Collection</td><td>PLP grid with quick view on hover ATC.</td></tr>
+            <tr><td>Search</td><td>Search results grid.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">For theme developers</h4>
+        <div class="ref-grid">
+          <div class="ref-item">
+            <span class="ref-item-name">API</span>
+            <span class="ref-item-desc"><code>GrimoireQuickView.create(modalElement)</code> — returns <code>open(card, trigger)</code> used by product cards.</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">Includes</span>
+            <span class="ref-item-desc">Renders <code>product-interactions.liquid</code> at the bottom of the snippet.</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">Data source</span>
+            <span class="ref-item-desc">Modal content is filled from <code>data-*</code> attributes on the <code>.pc-card-outer</code> that opened it (no separate Section Rendering fetch in the current implementation).</span>
+          </div>
+        </div>
+
+        <!-- product-carousel -->
+        <hr class="doc-divider" id="snippet-product-carousel">
+        <h3 class="doc-h3">product-carousel.liquid</h3>
+        <p>
+          Wraps a row of <strong>product cards</strong> in a horizontal carousel with previous/next arrows.
+          Shows <strong>1 card</strong> on mobile, <strong>3</strong> from 600px, and <strong>4</strong> from
+          1024px. Touch scrolling works before JavaScript; arrows and slide snapping activate once
+          <code>GrimoireCarousel</code> initializes.
+        </p>
+        <p>
+          Merchants do not add this snippet manually — it is embedded inside sections that output
+          product card slides (for example <em>Trending products</em> and <em>Product recommendations</em>).
+        </p>
+
+        <h4 class="doc-h4">Parameters (snippet reference)</h4>
+        <table class="params-table">
+          <thead><tr><th>Param</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>slides</td><td>HTML</td><td>Required. Captured Liquid output: each slide should be a <code>&lt;div class="pcar-slide"&gt;</code> wrapping a <code>product-card</code> render.</td></tr>
+            <tr><td>prev_label</td><td>string</td><td><code>aria-label</code> for the previous arrow. Default: <code>Previous products</code></td></tr>
+            <tr><td>next_label</td><td>string</td><td><code>aria-label</code> for the next arrow. Default: <code>Next products</code></td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Sections that use it</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li><strong>Trending products</strong> — One carousel per category tab; re-inits when tabs change.</li>
+          <li><strong>Product recommendations</strong> — Related products carousel on the product page.</li>
+          <li><strong>Recently viewed</strong> — Carousel of previously browsed products.</li>
+        </ul>
+
+        <div class="callout tip">
+          <strong>Not Swiper:</strong> Homepage <em>Slideshow</em> uses Swiper 11. Product carousels use
+          this lightweight transform-based track so card markup stays consistent across the theme.
+        </div>
+
+        <h4 class="doc-h4">For theme developers</h4>
+        <div class="ref-grid">
+          <div class="ref-item">
+            <span class="ref-item-name">API</span>
+            <span class="ref-item-desc"><code>GrimoireCarousel.init(wrap)</code> · <code>GrimoireCarousel.initAll(root)</code></span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">Hook</span>
+            <span class="ref-item-desc">Root element: <code>[data-pcar-carousel]</code></span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">Pattern</span>
+            <span class="ref-item-desc">Capture slides in Liquid, <code>{% render 'product-carousel', slides: tab_slides %}</code>, then init in the section’s custom element.</span>
+          </div>
         </div>
 
         <!-- meta-tags -->
@@ -1473,18 +1638,6 @@
 
         <h4 class="doc-h4">Other snippets</h4>
         <div class="ref-grid">
-          <div class="ref-item">
-            <span class="ref-item-name">product-carousel.liquid</span>
-            <span class="ref-item-desc">Swiper 11-powered product carousel with arrows and pagination</span>
-          </div>
-          <div class="ref-item">
-            <span class="ref-item-name">product-interactions.liquid</span>
-            <span class="ref-item-desc">JS Web Component wiring for variant selection, ATC, and sold-out</span>
-          </div>
-          <div class="ref-item">
-            <span class="ref-item-name">product-modal.liquid</span>
-            <span class="ref-item-desc">Quick view modal shell — loaded via Section Rendering API on demand</span>
-          </div>
           <div class="ref-item">
             <span class="ref-item-name">worlds-map.liquid</span>
             <span class="ref-item-desc">Inline SVG world map used by <code>testimonials.liquid</code> to pin reviews geographically</span>
