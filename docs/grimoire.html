@@ -659,6 +659,7 @@
             <a class="toc-sub" href="#sections-newsletter-liquid">newsletter.liquid</a>
             <a class="toc-sub" href="#sections-marquee-liquid">marquee.liquid</a>
             <a class="toc-sub" href="#sections-countdown-timer-hero-liquid">countdown-timer-hero.liquid</a>
+            <a class="toc-sub" href="#sections-image-hotspot-liquid">image-hotspot.liquid</a>
             <a class="toc-sub" href="#sections-collections-liquid">collections.liquid</a>
           </div>
 
@@ -2878,7 +2879,7 @@
         </table>
 
         <div class="callout tip">
-          <strong>Content tip:</strong> Keep phrases short and add enough blocks to fill the viewport width —
+          <strong>Content tip:</strong> Keep phrases short and add enough blocks to fill the viewport width,
           very few items can look sparse before the loop repeats. The preset ships five sample lines you can replace.
         </div>
 
@@ -2886,7 +2887,7 @@
         <p>
           Full-height promotional hero with a background image, headline, live countdown to a target date,
           and an optional pill CTA. Wrapped in <code>&lt;countdown-timer-hero&gt;</code>; theme editor name:
-          <strong>Countdown Timer Hero</strong>. No blocks — all content comes from section settings.
+          <strong>Countdown Timer Hero</strong>. No blocks, all content comes from section settings.
         </p>
 
         <h4 class="doc-h4">Merchant controls</h4>
@@ -2933,10 +2934,59 @@
 
         <h4 class="doc-h4">Layout notes</h4>
         <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
-          <li>Mobile: bottom bar stacks — timer above copy, CTA below; vertical separators between units are hidden.</li>
-          <li>Tablet+ (768px): three columns — copy left, centered countdown, CTA right-aligned.</li>
+          <li>Mobile: bottom bar stacks, timer above copy, CTA below; vertical separators between units are hidden.</li>
+          <li>Tablet+ (768px): three columns, copy left, centered countdown, CTA right-aligned.</li>
           <li>Gradient scrim behind the bar keeps text readable over the image.</li>
         </ul>
+
+        <h4 class="doc-h4" id="sections-image-hotspot-liquid">image-hotspot.liquid</h4>
+        <p>
+          Split “shop the look” section: editorial copy on the left and an interactive image on the right.
+          Each hotspot pin opens a tooltip with either linked product data or custom text/link content.
+          Wrapped in <code>&lt;image-hotspot&gt;</code>; theme editor name: <strong>Image Hotspot</strong>.
+        </p>
+
+        <h4 class="doc-h4">Merchant controls</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Group</th><th>Setting</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td>Content</td><td><code>eyebrow</code>, <code>heading</code>, <code>description</code></td><td>Left-panel copy stack.</td></tr>
+            <tr><td>Content</td><td><code>cta_label</code> + <code>cta_url</code></td><td>Optional panel link under the description.</td></tr>
+            <tr><td>Image</td><td><code>image</code>, <code>image_alt</code></td><td>Main media and its accessible alt text.</td></tr>
+            <tr><td>Layout</td><td><code>section_height</code></td><td>Desktop split height: small (400px), medium (550px), large (700px).</td></tr>
+            <tr><td>Overlay</td><td><code>overlay_opacity</code> (0-80%)</td><td>Dark overlay on the image for contrast.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Hotspot blocks</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Field</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td><code>position_x</code> / <code>position_y</code></td><td>Pin placement in percent coordinates across the image canvas.</td></tr>
+            <tr><td><code>tooltip_type</code></td><td>Switches between <code>product</code> and <code>custom</code> tooltip rendering.</td></tr>
+            <tr><td><code>product</code></td><td>For product tooltips: title, price (including “From” when price varies), image, and CTA/sold-out state come from the selected product.</td></tr>
+            <tr><td><code>custom_label</code>, <code>custom_description</code>, <code>custom_link</code></td><td>For custom tooltips: editorial content and optional “Learn more” link.</td></tr>
+            <tr><td>Capacity</td><td>Up to <strong>10</strong> hotspot blocks per section.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Runtime behavior</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Feature</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td>Pin interaction</td><td>Pins toggle one tooltip at a time; opening one closes the rest.</td></tr>
+            <tr><td>Auto positioning</td><td>Tooltip orientation flips right/below when edge space is limited, avoiding viewport clipping.</td></tr>
+            <tr><td>Keyboard support</td><td>Escape closes tooltips from both pin and tooltip context; focus moves to the first actionable control inside the opened tooltip.</td></tr>
+            <tr><td>Theme editor</td><td>Selecting a hotspot block highlights its pin and opens its tooltip automatically.</td></tr>
+            <tr><td>No-image safeguard</td><td>Without a main image, the placeholder still renders but hotspot pins are not output.</td></tr>
+            <tr><td>No-JS fallback</td><td>When image + blocks exist, a text list of featured items/links is rendered inside <code>&lt;noscript&gt;</code>.</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <strong>Merchandising tip:</strong> Use product tooltips for direct shopping intent and custom tooltips
+          for storytelling moments. Keep pins visually distributed (avoid clustering) so each target remains easy to tap.
+        </div>
 
         <h4 class="doc-h4" id="sections-collections-liquid">collections.liquid</h4>
         <p>
