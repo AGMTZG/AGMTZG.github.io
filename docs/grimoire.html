@@ -2080,26 +2080,41 @@
         <hr class="doc-divider" id="blocks-group">
         <h3 class="doc-h3">group.liquid</h3>
         <p>
-          A layout container that wraps other blocks in a flex row or column. Used to compose
-          multi-column layouts within a custom section without writing code.
+          A nested layout container block. It wraps child blocks and applies a local flex layout
+          (row or column), spacing, alignment, and optional mobile stacking. Use it when one
+          Custom Section needs internal structure (for example, icon cards in a row under a heading).
         </p>
 
         <h4 class="doc-h4">Schema settings</h4>
-        <table class="params-table">
+        <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting ID</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
-            <tr><td>layout_direction</td><td>select</td><td><code>horizontal</code> or <code>vertical</code> flex direction</td></tr>
-            <tr><td>gap</td><td>range</td><td>Gap between children in px (CSS <code>--blk-gap</code> variable)</td></tr>
-            <tr><td>alignment</td><td>select</td><td>Cross-axis alignment: <code>flex-start</code>, <code>center</code>, <code>flex-end</code></td></tr>
-            <tr><td>justify</td><td>select</td><td>Main-axis distribution: <code>flex-start</code>, <code>center</code>, <code>space-between</code></td></tr>
-            <tr><td>padding</td><td>range</td><td>Internal padding in px</td></tr>
-            <tr><td>stack_on_mobile</td><td>checkbox</td><td>Forces vertical stacking below 768px</td></tr>
+            <tr><td><code>layout_direction</code></td><td>select</td><td>Main flow of child blocks: <code>horizontal</code> (row) or <code>vertical</code> (column).</td></tr>
+            <tr><td><code>stack_on_mobile</code></td><td>checkbox</td><td>When enabled and layout is horizontal, row becomes column under <code>640px</code>.</td></tr>
+            <tr><td><code>gap</code></td><td>range</td><td>Space between children (0–64px, step 4). Applied via <code>--blk-gap</code>.</td></tr>
+            <tr><td><code>alignment</code></td><td>select</td><td>Cross-axis alignment (<code>flex-start</code>, <code>center</code>, <code>flex-end</code>).</td></tr>
+            <tr><td><code>justify</code></td><td>select</td><td>Main-axis distribution for horizontal mode (<code>flex-start</code>, <code>center</code>, <code>flex-end</code>, <code>space-between</code>).</td></tr>
+            <tr><td><code>padding</code></td><td>range</td><td>Inner padding (0–80px). Horizontal mode pads left/right; vertical mode pads top/bottom.</td></tr>
           </tbody>
         </table>
 
+        <h4 class="doc-h4">How it behaves in layouts</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Mode</th><th>Result</th></tr></thead>
+          <tbody>
+            <tr><td>Horizontal</td><td>Children render in a wrapped row (<code>flex-wrap: wrap</code>), honoring <code>alignment</code>, <code>justify</code>, and horizontal padding.</td></tr>
+            <tr><td>Vertical</td><td>Children render in a column stack; <code>alignment</code> controls horizontal anchoring of each child.</td></tr>
+            <tr><td>Horizontal + stack on mobile</td><td>At small screens, row switches to column so cards/buttons do not compress.</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <strong>Composition tip:</strong> Use one top-level vertical group for section flow, then add inner horizontal groups for rows of icon items, badges, or buttons.
+        </div>
+
         <div class="code-label"><span>blocks/group.liquid (render)</span></div>
         <pre><code><span class="t-tag">&lt;div</span> <span class="t-attr">class</span>=<span class="t-str">"blk-group blk-group--horizontal blk-group--stack"</span>
-     <span class="t-attr">style</span>=<span class="t-str">"--blk-gap: 24px; --blk-align: center;"</span>
+     <span class="t-attr">style</span>=<span class="t-str">"--blk-gap: 16px; --blk-padding: 0px; --blk-align: center; --blk-justify: center;"</span>
      <span class="t-liquid">{{ block.shopify_attributes }}</span><span class="t-tag">&gt;</span>
   <span class="t-liquid">{% content_for 'blocks' %}</span>
 <span class="t-tag">&lt;/div&gt;</span></code></pre>
