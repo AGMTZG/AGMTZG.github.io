@@ -648,6 +648,7 @@
               <span class="toc-dot"></span>Sections
             </a>
             <a class="toc-sub" href="#sections-announcement-bar">announcement-bar.liquid</a>
+            <a class="toc-sub" href="#sections-header-liquid">header.liquid</a>
           </div>
 
           <div class="toc-group">
@@ -2251,6 +2252,87 @@
           <li>If the visitor prefers reduced motion, rotation and fades are disabled.</li>
           <li>The section updates <code>--announcement-bar-height</code> dynamically so sticky offsets remain accurate.</li>
         </ul>
+
+        <h4 class="doc-h4" id="sections-header-liquid">header.liquid</h4>
+        <p>
+          The primary navigation shell for Grimoire. This section renders desktop navigation, mobile drawer,
+          search overlay, and cart sidebar, then coordinates their behavior through custom elements
+          (<code>&lt;site-navbar&gt;</code>, <code>&lt;search-overlay&gt;</code>, <code>&lt;cart-sidebar&gt;</code>).
+        </p>
+
+        <h4 class="doc-h4">Merchant controls</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Area</th><th>Setting IDs</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Behavior</td>
+              <td><code>navbar_behavior</code>, <code>transparent_header</code></td>
+              <td>Choose hide-on-scroll / always visible / static mode, and optional top-of-page transparency.</td>
+            </tr>
+            <tr>
+              <td>Branding</td>
+              <td><code>logo</code>, <code>logo_width</code>, <code>logo_text</code></td>
+              <td>Image logo with width control, or text fallback when no image is set.</td>
+            </tr>
+            <tr>
+              <td>Navigation</td>
+              <td><code>menu</code></td>
+              <td>Single Shopify menu used for both desktop links and mobile drawer links.</td>
+            </tr>
+            <tr>
+              <td>Mobile drawer copy</td>
+              <td><code>drawer_eyebrow</code>, <code>drawer_heading</code></td>
+              <td>Top labels shown in the slide-in menu.</td>
+            </tr>
+            <tr>
+              <td>Search overlay copy</td>
+              <td><code>search_title</code>, <code>search_placeholder</code>, <code>search_hint</code></td>
+              <td>Search modal title, input prompt, and helper text.</td>
+            </tr>
+            <tr>
+              <td>Cart drawer copy</td>
+              <td><code>eyebrow</code>, <code>cart_heading</code>, <code>cart_empty_title</code>, <code>cart_empty_subtitle</code>, <code>cart_checkout_label</code>, <code>cart_view_label</code></td>
+              <td>Text labels for the cart panel states and actions.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Behavior model</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Mode</th><th>What visitors experience</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><code>hide_on_scroll</code></td>
+              <td>Header group uses staged hide classes: announcement can hide first, navbar second; navbar reappears when scrolling up.</td>
+            </tr>
+            <tr>
+              <td><code>sticky</code></td>
+              <td>Header remains visible while scrolling.</td>
+            </tr>
+            <tr>
+              <td><code>static</code></td>
+              <td>Header scrolls with page content (no sticky behavior).</td>
+            </tr>
+            <tr>
+              <td>Transparent enabled</td>
+              <td>Header is transparent only at page top, then transitions to opaque after scroll/interaction.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Integrated features</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li><strong>Mobile drawer:</strong> Uses the Popover API (<code>popover</code>) with focus and overlay handling.</li>
+          <li><strong>Predictive search:</strong> Fetches from <code>{{ routes.predictive_search_url }}.json</code> and renders grouped product/collection/article suggestions.</li>
+          <li><strong>Cart sidebar:</strong> Supports quantity updates, item removal, discount rows, and subtotal refresh without full-page navigation.</li>
+          <li><strong>Shared modal coordination:</strong> Custom <code>ui:open</code> events ensure only one of drawer/search/cart is open at a time.</li>
+        </ul>
+
+        <div class="callout tip">
+          <strong>Editor note:</strong> The section includes Shopify Theme Editor lifecycle hooks
+          (<code>shopify:section:load</code>, <code>shopify:section:unload</code>, block select/show) to keep
+          overlays, sticky wrappers, and scroll-lock behavior stable during live customization.
+        </div>
 
       </section>
 
