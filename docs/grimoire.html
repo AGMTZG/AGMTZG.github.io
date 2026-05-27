@@ -406,6 +406,46 @@
       color: var(--text);
       line-height: 1.5;
     }
+    /* Guide tables: 3 columns (label · examples · description) */
+    .params-table.params-table--guide td:first-child {
+      width: 20%;
+      white-space: normal;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .params-table.params-table--guide td:nth-child(2) {
+      width: 32%;
+      white-space: normal;
+      font-family: inherit;
+      font-size: 0.82rem;
+      color: var(--text-soft);
+      line-height: 1.55;
+    }
+    .params-table.params-table--guide td:nth-child(2) code {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--amber);
+      white-space: normal;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+    .params-table.params-table--guide td:last-child {
+      width: 48%;
+    }
+    .params-table.params-table--guide .table-token-list {
+      margin: 0;
+      padding-left: 1.15rem;
+      list-style: disc;
+    }
+    .params-table.params-table--guide .table-token-list li {
+      margin-bottom: 0.4rem;
+    }
+    .params-table.params-table--guide .table-token-list li:last-child {
+      margin-bottom: 0;
+    }
     .param-optional { opacity: 0.55; font-style: italic; }
 
     /* ── GRID TABLES ── */
@@ -982,27 +1022,53 @@
           values and shadows for specific UI (cart drawer scrim, product-card hover border, carousel arrows)
           that stay consistent with Grimoire’s dark editorial look even when you recolor the store.
         </p>
-        <table class="params-table">
+        <table class="params-table params-table--guide">
           <thead><tr><th>Source</th><th>Examples</th><th>Effect when you change Theme settings</th></tr></thead>
           <tbody>
             <tr>
               <td>Theme settings</td>
-              <td><code>--font-primary--*</code>, <code>--font-heading--*</code>, <code>--page-width</code>, <code>--page-margin</code>, <code>--color-background</code>, <code>--color-foreground</code>, <code>--color-accent</code>, <code>--color-surface</code>, <code>--style-border-radius-inputs</code></td>
+              <td>
+                <ul class="table-token-list">
+                  <li><code>--font-primary--*</code>, <code>--font-heading--*</code></li>
+                  <li><code>--page-width</code>, <code>--page-margin</code></li>
+                  <li><code>--color-background</code>, <code>--color-foreground</code>, <code>--color-accent</code>, <code>--color-surface</code></li>
+                  <li><code>--style-border-radius-inputs</code></li>
+                </ul>
+              </td>
               <td>Updates immediately in the theme editor preview and on the live store after save.</td>
             </tr>
             <tr>
               <td>Derived from your palette</td>
-              <td><code>--is-active-color</code>, <code>--primary-color</code>, primary button hover tokens, <code>--pc-sale-bg</code>, collection/product arrow hovers tied to <code>--color-accent</code></td>
+              <td>
+                <ul class="table-token-list">
+                  <li><code>--is-active-color</code>, <code>--primary-color</code></li>
+                  <li>Primary button hover tokens</li>
+                  <li><code>--pc-sale-bg</code></li>
+                  <li>Collection/product arrow hovers tied to <code>--color-accent</code></li>
+                </ul>
+              </td>
               <td>Accent and background choices flow into active tabs, sale badges, ATC hover, and other “highlight” states without extra settings.</td>
             </tr>
             <tr>
               <td>Preset in snippet</td>
-              <td><code>--header-text-soft</code>, <code>--header-cart-overlay-bg</code>, <code>--coll-card-desc</code>, <code>--pc-overlay-start</code>, <code>--eyebrow-line-color</code>, <code>--timing</code></td>
+              <td>
+                <ul class="table-token-list">
+                  <li><code>--header-text-soft</code>, <code>--header-cart-overlay-bg</code></li>
+                  <li><code>--coll-card-desc</code>, <code>--pc-overlay-start</code></li>
+                  <li><code>--eyebrow-line-color</code>, <code>--timing</code></li>
+                </ul>
+              </td>
               <td>Not exposed in the theme editor today; they keep contrast and atmosphere stable on dark backgrounds. Future theme updates may surface more of these globally.</td>
             </tr>
             <tr>
               <td>Updated at runtime</td>
-              <td><code>--nav-height</code>, <code>--announcement-bar-height</code>, <code>--header-total-height</code></td>
+              <td>
+                <ul class="table-token-list">
+                  <li><code>--nav-height</code></li>
+                  <li><code>--announcement-bar-height</code></li>
+                  <li><code>--header-total-height</code></li>
+                </ul>
+              </td>
               <td>Adjusted by the header and announcement bar when the menu wraps or the promo bar is enabled, so sticky offsets and spacers stay correct.</td>
             </tr>
           </tbody>
