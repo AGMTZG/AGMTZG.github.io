@@ -546,9 +546,6 @@
             <a class="toc-link active" href="#introduction">
               <span class="toc-dot"></span>Introduction
             </a>
-            <a class="toc-link" href="#getting-started">
-              <span class="toc-dot"></span>Getting Started
-            </a>
             <a class="toc-link" href="#architecture">
               <span class="toc-dot"></span>Architecture
             </a>
@@ -700,71 +697,9 @@
           </div>
         </div>
         <p style="margin-top:1.2rem;">
-          The rest of this documentation walks through setup, architecture, and reference material for every layer
-          of the theme from <code>css-variables.liquid</code> and section schemas to CLI commands and theme settings.
+          The rest of this documentation covers how the theme is organized, how to use each section and setting
+          in the theme editor, and reference material for snippets, blocks, and global theme settings.
         </p>
-      </section>
-
-      <!-- ── GETTING STARTED ── -->
-      <section class="doc-section" id="getting-started">
-        <div class="section-eyebrow">Setup</div>
-        <h2 class="doc-h2">Getting Started</h2>
-        <p class="doc-lead">
-          Grimoire requires the <a href="https://shopify.dev/docs/api/shopify-cli" target="_blank">Shopify CLI</a>
-          and access to a Shopify store (development or production). No Node, no bundler, no build step.
-        </p>
-
-        <h3 class="doc-h3">Prerequisites</h3>
-        <div class="ref-grid">
-          <div class="ref-item">
-            <span class="ref-item-name">Shopify CLI ≥ 3.x</span>
-            <span class="ref-item-desc">Required for local dev and theme push</span>
-          </div>
-          <div class="ref-item">
-            <span class="ref-item-name">Shopify store</span>
-            <span class="ref-item-desc">Development store recommended for testing</span>
-          </div>
-          <div class="ref-item">
-            <span class="ref-item-name">Git</span>
-            <span class="ref-item-desc">Clone the repository locally</span>
-          </div>
-          <div class="ref-item">
-            <span class="ref-item-name">GitHub Actions (optional)</span>
-            <span class="ref-item-desc">CI/CD pipeline with Theme Check</span>
-          </div>
-        </div>
-
-        <h3 class="doc-h3">Installation</h3>
-        <div class="code-label">
-          <span>bash</span>
-          <span class="badge badge-green">clone + dev</span>
-        </div>
-        <pre><code><span class="t-comment"># 1. Clone the repository</span>
-git clone https://github.com/AGMTZG/grimoire.git
-cd grimoire
-
-<span class="t-comment"># 2. Authenticate Shopify CLI with your store</span>
-shopify auth login --store your-store.myshopify.com
-
-<span class="t-comment"># 3. Start local development server (hot reload)</span>
-shopify theme dev --store your-store.myshopify.com
-
-<span class="t-comment"># 4. Open the preview URL printed in the terminal</span></code></pre>
-
-        <div class="callout tip">
-          <strong>Tip:</strong> Use <code>shopify theme dev --open</code> to automatically open the
-          preview in your browser when the server starts.
-        </div>
-
-        <h3 class="doc-h3">First-time setup in the theme editor</h3>
-        <p>After starting <code>shopify theme dev</code>, open the theme editor and configure at minimum:</p>
-        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
-          <li><strong>Typography</strong> — Set primary and heading font pickers under <em>Theme settings → Typography</em></li>
-          <li><strong>Colors</strong> — Adjust background, foreground, accent, and surface under <em>Theme settings → Colors</em></li>
-          <li><strong>Header</strong> — Select your navigation menu and configure transparent/opaque behavior</li>
-          <li><strong>Slideshow</strong> — Add at least one slide to the homepage slideshow section</li>
-          <li><strong>Footer</strong> — Set your logo, menus, newsletter, and social links</li>
-        </ul>
       </section>
 
       <!-- ── ARCHITECTURE ── -->
