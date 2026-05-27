@@ -435,21 +435,6 @@
     .badge-green  { background: rgba(107,203,139,0.12); color: rgba(107,203,139,0.9); border: 1px solid rgba(107,203,139,0.2); }
     .badge-amber  { background: rgba(232,164,90,0.12); color: rgba(232,164,90,0.9);  border: 1px solid rgba(232,164,90,0.2); }
 
-    /* ── CLI TABLE ── */
-    .cli-list { display: flex; flex-direction: column; gap: 0.8rem; margin: 1.2rem 0; }
-    .cli-item {
-      background: var(--surface-2); border: 1px solid var(--border);
-      border-radius: 8px; overflow: hidden;
-    }
-    .cli-cmd {
-      display: flex; align-items: center; gap: 0.6rem;
-      padding: 0.9rem 1.2rem;
-      border-bottom: 1px solid var(--border);
-    }
-    .cli-prompt { color: var(--text-faint); font-family: var(--mono); font-size: 0.82rem; }
-    .cli-text { font-family: var(--mono); font-size: 0.85rem; color: var(--green); }
-    .cli-desc { padding: 0.65rem 1.2rem; font-size: 0.82rem; color: var(--text-faint); }
-
     /* ── ARCH FLOW ── */
     .arch-flow {
       background: var(--surface-2); border: 1px solid var(--border);
@@ -577,9 +562,6 @@
             <a class="toc-link" href="#theme-settings">
               <span class="toc-dot"></span>Theme Settings
             </a>
-            <a class="toc-link" href="#cli-commands">
-              <span class="toc-dot"></span>CLI Commands
-            </a>
           </div>
         </nav>
       </div>
@@ -704,84 +686,228 @@
 
       <!-- ── ARCHITECTURE ── -->
       <section class="doc-section" id="architecture">
-        <div class="section-eyebrow">Internals</div>
+        <div class="section-eyebrow">Structure</div>
         <h2 class="doc-h2">Architecture</h2>
         <p class="doc-lead">
-          Grimoire follows the standard Shopify OS 2.0 directory model.
-          <code>layout/theme.liquid</code> is the single outermost shell that wraps every page.
+          Everything in Grimoire is edited through the Shopify theme customizer. You do not need to
+          open code files: you pick a page, adjust the sections on that page, and use
+          <strong>Theme settings</strong> for store-wide typography, layout width, and colors.
         </p>
 
-        <h3 class="doc-h3">Directory structure</h3>
-        <div class="arch-flow">
-          <span class="af-root">grimoire/</span>
-          <span class="af-child">layout/         <span class="af-comment"># theme.liquid + password.liquid (2 files)</span></span>
-          <span class="af-child">sections/        <span class="af-comment"># ~40 Liquid page modules, each with {% schema %}</span></span>
-          <span class="af-child">blocks/          <span class="af-comment"># 14 nestable block files (cs-*, faq-item, group, text)</span></span>
-          <span class="af-child">snippets/        <span class="af-comment"># 9 reusable Liquid fragments, documented via {% doc %}</span></span>
-          <span class="af-child">templates/       <span class="af-comment"># 14 JSON templates — compose sections per page type</span></span>
-          <span class="af-child">config/          <span class="af-comment"># settings_schema.json — all theme editor settings</span></span>
-          <span class="af-child">locales/         <span class="af-comment"># en.default.json + en.default.schema.json</span></span>
-          <span class="af-child">assets/          <span class="af-comment"># critical.css, base.css, SVG icons, JS (6 files)</span></span>
-        </div>
-
-        <h3 class="doc-h3">Layout shell</h3>
+        <h3 class="doc-h3">Three places to customize</h3>
         <p>
-          <code>layout/theme.liquid</code> renders three top-level section groups in order:
+          When you open <em>Online Store → Themes → Customize</em>, Grimoire organizes controls into
+          three layers. Think of them top-down: global rules first, then the frame of every page, then
+          the content of the page you are viewing.
         </p>
-        <div class="code-label"><span>layout/theme.liquid</span></div>
-        <pre><code><span class="t-liquid">{% render 'meta-tags' %}</span>
-<span class="t-liquid">{% render 'css-variables' %}</span>
-
-<span class="t-tag">&lt;body&gt;</span>
-  <span class="t-comment">{%- sections 'header-group' -%}</span>
-  <span class="t-comment">{%- comment -%} renders: announcement-bar + header {%- endcomment -%}</span>
-
-  <span class="t-liquid">{{ content_for_layout }}</span>
-  <span class="t-comment">{# resolved by templates/*.json → which sections fire #}</span>
-
-  <span class="t-comment">{%- sections 'footer-group' -%}</span>
-  <span class="t-comment">{%- comment -%} renders: footer {%- endcomment -%}</span>
-<span class="t-tag">&lt;/body&gt;</span></code></pre>
-
-        <h3 class="doc-h3">JSON templates</h3>
-        <p>
-          Each page type is defined by a JSON template in <code>templates/</code>. The file declares
-          which sections appear and in what order — merchants can then reorder them in the theme editor
-          without touching code.
-        </p>
-        <div class="code-label"><span>templates/index.json (simplified)</span></div>
-        <pre><code>{
-  <span class="t-attr">"sections"</span>: {
-    <span class="t-attr">"slideshow"</span>: { <span class="t-attr">"type"</span>: <span class="t-str">"slideshow"</span> },
-    <span class="t-attr">"trending"</span>:  { <span class="t-attr">"type"</span>: <span class="t-str">"trending-products"</span> },
-    <span class="t-attr">"marquee"</span>:   { <span class="t-attr">"type"</span>: <span class="t-str">"marquee"</span> }
-  },
-  <span class="t-attr">"order"</span>: [<span class="t-str">"slideshow"</span>, <span class="t-str">"trending"</span>, <span class="t-str">"marquee"</span>]
-}</code></pre>
-
-        <h3 class="doc-h3">JavaScript model</h3>
-        <p>
-          All interactivity is Vanilla JS using native Custom Elements. Shared state is stored on
-          <code>window</code> objects — no module bundler, no tree-shaking, no framework overhead.
-        </p>
-
         <div class="ref-grid">
           <div class="ref-item">
-            <span class="ref-item-name">window.GrimoireCarousel</span>
-            <span class="ref-item-desc">Swiper instance manager for slideshows and carousels</span>
+            <span class="ref-item-name">1. Theme settings</span>
+            <span class="ref-item-desc">Typography, page width, margins, colors, favicon — applies to the entire store</span>
           </div>
           <div class="ref-item">
-            <span class="ref-item-name">window.GrimoireProduct</span>
-            <span class="ref-item-desc">PDP state: selected variant, quantity, ATC lifecycle</span>
+            <span class="ref-item-name">2. Header &amp; footer groups</span>
+            <span class="ref-item-desc">Announcement bar, navigation, search, cart drawer, and footer — visible on almost every page</span>
           </div>
           <div class="ref-item">
-            <span class="ref-item-name">window.GrimoireQuickView</span>
-            <span class="ref-item-desc">Quick view modal state and Section Rendering fetch</span>
+            <span class="ref-item-name">3. Page template</span>
+            <span class="ref-item-desc">The stack of sections for Home, Product, Collection, Blog, Cart, and each Page</span>
+          </div>
+        </div>
+
+        <h3 class="doc-h3">Theme settings (store-wide)</h3>
+        <p>
+          Open the customizer and click the gear icon or <strong>Theme settings</strong> in the left sidebar.
+          Grimoire exposes three groups that control the look of the whole storefront:
+        </p>
+        <table class="params-table">
+          <thead><tr><th>Group</th><th>What you control</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Typography</td>
+              <td><strong>Primary font</strong> (body and UI) and <strong>Heading font</strong>. Changes apply everywhere text is rendered.</td>
+            </tr>
+            <tr>
+              <td>Layout</td>
+              <td><strong>Page width</strong> (narrow or wide) and <strong>minimum page margin</strong>. Affects how much horizontal space your content uses on desktop.</td>
+            </tr>
+            <tr>
+              <td>Colors</td>
+              <td><strong>Background</strong>, <strong>foreground</strong>, <strong>accent</strong>, <strong>surface</strong>, <strong>input corner radius</strong>, and <strong>favicon</strong>. These feed the theme’s design tokens so header, cards, buttons, and product tiles stay consistent.</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="callout tip">
+          <strong>Tip:</strong> Set colors and fonts in Theme settings before fine-tuning individual sections.
+          Section-level options override layout details, but they inherit the global palette and type scale.
+        </div>
+
+        <h3 class="doc-h3">Header and footer (always on)</h3>
+        <p>
+          Grimoire uses Shopify <strong>section groups</strong> for the top and bottom of the store.
+          In the customizer you will see them listed separately from the page you are editing:
+        </p>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li><strong>Header group</strong> — <em>Announcement bar</em> (optional promo line) and <em>Header</em> (logo, main menu, search, account, cart). Header settings include scroll behavior (hide on scroll, sticky, or static), transparent header at the top of the page, logo image or text, main navigation menu, mobile drawer labels, search overlay copy, and cart drawer labels.</li>
+          <li><strong>Footer group</strong> — <em>Footer</em> with brand description, logo, social links, two navigation menus, newsletter signup, and payment icons.</li>
+        </ul>
+        <p>
+          Changes here appear across the storefront. Assign menus under <em>Content → Navigation</em>
+          in Shopify admin, then select those menus in the Header and Footer section settings.
+        </p>
+
+        <h3 class="doc-h3">Page templates</h3>
+        <p>
+          Each type of page in your store has its own <strong>template</strong>. When you customize
+          “Home”, “Default product”, “Default collection”, and so on, you are editing that template’s
+          section stack — not a single global layout. Grimoire ships preset templates so you can start
+          from a working layout and rearrange sections in the sidebar.
+        </p>
+        <table class="params-table">
+          <thead><tr><th>Customizer context</th><th>Typical sections included</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Home</td>
+              <td>Slideshow, Collections (hero/grid), Trending products — reorder or add marketing sections (marquee, newsletter, testimonials, etc.)</td>
+            </tr>
+            <tr>
+              <td>Product</td>
+              <td>Breadcrumb, Product (main buy box with blocks), Product benefits, Product recommendations, Recently viewed</td>
+            </tr>
+            <tr>
+              <td>Collection</td>
+              <td>Breadcrumb, optional Collections banner, Collection grid with filters and sort</td>
+            </tr>
+            <tr>
+              <td>Cart</td>
+              <td>Cart section (line items, notes, checkout CTA)</td>
+            </tr>
+            <tr>
+              <td>Search</td>
+              <td>Search results with product cards and quick view</td>
+            </tr>
+            <tr>
+              <td>Blog / Article</td>
+              <td>Blog listing or article layout with optional table of contents and reading progress on pages that support it</td>
+            </tr>
+            <tr>
+              <td>Default page</td>
+              <td>Breadcrumb and Page section (CMS content with optional TOC/progress)</td>
+            </tr>
+            <tr>
+              <td>Contact page</td>
+              <td>Breadcrumb, Page intro, Contact hero (form), Contact location, Contact channels (block-based cards)</td>
+            </tr>
+            <tr>
+              <td>About page</td>
+              <td>Breadcrumb, Page intro, Chronicle (story chapters), Coven (team or values), plus any sections you add</td>
+            </tr>
+            <tr>
+              <td>List collections</td>
+              <td>All collections index</td>
+            </tr>
+            <tr>
+              <td>Password / Gift card</td>
+              <td>Store password page and digital gift card layout (limited customization)</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          To edit a specific URL, use the page selector at the top of the customizer or navigate from
+          <em>Online Store → Pages / Products / Collections</em> and choose <strong>Customize</strong>
+          on the assigned template.
+        </p>
+
+        <h3 class="doc-h3">Sections: building a page</h3>
+        <p>
+          A <strong>section</strong> is a full-width module you can add, remove, reorder, and duplicate
+          in the left sidebar. Examples include Slideshow, Collection grid, FAQ, Testimonials, and
+          Custom section. Click <strong>Add section</strong> to browse Grimoire’s library; drag sections
+          to change order; click a section to edit its settings in the right panel.
+        </p>
+        <p>
+          Many sections are self-contained (one settings panel). Others are built for specific page
+          types — for example, the Product section only appears on product templates, and Cart only
+          on the cart template.
+        </p>
+
+        <h3 class="doc-h3">Blocks: content inside a section</h3>
+        <p>
+          Some sections support <strong>blocks</strong> — smaller pieces you can add, reorder, or remove
+          within that section. In the customizer, expand a section in the sidebar to see its blocks.
+        </p>
+        <p>Common block patterns in Grimoire:</p>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li><strong>Product section</strong> — Title, description, price, variant picker, quantity, buy buttons, pickup availability, share buttons. Reorder blocks to change the order of information on the product page (for example, move description above price).</li>
+          <li><strong>Product benefits</strong> — Individual benefit tiles (icon, title, text) in a row below the product.</li>
+          <li><strong>Breadcrumb</strong> — Home link, collection crumb, and current page. Toggle labels and separator style in section settings.</li>
+          <li><strong>FAQ</strong> — One block per question/answer pair, grouped by category tabs you configure in section settings.</li>
+          <li><strong>Contact channels</strong> — One block per support/sales card.</li>
+          <li><strong>Chronicle (About)</strong> — One block per story chapter (eyebrow, heading, body, image side).</li>
+          <li><strong>Custom section</strong> — See below; this is the theme’s flexible page builder.</li>
+        </ul>
+
+        <h3 class="doc-h3">Custom section (page builder)</h3>
+        <p>
+          <strong>Custom section</strong> is the most flexible layout tool in Grimoire. Add it to any
+          page template to build editorial layouts from blocks without code. Section settings let you
+          control section title (eyebrow + heading), alignment, max width (narrow, default, or full bleed),
+          spacing, optional background image with overlay, and gap between blocks.
+        </p>
+        <p>Available blocks inside Custom section:</p>
+        <div class="section-chips" style="margin-bottom:1rem;">
+          <span class="section-chip">Heading</span>
+          <span class="section-chip">Subheading</span>
+          <span class="section-chip">Text</span>
+          <span class="section-chip">Image</span>
+          <span class="section-chip">Video</span>
+          <span class="section-chip">Button</span>
+          <span class="section-chip">Badge</span>
+          <span class="section-chip">Quote</span>
+          <span class="section-chip">Icon item</span>
+          <span class="section-chip">Divider</span>
+          <span class="section-chip">Spacer</span>
+          <span class="section-chip">Group</span>
+        </div>
+        <p>
+          Use <strong>Group</strong> when you need a nested row or column of blocks. You can stack up
+          to 16 blocks per Custom section instance — duplicate the section on the page if you need more.
+        </p>
+
+        <h3 class="doc-h3">Special-purpose sections</h3>
+        <div class="ref-grid">
+          <div class="ref-item">
+            <span class="ref-item-name">Custom Liquid</span>
+            <span class="ref-item-desc">A single text area for Liquid or HTML snippets (app widgets, embeds). Use only if you are comfortable with code or following an app’s install instructions.</span>
           </div>
           <div class="ref-item">
-            <span class="ref-item-name">customElements.define()</span>
-            <span class="ref-item-desc">All interactive regions registered as Custom Elements</span>
+            <span class="ref-item-name">Page</span>
+            <span class="ref-item-desc">Renders Shopify page content from the admin. Optional table of contents and reading progress bar for long editorial pages.</span>
           </div>
+          <div class="ref-item">
+            <span class="ref-item-name">Signup flyout</span>
+            <span class="ref-item-desc">Global-style newsletter popup; configure timing and copy in section settings (add to templates where you want it to appear).</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">Oracle quiz</span>
+            <span class="ref-item-desc">Interactive quiz that routes shoppers to a product or collection based on answers — configured entirely in the section and its blocks.</span>
+          </div>
+        </div>
+
+        <h3 class="doc-h3">Recommended workflow</h3>
+        <ol style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li>Configure <strong>Theme settings</strong> (fonts, colors, page width).</li>
+          <li>Set up <strong>Header</strong> and <strong>Footer</strong> (logo, menus, newsletter, social links).</li>
+          <li>Customize the <strong>Home</strong> template: slideshow, collections, trending products, then add storytelling sections as needed.</li>
+          <li>Review <strong>Product</strong> and <strong>Collection</strong> templates — adjust product blocks, filters, and merchandising sections.</li>
+          <li>Build <strong>Pages</strong> (About, Contact) using Page + Custom section + dedicated contact/chronicle sections.</li>
+          <li>Create additional page templates in Shopify admin if you need alternate layouts (for example, a landing page without the default breadcrumb).</li>
+        </ol>
+        <div class="callout">
+          <strong>Presets are starting points.</strong> Duplicating a template in Shopify admin
+          (<em>Theme → … → Duplicate</em>) lets you keep Grimoire’s defaults for one use case while
+          building a second layout (e.g. a minimal landing page vs. a full homepage) without affecting
+          the rest of your store.
         </div>
       </section>
 
@@ -1273,113 +1399,6 @@
             </tbody>
           </table>
         </div>
-      </section>
-
-      <!-- ── CLI COMMANDS ── -->
-      <section class="doc-section" id="cli-commands">
-        <div class="section-eyebrow">Development</div>
-        <h2 class="doc-h2">CLI Commands</h2>
-        <p class="doc-lead">
-          All Grimoire development and deployment is done through the <strong>Shopify CLI</strong>.
-          No custom build scripts — the CLI handles hot reload, asset pushing, and deployment.
-        </p>
-
-        <div class="cli-list">
-          <div class="cli-item">
-            <div class="cli-cmd">
-              <span class="cli-prompt">$</span>
-              <span class="cli-text">shopify theme dev --store your-store.myshopify.com</span>
-            </div>
-            <div class="cli-desc">
-              Starts a local development server with hot reload. Changes to Liquid, CSS, and JS files
-              are reflected in the preview URL instantly. Opens on <code>http://127.0.0.1:9292</code> by default.
-            </div>
-          </div>
-
-          <div class="cli-item">
-            <div class="cli-cmd">
-              <span class="cli-prompt">$</span>
-              <span class="cli-text">shopify theme dev --open</span>
-            </div>
-            <div class="cli-desc">
-              Same as above but automatically opens the preview URL in your default browser on start.
-            </div>
-          </div>
-
-          <div class="cli-item">
-            <div class="cli-cmd">
-              <span class="cli-prompt">$</span>
-              <span class="cli-text">shopify theme push --store your-store.myshopify.com</span>
-            </div>
-            <div class="cli-desc">
-              Pushes the local theme to your Shopify store. Use <code>--publish</code> flag to make it
-              the live theme immediately. Prompts before overwriting if the theme already exists.
-            </div>
-          </div>
-
-          <div class="cli-item">
-            <div class="cli-cmd">
-              <span class="cli-prompt">$</span>
-              <span class="cli-text">shopify theme push --unpublished</span>
-            </div>
-            <div class="cli-desc">
-              Uploads the theme as an unpublished draft — safe for staging and review without
-              affecting the live store.
-            </div>
-          </div>
-
-          <div class="cli-item">
-            <div class="cli-cmd">
-              <span class="cli-prompt">$</span>
-              <span class="cli-text">shopify theme check</span>
-            </div>
-            <div class="cli-desc">
-              Runs Shopify's Theme Check linter locally. The same check runs in CI via GitHub Actions
-              on every push. Recommended before every <code>theme push</code>.
-            </div>
-          </div>
-
-          <div class="cli-item">
-            <div class="cli-cmd">
-              <span class="cli-prompt">$</span>
-              <span class="cli-text">shopify theme list --store your-store.myshopify.com</span>
-            </div>
-            <div class="cli-desc">
-              Lists all themes on the store with their IDs. Useful for targeting a specific theme
-              with <code>--theme-id</code> in push commands.
-            </div>
-          </div>
-
-          <div class="cli-item">
-            <div class="cli-cmd">
-              <span class="cli-prompt">$</span>
-              <span class="cli-text">shopify theme pull --store your-store.myshopify.com</span>
-            </div>
-            <div class="cli-desc">
-              Downloads the live theme from your store to the local directory. Useful for syncing
-              after merchant edits in the online theme editor.
-            </div>
-          </div>
-        </div>
-
-        <div class="callout">
-          <strong>GitHub Actions CI</strong> — The repository includes a CI pipeline that runs
-          <code>shopify theme check</code> on every push and pull request. See
-          <code>.github/workflows/</code> for the configuration.
-        </div>
-
-        <h3 class="doc-h3">Useful flags</h3>
-        <table class="params-table">
-          <thead><tr><th>Flag</th><th></th><th>Description</th></tr></thead>
-          <tbody>
-            <tr><td>--store</td><td>string</td><td>Your store URL (<code>your-store.myshopify.com</code>)</td></tr>
-            <tr><td>--theme-id</td><td>number</td><td>Target a specific theme by ID (from <code>theme list</code>)</td></tr>
-            <tr><td>--publish</td><td>boolean</td><td>Publish the theme immediately after pushing</td></tr>
-            <tr><td>--unpublished</td><td>boolean</td><td>Push as an unpublished draft (staging-safe)</td></tr>
-            <tr><td>--open</td><td>boolean</td><td>Open the preview URL in a browser after starting dev</td></tr>
-            <tr><td>--nodelete</td><td>boolean</td><td>Prevents deleting remote files not present locally during push</td></tr>
-          </tbody>
-        </table>
       </section>
 
     </main>
