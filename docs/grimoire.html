@@ -637,6 +637,7 @@
             <a class="toc-sub" href="#snippet-product-modal">product-modal.liquid</a>
             <a class="toc-sub" href="#snippet-product-carousel">product-carousel.liquid</a>
             <a class="toc-sub" href="#snippet-meta-tags">meta-tags.liquid</a>
+            <a class="toc-sub" href="#snippet-worlds-map">worlds-map.liquid</a>
             <a class="toc-link" href="#blocks">
               <span class="toc-dot"></span>Blocks
             </a>
@@ -1856,13 +1857,117 @@
           </div>
         </div>
 
-        <h4 class="doc-h4">Other snippets</h4>
+        <!-- worlds-map -->
+        <hr class="doc-divider" id="snippet-worlds-map">
+        <h3 class="doc-h3">worlds-map.liquid</h3>
+        <p>
+          A single large <strong>inline SVG world map</strong> (country paths with ISO-style <code>id</code> attributes such as
+          <code>US</code>, <code>FR</code>, <code>BR</code>). You never add this file from the snippet list — it is included by the
+          <strong>Testimonials</strong> section and powers the interactive map and review pins.
+        </p>
+
+        <h4 class="doc-h4">Where you see it</h4>
+        <p>
+          In the theme editor, add the <strong>Testimonials</strong> section to a template (for example About or a social-proof page).
+          On desktop the review card overlays the map; on smaller screens it sits below the map. Map clicks, pins, arrows, and dot
+          indicators all stay in sync with the active testimonial block.
+        </p>
+
+        <h4 class="doc-h4">What you configure (Testimonials section)</h4>
+        <p>
+          Open the Testimonials section in the editor, not this snippet. You can add up to <strong>12</strong> testimonial blocks.
+        </p>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Block setting</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Country</td>
+              <td>Dropdown of supported countries (for example United States, Philippines, Norway). Each option maps to a two-letter code that must exist on the SVG. Pins are centered on that country’s shape.</td>
+            </tr>
+            <tr>
+              <td>Quote</td>
+              <td>Customer quote shown in the card.</td>
+            </tr>
+            <tr>
+              <td>Rating (0 = hide)</td>
+              <td>Star row in the card; set to 0 to hide stars.</td>
+            </tr>
+            <tr>
+              <td>Customer name</td>
+              <td>Attribution line in the card.</td>
+            </tr>
+            <tr>
+              <td>Role or location</td>
+              <td>Secondary line under the name (city, title, etc.).</td>
+            </tr>
+            <tr>
+              <td>Avatar photo</td>
+              <td>Optional portrait in the card.</td>
+            </tr>
+            <tr>
+              <td>Product purchased</td>
+              <td>Optional link to a product referenced in the quote.</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          Section-level settings: <strong>Eyebrow</strong>, <strong>Title</strong>, <strong>Seconds per testimonial</strong> (auto-advance, 3–10s),
+          and top/bottom padding.
+        </p>
+
+        <div class="callout tip">
+          <strong>Country list:</strong> Only countries in the block dropdown are guaranteed to highlight and pin correctly. The SVG
+          contains more territories than the dropdown; adding a new country requires theme code (SVG path + dropdown option).
+        </div>
+
+        <h4 class="doc-h4">How interaction works</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Action</th><th>Result</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Click a country on the map</td>
+              <td>Highlights that region and shows the testimonial block with the same country code.</td>
+            </tr>
+            <tr>
+              <td>Click a pin</td>
+              <td>Same as clicking the country — one pin per testimonial block.</td>
+            </tr>
+            <tr>
+              <td>Previous / Next arrows or dots</td>
+              <td>Moves to another block; map highlight and card update together.</td>
+            </tr>
+            <tr>
+              <td>Auto-advance</td>
+              <td>Rotates through blocks on the interval from <strong>Seconds per testimonial</strong> when more than one block exists.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <strong>Appearance:</strong> Map colors and pin animation are defined in <code>sections/testimonials.liquid</code>, not in the theme editor.
+          The SVG file itself is static markup; change fills or strokes in code if you need a different look.
+        </div>
+
+        <h4 class="doc-h4">For theme developers</h4>
         <div class="ref-grid">
           <div class="ref-item">
-            <span class="ref-item-name">worlds-map.liquid</span>
-            <span class="ref-item-desc">Inline SVG world map used by <code>testimonials.liquid</code> to pin reviews geographically</span>
+            <span class="ref-item-name">Render</span>
+            <span class="ref-item-desc"><code>{% render 'worlds-map' %}</code> — no parameters. Used only from <code>sections/testimonials.liquid</code>.</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">Markup</span>
+            <span class="ref-item-desc"><code>&lt;svg viewBox="0 0 2000 857" class="tw__svg" aria-hidden="true"&gt;</code> — paths use <code>id</code> (most countries) or <code>class</code> (some multi-path countries).</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">Behavior</span>
+            <span class="ref-item-desc"><code>&lt;testimonials-world&gt;</code> reads <code>data-country</code> from blocks, places pins via path bounding boxes, and maps a few codes through <code>SVG_SEL</code> (for example <code>NO</code> → <code>.Norway</code>).</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">No {% doc %}</span>
+            <span class="ref-item-desc">Asset-only snippet (~2k lines of SVG). No Liquid parameters or theme settings.</span>
           </div>
         </div>
+
       </section>
 
       <!-- ── BLOCKS ── -->
