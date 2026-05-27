@@ -241,11 +241,6 @@
       margin-bottom: 0.7rem;
       display: flex; align-items: center; gap: 0.6rem;
     }
-    .section-eyebrow::after {
-      content: ''; flex: none;
-      width: 24px; height: 1px;
-      background: var(--purple); opacity: 0.5;
-    }
 
     h1.doc-h1 {
       font-family: 'Merriweather', serif;
@@ -604,7 +599,7 @@
         <h1 class="doc-h1">Introduction<span class="dot">.</span></h1>
         <p class="doc-lead">
           <strong>Grimoire</strong> (v1.0.0) is a commercial <strong>Shopify Online Store 2.0</strong> theme by AGMTZG.
-          It is a full storefront implementation — not a headless stack, not Hydrogen — built on Liquid,
+          It is a full storefront implementation, not a headless stack, not Hydrogen, built on Liquid,
           JSON templates, and the visual theme editor merchants already use.
         </p>
 
@@ -641,7 +636,7 @@
         <h3 class="doc-h3">Experience &amp; commerce</h3>
         <p>
           Global navigation is handled by custom elements in <code>sections/header.liquid</code>:
-          <code>&lt;site-navbar&gt;</code> (sticky or static behavior, hide-on-scroll optional),
+          <code>&lt;site-navbar&gt;</code> (the default option is hide-on-scroll, but you can change it to sticky or static behavior),
           <code>&lt;search-overlay&gt;</code> for predictive search, and <code>&lt;cart-sidebar&gt;</code> for an
           AJAX cart drawer wired to Shopify’s Cart API. Product discovery spans homepage slideshows (Swiper 11),
           collection grids with filters, trending and recently viewed carousels, quick view modals, and related
@@ -650,8 +645,8 @@
         <p>
           The product detail section (<code>product.liquid</code>) supports variant selection, quantity, buy buttons,
           Shop Pay installments, pickup availability, media galleries, optional 3D models, and JSON-LD structured
-          data. Shared client-side helpers — <code>window.GrimoireProduct</code>, <code>window.GrimoireQuickView</code>,
-          and <code>window.GrimoireCarousel</code> — live in snippets and power cards, modals, and carousels across
+          data. Shared client-side helpers: <code>window.GrimoireProduct</code>, <code>window.GrimoireQuickView</code>,
+          and <code>window.GrimoireCarousel</code>, live in snippets and power cards, modals, and carousels across
           collection, search, and merchandising sections.
         </p>
 
@@ -659,7 +654,8 @@
         <p>
           Grimoire’s visual identity is token-driven. <code>snippets/css-variables.liquid</code> maps theme settings
           into CSS custom properties for colors, typography, page width, header/cart/search surfaces, product cards,
-          collection carousels, and more. Default colors are intentionally neutral and dark:
+          collection carousels, and more. Default colors are intentionally neutral and dark because the design follows a niche aesthetic commonly associated with mystical products, 
+          candles, and spiritual-themed brands, helping create a calm, atmospheric, and immersive visual identity. Those colors are:
         </p>
         <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
           <li><strong>Background</strong> — <code>#0d0d0d</code></li>
@@ -670,8 +666,8 @@
         <p>
           Typography uses two <code>font_picker</code> settings (primary and heading), with all weights loaded via
           <code>font_face</code> and exposed as <code>--font-primary--*</code> and <code>--font-heading--*</code>.
-          Motion defaults to <code>--timing: 0.3s</code>. Editorial patterns — uppercase eyebrows, hairline dividers,
-          and luminous primary buttons — are consistent across sections and the reusable <code>section-title</code>
+          Motion defaults to <code>--timing: 0.3s</code>. Editorial patterns, uppercase eyebrows, hairline dividers,
+          and luminous primary buttons, are consistent across sections and the reusable <code>section-title</code>
           snippet.
         </p>
 
@@ -682,15 +678,6 @@
           (with world map), blog and news grids, and flexible page builders via <code>custom-section.liquid</code>
           plus composable <code>cs-*</code> blocks (headings, text, images, video, buttons, spacers, and more).
           Contact and about flows are covered by dedicated templates and matching sections.
-        </p>
-
-        <h3 class="doc-h3">Development &amp; quality</h3>
-        <p>
-          Local development uses <a href="https://shopify.dev/docs/api/shopify-cli" target="_blank" rel="noopener">Shopify CLI</a>
-          (<code>shopify theme dev</code> for hot reload, <code>shopify theme push</code> for deployment). The repository
-          runs <strong>Theme Check</strong> on every push via GitHub Actions, so Liquid and schema issues are caught in CI.
-          Interactive behavior is implemented with native <code>customElements.define</code> — no framework bundle on
-          the critical path.
         </p>
 
         <h3 class="doc-h3">Theme inventory</h3>
@@ -714,7 +701,7 @@
         </div>
         <p style="margin-top:1.2rem;">
           The rest of this documentation walks through setup, architecture, and reference material for every layer
-          of the theme — from <code>css-variables.liquid</code> and section schemas to CLI commands and theme settings.
+          of the theme from <code>css-variables.liquid</code> and section schemas to CLI commands and theme settings.
         </p>
       </section>
 
