@@ -1003,7 +1003,7 @@
         <h3 class="doc-h3">css-variables.liquid</h3>
         <p>
           This snippet is Grimoire’s <strong>global style sheet in one file</strong>. It is not a section
-          you add in the customizer — it runs on every storefront page and outputs a single
+          you add in the customizer, it runs on every storefront page and outputs a single
           <code>{% style %}</code> block of CSS custom properties (<code>--token-name</code>) that the rest
           of the theme reads. Sections and snippets reference those variables instead of hard-coding colors
           or font stacks, so a change in <strong>Theme settings</strong> can ripple across headers, cards,
@@ -1011,7 +1011,7 @@
         </p>
         <p>
           It is included in the document <code>&lt;head&gt;</code> from the main layout (and the password
-          and gift card layouts). It accepts <strong>no render parameters</strong> — only Shopify
+          and gift card layouts). It accepts <strong>no render parameters</strong>, only Shopify
           <code>settings.*</code> values and fixed defaults defined in the snippet itself.
         </p>
 
@@ -1078,7 +1078,7 @@
         <p>
           Before the <code>:root</code> block, the snippet registers <strong>primary</strong> and
           <strong>heading</strong> font files from Shopify’s CDN (regular, bold, italic combinations) with
-          <code>font-display: swap</code>. Picking fonts in Theme settings is enough — you do not upload
+          <code>font-display: swap</code>. Picking fonts in Theme settings is enough (We use the font Merryweather as the default font family), you do not upload
           font files separately. Every section that uses <code>var(--font-primary--family)</code> or
           <code>var(--font-heading--family)</code> picks up the same faces.
         </p>
@@ -1120,9 +1120,9 @@
 
         <h4 class="doc-h4">Practical tips for merchants</h4>
         <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
-          <li>If a section looks “almost right” after a rebrand, start with <strong>accent</strong> and <strong>surface</strong> in Theme settings — many highlights and card backgrounds reference those tokens indirectly.</li>
+          <li>If a section looks “almost right” after a rebrand, start with <strong>accent</strong> and <strong>surface</strong> in Theme settings, many highlights and card backgrounds reference those tokens indirectly.</li>
           <li>Section-specific colors (slideshow overlay, FAQ tab labels, a single banner background) are controlled in <strong>that section’s settings</strong>, not in this snippet.</li>
-          <li>You do not need to open <code>css-variables.liquid</code> for day-to-day customization. Editing it requires theme code access and is only relevant for advanced branding or agency work.</li>
+          <li>You can use Shopify’s built-in Custom CSS feature to easily add your own styles and personalize the theme without modifying the theme files directly.</li>
         </ul>
 
         <div class="callout tip">
