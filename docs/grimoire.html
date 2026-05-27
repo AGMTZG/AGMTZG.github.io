@@ -1577,9 +1577,9 @@
 
         <h4 class="doc-h4">What it does on the storefront</h4>
         <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
-          <li><strong>Swatch clicks</strong> — Updates the active swatch, color label, variant id on the ATC button, sold-out badge, and product image (with a short crossfade).</li>
-          <li><strong>ATC with quick view</strong> — When the card button has <code>data-opens-modal</code>, opens the quick view modal populated from that card’s data instead of navigating away.</li>
-          <li><strong>Fallback</strong> — If no modal is present, ATC falls back to the product URL on the card.</li>
+          <li><strong>Swatch clicks</strong>: Updates the active swatch, color label, variant id on the ATC button, sold-out badge, and product image (with a short crossfade).</li>
+          <li><strong>ATC with quick view</strong>: When the card button has <code>data-opens-modal</code>, opens the quick view modal populated from that card’s data instead of navigating away.</li>
+          <li><strong>Fallback</strong>: If no modal is present, ATC falls back to the product URL on the card.</li>
         </ul>
 
         <h4 class="doc-h4">Sections that rely on it</h4>
@@ -1618,7 +1618,7 @@
         <p>
           Quick view is enabled per product card in sections that support it (for example
           <em>Trending products</em> cards inside category blocks). In the theme editor, look for settings
-          on the section or block that control quick view / modal behavior — you do not edit
+          on the section or block that control quick view / modal behavior, you do not edit
           <code>product-modal.liquid</code> directly.
         </p>
         <p>
@@ -1658,7 +1658,7 @@
         <div class="ref-grid">
           <div class="ref-item">
             <span class="ref-item-name">API</span>
-            <span class="ref-item-desc"><code>GrimoireQuickView.create(modalElement)</code> — returns <code>open(card, trigger)</code> used by product cards.</span>
+            <span class="ref-item-desc"><code>GrimoireQuickView.create(modalElement)</code>, returns <code>open(card, trigger)</code> used by product cards.</span>
           </div>
           <div class="ref-item">
             <span class="ref-item-name">Includes</span>
@@ -1696,14 +1696,42 @@
 
         <h4 class="doc-h4">Sections that use it</h4>
         <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
-          <li><strong>Trending products</strong> — One carousel per category tab; re-inits when tabs change.</li>
-          <li><strong>Product recommendations</strong> — Related products carousel on the product page.</li>
-          <li><strong>Recently viewed</strong> — Carousel of previously browsed products.</li>
+          <li><strong>Trending products</strong>: One carousel per category tab; re-inits when tabs change.</li>
+          <li><strong>Product recommendations</strong>: Related products carousel on the product page.</li>
+          <li><strong>Recently viewed</strong>: Carousel of previously browsed products.</li>
         </ul>
 
+        <h4 class="doc-h4">Other carousels (do not use this snippet)</h4>
+        <p>
+          Some sections implement their own carousel markup and JavaScript.
+          They are <strong>not</strong> built with <code>product-carousel.liquid</code> or
+          <code>GrimoireCarousel</code>:
+        </p>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Section</th><th>What slides</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Collections</td>
+              <td>Category cards on the homepage (<code>collections.liquid</code>) — merchant-added blocks with image, title, and link; uses the section’s <code>collections-hero</code> carousel.</td>
+            </tr>
+            <tr>
+              <td>Read also</td>
+              <td>Blog article cards on article pages — editorial “read next” strip with its own track and arrows.</td>
+            </tr>
+            <tr>
+              <td>Slideshow</td>
+              <td>Full-bleed hero slides on the homepage — powered by <strong>Swiper 11</strong>, not product cards.</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          The <em>Collection</em> product listing page is a <strong>grid with filters</strong>, not a carousel.
+          Only merchandising sections that repeat <code>product-card</code> tiles use this snippet.
+        </p>
+
         <div class="callout tip">
-          <strong>Not Swiper:</strong> Homepage <em>Slideshow</em> uses Swiper 11. Product carousels use
-          this lightweight transform-based track so card markup stays consistent across the theme.
+          <strong>Scope:</strong> <code>product-carousel.liquid</code> exists so every product-card row shares
+          the same arrow behavior and breakpoints. Category, article, and hero carousels stay separate by design.
         </div>
 
         <h4 class="doc-h4">For theme developers</h4>
