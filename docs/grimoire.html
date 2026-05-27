@@ -650,6 +650,7 @@
             <a class="toc-sub" href="#sections-announcement-bar">announcement-bar.liquid</a>
             <a class="toc-sub" href="#sections-header-liquid">header.liquid</a>
             <a class="toc-sub" href="#sections-footer-liquid">footer.liquid</a>
+            <a class="toc-sub" href="#sections-password-liquid">password.liquid</a>
           </div>
 
           <div class="toc-group">
@@ -2400,6 +2401,58 @@
 
         <div class="callout tip">
           <strong>Localization display:</strong> Language/country selectors only render when Shopify exposes more than one available language or country in the storefront context.
+        </div>
+
+        <h4 class="doc-h4" id="sections-password-liquid">password.liquid</h4>
+        <p>
+          The storefront gate page shown while the shop is protected by a password. This section renders the
+          right-side content panel: brand mark, launch messaging, newsletter capture, and an “Enter using password”
+          trigger that opens the access dialog in the password layout.
+        </p>
+
+        <h4 class="doc-h4">Merchant controls</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Area</th><th>Setting IDs</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Launch copy</td>
+              <td><code>eyebrow</code>, <code>heading</code>, <code>subtext</code></td>
+              <td>Controls “coming soon” text stack. If <code>heading</code> is empty, the store name is used.</td>
+            </tr>
+            <tr>
+              <td>Social links payload</td>
+              <td><code>social_facebook</code>, <code>social_instagram</code>, <code>social_twitter</code>, <code>social_youtube</code></td>
+              <td>Exposed through hidden <code>#pw-social-data</code> attributes for layout-level social rendering logic.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Page behavior</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Element</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Newsletter form</td>
+              <td>Uses Shopify <code>{% form 'customer' %}</code> with newsletter tagging (<code>contact[tags]=newsletter</code>) and inline success/error rendering.</td>
+            </tr>
+            <tr>
+              <td>Password entry trigger</td>
+              <td><code>#pw-enter-trigger</code> button is rendered in this section and used by the password layout script to open admin/customer access flow.</td>
+            </tr>
+            <tr>
+              <td>Fallback text logic</td>
+              <td><code>subtext</code> defaults to a built-in launch paragraph when empty.</td>
+            </tr>
+            <tr>
+              <td>Motion preference</td>
+              <td>All entrance/hover transitions in this section are disabled under <code>prefers-reduced-motion: reduce</code>.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <strong>Scope note:</strong> <code>password.liquid</code> (section) defines the content panel, while
+          <code>layout/password.liquid</code> controls the full split-screen shell and modal wiring around it.
         </div>
 
       </section>
