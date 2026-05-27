@@ -654,6 +654,7 @@
             <a class="toc-sub" href="#sections-404-liquid">404.liquid</a>
             <a class="toc-sub" href="#sections-breadcrumb-liquid">breadcrumb.liquid</a>
             <a class="toc-sub" href="#sections-slideshow-liquid">slideshow.liquid</a>
+            <a class="toc-sub" href="#sections-trending-products-liquid">trending-products.liquid</a>
           </div>
 
           <div class="toc-group">
@@ -2620,6 +2621,83 @@
           <strong>Accessibility note:</strong> The section exposes carousel semantics (<code>role="region"</code>,
           slide <code>aria-label</code> indexing, and polite counter updates) while reducing motion effects when
           the visitor prefers reduced motion.
+        </div>
+
+        <h4 class="doc-h4" id="sections-trending-products-liquid">trending-products.liquid</h4>
+        <p>
+          Tabbed merchandising block for the homepage (or any template). Each <strong>Category tab</strong>
+          block holds a hand-picked <code>product_list</code>; visitors switch tabs to see a horizontal
+          product row per category. The section is wrapped in <code>&lt;trending-products&gt;</code> and
+          ships with a preset of three tabs (Best Sellers, New Arrivals, Featured).
+        </p>
+
+        <h4 class="doc-h4">Merchant controls</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Scope</th><th>Setting</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Section</td>
+              <td><code>eyebrow</code>, <code>heading</code></td>
+              <td>Passed to the <a href="#snippet-section-title">section-title</a> snippet for the block header.</td>
+            </tr>
+            <tr>
+              <td>Section</td>
+              <td><code>btn_label</code> + <code>btn_url</code></td>
+              <td>Optional “View all” (or custom) link beside the heading; omitted when the label is blank.</td>
+            </tr>
+            <tr>
+              <td>Section</td>
+              <td><code>products_to_show</code> (1–12)</td>
+              <td>Caps how many products render per tab from each block’s list (default 8).</td>
+            </tr>
+            <tr>
+              <td>Category tab block</td>
+              <td><code>label</code></td>
+              <td>Tab button text (default “Category”). Up to <strong>5</strong> tab blocks per section.</td>
+            </tr>
+            <tr>
+              <td>Category tab block</td>
+              <td><code>products</code></td>
+              <td>Curated product picker for that tab’s carousel.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Runtime behavior</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Feature</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Tab switching</td>
+              <td>First tab is active on load. Clicking a tab shows one panel and updates <code>aria-selected</code> / <code>hidden</code>. Arrow keys, Home, and End move focus between tabs.</td>
+            </tr>
+            <tr>
+              <td>Product rows</td>
+              <td>Each populated tab captures <a href="#snippet-product-card">product-card</a> slides and passes them to <a href="#snippet-product-carousel">product-carousel</a>; <code>GrimoireCarousel.initAll</code> runs inside this section only.</td>
+            </tr>
+            <tr>
+              <td>Quick view</td>
+              <td>Includes one <a href="#snippet-product-modal">product-modal</a> per section instance. Cards use <code>opens_modal: true</code> so clicks open quick view instead of navigating away.</td>
+            </tr>
+            <tr>
+              <td>Theme editor</td>
+              <td>Selecting a tab block in the editor auto-activates that tab so the matching product list is visible while editing.</td>
+            </tr>
+            <tr>
+              <td>Empty states</td>
+              <td>No tab blocks → “Add categories via the theme editor.” A tab with no products → “Add products to this category.”</td>
+            </tr>
+            <tr>
+              <td>No-JS fallback</td>
+              <td>Tab buttons are hidden; all category panels stay visible so every assigned product list remains reachable without JavaScript.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <strong>Merchandising tip:</strong> Order products inside each tab’s product list in the picker —
+          the section respects that order up to <code>products_to_show</code>. Use separate tabs for
+          collections you want side by side (for example bestsellers vs. new arrivals) rather than one mixed list.
         </div>
 
       </section>
