@@ -653,6 +653,7 @@
             <a class="toc-sub" href="#sections-password-liquid">password.liquid</a>
             <a class="toc-sub" href="#sections-404-liquid">404.liquid</a>
             <a class="toc-sub" href="#sections-breadcrumb-liquid">breadcrumb.liquid</a>
+            <a class="toc-sub" href="#sections-slideshow-liquid">slideshow.liquid</a>
           </div>
 
           <div class="toc-group">
@@ -2552,6 +2553,73 @@
         <div class="callout tip">
           <strong>Composition tip:</strong> Keep the default order <code>home → collection/blog/search → current</code>
           for predictable paths; remove intermediate blocks when you want a shorter trail.
+        </div>
+
+        <h4 class="doc-h4" id="sections-slideshow-liquid">slideshow.liquid</h4>
+        <p>
+          Full-viewport hero carousel powered by Swiper 11 and wrapped in a custom element
+          (<code>&lt;site-slideshow&gt;</code>). It supports up to 8 slides, lazy-loads non-first media,
+          and includes a custom navigation bar plus “next slide” preview panel.
+        </p>
+
+        <h4 class="doc-h4">Merchant controls</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Scope</th><th>Setting</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Section</td>
+              <td><code>autoplay_delay</code> (3000-9500ms)</td>
+              <td>Controls slideshow cycle timing used by the internal progress clock.</td>
+            </tr>
+            <tr>
+              <td>Slide block</td>
+              <td><code>bg_image</code></td>
+              <td>Background image for the slide; placeholder artwork is used when missing.</td>
+            </tr>
+            <tr>
+              <td>Slide block</td>
+              <td><code>eyebrow</code>, <code>title</code>, <code>description</code></td>
+              <td>Text stack shown over gradient overlay.</td>
+            </tr>
+            <tr>
+              <td>Slide block</td>
+              <td><code>cta_text</code> + <code>cta_url</code></td>
+              <td>Renders CTA only when both fields are present.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Runtime behavior</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Feature</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Loading strategy</td>
+              <td>First slide image loads eagerly; subsequent slides use Swiper lazy loading (<code>data-src</code>, <code>loadPrevNext</code>).</td>
+            </tr>
+            <tr>
+              <td>Navigation bar</td>
+              <td>Custom prev/next controls with slide counter and ripple feedback; disabled when only one slide exists.</td>
+            </tr>
+            <tr>
+              <td>Preview panel</td>
+              <td>Desktop panel shows next slide thumbnail/placeholder and a 00-99 cycle progress indicator.</td>
+            </tr>
+            <tr>
+              <td>Autoplay clock</td>
+              <td>Internal RAF timer pauses on hover and hidden tabs, then resumes cleanly on visibility return.</td>
+            </tr>
+            <tr>
+              <td>No-JS fallback</td>
+              <td>Without Swiper initialization, slides render as stacked static panels for graceful degradation.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <strong>Accessibility note:</strong> The section exposes carousel semantics (<code>role="region"</code>,
+          slide <code>aria-label</code> indexing, and polite counter updates) while reducing motion effects when
+          the visitor prefers reduced motion.
         </div>
 
       </section>
