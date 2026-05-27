@@ -656,6 +656,7 @@
             <a class="toc-sub" href="#sections-slideshow-liquid">slideshow.liquid</a>
             <a class="toc-sub" href="#sections-trending-products-liquid">trending-products.liquid</a>
             <a class="toc-sub" href="#sections-blog-featured-liquid">blog-featured.liquid</a>
+            <a class="toc-sub" href="#sections-newsletter-liquid">newsletter.liquid</a>
             <a class="toc-sub" href="#sections-collections-liquid">collections.liquid</a>
           </div>
 
@@ -2760,6 +2761,56 @@
           <li>Desktop (769px+): two-column card — image ~56% width, content aligned to the bottom with a vertical hairline separator.</li>
           <li>The entire card is one link to the article URL; hover scales the image slightly and brightens the border and CTA underline.</li>
           <li>Motion: content fade-in and image zoom respect <code>prefers-reduced-motion</code>.</li>
+        </ul>
+
+        <h4 class="doc-h4" id="sections-newsletter-liquid">newsletter.liquid</h4>
+        <p>
+          Centered email capture section with a minimal inline form and built-in Shopify customer submission.
+          It renders a title row, optional supporting copy, one email field, and one submit button.
+          The section does not use blocks, sliders, or custom JavaScript; interactions rely on native
+          form handling from Shopify’s <code>{% form 'customer' %}</code>.
+        </p>
+
+        <h4 class="doc-h4">Merchant controls</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>eyebrow</code>, <code>heading</code></td><td>Section title content shown via <a href="#snippet-section-title">section-title</a>.</td></tr>
+            <tr><td><code>subtext</code></td><td>Optional paragraph under the heading for promise/value copy.</td></tr>
+            <tr><td><code>btn_label</code></td><td>Submit button text (default “Subscribe”).</td></tr>
+            <tr><td><code>note</code></td><td>Optional fine print below the field (for consent or expectations).</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Form behavior</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Rule</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Submission target</td>
+              <td>Posts through Shopify customer form and attaches hidden tag <code>newsletter</code> to each signup.</td>
+            </tr>
+            <tr>
+              <td>Validation</td>
+              <td>Email input is required and uses <code>type="email"</code> + <code>autocomplete="email"</code> for browser validation and autofill.</td>
+            </tr>
+            <tr>
+              <td>Error state</td>
+              <td>When submission fails, Shopify default error markup appears inside the <code>bn-errors</code> container with <code>role="alert"</code>.</td>
+            </tr>
+            <tr>
+              <td>Success state</td>
+              <td>On successful submit, the form fields are replaced by a confirmation line (“You have been initiated…”).</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Presentation notes</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li>Top and bottom decorative hairlines frame the section across the full width.</li>
+          <li>The title area is force-centered across breakpoints (eyebrow row + heading row alignment overrides).</li>
+          <li>Field and button are one continuous inline control; focus-within only changes border contrast.</li>
+          <li>Motion is minimal and disabled under <code>prefers-reduced-motion</code>.</li>
         </ul>
 
         <h4 class="doc-h4" id="sections-collections-liquid">collections.liquid</h4>
