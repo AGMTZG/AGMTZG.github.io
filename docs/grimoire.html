@@ -651,6 +651,7 @@
             <a class="toc-sub" href="#sections-header-liquid">header.liquid</a>
             <a class="toc-sub" href="#sections-footer-liquid">footer.liquid</a>
             <a class="toc-sub" href="#sections-password-liquid">password.liquid</a>
+            <a class="toc-sub" href="#sections-404-liquid">404.liquid</a>
           </div>
 
           <div class="toc-group">
@@ -2453,6 +2454,67 @@
         <div class="callout tip">
           <strong>Scope note:</strong> <code>password.liquid</code> (section) defines the content panel, while
           <code>layout/password.liquid</code> controls the full split-screen shell and modal wiring around it.
+        </div>
+
+        <h4 class="doc-h4" id="sections-404-liquid">404.liquid</h4>
+        <p>
+          The not-found template section for missing URLs. It presents a branded error experience with two
+          clear recovery paths: return to homepage or browse the full catalog collection.
+        </p>
+
+        <h4 class="doc-h4">What this section includes</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Part</th><th>Implementation detail</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Error copy</td>
+              <td>Fixed editorial text: eyebrow, title (<code>Astray.</code>), and explanatory paragraph.</td>
+            </tr>
+            <tr>
+              <td>Primary action</td>
+              <td>Button to <code>{{ routes.root_url }}</code> (“Return home”).</td>
+            </tr>
+            <tr>
+              <td>Secondary action</td>
+              <td>Ghost link to <code>{{ routes.all_products_collection_url }}</code> (“Browse the Grimoire”).</td>
+            </tr>
+            <tr>
+              <td>404 visual</td>
+              <td>Large “4 [animated glyph] 4” composition rendered with inline SVG and pulse/float keyframes.</td>
+            </tr>
+            <tr>
+              <td>Schema</td>
+              <td>No merchant settings (<code>"settings": []</code>), so content/styling are code-defined for consistency.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Responsive and motion behavior</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Condition</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Under 861px</td>
+              <td>Column-reverse layout: content stack with centered text/actions and graphic block optimized for small screens.</td>
+            </tr>
+            <tr>
+              <td>861px and up</td>
+              <td>Two-column split: messaging on the left, 404 numeral/glyph artwork on the right.</td>
+            </tr>
+            <tr>
+              <td><code>prefers-reduced-motion: reduce</code></td>
+              <td>Entrance, float, and pulse animations are disabled; hover motion is neutralized.</td>
+            </tr>
+            <tr>
+              <td>JavaScript disabled</td>
+              <td><code>&lt;noscript&gt;</code> fallback removes animation effects to keep static readability.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <strong>Content strategy:</strong> Keep this page focused on recovery (where to go next), not promotion.
+          The current implementation prioritizes fast wayfinding over configurable marketing blocks.
         </div>
 
       </section>
