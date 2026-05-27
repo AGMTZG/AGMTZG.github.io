@@ -658,6 +658,7 @@
             <a class="toc-sub" href="#sections-blog-featured-liquid">blog-featured.liquid</a>
             <a class="toc-sub" href="#sections-newsletter-liquid">newsletter.liquid</a>
             <a class="toc-sub" href="#sections-marquee-liquid">marquee.liquid</a>
+            <a class="toc-sub" href="#sections-countdown-timer-hero-liquid">countdown-timer-hero.liquid</a>
             <a class="toc-sub" href="#sections-collections-liquid">collections.liquid</a>
           </div>
 
@@ -2880,6 +2881,62 @@
           <strong>Content tip:</strong> Keep phrases short and add enough blocks to fill the viewport width —
           very few items can look sparse before the loop repeats. The preset ships five sample lines you can replace.
         </div>
+
+        <h4 class="doc-h4" id="sections-countdown-timer-hero-liquid">countdown-timer-hero.liquid</h4>
+        <p>
+          Full-height promotional hero with a background image, headline, live countdown to a target date,
+          and an optional pill CTA. Wrapped in <code>&lt;countdown-timer-hero&gt;</code>; theme editor name:
+          <strong>Countdown Timer Hero</strong>. No blocks — all content comes from section settings.
+        </p>
+
+        <h4 class="doc-h4">Merchant controls</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Group</th><th>Setting</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td>Content</td><td><code>heading</code>, <code>description</code></td><td>Left-column copy in the bottom bar.</td></tr>
+            <tr>
+              <td>Countdown</td>
+              <td><code>end_date</code></td>
+              <td>Target moment in ISO 8601 form <code>YYYY-MM-DDTHH:MM</code> (for example <code>2026-12-31T23:59</code>). Invalid or empty values skip the live timer.</td>
+            </tr>
+            <tr><td>Countdown</td><td><code>show_expired_message</code>, <code>expired_message</code></td><td>After zero, hide the digits and optionally show custom copy (default “This offer has ended.”).</td></tr>
+            <tr><td>CTA</td><td><code>cta_label</code> + <code>cta_url</code></td><td>Rounded button on the right; omitted when the label is blank.</td></tr>
+            <tr><td>Background</td><td><code>background_image</code></td><td>Cover image (eager-loaded) or lifestyle placeholder when unset.</td></tr>
+            <tr><td>Background</td><td><code>enable_grayscale</code></td><td>Applies a grayscale filter to the background image (default on).</td></tr>
+            <tr><td>Background</td><td><code>overlay_opacity</code> (0–100%)</td><td>Darkens the image with the theme background color.</td></tr>
+            <tr><td>Layout</td><td><code>section_height</code></td><td><code>full</code> (100vh), <code>large</code> (80vh), or <code>medium</code> (60vh).</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Timer behavior</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Phase</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Before JS</td>
+              <td>Formatted end date (for example “January 1, 2027”) shows as static text; digit columns stay hidden.</td>
+            </tr>
+            <tr>
+              <td>Running</td>
+              <td>Updates every second (days un-padded; hours/minutes/seconds zero-padded). <code>&lt;time datetime&gt;</code> carries an ISO-8601 duration; screen-reader text refreshes at most once per minute.</td>
+            </tr>
+            <tr>
+              <td>Expired</td>
+              <td>Interval stops; timer hides. If <code>show_expired_message</code> is on, the expired line appears in the center column.</td>
+            </tr>
+            <tr>
+              <td>No JavaScript</td>
+              <td>Static date remains visible; a short notice asks visitors to enable JavaScript for the live counter.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Layout notes</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li>Mobile: bottom bar stacks — timer above copy, CTA below; vertical separators between units are hidden.</li>
+          <li>Tablet+ (768px): three columns — copy left, centered countdown, CTA right-aligned.</li>
+          <li>Gradient scrim behind the bar keeps text readable over the image.</li>
+        </ul>
 
         <h4 class="doc-h4" id="sections-collections-liquid">collections.liquid</h4>
         <p>
