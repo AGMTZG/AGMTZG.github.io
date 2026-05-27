@@ -661,6 +661,7 @@
             <a class="toc-sub" href="#sections-countdown-timer-hero-liquid">countdown-timer-hero.liquid</a>
             <a class="toc-sub" href="#sections-image-hotspot-liquid">image-hotspot.liquid</a>
             <a class="toc-sub" href="#sections-product-liquid">product.liquid</a>
+            <a class="toc-sub" href="#sections-collection-liquid">collection.liquid</a>
             <a class="toc-sub" href="#sections-collections-liquid">collections.liquid</a>
           </div>
 
@@ -3050,6 +3051,64 @@
           <li>Price/status live regions announce variant updates for assistive tech.</li>
           <li>No-JS fallbacks are included for variant selection and basic product submission.</li>
         </ul>
+
+        <h4 class="doc-h4" id="sections-collection-liquid">collection.liquid</h4>
+        <p>
+          Main collection (PLP) template section. It renders in two parts: a hero banner for the current
+          <code>collection</code>, then a filterable product grid with pagination. Theme editor name:
+          <strong>Main Collection</strong>. Not to be confused with <a href="#sections-collections-liquid">collections.liquid</a>,
+          which is a homepage marketing block for browsing collection categories.
+        </p>
+
+        <h4 class="doc-h4">Merchant controls</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Group</th><th>Setting</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td>Banner</td><td><code>banner_height</code></td><td>Small / medium / large hero height when the collection has a featured image; collapses to text-only when no image.</td></tr>
+            <tr><td>Banner</td><td><code>show_description</code></td><td>Shows collection description (truncated to 40 words) under the title.</td></tr>
+            <tr><td>Grid</td><td><code>products_per_page</code> (8–48)</td><td>Pagination page size (default 24).</td></tr>
+            <tr><td>Grid</td><td><code>columns_desktop</code></td><td>3, 4, or 5 columns on desktop breakpoints.</td></tr>
+            <tr><td>Filtering</td><td><code>show_filters</code></td><td>Enables the filter drawer and active-filter pills (requires Shopify Search &amp; Discovery filters).</td></tr>
+            <tr><td>Filtering</td><td><code>show_sort</code></td><td>Enables the sort dropdown (Featured, Best selling, A–Z, price, date).</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Banner and grid output</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Area</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td>Banner</td><td>Uses <a href="#snippet-section-title">section-title</a> with eyebrow “Collection” and the collection title as <code>&lt;h1&gt;</code>; optional collection image with gradient overlay.</td></tr>
+            <tr><td>Product grid</td><td>Each product renders a <a href="#snippet-product-card">product-card</a> (<code>opens_modal: true</code>) inside a responsive CSS grid.</td></tr>
+            <tr><td>Quick view</td><td>Includes <a href="#snippet-product-modal">product-modal</a> once per section; cards wire up via <code>GrimoireQuickView</code> after grid updates.</td></tr>
+            <tr><td>Empty state</td><td>“No products found” with a clear-filters link when filters are active.</td></tr>
+            <tr><td>App blocks</td><td>Supports <code>@app</code> blocks below the grid if an app provides them.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Filter drawer</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Filter type</th><th>UI</th></tr></thead>
+          <tbody>
+            <tr><td>List (non-color)</td><td>Checkbox-style links with product counts; zero-count options are disabled visually.</td></tr>
+            <tr><td>List (color/colour)</td><td>Swatch grid using label text as background color.</td></tr>
+            <tr><td>Price range</td><td>Min/max inputs with currency symbol and Apply button (values submitted as cents in query params).</td></tr>
+            <tr><td>Boolean</td><td>Same checkbox pattern as list filters.</td></tr>
+            <tr><td>Toolbar</td><td>Active selections appear as removable pills; filter button shows a count badge when filters are applied.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">AJAX behavior</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Action</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td>Filter / sort / paginate</td><td>Intercepts link clicks and sort changes, fetches the collection URL, and swaps grid, toolbar, drawer body/footer, and pagination without a full reload.</td></tr>
+            <tr><td>Loading state</td><td>Shows a skeleton grid (3 rows × column count) for at least ~350ms while fetching.</td></tr>
+            <tr><td>History</td><td>Updates <code>history.pushState</code> on filter changes; browser back/forward re-fetches the URL.</td></tr>
+            <tr><td>Scroll</td><td>After updates, scrolls smoothly to the grid when the user is below it.</td></tr>
+            <tr><td>Drawer UX</td><td>Opening filters locks body scroll and compensates for scrollbar width on header elements; Escape closes drawer or quick view first.</td></tr>
+            <tr><td>No JavaScript</td><td>Filter drawer renders inline (static layout); filter and sort forms submit with normal navigation.</td></tr>
+          </tbody>
+        </table>
 
         <h4 class="doc-h4" id="sections-collections-liquid">collections.liquid</h4>
         <p>
