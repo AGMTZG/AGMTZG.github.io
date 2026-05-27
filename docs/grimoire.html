@@ -656,6 +656,7 @@
             <a class="toc-sub" href="#sections-slideshow-liquid">slideshow.liquid</a>
             <a class="toc-sub" href="#sections-trending-products-liquid">trending-products.liquid</a>
             <a class="toc-sub" href="#sections-blog-featured-liquid">blog-featured.liquid</a>
+            <a class="toc-sub" href="#sections-collections-liquid">collections.liquid</a>
           </div>
 
           <div class="toc-group">
@@ -2705,7 +2706,7 @@
         <p>
           A single large “hero card” for the blog index. It highlights one post from the current blog
           (<code>blog.articles.first</code>) as a full-width linked card with image, tags, title, author,
-          date, and excerpt. There are no blocks and no JavaScript — layout and hover effects are CSS only.
+          date, and excerpt. There are no blocks and no JavaScript, layout and hover effects are CSS only.
           In the theme editor the section appears as <strong>Featured Article</strong>.
         </p>
 
@@ -2726,7 +2727,7 @@
           <tbody>
             <tr>
               <td>Article source</td>
-              <td>Always the first entry in <code>blog.articles</code> for the blog page this section sits on — there is no article picker in the schema.</td>
+              <td>Always the first entry in <code>blog.articles</code> for the blog page this section sits on, there is no article picker in the schema.</td>
             </tr>
             <tr>
               <td>Changing the highlight</td>
@@ -2760,6 +2761,86 @@
           <li>The entire card is one link to the article URL; hover scales the image slightly and brightens the border and CTA underline.</li>
           <li>Motion: content fade-in and image zoom respect <code>prefers-reduced-motion</code>.</li>
         </ul>
+
+        <h4 class="doc-h4" id="sections-collections-liquid">collections.liquid</h4>
+        <p>
+          Homepage-style “Collections Hero” section: a <a href="#snippet-section-title">section-title</a> header,
+          an optional editorial <strong>featured</strong> split block (copy + image + CTA), and a horizontal
+          <strong>category carousel</strong> built from merchant-defined blocks. Wrapped in
+          <code>&lt;collections-hero&gt;</code>; theme editor name: <strong>Collections Hero</strong>.
+          This carousel is bespoke (not <a href="#snippet-product-carousel">product-carousel</a>).
+        </p>
+
+        <h4 class="doc-h4">Merchant controls — header</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>eyebrow</code>, <code>heading</code></td><td>Section title row.</td></tr>
+            <tr><td><code>btn_label</code> + <code>btn_url</code></td><td>Optional header link (for example “View all collections”).</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Merchant controls — featured block</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>show_featured</code></td><td>Toggles the entire featured split (default on).</td></tr>
+            <tr><td><code>featured_label</code>, <code>featured_title</code>, <code>featured_description</code></td><td>Left-column copy; each field hides when blank.</td></tr>
+            <tr><td><code>featured_image</code></td><td>Right-column image (lazy-loaded) or lifestyle placeholder.</td></tr>
+            <tr><td><code>featured_url</code> + <code>featured_cta_text</code></td><td>Primary button link and label (default “Explore collection”).</td></tr>
+            <tr><td><code>reviews_count</code>, <code>reviews_label</code></td><td>Optional social-proof row (for example “4.9 ★★★★★”). Decorative avatar stack only — not pulled from Shopify Reviews.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Category blocks</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Block</th><th>Fields</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Category</td>
+              <td><code>image</code>, <code>title</code>, <code>url</code></td>
+              <td>Up to <strong>15</strong> cards. Each card is a single link with image overlay and uppercase title. Placeholder art cycles <code>collection-1</code>…<code>collection-6</code> when no image is set.</td>
+            </tr>
+            <tr>
+              <td><code>@app</code></td>
+              <td>—</td>
+              <td>App blocks can be added alongside categories if an app provides them.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Carousel behavior</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Feature</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Visible cards</td>
+              <td>3 on mobile, 4 from 640px, 5 from 1024px. Prev/next advance by one “page” (that many slides at a time).</td>
+            </tr>
+            <tr>
+              <td>Navigation</td>
+              <td>Arrows appear only after JS init (<code>ch-js-active</code>). Disabled at start/end via <code>aria-disabled</code>. A live region announces the visible range (for example “1–5 of 12”).</td>
+            </tr>
+            <tr>
+              <td>Resize</td>
+              <td><code>ResizeObserver</code> resets the carousel to the first slide and recalculates bounds when the viewport changes.</td>
+            </tr>
+            <tr>
+              <td>No JavaScript</td>
+              <td>Track stays horizontally scrollable with <code>scroll-snap</code>; a <code>&lt;noscript&gt;</code> notice prompts horizontal scrolling (copy is in Spanish in the theme file).</td>
+            </tr>
+            <tr>
+              <td>Empty state</td>
+              <td>No category blocks → “Add categories to this section using the theme editor.”</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <strong>Linking tip:</strong> Category blocks do not auto-bind to Shopify collections — set each
+          <code>url</code> to a collection, page, or custom path. The featured block is the same: all copy
+          and imagery are manual, not synced from a collection object.
+        </div>
 
       </section>
 
