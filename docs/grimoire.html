@@ -662,6 +662,7 @@
             <a class="toc-sub" href="#sections-image-hotspot-liquid">image-hotspot.liquid</a>
             <a class="toc-sub" href="#sections-product-liquid">product.liquid</a>
             <a class="toc-sub" href="#sections-collection-liquid">collection.liquid</a>
+            <a class="toc-sub" href="#sections-cart-liquid">cart.liquid</a>
             <a class="toc-sub" href="#sections-collections-liquid">collections.liquid</a>
           </div>
 
@@ -3109,6 +3110,63 @@
             <tr><td>No JavaScript</td><td>Filter drawer renders inline (static layout); filter and sort forms submit with normal navigation.</td></tr>
           </tbody>
         </table>
+
+        <h4 class="doc-h4" id="sections-cart-liquid">cart.liquid</h4>
+        <p>
+          Full-page cart template (singleton). Presents line items in a table-style layout with a sticky
+          order summary on desktop. Theme editor name: <strong>Cart</strong>. The schema has no settings —
+          copy and structure are fixed in the section. This is separate from the header’s cart drawer;
+          use this section on the <code>/cart</code> template only.
+        </p>
+
+        <h4 class="doc-h4">Page structure</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>State</th><th>What renders</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Empty cart</td>
+              <td>Decorative empty state (“The pages are bare”) and a link to the all-products collection.</td>
+            </tr>
+            <tr>
+              <td>With items</td>
+              <td>Header via <a href="#snippet-section-title">section-title</a> (eyebrow “Your Chamber”, heading “The Ritual Tome”) plus an item count tag; two-column grid (items + summary).</td>
+            </tr>
+            <tr>
+              <td>Line item row</td>
+              <td>Thumbnail, title link, variant options, selling plan name, unit price, line-level discount tags, remove control, quantity stepper, line total (and compare-at when on sale).</td>
+            </tr>
+            <tr>
+              <td>Summary panel</td>
+              <td>Subtotal, cart-level discount rows, total, tax/shipping note, order note textarea, checkout button, and Shopify dynamic checkout buttons.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Quantity and removal (JavaScript)</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Action</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Increase / decrease</td>
+              <td>Updates display and line price immediately; debounced POST to <code>/cart/change.js</code> (200ms). Quantity clamped between 1 and 99.</td>
+            </tr>
+            <tr>
+              <td>Remove</td>
+              <td>Prevents default on remove link, fades out the row (unless reduced motion), then sets quantity to 0 via <code>/cart/change.js</code>.</td>
+            </tr>
+            <tr>
+              <td>Total display</td>
+              <td>Recalculates the summary total client-side from visible line prices × quantities; Shopify checkout still applies the authoritative tax, shipping, and discount totals.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">No-JS fallback</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li>Quantity number inputs are shown instead of +/- buttons; form posts to <code>{{ routes.cart_url }}</code> with <code>updates[line_key]</code> fields.</li>
+          <li>Remove links use native <code>url_to_remove</code> navigation.</li>
+          <li>Checkout submits via the standard cart form (<code>name="checkout"</code>).</li>
+        </ul>
 
         <h4 class="doc-h4" id="sections-collections-liquid">collections.liquid</h4>
         <p>
