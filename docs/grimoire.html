@@ -1767,36 +1767,96 @@
   <script src="../snippets/nav.js"></script>
 
   <script>
-    // Active TOC link — only sections linked from the sidebar
-    const tocLinks = document.querySelectorAll('#toc .toc-link, #toc .toc-sub');
-    const sections = Array.from(tocLinks)
-      .map(function (link) {
-        var id = link.getAttribute('href');
-        return id && id.charAt(0) === '#' ? document.getElementById(id.slice(1)) : null;
-      })
-      .filter(Boolean);
-
-    var activeId = null;
-
-    function setActiveToc(id) {
-      if (!id || id === activeId) return;
-      activeId = id;
+    (function () {
+      var tocLinks = document.querySelectorAll('#toc .toc-link, #toc .toc-sub');
+      var entries = [];
       tocLinks.forEach(function (link) {
-        link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+        var href = link.getAttribute('href');
+        if (!href || href.charAt(0) !== '#') return;
+        var id = href.slice(1);
+        var el = document.getElementById(id);
+        if (el) entries.push({ id: id, el: el, link: link });
       });
-    }
 
-    var observer = new IntersectionObserver(function (entries) {
-      var visible = entries
-        .filter(function (e) { return e.isIntersecting; })
-        .sort(function (a, b) { return a.boundingClientRect.top - b.boundingClientRect.top; });
-      if (visible.length) setActiveToc(visible[0].target.id);
-    }, {
-      rootMargin: '-20% 0px -70% 0px',
-      threshold: 0
-    });
+      var activeId = null;
+      var ignoreSpyUntil = 0;
+      var scrollRaf = null;
 
-    sections.forEach(function (section) { observer.observe(section); });
+      function getScrollLine() {
+        var navH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 80;
+        return window.scrollY + navH + 40;
+      }
+
+      function setActiveToc(id) {
+        if (!id || id === activeId) return;
+        activeId = id;
+        tocLinks.forEach(function (link) {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+        });
+      }
+
+      function updateActiveFromScroll() {
+        if (Date.now() < ignoreSpyUntil) return;
+        if (!entries.length) return;
+
+        var line = getScrollLine();
+        var sorted = entries.slice().sort(function (a, b) {
+          return a.el.getBoundingClientRect().top - b.el.getBoundingClientRect().top;
+        });
+
+        var current = sorted[0].id;
+        for (var i = 0; i < sorted.length; i++) {
+          var top = sorted[i].el.getBoundingClientRect().top + window.scrollY;
+          if (top <= line + 2) current = sorted[i].id;
+        }
+
+        var docH = document.documentElement.scrollHeight;
+        var viewBottom = window.scrollY + window.innerHeight;
+        if (viewBottom >= docH - 4) {
+          current = sorted[sorted.length - 1].id;
+        }
+
+        setActiveToc(current);
+      }
+
+      function scheduleScrollUpdate() {
+        if (scrollRaf) return;
+        scrollRaf = requestAnimationFrame(function () {
+          scrollRaf = null;
+          updateActiveFromScroll();
+        });
+      }
+
+      tocLinks.forEach(function (link) {
+        link.addEventListener('click', function () {
+          var href = link.getAttribute('href');
+          if (!href || href.charAt(0) !== '#') return;
+          var id = href.slice(1);
+          ignoreSpyUntil = Date.now() + 500;
+          setActiveToc(id);
+          link.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+          window.setTimeout(function () {
+            ignoreSpyUntil = 0;
+            updateActiveFromScroll();
+          }, 550);
+        });
+      });
+
+      window.addEventListener('scroll', scheduleScrollUpdate, { passive: true });
+      window.addEventListener('hashchange', function () {
+        var id = location.hash.slice(1);
+        if (!id || !document.getElementById(id)) return;
+        ignoreSpyUntil = Date.now() + 500;
+        setActiveToc(id);
+        window.setTimeout(function () {
+          ignoreSpyUntil = 0;
+          updateActiveFromScroll();
+        }, 550);
+      });
+      window.addEventListener('resize', scheduleScrollUpdate, { passive: true });
+
+      updateActiveFromScroll();
+    })();
   </script>
 
   <div id="footer-placeholder"></div>
