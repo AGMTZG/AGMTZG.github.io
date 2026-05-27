@@ -1450,18 +1450,18 @@
         <p>
           The reusable <strong>product tile</strong> in Grimoire: image, sale/sold-out badges, title,
           price (and compare-at when on sale), optional color swatches, and an action button. Sections
-          render it inside grids or carousels — you do not add the snippet from the theme customizer.
+          render it inside grids or carousels, you do not add the snippet from the theme customizer.
           What you control as a merchant is <em>which products appear</em> in each section (collections,
           recommendations, search results) and your catalog data (images, variants, pricing).
         </p>
 
         <h4 class="doc-h4">What shoppers see on each card</h4>
         <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
-          <li><strong>Media</strong> — Square image with a subtle gradient overlay; image zooms on hover (behavior depends on hover mode below).</li>
-          <li><strong>Badges</strong> — “Sale” when the product is discounted; “Sold out” when the selected color has no available inventory.</li>
-          <li><strong>Swatches</strong> — Shown only when the product has a <strong>Color</strong> or <strong>Colour</strong> option in Shopify admin. Clicking a swatch updates the preview image, active variant, and sold-out state on that card.</li>
-          <li><strong>Title &amp; price</strong> — Linked to the product page. Compare-at price appears struck through when on sale.</li>
-          <li><strong>Action button</strong> — Either adds one unit to the cart via AJAX (cart drawer opens) or opens the quick view modal first — see the next section.</li>
+          <li><strong>Media</strong>: Square image with a subtle gradient overlay; image zooms on hover (behavior depends on hover mode below).</li>
+          <li><strong>Badges</strong>: “Sale” when the product is discounted; “Sold out” when the selected color has no available inventory.</li>
+          <li><strong>Swatches</strong>: Shown only when the product has a <strong>Color</strong> or <strong>Colour</strong> option in Shopify admin. Clicking a swatch updates the preview image, active variant, and sold-out state on that card.</li>
+          <li><strong>Title &amp; price</strong>: Linked to the product page. Compare-at price appears struck through when on sale.</li>
+          <li><strong>Action button</strong>: Either adds one unit to the cart via AJAX (cart drawer opens) or opens the quick view modal first, see the next section.</li>
         </ul>
 
         <h4 class="doc-h4">Add to cart: two behaviors</h4>
@@ -1500,13 +1500,13 @@
 
         <h4 class="doc-h4">Card layout options (set by the theme)</h4>
         <p>
-          These are passed when a section renders the card — not exposed as theme editor toggles on
+          These are passed when a section renders the card, not exposed as theme editor toggles on
           every section today, but useful if you work with a developer:
         </p>
         <table class="params-table">
           <thead><tr><th>Option</th><th>Values</th><th>Effect</th></tr></thead>
           <tbody>
-            <tr><td>hover_mode</td><td><code>full</code> (default) · <code>media-title</code></td><td><code>media-title</code> limits zoom/hover border to the image, title row, or ATC — used on Grimoire grids.</td></tr>
+            <tr><td>hover_mode</td><td><code>full</code> (default) · <code>media-title</code></td><td><code>media-title</code> limits zoom/hover border to the image, title row, or ATC, used on Grimoire grids.</td></tr>
             <tr><td>variant</td><td><code>default</code> · <code>grimoire</code></td><td><code>grimoire</code> applies tighter typography scaling on large screens.</td></tr>
             <tr><td>swatch_shape</td><td><code>circle</code> (default) · <code>rectangle</code></td><td>Shape of color swatch buttons.</td></tr>
             <tr><td>opens_modal</td><td>true / false</td><td>When true, ATC opens quick view instead of adding immediately.</td></tr>
