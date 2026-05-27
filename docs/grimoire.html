@@ -1754,12 +1754,107 @@
         <hr class="doc-divider" id="snippet-meta-tags">
         <h3 class="doc-h3">meta-tags.liquid</h3>
         <p>
-          Outputs all head meta tags: charset, viewport, canonical URL, Open Graph tags
-          (<code>og:title</code>, <code>og:type</code>, <code>og:url</code>, <code>og:description</code>,
-          <code>og:image</code>), and Twitter card tags. Page type is auto-detected to set
-          <code>og:type</code> to <code>product</code>, <code>article</code>, or <code>website</code>.
+          Handles <strong>search and social metadata</strong> for the storefront: browser title, meta
+          description, canonical URL, Open Graph tags for link previews, Twitter card fields, and (on
+          product pages) structured data for Google. It runs once in the document <code>&lt;head&gt;</code>
+          — there is nothing to add or reorder in the theme customizer.
         </p>
-        <p>No parameters. Rendered once inside <code>&lt;head&gt;</code>.</p>
+        <p>
+          Grimoire does not expose SEO fields inside this snippet. You manage copy and images in
+          <strong>Shopify admin</strong>; the theme reads Shopify’s built-in objects
+          (<code>page_title</code>, <code>page_description</code>, <code>page_image</code>, product data)
+          and outputs the correct tags automatically.
+        </p>
+
+        <h4 class="doc-h4">What you control (Shopify admin)</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Where in admin</th><th>What it affects</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Online Store → Preferences</td>
+              <td>Default store title and meta description used when a page does not define its own.</td>
+            </tr>
+            <tr>
+              <td>Product → Search engine listing</td>
+              <td>Product page <code>&lt;title&gt;</code>, meta description, and URL preview. Featured media often becomes the share image.</td>
+            </tr>
+            <tr>
+              <td>Collection → SEO</td>
+              <td>Collection listing title and description in search results.</td>
+            </tr>
+            <tr>
+              <td>Pages / Blog posts</td>
+              <td>Per-page title and description; article featured image can feed social previews when Shopify provides <code>page_image</code>.</td>
+            </tr>
+            <tr>
+              <td>Theme settings → Favicon</td>
+              <td>Browser tab icon — output in <code>layout/theme.liquid</code>, not in this snippet.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">What the snippet outputs by page type</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Page type</th><th>Extra behavior</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>All pages</td>
+              <td>Charset, viewport, <code>&lt;title&gt;</code> (with pagination and tag suffixes when applicable), canonical link, meta description when set, Open Graph + Twitter tags using shop name, title, description, and URL.</td>
+            </tr>
+            <tr>
+              <td>Product</td>
+              <td><code>og:type</code> = <code>product</code>; <code>og:price:amount</code> and <code>og:price:currency</code>; JSON-LD block via <code>{{ product | structured_data }}</code> for rich results.</td>
+            </tr>
+            <tr>
+              <td>Article</td>
+              <td><code>og:type</code> = <code>article</code>.</td>
+            </tr>
+            <tr>
+              <td>Password</td>
+              <td>Open Graph URL uses the store origin (password layout does not render this snippet — see below).</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Share images</h4>
+        <p>
+          When Shopify supplies a <code>page_image</code> for the current resource, the snippet adds
+          <code>og:image</code>, <code>og:image:secure_url</code>, and width/height meta tags. If no image
+          is available, social previews fall back to title and description only — upload a strong featured
+          image on products and blog posts you expect to be shared.
+        </p>
+
+        <div class="callout tip">
+          <strong>Browser tab title:</strong> The visible tab text comes from the <code>&lt;title&gt;</code>
+          tag in this snippet. It appends your shop name when it is not already part of
+          <code>page_title</code>, and adds “Page 2”, tag names, or similar when relevant.
+        </div>
+
+        <h4 class="doc-h4">Where it is loaded</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li><code>layout/theme.liquid</code> — every normal storefront page (after favicon and CSS).</li>
+          <li><code>templates/gift_card.liquid</code> — digital gift card view.</li>
+        </ul>
+        <p>
+          The <strong>password</strong> page uses <code>layout/password.liquid</code> with a fixed
+          “Coming Soon” title and does not include <code>meta-tags.liquid</code>.
+        </p>
+
+        <h4 class="doc-h4">For theme developers</h4>
+        <div class="ref-grid">
+          <div class="ref-item">
+            <span class="ref-item-name">Render</span>
+            <span class="ref-item-desc"><code>{% render 'meta-tags' %}</code> — no parameters</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">Source</span>
+            <span class="ref-item-desc">Standard Shopify starter pattern (~100 lines); no <code>{% doc %}</code> block in the theme file.</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">Extend</span>
+            <span class="ref-item-desc">Add tags (hreflang, robots, theme-color) in this snippet or via apps that inject into <code>content_for_header</code>.</span>
+          </div>
+        </div>
 
         <h4 class="doc-h4">Other snippets</h4>
         <div class="ref-grid">
