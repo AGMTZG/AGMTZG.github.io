@@ -1358,37 +1358,87 @@
         <hr class="doc-divider" id="snippet-image">
         <h3 class="doc-h3">image.liquid</h3>
         <p>
-          Renders a responsive image using Shopify's <code>image_url</code> and <code>image_tag</code>
-          filters with automatic <code>srcset</code> generation. When <code>url</code> is provided
-          the image is wrapped in an <code>&lt;a&gt;</code> tag; otherwise a <code>&lt;div&gt;</code>.
+          A small <strong>developer utility</strong> for outputting a Shopify image with responsive
+          URLs. It is not something you add from the theme customizer — merchants add pictures through
+          each section’s <strong>image picker</strong> fields, or through the <strong>Image</strong> block
+          inside <em>Custom section</em> (that block uses its own markup in <code>blocks/cs-image.liquid</code>,
+          not this snippet).
+        </p>
+        <p>
+          Grimoire keeps <code>image.liquid</code> as a documented pattern for theme extensions: pass a
+          Shopify <code>image</code> object, optionally cap resolution, crop to an aspect ratio, or wrap
+          the graphic in a link.
         </p>
 
-        <h4 class="doc-h4">Parameters</h4>
-        <table class="params-table">
-          <thead><tr><th>Param</th><th>Type</th><th>Description</th></tr></thead>
+        <h4 class="doc-h4">Where merchants add images instead</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Context</th><th>How to add or change images</th></tr></thead>
           <tbody>
-            <tr><td>image</td><td>image</td><td>The Shopify image object to render</td></tr>
-            <tr><td>url</td><td>string</td><td class="param-optional">Optional destination URL — wraps image in <code>&lt;a&gt;</code></td></tr>
-            <tr><td>class</td><td>string</td><td class="param-optional">Additional CSS class added to the wrapper element</td></tr>
-            <tr><td>width</td><td>number</td><td class="param-optional">Max resolution width for image URL generation</td></tr>
-            <tr><td>height</td><td>number</td><td class="param-optional">Max resolution height (used with <code>crop</code>)</td></tr>
-            <tr><td>crop</td><td>string</td><td class="param-optional">Crop position: <code>center</code>, <code>top</code>, <code>bottom</code>, <code>left</code>, <code>right</code></td></tr>
+            <tr>
+              <td>Custom section</td>
+              <td>Add an <strong>Image</strong> block — width, alt text, border radius, and alignment are in the block settings.</td>
+            </tr>
+            <tr>
+              <td>Slideshow, Collections, Chronicle, etc.</td>
+              <td>Use that section’s own image or background fields in the customizer.</td>
+            </tr>
+            <tr>
+              <td>Product &amp; collection pages</td>
+              <td>Product media and collection images come from the Shopify admin catalog, not from this snippet.</td>
+            </tr>
+            <tr>
+              <td>Header &amp; footer</td>
+              <td>Logo image picker in the Header section; footer logo in Footer settings.</td>
+            </tr>
           </tbody>
         </table>
 
-        <div class="code-label"><span>Usage</span></div>
-        <pre><code><span class="t-comment">{# Simple image #}</span>
-<span class="t-liquid">{% render 'image', image: product.featured_image %}</span>
+        <h4 class="doc-h4">What the snippet outputs</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li><strong>Wrapper</strong> — A <code>&lt;div class="image"&gt;</code> by default, or <code>&lt;a class="image"&gt;</code> when <code>url</code> is set so the whole image is clickable.</li>
+          <li><strong>Picture</strong> — Built with Shopify’s <code>image_url</code> + <code>image_tag</code> filters (responsive <code>srcset</code> is handled by <code>image_tag</code>).</li>
+          <li><strong>Aspect ratio</strong> — When both <code>width</code> and <code>height</code> are passed (with optional <code>crop</code>), Shopify crops to that box. If <code>height</code> is omitted, width defaults to the source image’s native width.</li>
+          <li><strong>Layout CSS</strong> — A co-located stylesheet makes the wrapper full width and the <code>&lt;img&gt;</code> scale with <code>height: auto</code>.</li>
+        </ul>
 
-<span class="t-comment">{# Linked, fixed aspect ratio #}</span>
-<span class="t-liquid">{% render 'image',
-  image:  product.featured_image,
-  url:    product.url,
-  class:  'product__image',
-  width:  1200,
-  height: 800,
-  crop:   'center'
-%}</span></code></pre>
+        <div class="callout tip">
+          <strong>Alt text:</strong> This snippet does not accept a separate alt parameter — it relies on
+          the alt stored on the image in Shopify admin. For editorial blocks, use the Image block in
+          Custom section, which includes a dedicated <strong>Alt text</strong> field.
+        </div>
+
+        <h4 class="doc-h4">Parameters (snippet reference)</h4>
+        <table class="params-table">
+          <thead><tr><th>Param</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>image</td><td>image</td><td>Required. The Shopify image object (from a product, collection, setting, or block).</td></tr>
+            <tr><td>url</td><td>string</td><td class="param-optional">If set, wraps the image in a link to this URL.</td></tr>
+            <tr><td>class</td><td>string</td><td class="param-optional">Extra class on the wrapper (e.g. for section-specific CSS).</td></tr>
+            <tr><td>width</td><td>number</td><td class="param-optional">Max width in px for the generated CDN URL. Defaults to the image’s full width when height is not used.</td></tr>
+            <tr><td>height</td><td>number</td><td class="param-optional">Height in px; use with <code>width</code> and <code>crop</code> for a fixed crop.</td></tr>
+            <tr><td>crop</td><td>string</td><td class="param-optional">Crop anchor when width and height are set: <code>center</code>, <code>top</code>, <code>bottom</code>, <code>left</code>, <code>right</code>.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">For theme developers</h4>
+        <div class="ref-grid">
+          <div class="ref-item">
+            <span class="ref-item-name">Render</span>
+            <span class="ref-item-desc"><code>{% render 'image', image: collection.image, url: collection.url %}</code></span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">In storefront today</span>
+            <span class="ref-item-desc">Not called by core Grimoire sections; product cards and <code>cs-image</code> use their own image markup.</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">LiquidDoc</span>
+            <span class="ref-item-desc">Includes a <code>{% doc %}</code> block with typed parameters and examples in the theme source.</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">Extend</span>
+            <span class="ref-item-desc">Reuse or extend the snippet when building new sections; add <code>loading: 'lazy'</code> in a fork if needed for below-the-fold images.</span>
+          </div>
+        </div>
 
         <!-- product-card -->
         <hr class="doc-divider" id="snippet-product-card">
