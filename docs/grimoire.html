@@ -652,6 +652,7 @@
             <a class="toc-sub" href="#sections-footer-liquid">footer.liquid</a>
             <a class="toc-sub" href="#sections-password-liquid">password.liquid</a>
             <a class="toc-sub" href="#sections-404-liquid">404.liquid</a>
+            <a class="toc-sub" href="#sections-breadcrumb-liquid">breadcrumb.liquid</a>
           </div>
 
           <div class="toc-group">
@@ -2515,6 +2516,42 @@
         <div class="callout tip">
           <strong>Content strategy:</strong> Keep this page focused on recovery (where to go next), not promotion.
           The current implementation prioritizes fast wayfinding over configurable marketing blocks.
+        </div>
+
+        <h4 class="doc-h4" id="sections-breadcrumb-liquid">breadcrumb.liquid</h4>
+        <p>
+          A block-driven breadcrumb trail section. Instead of hardcoding a fixed path, this section composes
+          breadcrumbs from optional blocks (<code>home</code>, <code>blog</code>, <code>collection</code>, <code>search</code>, <code>current</code>)
+          and only renders pieces that match the current page context.
+        </p>
+
+        <h4 class="doc-h4">Section and block settings</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Scope</th><th>Setting</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td>Section</td><td><code>separator</code></td><td>Global separator style: <code>chevron</code>, <code>slash</code>, <code>dot</code>, or <code>arrow</code>.</td></tr>
+            <tr><td><code>home</code> block</td><td><code>label</code>, <code>show_icon</code></td><td>Home link text and optional house icon.</td></tr>
+            <tr><td><code>blog</code> block</td><td><code>label</code></td><td>Optional label override; falls back to the blog title when blank.</td></tr>
+            <tr><td><code>search</code> block</td><td><code>label</code></td><td>Current-page label for search templates.</td></tr>
+            <tr><td><code>collection</code> block</td><td>(none)</td><td>Links to current collection, or product’s first collection when on a product page.</td></tr>
+            <tr><td><code>current</code> block</td><td>(none)</td><td>Renders current resource title (product, collection, article, page, or blog).</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Rendering logic</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Rule</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td>Context-aware current title</td><td>Uses the first available object title in priority order: product, collection, article, page, blog.</td></tr>
+            <tr><td>Conditional blocks</td><td>Each block type renders only when relevant data exists (for example blog block only on blog/article context).</td></tr>
+            <tr><td>Separator insertion</td><td>Separators are inserted only between already-rendered items via internal <code>_sep_needed</code> state.</td></tr>
+            <tr><td>Current item semantics</td><td>Current trail item uses <code>aria-current="page"</code> for accessibility.</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout tip">
+          <strong>Composition tip:</strong> Keep the default order <code>home → collection/blog/search → current</code>
+          for predictable paths; remove intermediate blocks when you want a shorter trail.
         </div>
 
       </section>
