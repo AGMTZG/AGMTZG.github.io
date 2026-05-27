@@ -394,6 +394,8 @@
       font-size: 0.85rem;
       color: var(--text-soft);
       line-height: 1.65;
+      opacity: 1;
+      font-style: normal;
     }
     /* Merchant / docs tables (2 columns) */
     .params-table td:first-child:nth-last-child(2) {
@@ -467,7 +469,6 @@
     .params-table.params-table--guide.params-table--sections td:last-child {
       width: 46%;
     }
-    .param-optional { opacity: 0.55; font-style: italic; }
 
     /* ── GRID TABLES ── */
     .ref-grid {
@@ -1328,9 +1329,9 @@
           <tbody>
             <tr><td>eyebrow</td><td>string</td><td>Label above the title. Omitted from markup when blank.</td></tr>
             <tr><td>heading</td><td>string</td><td>Main title text. Omitted when blank.</td></tr>
-            <tr><td>heading_tag</td><td>string</td><td class="param-optional">HTML tag for the title node. Default: <code>h2</code>. Use <code>h1</code> only for the primary page heading.</td></tr>
-            <tr><td>btn_label</td><td>string</td><td class="param-optional">CTA label. Button is not rendered when empty.</td></tr>
-            <tr><td>btn_url</td><td>string</td><td class="param-optional">Destination URL for the CTA. Ignored unless <code>btn_label</code> is set.</td></tr>
+            <tr><td>heading_tag</td><td>string</td><td>HTML tag for the title node. Default: <code>h2</code>. Use <code>h1</code> only for the primary page heading.</td></tr>
+            <tr><td>btn_label</td><td>string</td><td>CTA label. Button is not rendered when empty.</td></tr>
+            <tr><td>btn_url</td><td>string</td><td>Destination URL for the CTA. Ignored unless <code>btn_label</code> is set.</td></tr>
           </tbody>
         </table>
 
@@ -1359,7 +1360,7 @@
         <h3 class="doc-h3">image.liquid</h3>
         <p>
           A small <strong>developer utility</strong> for outputting a Shopify image with responsive
-          URLs. It is not something you add from the theme customizer — merchants add pictures through
+          URLs. It is not something you add from the theme customizer, merchants add pictures through
           each section’s <strong>image picker</strong> fields, or through the <strong>Image</strong> block
           inside <em>Custom section</em> (that block uses its own markup in <code>blocks/cs-image.liquid</code>,
           not this snippet).
@@ -1376,7 +1377,7 @@
           <tbody>
             <tr>
               <td>Custom section</td>
-              <td>Add an <strong>Image</strong> block — width, alt text, border radius, and alignment are in the block settings.</td>
+              <td>Add an <strong>Image</strong> block: width, alt text, border radius, and alignment are in the block settings.</td>
             </tr>
             <tr>
               <td>Slideshow, Collections, Chronicle, etc.</td>
@@ -1395,14 +1396,14 @@
 
         <h4 class="doc-h4">What the snippet outputs</h4>
         <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
-          <li><strong>Wrapper</strong> — A <code>&lt;div class="image"&gt;</code> by default, or <code>&lt;a class="image"&gt;</code> when <code>url</code> is set so the whole image is clickable.</li>
-          <li><strong>Picture</strong> — Built with Shopify’s <code>image_url</code> + <code>image_tag</code> filters (responsive <code>srcset</code> is handled by <code>image_tag</code>).</li>
-          <li><strong>Aspect ratio</strong> — When both <code>width</code> and <code>height</code> are passed (with optional <code>crop</code>), Shopify crops to that box. If <code>height</code> is omitted, width defaults to the source image’s native width.</li>
-          <li><strong>Layout CSS</strong> — A co-located stylesheet makes the wrapper full width and the <code>&lt;img&gt;</code> scale with <code>height: auto</code>.</li>
+          <li><strong>Wrapper</strong>: A <code>&lt;div class="image"&gt;</code> by default, or <code>&lt;a class="image"&gt;</code> when <code>url</code> is set so the whole image is clickable.</li>
+          <li><strong>Picture</strong>: Built with Shopify’s <code>image_url</code> + <code>image_tag</code> filters (responsive <code>srcset</code> is handled by <code>image_tag</code>).</li>
+          <li><strong>Aspect ratio</strong>: When both <code>width</code> and <code>height</code> are passed (with optional <code>crop</code>), Shopify crops to that box. If <code>height</code> is omitted, width defaults to the source image’s native width.</li>
+          <li><strong>Layout CSS</strong>: A co-located stylesheet makes the wrapper full width and the <code>&lt;img&gt;</code> scale with <code>height: auto</code>.</li>
         </ul>
 
         <div class="callout tip">
-          <strong>Alt text:</strong> This snippet does not accept a separate alt parameter — it relies on
+          <strong>Alt text:</strong> This snippet does not accept a separate alt parameter, it relies on
           the alt stored on the image in Shopify admin. For editorial blocks, use the Image block in
           Custom section, which includes a dedicated <strong>Alt text</strong> field.
         </div>
@@ -1412,11 +1413,11 @@
           <thead><tr><th>Param</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
             <tr><td>image</td><td>image</td><td>Required. The Shopify image object (from a product, collection, setting, or block).</td></tr>
-            <tr><td>url</td><td>string</td><td class="param-optional">If set, wraps the image in a link to this URL.</td></tr>
-            <tr><td>class</td><td>string</td><td class="param-optional">Extra class on the wrapper (e.g. for section-specific CSS).</td></tr>
-            <tr><td>width</td><td>number</td><td class="param-optional">Max width in px for the generated CDN URL. Defaults to the image’s full width when height is not used.</td></tr>
-            <tr><td>height</td><td>number</td><td class="param-optional">Height in px; use with <code>width</code> and <code>crop</code> for a fixed crop.</td></tr>
-            <tr><td>crop</td><td>string</td><td class="param-optional">Crop anchor when width and height are set: <code>center</code>, <code>top</code>, <code>bottom</code>, <code>left</code>, <code>right</code>.</td></tr>
+            <tr><td>url</td><td>string</td><td>If set, wraps the image in a link to this URL.</td></tr>
+            <tr><td>class</td><td>string</td><td>Extra class on the wrapper (e.g. for section-specific CSS).</td></tr>
+            <tr><td>width</td><td>number</td><td>Max width in px for the generated CDN URL. Defaults to the image’s full width when height is not used.</td></tr>
+            <tr><td>height</td><td>number</td><td>Height in px; use with <code>width</code> and <code>crop</code> for a fixed crop.</td></tr>
+            <tr><td>crop</td><td>string</td><td>Crop anchor when width and height are set: <code>center</code>, <code>top</code>, <code>bottom</code>, <code>left</code>, <code>right</code>.</td></tr>
           </tbody>
         </table>
 
