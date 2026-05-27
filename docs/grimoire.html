@@ -660,6 +660,7 @@
             <a class="toc-sub" href="#sections-marquee-liquid">marquee.liquid</a>
             <a class="toc-sub" href="#sections-countdown-timer-hero-liquid">countdown-timer-hero.liquid</a>
             <a class="toc-sub" href="#sections-image-hotspot-liquid">image-hotspot.liquid</a>
+            <a class="toc-sub" href="#sections-product-liquid">product.liquid</a>
             <a class="toc-sub" href="#sections-collections-liquid">collections.liquid</a>
           </div>
 
@@ -2987,6 +2988,68 @@
           <strong>Merchandising tip:</strong> Use product tooltips for direct shopping intent and custom tooltips
           for storytelling moments. Keep pins visually distributed (avoid clustering) so each target remains easy to tap.
         </div>
+
+        <h4 class="doc-h4" id="sections-product-liquid">product.liquid</h4>
+        <p>
+          Core product detail section for Grimoire, rendered as a two-column layout:
+          media gallery on the left and block-driven purchase UI on the right.
+          Wrapped in <code>&lt;product-form&gt;</code>, with built-in variant state, AJAX add-to-cart,
+          inventory messaging, and optional pickup/selling-plan support.
+        </p>
+
+        <h4 class="doc-h4">Section settings</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>media_size</code></td><td>Desktop split ratio for gallery column: small (38%), medium (50%), large (58%).</td></tr>
+            <tr><td><code>show_vendor</code>, <code>show_type</code>, <code>show_sku</code></td><td>Toggles metadata rows in title/price blocks.</td></tr>
+            <tr><td><code>show_quantity_selector</code></td><td>Controls whether the quantity stepper block outputs its UI.</td></tr>
+            <tr><td><code>enable_sticky_info</code></td><td>Makes the info column sticky on desktop using header-height offset.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Editor blocks</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Block</th><th>What it adds</th></tr></thead>
+          <tbody>
+            <tr><td><code>title</code></td><td>Vendor/type labels (optional) and product title.</td></tr>
+            <tr><td><code>price</code></td><td>Live price, compare-at logic, sale badge, unit price, tax notice, SKU.</td></tr>
+            <tr><td><code>variant_picker</code></td><td>Option controls (radio/select), color swatches, no-JS variant fallback select.</td></tr>
+            <tr><td><code>quantity_selector</code></td><td>Minus/plus quantity stepper.</td></tr>
+            <tr><td><code>buy_buttons</code></td><td>Add-to-cart button plus optional dynamic checkout and payment terms.</td></tr>
+            <tr><td><code>pickup_availability</code></td><td>Store pickup rows per location for current variant.</td></tr>
+            <tr><td><code>description</code></td><td>Product description rich text output.</td></tr>
+            <tr><td><code>share</code></td><td>Configurable social/email/copy-link sharing buttons.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Media and variant behavior</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Feature</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td>Supported media</td><td>Images, hosted video, external video embeds, and 3D models (<code>model-viewer</code> loaded only when model media exists).</td></tr>
+            <tr><td>Gallery navigation</td><td>Thumbnails + prev/next arrows (when multiple media). Keyboard arrow navigation works in thumbnail tablist.</td></tr>
+            <tr><td>Variant sync</td><td>Selecting options resolves a matching variant, updates hidden variant ID, price states, SKU, stock badge, unit price, and active media.</td></tr>
+            <tr><td>Availability logic</td><td>Option chips/swatches are marked unavailable when combinations do not exist or are sold out.</td></tr>
+            <tr><td>URL updates</td><td>Current variant ID is written to query params with <code>history.replaceState</code> (no reload).</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Commerce flow details</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li>AJAX add-to-cart posts to <code>/cart/add.js</code>, refreshes/open cart drawer when global cart helpers exist, then restores button state.</li>
+          <li>On AJAX failure, it falls back to native form submission.</li>
+          <li>Gift card products expose recipient fields (email required only when “Send as a gift” is enabled).</li>
+          <li>If selling plans exist, a hidden <code>selling_plan</code> input is synced from radio selections.</li>
+          <li>Pickup availability updates after variant changes by re-fetching section HTML for the selected variant.</li>
+        </ul>
+
+        <h4 class="doc-h4">SEO and accessibility notes</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li>Outputs Product JSON-LD with variant offers, currency, availability, URLs, and gallery image set.</li>
+          <li>Price/status live regions announce variant updates for assistive tech.</li>
+          <li>No-JS fallbacks are included for variant selection and basic product submission.</li>
+        </ul>
 
         <h4 class="doc-h4" id="sections-collections-liquid">collections.liquid</h4>
         <p>
