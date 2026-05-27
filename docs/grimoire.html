@@ -603,40 +603,100 @@
         <div class="section-eyebrow">Overview</div>
         <h1 class="doc-h1">Introduction<span class="dot">.</span></h1>
         <p class="doc-lead">
-          Grimoire is a complete <strong>Shopify Online Store 2.0</strong> storefront theme — dark, editorial, and
-          production-ready. Built for lifestyle, fashion, and curated-object brands that need strong
-          visual identity and storytelling alongside robust commerce.
+          <strong>Grimoire</strong> (v1.0.0) is a commercial <strong>Shopify Online Store 2.0</strong> theme by AGMTZG.
+          It is a full storefront implementation — not a headless stack, not Hydrogen — built on Liquid,
+          JSON templates, and the visual theme editor merchants already use.
         </p>
 
         <p>
-          The theme ships with ~40 sections, 14 blocks, 9 snippets, and 14 JSON templates covering every
-          standard Shopify page type. All interactivity is written in Vanilla JS using native
-          <code>customElements.define</code> — no framework, no build step.
+          The theme targets lifestyle, fashion, and curated-object brands that want a dark, editorial
+          presence: strong typography, restrained grayscale surfaces, and room for storytelling sections
+          alongside a complete commerce flow (browse, search, product detail, cart, and checkout handoff).
         </p>
 
         <div class="callout">
-          <strong>Not a skeleton.</strong> Grimoire started from the official Shopify Skeleton but has
-          grown far beyond it. It's a fully-featured theme ready for a real storefront — with its
-          own design language, custom element library, and CI pipeline.
+          <strong>Commercial product.</strong> Grimoire is licensed for use on Shopify stores under your
+          product terms. Documentation and support are provided for customers at
+          <a href="https://agmtzg.github.io/grimoire/docs" target="_blank" rel="noopener">agmtzg.github.io/grimoire/docs</a>
+          and <a href="https://agmtzg.github.io/support" target="_blank" rel="noopener">agmtzg.github.io/support</a>.
         </div>
 
-        <h3 class="doc-h3">Design language</h3>
+        <h3 class="doc-h3">What you get</h3>
         <p>
-          The default palette is built around near-black surfaces (<code>#0d0d0d</code> background,
-          <code>#111111</code> cards) with warm off-white text (<code>#dddbd7</code>). UI patterns
-          throughout: uppercase eyebrows, hairline borders, luminous-border buttons, and
-          <code>--timing: 0.3s</code> smooth transitions.
+          The codebase follows standard OS 2.0 architecture. <code>layout/theme.liquid</code> wraps every page
+          with a <strong>header group</strong> (announcement bar + header), dynamic page content via
+          <code>{{ content_for_layout }}</code>, and a <strong>footer group</strong>. Each page type is a JSON
+          template that composes sections; merchants reorder and configure sections in the theme editor without
+          editing code.
         </p>
         <p>
-          Typography is fully configurable via Shopify's <code>font_picker</code>. Two font pickers
-          are exposed — <em>primary</em> (body/UI) and <em>heading</em> — and all variants are loaded
-          via <code>snippets/css-variables.liquid</code> which outputs them as CSS custom properties.
+          Out of the box the theme includes <strong>40 sections</strong>, <strong>14 blocks</strong>,
+          <strong>9 snippets</strong>, and <strong>14 templates</strong> (including dedicated layouts for product,
+          collection, cart, blog, article, search, password, gift card, and custom pages such as contact and
+          about). Styles ship as plain CSS (<code>assets/critical.css</code>, <code>assets/base.css</code>, and
+          co-located <code>{% stylesheet %}</code> blocks inside sections). There is no Webpack, Vite, or React
+          runtime on the storefront.
         </p>
 
-        <h3 class="doc-h3">What's included</h3>
+        <h3 class="doc-h3">Experience &amp; commerce</h3>
+        <p>
+          Global navigation is handled by custom elements in <code>sections/header.liquid</code>:
+          <code>&lt;site-navbar&gt;</code> (sticky or static behavior, hide-on-scroll optional),
+          <code>&lt;search-overlay&gt;</code> for predictive search, and <code>&lt;cart-sidebar&gt;</code> for an
+          AJAX cart drawer wired to Shopify’s Cart API. Product discovery spans homepage slideshows (Swiper 11),
+          collection grids with filters, trending and recently viewed carousels, quick view modals, and related
+          product recommendations.
+        </p>
+        <p>
+          The product detail section (<code>product.liquid</code>) supports variant selection, quantity, buy buttons,
+          Shop Pay installments, pickup availability, media galleries, optional 3D models, and JSON-LD structured
+          data. Shared client-side helpers — <code>window.GrimoireProduct</code>, <code>window.GrimoireQuickView</code>,
+          and <code>window.GrimoireCarousel</code> — live in snippets and power cards, modals, and carousels across
+          collection, search, and merchandising sections.
+        </p>
+
+        <h3 class="doc-h3">Design system</h3>
+        <p>
+          Grimoire’s visual identity is token-driven. <code>snippets/css-variables.liquid</code> maps theme settings
+          into CSS custom properties for colors, typography, page width, header/cart/search surfaces, product cards,
+          collection carousels, and more. Default colors are intentionally neutral and dark:
+        </p>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li><strong>Background</strong> — <code>#0d0d0d</code></li>
+          <li><strong>Surface</strong> — <code>#111111</code> (cards, elevated UI)</li>
+          <li><strong>Foreground / accent</strong> — <code>#dddbd7</code> (warm off-white)</li>
+          <li><strong>Inactive UI</strong> — <code>#505050</code> (tabs, idle controls, eyebrows)</li>
+        </ul>
+        <p>
+          Typography uses two <code>font_picker</code> settings (primary and heading), with all weights loaded via
+          <code>font_face</code> and exposed as <code>--font-primary--*</code> and <code>--font-heading--*</code>.
+          Motion defaults to <code>--timing: 0.3s</code>. Editorial patterns — uppercase eyebrows, hairline dividers,
+          and luminous primary buttons — are consistent across sections and the reusable <code>section-title</code>
+          snippet.
+        </p>
+
+        <h3 class="doc-h3">Content &amp; marketing sections</h3>
+        <p>
+          Beyond core commerce, Grimoire ships sections for brand storytelling and conversion: marquee, newsletter,
+          signup flyout, FAQ with tabs, image hotspot, countdown hero, CTA with video, oracle quiz, testimonials
+          (with world map), blog and news grids, and flexible page builders via <code>custom-section.liquid</code>
+          plus composable <code>cs-*</code> blocks (headings, text, images, video, buttons, spacers, and more).
+          Contact and about flows are covered by dedicated templates and matching sections.
+        </p>
+
+        <h3 class="doc-h3">Development &amp; quality</h3>
+        <p>
+          Local development uses <a href="https://shopify.dev/docs/api/shopify-cli" target="_blank" rel="noopener">Shopify CLI</a>
+          (<code>shopify theme dev</code> for hot reload, <code>shopify theme push</code> for deployment). The repository
+          runs <strong>Theme Check</strong> on every push via GitHub Actions, so Liquid and schema issues are caught in CI.
+          Interactive behavior is implemented with native <code>customElements.define</code> — no framework bundle on
+          the critical path.
+        </p>
+
+        <h3 class="doc-h3">Theme inventory</h3>
         <div class="ref-grid" style="grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin-top: 0.8rem;">
           <div class="ref-item" style="text-align:center; padding: 1rem 0.5rem;">
-            <span style="font-size:1.5rem; font-family:'Merriweather',serif; font-weight:900; color:var(--text); display:block;">~40</span>
+            <span style="font-size:1.5rem; font-family:'Merriweather',serif; font-weight:900; color:var(--text); display:block;">40</span>
             <span class="ref-item-desc">Sections</span>
           </div>
           <div class="ref-item" style="text-align:center; padding: 1rem 0.5rem;">
@@ -652,6 +712,10 @@
             <span class="ref-item-desc">Templates</span>
           </div>
         </div>
+        <p style="margin-top:1.2rem;">
+          The rest of this documentation walks through setup, architecture, and reference material for every layer
+          of the theme — from <code>css-variables.liquid</code> and section schemas to CLI commands and theme settings.
+        </p>
       </section>
 
       <!-- ── GETTING STARTED ── -->
