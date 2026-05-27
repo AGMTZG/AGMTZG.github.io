@@ -446,6 +446,27 @@
     .params-table.params-table--guide .table-token-list li:last-child {
       margin-bottom: 0;
     }
+    .params-table.params-table--guide .table-field-list {
+      margin: 0;
+      padding-left: 1.15rem;
+      list-style: none;
+    }
+    .params-table.params-table--guide .table-field-list li {
+      margin-bottom: 0.35rem;
+      padding-left: 0;
+    }
+    .params-table.params-table--guide .table-field-list li:last-child {
+      margin-bottom: 0;
+    }
+    .params-table.params-table--guide.params-table--sections td:first-child {
+      width: 24%;
+    }
+    .params-table.params-table--guide.params-table--sections td:nth-child(2) {
+      width: 30%;
+    }
+    .params-table.params-table--guide.params-table--sections td:last-child {
+      width: 46%;
+    }
     .param-optional { opacity: 0.55; font-style: italic; }
 
     /* ── GRID TABLES ── */
@@ -1157,7 +1178,7 @@
         <p>
           Shared <strong>section header</strong> for Grimoire: a short label (eyebrow), a large title,
           and an optional text link styled as a button. You will not add this snippet manually in the
-          theme editor — sections that support it expose <strong>Eyebrow</strong>, <strong>Heading</strong>,
+          theme editor, sections that support it expose <strong>Eyebrow</strong>, <strong>Heading</strong>,
           and sometimes <strong>Button label</strong> / <strong>Button link</strong> fields in their own
           settings panel. Leaving a field empty hides that part of the header (for example, heading-only
           or eyebrow-only is valid).
@@ -1165,9 +1186,9 @@
 
         <h4 class="doc-h4">What you see on the storefront</h4>
         <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
-          <li><strong>Eyebrow</strong> — Small caps line with horizontal rules on either side (mobile: centered with rules; desktop: left-aligned, rule extends to the right).</li>
-          <li><strong>Heading</strong> — Large display title using your Theme settings heading font; scales with viewport width.</li>
-          <li><strong>Optional CTA</strong> — Uppercase outline button with a chevron icon, shown only when a button label is set. If a link is missing, the button falls back to <code>#</code> — always set <strong>Button link</strong> when you add a label.</li>
+          <li><strong>Eyebrow</strong>: Small caps line with horizontal rules on either side (mobile: centered with rules; desktop: left-aligned, rule extends to the right).</li>
+          <li><strong>Heading</strong>: Large display title using your Theme settings heading font; scales with viewport width.</li>
+          <li><strong>Optional CTA</strong>: Uppercase outline button with a chevron icon, shown only when a button label is set. If a link is missing, the button falls back to <code>#</code>, always set <strong>Button link</strong> when you add a label.</li>
         </ul>
         <p>
           On viewports <strong>768px and wider</strong>, the heading and CTA sit on one row (title left,
@@ -1179,58 +1200,115 @@
           Open the section on your page and look for header fields near the top of the settings sidebar.
           Labels vary slightly by section but usually match the table below.
         </p>
-        <table class="params-table">
+        <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Section</th><th>Customizer fields</th><th>Notes</th></tr></thead>
           <tbody>
             <tr>
               <td>Collections</td>
-              <td>Eyebrow, Heading, Button label, Button link</td>
+              <td>
+                <ul class="table-field-list">
+                  <li>Eyebrow</li>
+                  <li>Heading</li>
+                  <li>Button label</li>
+                  <li>Button link</li>
+                </ul>
+              </td>
               <td>Homepage collection carousel header; CTA often points to <em>All collections</em>.</td>
             </tr>
             <tr>
               <td>Trending products</td>
-              <td>Eyebrow, Heading, Button label, Button link</td>
+              <td>
+                <ul class="table-field-list">
+                  <li>Eyebrow</li>
+                  <li>Heading</li>
+                  <li>Button label</li>
+                  <li>Button link</li>
+                </ul>
+              </td>
               <td>Same header pattern above category tabs and the product carousel.</td>
             </tr>
             <tr>
               <td>Product recommendations</td>
-              <td>Eyebrow, Heading</td>
+              <td>
+                <ul class="table-field-list">
+                  <li>Eyebrow</li>
+                  <li>Heading</li>
+                </ul>
+              </td>
               <td>On the product template below the buy box; no section CTA by default.</td>
             </tr>
             <tr>
               <td>Recently viewed</td>
-              <td>Eyebrow, Heading</td>
+              <td>
+                <ul class="table-field-list">
+                  <li>Eyebrow</li>
+                  <li>Heading</li>
+                </ul>
+              </td>
               <td>Product template footer strip.</td>
             </tr>
             <tr>
               <td>Collection (PLP)</td>
-              <td>Eyebrow, Heading</td>
+              <td>
+                <ul class="table-field-list">
+                  <li>Eyebrow</li>
+                  <li>Heading</li>
+                </ul>
+              </td>
               <td>Title area above the product grid on collection pages.</td>
             </tr>
             <tr>
               <td>Cart</td>
-              <td>Eyebrow, Heading</td>
+              <td>
+                <ul class="table-field-list">
+                  <li>Eyebrow</li>
+                  <li>Heading</li>
+                </ul>
+              </td>
               <td>Uses <code>h1</code> for the page title (accessibility).</td>
             </tr>
             <tr>
               <td>Blog, News grid, Read also, FAQ</td>
-              <td>Eyebrow, Heading (and CTA where the section schema includes it)</td>
+              <td>
+                <ul class="table-field-list">
+                  <li>Eyebrow</li>
+                  <li>Heading</li>
+                  <li>Button label / link (if section includes CTA)</li>
+                </ul>
+              </td>
               <td>Editorial and support content headers.</td>
             </tr>
             <tr>
               <td>Newsletter</td>
-              <td>Eyebrow, Heading</td>
+              <td>
+                <ul class="table-field-list">
+                  <li>Eyebrow</li>
+                  <li>Heading</li>
+                </ul>
+              </td>
               <td>Header is centered in this section by section-specific CSS overrides.</td>
             </tr>
             <tr>
-              <td>Contact (hero, channels, location), Coven</td>
-              <td>Eyebrow, Heading</td>
-              <td>Contact hero uses <code>h1</code> for the main page title.</td>
+              <td>Contact, Coven</td>
+              <td>
+                <ul class="table-field-list">
+                  <li>Eyebrow</li>
+                  <li>Heading</li>
+                </ul>
+              </td>
+              <td>Hero, channels, and location blocks. Contact hero uses <code>h1</code> for the main page title.</td>
             </tr>
             <tr>
               <td>Custom section</td>
-              <td>Show section title, Eyebrow, Heading, Heading tag</td>
-              <td>Toggle <strong>Show section title</strong> first; optional <code>h1</code>–<code>h4</code> for SEO on landing pages.</td>
+              <td>
+                <ul class="table-field-list">
+                  <li>Show section title</li>
+                  <li>Eyebrow</li>
+                  <li>Heading</li>
+                  <li>Heading tag</li>
+                </ul>
+              </td>
+              <td>Enable <strong>Show section title</strong> first; pick <code>h1</code>–<code>h4</code> for landing-page SEO when needed.</td>
             </tr>
           </tbody>
         </table>
