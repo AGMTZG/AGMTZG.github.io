@@ -677,6 +677,7 @@
             <a class="toc-sub" href="#sections-cart-liquid">cart.liquid</a>
             <a class="toc-sub" href="#sections-search-liquid">search.liquid</a>
             <a class="toc-sub" href="#sections-product-recommendations-liquid">product-recommendations.liquid</a>
+            <a class="toc-sub" href="#sections-recently-viewed-liquid">recently-viewed.liquid</a>
             <a class="toc-sub" href="#sections-collections-liquid">collections.liquid</a>
           </div>
 
@@ -3277,6 +3278,55 @@
           <li>Fetched products render with <a href="#snippet-product-card">product-card</a> and the same sale/compare-price logic used in other merchandising rows.</li>
           <li>The section includes one <a href="#snippet-product-modal">product-modal</a>; cards open quick view via <code>opens_modal: true</code>.</li>
           <li>On unmount, both quick-view and carousel instances are destroyed to avoid stale listeners.</li>
+        </ul>
+
+        <h4 class="doc-h4" id="sections-recently-viewed-liquid">recently-viewed.liquid</h4>
+        <p>
+          Product-page companion section that shows each visitor's own recently viewed products.
+          Theme editor name: <strong>Recently Viewed</strong>. Unlike Shopify recommendations, this section
+          is fully client-driven using browser <code>localStorage</code> and product JSON endpoints.
+        </p>
+
+        <h4 class="doc-h4">Merchant controls</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>eyebrow</code>, <code>heading</code></td><td>Header text rendered with <a href="#snippet-section-title">section-title</a>.</td></tr>
+            <tr><td><code>count</code> (2-8)</td><td>Maximum cards rendered from recently viewed history.</td></tr>
+            <tr><td>Section limit</td><td>Schema enforces <code>limit: 1</code> (single instance per template).</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Tracking and data source</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Step</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td>Store key</td><td>Handles are stored under <code>localStorage.grimoire_rv</code> with a hard cap of 20 entries.</td></tr>
+            <tr><td>Update rule</td><td>Current product handle is moved to the front (deduplicated), then persisted.</td></tr>
+            <tr><td>Render candidates</td><td>Current product is excluded; remaining handles are sliced to <code>count</code>.</td></tr>
+            <tr><td>Fetch source</td><td>Each handle is requested from <code>/products/{handle}.js</code>; failed fetches are skipped.</td></tr>
+            <tr><td>Visibility guard</td><td>If no valid products remain, the section stays hidden (<code>display:none</code>).</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Card construction details</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Feature</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td>Rendering mode</td><td>Cards are generated in JavaScript HTML (not Liquid loops), then appended as <code>.pcar-slide</code> items.</td></tr>
+            <tr><td>Color swatches</td><td>Detects color option names (<code>color/colour</code> variants), builds swatch buttons, and marks sold-out colors.</td></tr>
+            <tr><td>Image selection</td><td>Prefers selected variant media; falls back to product featured image or placeholder SVG.</td></tr>
+            <tr><td>Price formatting</td><td>Uses section <code>data-money-format</code> and a JS formatter to match storefront currency output.</td></tr>
+            <tr><td>Sold-out states</td><td>Shows card-level sold-out badge and disables CTA states when unavailable.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Carousel and quick view integration</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li>Uses <a href="#snippet-product-carousel">product-carousel</a> shell, then initializes via <code>GrimoireCarousel.init</code> after slides are injected.</li>
+          <li>Includes one <a href="#snippet-product-modal">product-modal</a> and binds card interactions with <code>GrimoireQuickView</code> / <code>GrimoireProduct.bindCards</code>.</li>
+          <li>A hidden dummy <code>product-card</code> render is included only to load shared card CSS before JS-built cards mount.</li>
+          <li>On disconnect, quick-view and carousel instances are destroyed to prevent leaked handlers.</li>
         </ul>
 
         <h4 class="doc-h4" id="sections-collections-liquid">collections.liquid</h4>
