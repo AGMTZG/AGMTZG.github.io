@@ -679,6 +679,7 @@
             <a class="toc-sub" href="#sections-product-recommendations-liquid">product-recommendations.liquid</a>
             <a class="toc-sub" href="#sections-recently-viewed-liquid">recently-viewed.liquid</a>
             <a class="toc-sub" href="#sections-product-benefits-liquid">product-benefits.liquid</a>
+            <a class="toc-sub" href="#sections-custom-section-liquid">custom-section.liquid</a>
             <a class="toc-sub" href="#sections-collections-liquid">collections.liquid</a>
           </div>
 
@@ -3367,6 +3368,45 @@
           <li>Grid uses <code>role="list"</code> and each card uses <code>role="listitem"</code> for simple semantic grouping.</li>
           <li>Section is disabled in header/footer/aside groups (main content placement only).</li>
           <li>Preset ships four common commerce benefits as starter content.</li>
+        </ul>
+
+        <h4 class="doc-h4" id="sections-custom-section-liquid">custom-section.liquid</h4>
+        <p>
+          Flexible page-builder container used to assemble bespoke content stacks from <code>cs-*</code> and
+          <code>group</code> blocks. Theme editor name: <strong>Custom Section</strong>. This section mainly
+          controls layout, spacing, background canvas, and title shell; individual block content is delegated to
+          the block snippets already documented in the Blocks chapter.
+        </p>
+
+        <h4 class="doc-h4">Section controls</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Group</th><th>Setting</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td>Title</td><td><code>show_title</code>, <code>eyebrow</code>, <code>heading</code>, <code>heading_tag</code></td><td>Optional section heading wrapper via <a href="#snippet-section-title">section-title</a>.</td></tr>
+            <tr><td>Layout</td><td><code>max_width</code></td><td>Inner container width profile: narrow (720px), normal (page width), or full (edge-to-edge).</td></tr>
+            <tr><td>Layout</td><td><code>content_align</code></td><td>Horizontal alignment for the block stack (<code>flex-start</code>, <code>center</code>, <code>flex-end</code>).</td></tr>
+            <tr><td>Layout</td><td><code>blocks_gap</code></td><td>Global vertical gap between block rows (0-64px).</td></tr>
+            <tr><td>Spacing</td><td><code>margin_top</code>, <code>padding_top</code>, <code>padding_bottom</code></td><td>Section-level spacing controls; mobile scales top/bottom padding to 65% for tighter rhythm.</td></tr>
+            <tr><td>Background</td><td><code>background_image</code>, <code>overlay_opacity</code></td><td>Optional full-canvas image behind blocks with configurable dark overlay.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Block system integration</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Aspect</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td>Block renderer</td><td>Uses Shopify native <code>content_for 'blocks'</code>; block order and nesting are fully editor-driven.</td></tr>
+            <tr><td>Allowed blocks</td><td>Supports 11 <code>cs-*</code> primitives plus <code>group</code>, up to <strong>16</strong> top-level blocks.</td></tr>
+            <tr><td>Section vs block spacing</td><td>Section controls outer rhythm and global gaps; each block still applies its own top/bottom spacing settings.</td></tr>
+            <tr><td>Canvas mode</td><td>When a background image is set, the block wrapper switches to <code>cs__blocks--canvas</code> to add internal vertical breathing space above the image layer.</td></tr>
+            <tr><td>Template placement</td><td>No <code>disabled_on</code> restriction in this section schema, so it can be used in any group where the template allows sections.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Preset behavior</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li>Default preset ships as a complete storytelling starter (subheading, heading, body text, image, and grouped CTA button).</li>
+          <li>The preset demonstrates nested composition through the <code>group</code> block with mobile stacking enabled.</li>
         </ul>
 
         <h4 class="doc-h4" id="sections-collections-liquid">collections.liquid</h4>
