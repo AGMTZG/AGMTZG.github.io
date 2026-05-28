@@ -696,6 +696,7 @@
             <a class="toc-sub" href="#sections-contact-channels-liquid">contact-channels.liquid</a>
             <a class="toc-sub" href="#sections-contact-location-liquid">contact-location.liquid</a>
             <a class="toc-sub" href="#sections-chronicle-liquid">chronicle.liquid</a>
+            <a class="toc-sub" href="#sections-coven-liquid">coven.liquid</a>
             <a class="toc-sub" href="#sections-collections-liquid">collections.liquid</a>
           </div>
 
@@ -4122,6 +4123,52 @@
           <li>In reduced-motion mode, transitions/scan effects are disabled and word stagger timing is skipped.</li>
           <li><code>&lt;noscript&gt;</code> forces all reveal targets to visible state so content remains fully readable without JavaScript.</li>
           <li>Section ID is namespaced as <code>au-{section.id}</code> to keep script and fallback CSS scoped per instance.</li>
+        </ul>
+
+        <h4 class="doc-h4" id="sections-coven-liquid">coven.liquid</h4>
+        <p>
+          Editorial team-member roster section with responsive portrait grid, staggered reveal-on-scroll, and
+          grayscale-to-color media hover treatment. Theme editor name: <strong>Coven</strong>.
+        </p>
+
+        <h4 class="doc-h4">Section controls</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>eyebrow</code>, <code>heading</code></td><td>Header copy rendered via <a href="#snippet-section-title">section-title</a>.</td></tr>
+            <tr><td>Render guard</td><td>Section outputs only when at least one <code>member</code> block exists.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Member block fields</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Field</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td><code>image</code></td><td>Portrait asset (lazy-loaded at 700px target width); fallback to Shopify placeholder when missing.</td></tr>
+            <tr><td><code>name</code></td><td>Primary card title in heading font.</td></tr>
+            <tr><td><code>role</code></td><td>Uppercase micro-label beneath name.</td></tr>
+            <tr><td><code>bio</code></td><td>Short descriptive paragraph.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Grid and reveal behavior</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Feature</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td>Responsive columns</td><td>2 columns on small screens, 3 from 640px, 4 from 1024px.</td></tr>
+            <tr><td>Stagger timing</td><td>Each member card receives <code>data-cv-delay</code> in 90ms increments based on index.</td></tr>
+            <tr><td>Observer trigger</td><td><code>IntersectionObserver</code> reveals header/cards once they enter view (threshold 0.12, negative bottom root margin).</td></tr>
+            <tr><td>JS activation gate</td><td>Animation styles are scoped behind <code>.js-cv-active</code>, preventing hidden-content flash when JS is unavailable.</td></tr>
+            <tr><td>Media interaction</td><td>Hover scales image slightly and removes grayscale; info divider line and title opacity also shift.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Accessibility and motion notes</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li>Card grid is exposed semantically as <code>role="list"</code> with each member as <code>role="listitem"</code>.</li>
+          <li>Decorative placeholder wrapper is marked <code>aria-hidden="true"</code> when no image is provided.</li>
+          <li>Image <code>alt</code> text is derived from member name for basic portrait context.</li>
+          <li>Under <code>prefers-reduced-motion</code>, reveal and hover transitions are disabled.</li>
         </ul>
 
         <h4 class="doc-h4" id="sections-collections-liquid">collections.liquid</h4>
