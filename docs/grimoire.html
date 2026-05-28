@@ -3237,7 +3237,26 @@
           <tbody>
             <tr><td><code>eyebrow</code>, <code>heading</code></td><td>Header text rendered through <a href="#snippet-section-title">section-title</a>.</td></tr>
             <tr><td><code>count</code> (2-10)</td><td>Recommendation limit sent to Shopify recommendations endpoint.</td></tr>
-            <tr><td><code>intent</code></td><td>Chooses recommendation source: <code>related</code> or <code>complementary</code>.</td></tr>
+            <tr><td><code>intent</code></td><td>Chooses recommendation source: <code>related</code> (algorithmic) or <code>complementary</code> (merchant-curated in Search &amp; Discovery).</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Search &amp; Discovery integration</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Mode</th><th>How Shopify decides products</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><code>related</code></td>
+              <td>Uses Shopify recommendation logic for similar items. Works without manual assignment in most stores.</td>
+            </tr>
+            <tr>
+              <td><code>complementary</code></td>
+              <td>Uses the product’s complementary list configured in the Shopify <strong>Search &amp; Discovery</strong> app. If a product has no complementary setup, this section receives no items and stays hidden.</td>
+            </tr>
+            <tr>
+              <td>Practical setup</td>
+              <td>Merchants define complementary pairs per product in the app; this section simply requests them through <code>intent=complementary</code> and renders what Shopify returns.</td>
+            </tr>
           </tbody>
         </table>
 
