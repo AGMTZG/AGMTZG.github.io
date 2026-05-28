@@ -688,6 +688,7 @@
             <a class="toc-sub" href="#sections-article-liquid">article.liquid</a>
             <a class="toc-sub" href="#sections-news-grid-liquid">news-grid.liquid</a>
             <a class="toc-sub" href="#sections-read-also-liquid">read-also.liquid</a>
+            <a class="toc-sub" href="#sections-oracle-quiz-liquid">oracle-quiz.liquid</a>
             <a class="toc-sub" href="#sections-collections-liquid">collections.liquid</a>
           </div>
 
@@ -3747,6 +3748,54 @@
           <li>Without JS, cards remain horizontally scrollable via native overflow with scroll-snap.</li>
           <li>JS mode adds <code>ra-js-active</code>, hides overflow, and enables arrow controls.</li>
           <li>Hover/track transitions are removed under <code>prefers-reduced-motion</code>.</li>
+        </ul>
+
+        <h4 class="doc-h4" id="sections-oracle-quiz-liquid">oracle-quiz.liquid</h4>
+        <p>
+          Interactive three-step product discovery quiz ("The Oracle") with dynamic image panel, staged answers,
+          and personalized product result cards. Wrapped in <code>&lt;oracle-quiz&gt;</code>; theme editor name:
+          <strong>The Oracle</strong>.
+        </p>
+
+        <h4 class="doc-h4">Section controls</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Group</th><th>Setting</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td>Header copy</td><td><code>eyebrow</code>, <code>heading</code>, <code>subheading</code></td><td>Intro content shown in stage 1 and carried through the quiz shell.</td></tr>
+            <tr><td>Questions</td><td><code>s1_question</code>, <code>s2_question</code>, <code>s3_question</code></td><td>Prompt text for Intention, Vessel, and Element stages.</td></tr>
+            <tr><td>Options</td><td><code>s1_opt*</code>, <code>s2_opt*</code>, <code>s3_opt*</code> + corresponding <code>_img</code></td><td>Choice labels and optional per-option hero imagery for each stage.</td></tr>
+            <tr><td>Result copy</td><td><code>result_label</code>, <code>result_heading</code>, <code>reset_label</code></td><td>Final screen heading stack and replay CTA.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Recommendation blocks</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Block field</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td><code>intention</code> / <code>form</code> / <code>energy</code></td><td>Defines a matching rule for the 3-step answer combination.</td></tr>
+            <tr><td><code>products</code> (<code>product_list</code>, max 4)</td><td>Products shown when block conditions match; each renders as a result card.</td></tr>
+            <tr><td>Fallback chain</td><td>If no exact match has products, logic falls back to partial matches, then first block with products.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Runtime behavior</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Feature</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td>Data bootstrap</td><td>Section serializes all quiz copy, options, images, and recommendation mappings into one JSON payload (<code>.oq-data</code>).</td></tr>
+            <tr><td>Stage flow</td><td>Single arena container re-renders per stage; selected option advances after a short transition delay.</td></tr>
+            <tr><td>Image interactivity</td><td>Hovering options previews corresponding left-panel image; selected option locks active slide.</td></tr>
+            <tr><td>Progress system</td><td>Roman-numeral indicators and connecting fills update per stage on both image footer and form panel.</td></tr>
+            <tr><td>Result render</td><td>Outputs 2-3 column responsive product grid, staggered card reveal, and reset button to restart at stage 1.</td></tr>
+            <tr><td>No-JS fallback</td><td>Displays static intro copy with message prompting JavaScript enablement (no interactive quiz server fallback).</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Editorial/UX notes</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li>Visual language intentionally differs from standard commerce sections (split noir layout, staged narrative, serif-heavy typography).</li>
+          <li>Reduced-motion mode removes stage/card animations and transitions while preserving functional progression.</li>
+          <li>Preset seeds four recommendation blocks so merchants can immediately test matching paths before curating full product lists.</li>
         </ul>
 
         <h4 class="doc-h4" id="sections-collections-liquid">collections.liquid</h4>
