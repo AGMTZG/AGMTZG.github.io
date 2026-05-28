@@ -695,6 +695,7 @@
             <a class="toc-sub" href="#sections-contact-hero-liquid">contact-hero.liquid</a>
             <a class="toc-sub" href="#sections-contact-channels-liquid">contact-channels.liquid</a>
             <a class="toc-sub" href="#sections-contact-location-liquid">contact-location.liquid</a>
+            <a class="toc-sub" href="#sections-chronicle-liquid">chronicle.liquid</a>
             <a class="toc-sub" href="#sections-collections-liquid">collections.liquid</a>
           </div>
 
@@ -4072,6 +4073,55 @@
           <li>Location label includes an inline pin icon and uppercase micro-heading styling.</li>
           <li>Section uses theme tokens for page width, spacing, fonts, and color hierarchy to stay visually consistent with other contact templates.</li>
           <li>No JavaScript is required; all behavior is Liquid/CSS-driven.</li>
+        </ul>
+
+        <h4 class="doc-h4" id="sections-chronicle-liquid">chronicle.liquid</h4>
+        <p>
+          Cinematic long-form storytelling section with progressive on-scroll reveals, chaptered media/content rows,
+          and alternating image layout. Theme editor name: <strong>Chronicle</strong>. Built as a singleton narrative
+          component rather than a reusable utility carousel/grid.
+        </p>
+
+        <h4 class="doc-h4">Section-level controls</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>eyebrow</code></td><td>Intro label shown with a horizontal rule above the main narrative heading.</td></tr>
+            <tr><td><code>intro_heading</code></td><td>Primary hero headline with per-word reveal animation.</td></tr>
+            <tr><td><code>intro_body</code></td><td>Optional supporting paragraph under the intro heading.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Chapter blocks</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Field</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td><code>eyebrow</code>, <code>heading</code>, <code>body</code></td><td>Narrative copy stack per chapter; body is richtext and preserves formatting/links.</td></tr>
+            <tr><td><code>image</code></td><td>Chapter media asset; if empty, section renders Shopify placeholder SVG artwork.</td></tr>
+            <tr><td><code>image_position</code></td><td>Controls alternating layout by toggling <code>au-chapter--reverse</code> (image right on desktop).</td></tr>
+            <tr><td>Chapter numbering</td><td>Auto-generated sequential visual index (<code>01</code>, <code>02</code>, ...), decorative only (<code>aria-hidden</code>).</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Reveal engine</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Mode</th><th>Implementation</th></tr></thead>
+          <tbody>
+            <tr><td><code>fade-up</code></td><td>Opacity + translateY transition for eyebrow/body elements.</td></tr>
+            <tr><td><code>clip</code></td><td>Image wipe using <code>clip-path</code> inset animation from top to bottom.</td></tr>
+            <tr><td><code>words</code></td><td>Headings are split into <code>.au-word</code> spans and revealed with staggered delays.</td></tr>
+            <tr><td>Observer trigger</td><td><code>IntersectionObserver</code> watches all reveal targets (threshold 0.12, negative bottom root margin) and unobserves after first reveal.</td></tr>
+            <tr><td>Per-element delay</td><td>Optional <code>data-au-delay</code> enables tuned reveal timing offsets (for example intro/body pacing).</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Motion and fallback behavior</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li>Each revealed image runs a one-shot scan-line sweep overlay (<code>@keyframes au-scan</code>) to reinforce the “chronicle” aesthetic.</li>
+          <li>Visible media receives subtle long-duration image scale for cinematic depth.</li>
+          <li>In reduced-motion mode, transitions/scan effects are disabled and word stagger timing is skipped.</li>
+          <li><code>&lt;noscript&gt;</code> forces all reveal targets to visible state so content remains fully readable without JavaScript.</li>
+          <li>Section ID is namespaced as <code>au-{section.id}</code> to keep script and fallback CSS scoped per instance.</li>
         </ul>
 
         <h4 class="doc-h4" id="sections-collections-liquid">collections.liquid</h4>
