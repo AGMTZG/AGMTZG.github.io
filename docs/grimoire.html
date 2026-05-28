@@ -686,6 +686,7 @@
             <a class="toc-sub" href="#sections-cta-with-video-liquid">cta-with-video.liquid</a>
             <a class="toc-sub" href="#sections-blog-liquid">blog.liquid</a>
             <a class="toc-sub" href="#sections-article-liquid">article.liquid</a>
+            <a class="toc-sub" href="#sections-news-grid-liquid">news-grid.liquid</a>
             <a class="toc-sub" href="#sections-collections-liquid">collections.liquid</a>
           </div>
 
@@ -3653,6 +3654,51 @@
         <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
           <li>Comment rendering and form submission use native Shopify article comment endpoints.</li>
           <li>Form fields map to <code>comment[author]</code>, <code>comment[email]</code>, and <code>comment[body]</code> with theme-styled error output via <code>default_errors</code>.</li>
+        </ul>
+
+        <h4 class="doc-h4" id="sections-news-grid-liquid">news-grid.liquid</h4>
+        <p>
+          Editorial split-layout blog showcase section: one featured article on the left and four compact
+          sidebar cards on the right. Theme editor name: <strong>News Grid</strong>. Designed for homepage
+          or landing pages that need a curated “latest stories” block separate from full blog templates.
+        </p>
+
+        <h4 class="doc-h4">Merchant controls</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>heading</code></td><td>Main title rendered in the section header (eyebrow and “View all news” CTA are fixed in this section).</td></tr>
+            <tr><td><code>blog</code></td><td>Selected blog source for all article content.</td></tr>
+            <tr><td><code>article_count</code></td><td>Fixed at 5 (1 featured + 4 sidebar cards).</td></tr>
+            <tr><td><code>image_height</code></td><td>Desktop featured panel height: small 380px, medium 520px, large 660px.</td></tr>
+            <tr><td><code>show_excerpt</code></td><td>Toggles excerpt in featured article body only.</td></tr>
+            <tr><td><code>show_date</code>, <code>show_tags</code></td><td>Toggles metadata chips on featured and sidebar cards.</td></tr>
+            <tr><td><code>padding_top</code>, <code>padding_bottom</code></td><td>Section-level vertical spacing controls.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Content mapping behavior</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Area</th><th>Data source and logic</th></tr></thead>
+          <tbody>
+            <tr><td>Featured panel</td><td>Uses first article in the selected blog subset; includes image/placeholder, date+tag badges, title, optional excerpt (160 chars), and “Read more” affordance.</td></tr>
+            <tr><td>Sidebar list</td><td>Renders articles 2-5 as compact cards with thumbnail, date/tag row, and title.</td></tr>
+            <tr><td>Tag rail</td><td>Horizontal filter links from <code>blog.all_tags</code> plus “All”; active state follows <code>current_tags</code>.</td></tr>
+            <tr><td>Pagination</td><td>Section-level pagination for the chosen blog via <code>paginate blog.articles by articles_per_page</code>.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Fallback and empty states</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li>If no blog is selected, section shows a complete placeholder composition and an editor prompt (“Select a blog in the theme editor...”).</li>
+          <li>If selected blog has fewer than 5 posts, missing sidebar slots render skeleton-style placeholder cards.</li>
+          <li>If article imagery is missing, featured and sidebar cards use section-specific SVG placeholders.</li>
+        </ul>
+
+        <h4 class="doc-h4">Interaction notes</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li>All navigation is server-rendered links (tag filtering and pagination) with no AJAX interception in this section.</li>
+          <li>Featured and sidebar image hover zoom transitions are disabled under <code>prefers-reduced-motion</code>.</li>
         </ul>
 
         <h4 class="doc-h4" id="sections-collections-liquid">collections.liquid</h4>
