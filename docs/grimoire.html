@@ -690,6 +690,7 @@
             <a class="toc-sub" href="#sections-read-also-liquid">read-also.liquid</a>
             <a class="toc-sub" href="#sections-oracle-quiz-liquid">oracle-quiz.liquid</a>
             <a class="toc-sub" href="#sections-testimonials-liquid">testimonials.liquid</a>
+            <a class="toc-sub" href="#sections-signup-flyout-liquid">signup-flyout.liquid</a>
             <a class="toc-sub" href="#sections-collections-liquid">collections.liquid</a>
           </div>
 
@@ -3848,6 +3849,64 @@
           <li><strong>ARIA labels:</strong> Region, arrows, dots, and rating output include labels to keep the rotating experience understandable for assistive tech.</li>
           <li><strong>Country support caveat:</strong> The schema includes more countries than the hardcoded selector map; unmapped ISO codes will show in dots/card flow but without an SVG pin highlight.</li>
         </ul>
+
+        <h4 class="doc-h4" id="sections-signup-flyout-liquid">signup-flyout.liquid</h4>
+        <p>
+          Global newsletter modal/flyout rendered as a custom element (<code>&lt;signup-flyout&gt;</code>) that
+          appears after a configurable delay, traps focus while open, and suppresses itself using a per-section
+          cookie after dismiss or submit. Theme editor name: <strong>Signup Flyout</strong>.
+        </p>
+
+        <h4 class="doc-h4">Visibility and timing controls</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td><code>enabled</code></td><td>Hard on/off switch. When false, markup, script, and modal behavior are not rendered.</td></tr>
+            <tr><td><code>show_delay</code></td><td>Delay in seconds before auto-open on page load (converted to milliseconds in <code>data-delay</code>).</td></tr>
+            <tr><td><code>cookie_days</code></td><td>Dismiss/submission suppression window using cookie <code>sf_dismissed_{section_id}</code>.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Content controls</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Usage</th></tr></thead>
+          <tbody>
+            <tr><td><code>eyebrow</code>, <code>heading</code>, <code>subtext</code></td><td>Top copy stack; when <code>subtext</code> is empty, a screen-reader fallback description is injected.</td></tr>
+            <tr><td><code>input_placeholder</code></td><td>Email field placeholder text.</td></tr>
+            <tr><td><code>submit_label</code>, <code>exit_label</code></td><td>Primary submit and secondary dismiss CTA labels.</td></tr>
+            <tr><td><code>disclaimer</code></td><td>Optional legal/trust copy rendered under a decorative divider glyph.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Form pipeline and integration</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Layer</th><th>Implementation details</th></tr></thead>
+          <tbody>
+            <tr><td>Default submit flow</td><td>Uses native Shopify <code>{% form 'customer' %}</code> with <code>contact[tags]=newsletter</code>, posting to Shopify's customer/contact endpoint.</td></tr>
+            <tr><td>Dismiss-on-submit safety</td><td>Cookie is set in submit handler before Shopify reloads the page, preventing immediate reopen loops.</td></tr>
+            <tr><td>Alternative providers</td><td>Inline comments document Klaviyo-style action swap and AJAX interception pattern for no-reload submissions.</td></tr>
+            <tr><td>Programmatic triggers</td><td>Listens for clicks on <code>[data-flyout-open="newsletter"]</code> and exposes <code>window.SignupFlyout</code> helpers (<code>open</code>, <code>close</code>, <code>showSuccess</code>).</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Behavior and accessibility</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Feature</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td>Dialog semantics</td><td>Rendered with <code>role="dialog"</code>, <code>aria-modal="true"</code>, and heading/description relationships.</td></tr>
+            <tr><td>Focus management</td><td>Moves focus into panel on open, traps Tab/Shift+Tab cycling, restores prior focused element on close.</td></tr>
+            <tr><td>Close inputs</td><td>Supports backdrop click, close icon, secondary exit button, and <kbd>Escape</kbd>.</td></tr>
+            <tr><td>Theme editor hooks</td><td>In design mode, responds to section select/deselect/unload events for predictable editor previews.</td></tr>
+            <tr><td>Reduced motion</td><td>Transition effects are disabled under <code>prefers-reduced-motion</code>.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Inline success state</h4>
+        <p>
+          The section ships a hidden success panel (<code>.sf-success</code>) used by custom AJAX/Klaviyo flows.
+          Calling <code>showSuccess()</code> hides form controls, announces success through a polite live region,
+          focuses the success heading for assistive technology, and auto-closes the flyout after ~3 seconds.
+        </p>
 
         <h4 class="doc-h4" id="sections-collections-liquid">collections.liquid</h4>
         <p>
