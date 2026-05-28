@@ -693,6 +693,7 @@
             <a class="toc-sub" href="#sections-signup-flyout-liquid">signup-flyout.liquid</a>
             <a class="toc-sub" href="#sections-faq-liquid">faq.liquid</a>
             <a class="toc-sub" href="#sections-contact-hero-liquid">contact-hero.liquid</a>
+            <a class="toc-sub" href="#sections-contact-channels-liquid">contact-channels.liquid</a>
             <a class="toc-sub" href="#sections-collections-liquid">collections.liquid</a>
           </div>
 
@@ -3996,6 +3997,44 @@
           <li>Focus-visible outlines are explicitly defined for submit button accessibility.</li>
           <li>Input/button transitions are disabled under <code>prefers-reduced-motion</code>.</li>
         </ul>
+
+        <h4 class="doc-h4" id="sections-contact-channels-liquid">contact-channels.liquid</h4>
+        <p>
+          Channel directory section for support and sales journeys: a heading/description intro plus a responsive
+          grid of CTA cards managed by blocks. Theme editor name: <strong>Contact Channels</strong>.
+        </p>
+
+        <h4 class="doc-h4">Section controls</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>eyebrow</code>, <code>heading</code></td><td>Top title row rendered with <a href="#snippet-section-title">section-title</a>.</td></tr>
+            <tr><td><code>description</code></td><td>Optional helper copy shown below the heading block.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Channel card blocks</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Field</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td><code>icon</code></td><td>Select field mapped to inline SVG variants: <code>help</code>, <code>support</code>, <code>sales</code>, <code>email</code>, <code>chat</code> (fallback uses help icon).</td></tr>
+            <tr><td><code>title</code>, <code>text</code></td><td>Main card copy; each element hides when blank.</td></tr>
+            <tr><td><code>cta_label</code>, <code>cta_url</code></td><td>Optional action button; when URL is empty it falls back to <code>#</code>.</td></tr>
+            <tr><td>Accessibility label</td><td>If title exists, CTA gets combined label <code>"{cta} - {title}"</code> for clearer link context.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Layout and interaction behavior</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Feature</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td>Grid structure</td><td>Card container uses a 1px gap grid with shared outer border to create divider-line card seams.</td></tr>
+            <tr><td>Responsive columns</td><td>Single column by default; from 540px, auto-fit columns with minimum 220px width.</td></tr>
+            <tr><td>Card affordance</td><td>Hover subtly shifts card background and icon contrast to emphasize interactivity.</td></tr>
+            <tr><td>CTA micro-motion</td><td>Arrow icon nudges horizontally on hover; all transitions disabled under <code>prefers-reduced-motion</code>.</td></tr>
+            <tr><td>Semantic grouping</td><td>Grid is exposed as <code>role="list"</code> and each card as <code>role="listitem"</code>.</td></tr>
+          </tbody>
+        </table>
 
         <h4 class="doc-h4" id="sections-collections-liquid">collections.liquid</h4>
         <p>
