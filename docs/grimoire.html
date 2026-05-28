@@ -689,6 +689,7 @@
             <a class="toc-sub" href="#sections-news-grid-liquid">news-grid.liquid</a>
             <a class="toc-sub" href="#sections-read-also-liquid">read-also.liquid</a>
             <a class="toc-sub" href="#sections-oracle-quiz-liquid">oracle-quiz.liquid</a>
+            <a class="toc-sub" href="#sections-testimonials-liquid">testimonials.liquid</a>
             <a class="toc-sub" href="#sections-collections-liquid">collections.liquid</a>
           </div>
 
@@ -3796,6 +3797,56 @@
           <li>Visual language intentionally differs from standard commerce sections (split noir layout, staged narrative, serif-heavy typography).</li>
           <li>Reduced-motion mode removes stage/card animations and transitions while preserving functional progression.</li>
           <li>Preset seeds four recommendation blocks so merchants can immediately test matching paths before curating full product lists.</li>
+        </ul>
+
+        <h4 class="doc-h4" id="sections-testimonials-liquid">testimonials.liquid</h4>
+        <p>
+          Geographical testimonial storytelling section with a world map, animated country pins, and a rotating
+          quote card. Wrapped in <code>&lt;testimonials-world&gt;</code>; theme editor name:
+          <strong>Testimonials</strong>. Unlike standard sliders, each testimonial is tied to a country code and
+          visually highlights the matching SVG region in <a href="#snippet-worlds-map">worlds-map.liquid</a>.
+        </p>
+
+        <h4 class="doc-h4">Section controls</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>eyebrow</code>, <code>title</code></td><td>Header copy displayed above the map.</td></tr>
+            <tr><td><code>autoplay_delay</code></td><td>Seconds each testimonial stays active before auto-advancing (3-10s).</td></tr>
+            <tr><td><code>padding_top</code>, <code>padding_bottom</code></td><td>Vertical spacing exported to CSS custom properties for the section wrapper.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Testimonial block fields</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Field</th><th>Behavior in UI</th></tr></thead>
+          <tbody>
+            <tr><td><code>country_code</code></td><td>Stores <code>ISO|Country Name</code>; ISO part targets map path selectors, label part prints in the card.</td></tr>
+            <tr><td><code>quote</code>, <code>name</code>, <code>role</code></td><td>Main testimonial content rendered in the active card state.</td></tr>
+            <tr><td><code>rating</code></td><td>0-5 scale; 0 hides stars, otherwise shows five dots with active count.</td></tr>
+            <tr><td><code>image</code></td><td>Optional avatar. When empty, JS auto-generates initials from customer name.</td></tr>
+            <tr><td><code>product</code></td><td>Optional “Purchased” mini-row with product thumbnail/title/link.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Interaction model</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Layer</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td>Data bootstrap</td><td>Liquid serializes each block into hidden <code>data-tw-item</code> nodes consumed client-side.</td></tr>
+            <tr><td>Map pins</td><td>For each testimonial, JS finds the best matching SVG country path, computes its center via <code>getBBox()</code>, and places an interactive pin group.</td></tr>
+            <tr><td>Card transitions</td><td>Switching items toggles active map region/pin, fades card out/in, then re-renders quote, stars, author, and optional purchased product row.</td></tr>
+            <tr><td>Navigation</td><td>Users can navigate by map pin, prev/next arrows, or bottom dots; every manual jump resets autoplay progress.</td></tr>
+            <tr><td>Autoplay meter</td><td><code>requestAnimationFrame</code>-driven progress bar fills linearly and advances to the next testimonial on timeout.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Resilience and accessibility notes</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li><strong>No-JS fallback:</strong> A <code>&lt;noscript&gt;</code> article list renders all testimonials sequentially, including ratings and purchased product links.</li>
+          <li><strong>Motion preferences:</strong> Under <code>prefers-reduced-motion</code>, ping animations and transitions are disabled while content remains fully usable.</li>
+          <li><strong>ARIA labels:</strong> Region, arrows, dots, and rating output include labels to keep the rotating experience understandable for assistive tech.</li>
+          <li><strong>Country support caveat:</strong> The schema includes more countries than the hardcoded selector map; unmapped ISO codes will show in dots/card flow but without an SVG pin highlight.</li>
         </ul>
 
         <h4 class="doc-h4" id="sections-collections-liquid">collections.liquid</h4>
