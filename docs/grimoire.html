@@ -683,6 +683,7 @@
             <a class="toc-sub" href="#sections-custom-liquid-liquid">custom-liquid.liquid</a>
             <a class="toc-sub" href="#sections-text-liquid">text.liquid</a>
             <a class="toc-sub" href="#sections-page-liquid">page.liquid</a>
+            <a class="toc-sub" href="#sections-cta-with-video-liquid">cta-with-video.liquid</a>
             <a class="toc-sub" href="#sections-collections-liquid">collections.liquid</a>
           </div>
 
@@ -3525,6 +3526,45 @@
           <li>TOC and navigation landmarks include explicit <code>aria-label</code> attributes for section discovery.</li>
           <li>Progress bar is decorative (<code>aria-hidden</code>, presentational role).</li>
           <li>Entry animations and transition effects are removed under <code>prefers-reduced-motion</code>.</li>
+        </ul>
+
+        <h4 class="doc-h4" id="sections-cta-with-video-liquid">cta-with-video.liquid</h4>
+        <p>
+          Full-width cinematic call-to-action section with optional background video and layered fallback image.
+          Wrapped in <code>&lt;cta-with-video&gt;</code>; theme editor name: <strong>CTA with Video</strong>.
+          It combines media, overlay contrast controls, and a single CTA button in a centered hero composition.
+        </p>
+
+        <h4 class="doc-h4">Merchant controls</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Group</th><th>Setting</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td>Media</td><td><code>video</code></td><td>Background video source used when available.</td></tr>
+            <tr><td>Media</td><td><code>fallback_image</code></td><td>Poster/fallback layer shown while video loads or when autoplay is blocked.</td></tr>
+            <tr><td>Overlay</td><td><code>overlay_color</code>, <code>overlay_opacity</code></td><td>Darkening layer above media for text legibility.</td></tr>
+            <tr><td>Content</td><td><code>heading</code>, <code>subheading</code>, <code>text_color</code></td><td>Main CTA copy and text color styling.</td></tr>
+            <tr><td>Button</td><td><code>button_label</code>, <code>button_url</code>, <code>button_style</code></td><td>Single CTA action with 3 style variants: primary, secondary, outline.</td></tr>
+            <tr><td>Layout</td><td><code>section_height</code></td><td>Small (400px), medium (600px), or large (100vh).</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Media loading behavior</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Step</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td>Initial render</td><td>Fallback image can render eagerly; video element starts hidden (<code>opacity: 0</code>).</td></tr>
+            <tr><td>Lazy activation</td><td>An <code>IntersectionObserver</code> waits until the section is in view before loading/playing video.</td></tr>
+            <tr><td>Ready state</td><td>On <code>loadeddata</code>, video receives <code>is-loaded</code> and fades in above fallback image.</td></tr>
+            <tr><td>Autoplay blocked</td><td>If browser blocks autoplay, video remains hidden and fallback image persists.</td></tr>
+            <tr><td>No-JS note</td><td>When video exists, a noscript helper message asks users to enable JavaScript for playback.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Visual behavior notes</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li>Permanent radial vignette is applied on top of media to keep center content readable and visually focused.</li>
+          <li>Heading, subheading, and button animate upward with staggered timing; reduced-motion mode removes these animations.</li>
+          <li>CTA button focus uses a dual-ring treatment for contrast over bright or dark video frames.</li>
         </ul>
 
         <h4 class="doc-h4" id="sections-collections-liquid">collections.liquid</h4>
