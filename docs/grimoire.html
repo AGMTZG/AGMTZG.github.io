@@ -685,6 +685,7 @@
             <a class="toc-sub" href="#sections-page-liquid">page.liquid</a>
             <a class="toc-sub" href="#sections-cta-with-video-liquid">cta-with-video.liquid</a>
             <a class="toc-sub" href="#sections-blog-liquid">blog.liquid</a>
+            <a class="toc-sub" href="#sections-article-liquid">article.liquid</a>
             <a class="toc-sub" href="#sections-collections-liquid">collections.liquid</a>
           </div>
 
@@ -3607,6 +3608,51 @@
           <li>Tag filter container is a labeled navigation landmark (<code>aria-label="Filter articles by tag"</code>).</li>
           <li>Image links are marked decorative in cards (<code>aria-hidden</code>, <code>tabindex="-1"</code>) to prevent duplicate focus targets.</li>
           <li>Image zoom transition is disabled when <code>prefers-reduced-motion</code> is enabled.</li>
+        </ul>
+
+        <h4 class="doc-h4" id="sections-article-liquid">article.liquid</h4>
+        <p>
+          Main article template in a magazine-style layout. Theme editor label:
+          <strong>Article</strong>. It combines a split hero, long-form prose area, sticky desktop sidebar
+          (share + TOC), reading progress bar, and optional native Shopify comments.
+        </p>
+
+        <h4 class="doc-h4">Merchant controls</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>show_share</code></td><td>Toggles sidebar share actions (X, LinkedIn, Email, Copy link).</td></tr>
+            <tr><td><code>show_toc</code></td><td>Toggles generated desktop table of contents from article headings.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Layout structure</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Area</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td>Hero</td><td>Split grid: editorial metadata and title on one side, featured image (or placeholder) on the other with gradient treatment.</td></tr>
+            <tr><td>Sidebar</td><td>Desktop sticky rail with share controls and TOC; mobile collapses into a regular stacked row.</td></tr>
+            <tr><td>Prose</td><td>Renders <code>{{ article.content }}</code> with dedicated long-form typography for headings, lists, quotes, code, and tables.</td></tr>
+            <tr><td>Comments</td><td>If blog comments are enabled, outputs existing comments (paginated by 10) and new-comment form.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Interactive behavior</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Feature</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td>Reading progress</td><td>Fixed top bar width updates on scroll using document scroll ratio.</td></tr>
+            <tr><td>Copy link action</td><td>Uses Clipboard API; success state changes button label to “Copied!” then resets after 2 seconds.</td></tr>
+            <tr><td>TOC generation</td><td>When enabled, scans prose <code>h2/h3</code>, auto-generates IDs if missing, builds nested TOC links, and hides TOC if fewer than two headings.</td></tr>
+            <tr><td>Active heading state</td><td><code>IntersectionObserver</code> toggles <code>is-active</code> on TOC links while reading.</td></tr>
+            <tr><td>No-JS fallback</td><td>Hides copy-link button and TOC via <code>&lt;noscript&gt;</code> to avoid non-functional controls.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Comments integration notes</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li>Comment rendering and form submission use native Shopify article comment endpoints.</li>
+          <li>Form fields map to <code>comment[author]</code>, <code>comment[email]</code>, and <code>comment[body]</code> with theme-styled error output via <code>default_errors</code>.</li>
         </ul>
 
         <h4 class="doc-h4" id="sections-collections-liquid">collections.liquid</h4>
