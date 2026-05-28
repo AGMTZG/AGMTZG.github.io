@@ -678,6 +678,7 @@
             <a class="toc-sub" href="#sections-search-liquid">search.liquid</a>
             <a class="toc-sub" href="#sections-product-recommendations-liquid">product-recommendations.liquid</a>
             <a class="toc-sub" href="#sections-recently-viewed-liquid">recently-viewed.liquid</a>
+            <a class="toc-sub" href="#sections-product-benefits-liquid">product-benefits.liquid</a>
             <a class="toc-sub" href="#sections-collections-liquid">collections.liquid</a>
           </div>
 
@@ -3327,6 +3328,45 @@
           <li>Includes one <a href="#snippet-product-modal">product-modal</a> and binds card interactions with <code>GrimoireQuickView</code> / <code>GrimoireProduct.bindCards</code>.</li>
           <li>A hidden dummy <code>product-card</code> render is included only to load shared card CSS before JS-built cards mount.</li>
           <li>On disconnect, quick-view and carousel instances are destroyed to prevent leaked handlers.</li>
+        </ul>
+
+        <h4 class="doc-h4" id="sections-product-benefits-liquid">product-benefits.liquid</h4>
+        <p>
+          Compact product-page info grid for trust signals and service highlights (shipping, returns, payment, etc.).
+          Theme editor name: <strong>Product Benefits</strong>. This section is static Liquid/CSS only (no JavaScript)
+          and can render up to eight benefit cards.
+        </p>
+
+        <h4 class="doc-h4">Merchant controls</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>columns</code> (2-4)</td><td>Desktop column count via CSS variable; mobile stays at 2 columns by default.</td></tr>
+            <tr><td><code>icon_color</code>, <code>text_color</code></td><td>Global icon and text color for all cards.</td></tr>
+            <tr><td><code>border_color</code></td><td>Outer border and internal divider color.</td></tr>
+            <tr><td><code>background_color</code></td><td>Card background fill color.</td></tr>
+            <tr><td>Section limit</td><td><code>limit: 1</code> (single instance per template).</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Benefit blocks</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Field</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td><code>icon</code></td><td>Built-in icon set: truck, shield, leaf, star, clock, tag, refresh, lock, or custom SVG.</td></tr>
+            <tr><td><code>custom_svg</code></td><td>Raw inline <code>&lt;svg&gt;</code> markup, rendered only when icon is set to <code>custom</code>.</td></tr>
+            <tr><td><code>label</code></td><td>Small uppercase descriptor line.</td></tr>
+            <tr><td><code>value</code></td><td>Main emphasized benefit text.</td></tr>
+            <tr><td>Capacity</td><td>Up to <strong>8</strong> benefit blocks.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Rendering rules</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li>The whole grid is not rendered when there are no blocks (<code>section.blocks.size == 0</code> guard).</li>
+          <li>Grid uses <code>role="list"</code> and each card uses <code>role="listitem"</code> for simple semantic grouping.</li>
+          <li>Section is disabled in header/footer/aside groups (main content placement only).</li>
+          <li>Preset ships four common commerce benefits as starter content.</li>
         </ul>
 
         <h4 class="doc-h4" id="sections-collections-liquid">collections.liquid</h4>
