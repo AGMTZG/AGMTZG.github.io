@@ -692,6 +692,7 @@
             <a class="toc-sub" href="#sections-testimonials-liquid">testimonials.liquid</a>
             <a class="toc-sub" href="#sections-signup-flyout-liquid">signup-flyout.liquid</a>
             <a class="toc-sub" href="#sections-faq-liquid">faq.liquid</a>
+            <a class="toc-sub" href="#sections-contact-hero-liquid">contact-hero.liquid</a>
             <a class="toc-sub" href="#sections-collections-liquid">collections.liquid</a>
           </div>
 
@@ -3955,6 +3956,45 @@
           <li>Section keeps semantic region labeling (<code>aria-label</code>) and updates accordion button <code>aria-expanded</code> states.</li>
           <li><code>&lt;noscript&gt;</code> message clarifies that filtering requires JavaScript while all questions remain visible.</li>
           <li>Transition effects are disabled for users with <code>prefers-reduced-motion</code>.</li>
+        </ul>
+
+        <h4 class="doc-h4" id="sections-contact-hero-liquid">contact-hero.liquid</h4>
+        <p>
+          Two-column contact landing section that pairs editorial/support details with a native Shopify contact
+          form. Theme editor name: <strong>Contact Hero</strong>. The title stack is rendered through
+          <a href="#snippet-section-title">section-title</a> using <code>heading_tag: 'h1'</code>.
+        </p>
+
+        <h4 class="doc-h4">Merchant controls</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Area</th><th>Setting</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td>Hero copy</td><td><code>eyebrow</code>, <code>heading</code>, <code>subtext</code></td><td>Left-column intro and explanatory paragraph.</td></tr>
+            <tr><td>Contact details</td><td><code>email</code>, <code>phone</code>, <code>hours</code></td><td>Optional info-list rows with decorative icons; each row hides when blank.</td></tr>
+            <tr><td>Form header</td><td><code>form_title</code></td><td>Heading above the form panel.</td></tr>
+            <tr><td>Primary CTA</td><td><code>submit_label</code></td><td>Text for form submit button.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Form behavior</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Feature</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td>Backend endpoint</td><td>Uses native <code>{% form 'contact' %}</code> flow (no custom JS submission layer).</td></tr>
+            <tr><td>Fields</td><td>Collects first name, last name, email (required), phone, and message body (required).</td></tr>
+            <tr><td>Persistence on errors</td><td>Reuses <code>form.email</code> and <code>form.body</code> so failed submissions preserve key user input.</td></tr>
+            <tr><td>Error feedback</td><td>Shows Shopify <code>default_errors</code> in an alert container when validation/server errors occur.</td></tr>
+            <tr><td>Success feedback</td><td>Replaces form with translated confirmation text via <code>'contact.form.post_success' | t</code> after successful submit.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Layout and UX notes</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li>Responsive grid switches from single column to balanced 2-column layout at 900px+.</li>
+          <li>The section uses theme tokens for colors, typography, and input radius (<code>--style-border-radius-inputs</code>).</li>
+          <li>Button states map to theme variables (<code>--primary-button-*</code>) so global button styling remains consistent.</li>
+          <li>Focus-visible outlines are explicitly defined for submit button accessibility.</li>
+          <li>Input/button transitions are disabled under <code>prefers-reduced-motion</code>.</li>
         </ul>
 
         <h4 class="doc-h4" id="sections-collections-liquid">collections.liquid</h4>
