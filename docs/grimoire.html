@@ -684,6 +684,7 @@
             <a class="toc-sub" href="#sections-text-liquid">text.liquid</a>
             <a class="toc-sub" href="#sections-page-liquid">page.liquid</a>
             <a class="toc-sub" href="#sections-cta-with-video-liquid">cta-with-video.liquid</a>
+            <a class="toc-sub" href="#sections-blog-liquid">blog.liquid</a>
             <a class="toc-sub" href="#sections-collections-liquid">collections.liquid</a>
           </div>
 
@@ -3564,6 +3565,48 @@
           <li>Permanent radial vignette is applied on top of media to keep center content readable and visually focused.</li>
           <li>Heading, subheading, and button animate upward with staggered timing; reduced-motion mode removes these animations.</li>
           <li>CTA button focus uses a dual-ring treatment for contrast over bright or dark video frames.</li>
+        </ul>
+
+        <h4 class="doc-h4" id="sections-blog-liquid">blog.liquid</h4>
+        <p>
+          Main blog index section for article listing and tag navigation. Theme editor label:
+          <strong>Blog</strong>. It renders a section-title header, horizontal tag filter rail, responsive
+          article card grid, and classic pagination.
+        </p>
+
+        <h4 class="doc-h4">Merchant controls</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>eyebrow</code>, <code>heading</code></td><td>Header row content rendered through <a href="#snippet-section-title">section-title</a>.</td></tr>
+            <tr><td><code>articles_per_page</code> (3-24, step 3)</td><td>Controls <code>paginate blog.articles</code> page size (default 9).</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Listing and filter behavior</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Feature</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td>Tag rail</td><td>Shows “All” plus <code>blog.all_tags</code>; selected tag gets active styling and <code>aria-current="page"</code>.</td></tr>
+            <tr><td>Tag URLs</td><td>Uses native blog tag routes (<code>{{ blog.url }}/tagged/{handle}</code>) for filter navigation.</td></tr>
+            <tr><td>Grid layout</td><td>Article cards display in 1 column on small screens, 2 columns from ~541px, and 3 columns from ~861px.</td></tr>
+            <tr><td>Card metadata</td><td>Each card can render media/placeholder, up to two tags, title link, optional excerpt (truncated to 130 chars), author, and published date.</td></tr>
+            <tr><td>Empty state</td><td>When no articles are available, section shows “The compendium awaits its first inscription.”</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Pagination behavior</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li>Renders prev/next controls and page parts from <code>paginate.parts</code>, including ellipsis states.</li>
+          <li>Current page number uses <code>aria-current="page"</code> semantics.</li>
+          <li>Navigation is server-rendered links (no AJAX interception in this section).</li>
+        </ul>
+
+        <h4 class="doc-h4">Accessibility and motion notes</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li>Tag filter container is a labeled navigation landmark (<code>aria-label="Filter articles by tag"</code>).</li>
+          <li>Image links are marked decorative in cards (<code>aria-hidden</code>, <code>tabindex="-1"</code>) to prevent duplicate focus targets.</li>
+          <li>Image zoom transition is disabled when <code>prefers-reduced-motion</code> is enabled.</li>
         </ul>
 
         <h4 class="doc-h4" id="sections-collections-liquid">collections.liquid</h4>
