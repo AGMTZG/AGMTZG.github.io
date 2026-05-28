@@ -663,6 +663,7 @@
             <a class="toc-sub" href="#sections-product-liquid">product.liquid</a>
             <a class="toc-sub" href="#sections-collection-liquid">collection.liquid</a>
             <a class="toc-sub" href="#sections-cart-liquid">cart.liquid</a>
+            <a class="toc-sub" href="#sections-search-liquid">search.liquid</a>
             <a class="toc-sub" href="#sections-collections-liquid">collections.liquid</a>
           </div>
 
@@ -3114,7 +3115,7 @@
         <h4 class="doc-h4" id="sections-cart-liquid">cart.liquid</h4>
         <p>
           Full-page cart template (singleton). Presents line items in a table-style layout with a sticky
-          order summary on desktop. Theme editor name: <strong>Cart</strong>. The schema has no settings —
+          order summary on desktop. Theme editor name: <strong>Cart</strong>. The schema has no settings,
           copy and structure are fixed in the section. This is separate from the header’s cart drawer;
           use this section on the <code>/cart</code> template only.
         </p>
@@ -3166,6 +3167,48 @@
           <li>Quantity number inputs are shown instead of +/- buttons; form posts to <code>{{ routes.cart_url }}</code> with <code>updates[line_key]</code> fields.</li>
           <li>Remove links use native <code>url_to_remove</code> navigation.</li>
           <li>Checkout submits via the standard cart form (<code>name="checkout"</code>).</li>
+        </ul>
+
+        <h4 class="doc-h4" id="sections-search-liquid">search.liquid</h4>
+        <p>
+          Unified search template for products, articles, and pages. Theme editor name:
+          <strong>Search</strong>. The section has no configurable settings; behavior is driven by Shopify's
+          <code>search</code> object and query parameters.
+        </p>
+
+        <h4 class="doc-h4">Search flow</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>State</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td>Before searching</td><td>Shows prompt headline and the search form only.</td></tr>
+            <tr><td>After searching</td><td>Header switches to quoted terms and a result count line with singular/plural/empty variants.</td></tr>
+            <tr><td>No matches</td><td>Dedicated empty state with CTA to <code>routes.collections_url</code>.</td></tr>
+            <tr><td>Matches found</td><td>Renders a responsive mixed-content grid and paginates 20 results per page.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Result types</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Object type</th><th>Rendering</th></tr></thead>
+          <tbody>
+            <tr><td><code>product</code></td><td>Uses <a href="#snippet-product-card">product-card</a> with sale/compare pricing and quick view enabled (<code>opens_modal: true</code>).</td></tr>
+            <tr><td><code>article</code></td><td>Media card with article image (or placeholder), type badge, title, and 16-word excerpt.</td></tr>
+            <tr><td><code>page</code></td><td>Text card with type badge, title, 16-word excerpt, and directional arrow.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Form and query behavior</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li>Form posts to <code>routes.search_url</code> with fixed <code>type=product,article,page</code> scope.</li>
+          <li>Clear control appears only when a term exists and links back to the base search route.</li>
+          <li>Pagination uses Shopify <code>paginate.parts</code> with accessible current/disabled states.</li>
+        </ul>
+
+        <h4 class="doc-h4">Quick view and accessibility</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li>Includes one <a href="#snippet-product-modal">product-modal</a> and binds product cards through <code>GrimoireQuickView</code> + <code>GrimoireProduct.bindCards</code>.</li>
+          <li>Result count and result grid use polite live-region semantics for assistive updates.</li>
+          <li>Animations and hover transitions are disabled under <code>prefers-reduced-motion</code>.</li>
         </ul>
 
         <h4 class="doc-h4" id="sections-collections-liquid">collections.liquid</h4>
