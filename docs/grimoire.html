@@ -681,6 +681,7 @@
             <a class="toc-sub" href="#sections-product-benefits-liquid">product-benefits.liquid</a>
             <a class="toc-sub" href="#sections-custom-section-liquid">custom-section.liquid</a>
             <a class="toc-sub" href="#sections-custom-liquid-liquid">custom-liquid.liquid</a>
+            <a class="toc-sub" href="#sections-text-liquid">text.liquid</a>
             <a class="toc-sub" href="#sections-collections-liquid">collections.liquid</a>
           </div>
 
@@ -3442,6 +3443,40 @@
           <li>Best used for lightweight embeds, app blocks/snippets, badges, trust widgets, or one-off markup that does not justify a dedicated section file.</li>
           <li>Because output is direct, any structure/styling responsibility belongs to the snippet or markup the merchant pastes.</li>
           <li>Unlike <a href="#sections-custom-section-liquid">custom-section.liquid</a>, this section has no internal block system or background canvas controls.</li>
+        </ul>
+
+        <h4 class="doc-h4" id="sections-text-liquid">text.liquid</h4>
+        <p>
+          Lightweight block-container section for editorial content rows. Theme editor name:
+          <strong>Text</strong>. It uses the same <code>cs-*</code> / <code>group</code> building blocks as the
+          broader custom builder, but with a much smaller section-level control surface.
+        </p>
+
+        <h4 class="doc-h4">Section controls</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>max_width</code> (400-1400px)</td><td>Constrains the block canvas width inside the full-width section.</td></tr>
+            <tr><td><code>padding_top</code>, <code>padding_bottom</code> (0-64px)</td><td>Vertical section spacing around the inner block stack.</td></tr>
+            <tr><td>Top rhythm</td><td>Section adds a fixed top margin (<code>margin-top: clamp(1.5rem, 3vw, 3.5rem)</code>) to separate it from previous content.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Block integration</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Aspect</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td>Renderer</td><td>Uses Shopify native <code>content_for 'blocks'</code> for all block output.</td></tr>
+            <tr><td>Allowed block types</td><td>Supports the same modular set as the custom builder: badge, button, divider, heading, icon item, image, quote, spacer, subheading, text, video, and group.</td></tr>
+            <tr><td>No section title shell</td><td>Unlike <a href="#sections-custom-section-liquid">custom-section.liquid</a>, there is no built-in eyebrow/heading wrapper at section level.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Empty-state behavior</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li>If no blocks are added, the section renders a dashed placeholder panel (“Add blocks via the theme editor”).</li>
+          <li>Placeholder uses dedicated empty classes and keeps editor layout visible without outputting storefront content blocks.</li>
+          <li>Desktop increases empty-container side margins and inner padding for better editing affordance.</li>
         </ul>
 
         <h4 class="doc-h4" id="sections-collections-liquid">collections.liquid</h4>
