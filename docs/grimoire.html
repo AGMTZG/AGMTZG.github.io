@@ -691,6 +691,7 @@
             <a class="toc-sub" href="#sections-oracle-quiz-liquid">oracle-quiz.liquid</a>
             <a class="toc-sub" href="#sections-testimonials-liquid">testimonials.liquid</a>
             <a class="toc-sub" href="#sections-signup-flyout-liquid">signup-flyout.liquid</a>
+            <a class="toc-sub" href="#sections-faq-liquid">faq.liquid</a>
             <a class="toc-sub" href="#sections-collections-liquid">collections.liquid</a>
           </div>
 
@@ -3907,6 +3908,54 @@
           Calling <code>showSuccess()</code> hides form controls, announces success through a polite live region,
           focuses the success heading for assistive technology, and auto-closes the flyout after ~3 seconds.
         </p>
+
+        <h4 class="doc-h4" id="sections-faq-liquid">faq.liquid</h4>
+        <p>
+          Editorial FAQ section with a two-column layout: sticky category filters on the left and a single-open
+          accordion list on the right. Wrapped in <code>&lt;faq-section&gt;</code>; theme editor name:
+          <strong>FAQ</strong>. Question rows come from <a href="#blocks-faq">faq-item.liquid</a> blocks.
+        </p>
+
+        <h4 class="doc-h4">Merchant controls</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Group</th><th>Setting</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td>Header copy</td><td><code>eyebrow</code>, <code>heading</code>, <code>subtext</code></td><td>Top title stack and optional helper paragraph.</td></tr>
+            <tr><td>Contact link</td><td><code>contact_text</code>, <code>contact_url</code></td><td>Inline CTA appended to subtext; becomes a link only if URL is provided.</td></tr>
+            <tr><td>Tabs label</td><td><code>tab_all_label</code></td><td>Custom label for the default catch-all filter tab (for example “All”, “Everything”).</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Block model</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Rule</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td>Block type</td><td>Accepts only <code>faq-item</code> blocks, up to <strong>20</strong> items.</td></tr>
+            <tr><td>Rendering strategy</td><td>Uses <code>{% content_for 'blocks' %}</code> so each block manages its own markup while the section handles filtering and accordion behavior.</td></tr>
+            <tr><td>Empty state</td><td>If no blocks exist, shows “Add questions via the theme editor.”</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Runtime behavior</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Feature</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td>Accordion logic</td><td>Only one item can stay open at a time; opening a new item closes previously expanded content.</td></tr>
+            <tr><td>Animated height</td><td>JS applies inline <code>max-height</code> based on <code>scrollHeight</code> for smooth expand/collapse transitions.</td></tr>
+            <tr><td>Category discovery</td><td>Reads each row <code>data-category</code>/<code>data-category-name</code> and builds tabs dynamically in DOM order.</td></tr>
+            <tr><td>Filter behavior</td><td>Selecting a tab toggles <code>hidden</code> on non-matching rows and resets any currently open panel.</td></tr>
+            <tr><td>Tab threshold</td><td>Category sidebar remains hidden when fewer than 2 unique categories exist.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Responsive and accessibility notes</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li>Mobile: category tabs render as a compact grid with bottom-border active state.</li>
+          <li>Desktop (640px+): tabs become a sticky vertical rail with left-border active marker.</li>
+          <li>Section keeps semantic region labeling (<code>aria-label</code>) and updates accordion button <code>aria-expanded</code> states.</li>
+          <li><code>&lt;noscript&gt;</code> message clarifies that filtering requires JavaScript while all questions remain visible.</li>
+          <li>Transition effects are disabled for users with <code>prefers-reduced-motion</code>.</li>
+        </ul>
 
         <h4 class="doc-h4" id="sections-collections-liquid">collections.liquid</h4>
         <p>
