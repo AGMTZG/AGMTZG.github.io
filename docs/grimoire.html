@@ -694,6 +694,7 @@
             <a class="toc-sub" href="#sections-faq-liquid">faq.liquid</a>
             <a class="toc-sub" href="#sections-contact-hero-liquid">contact-hero.liquid</a>
             <a class="toc-sub" href="#sections-contact-channels-liquid">contact-channels.liquid</a>
+            <a class="toc-sub" href="#sections-contact-location-liquid">contact-location.liquid</a>
             <a class="toc-sub" href="#sections-collections-liquid">collections.liquid</a>
           </div>
 
@@ -4035,6 +4036,43 @@
             <tr><td>Semantic grouping</td><td>Grid is exposed as <code>role="list"</code> and each card as <code>role="listitem"</code>.</td></tr>
           </tbody>
         </table>
+
+        <h4 class="doc-h4" id="sections-contact-location-liquid">contact-location.liquid</h4>
+        <p>
+          Split contact-location section combining an embeddable map panel with editorial address information.
+          Theme editor name: <strong>Contact Location</strong>. It is intended for headquarters/store visibility
+          and uses a merchant-provided HTML map embed.
+        </p>
+
+        <h4 class="doc-h4">Section controls</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>eyebrow</code>, <code>heading</code>, <code>description</code></td><td>Intro copy rendered in the right-side information column.</td></tr>
+            <tr><td><code>map_embed</code> (HTML)</td><td>Raw embed slot for map iframe markup (for example Google Maps embed code).</td></tr>
+            <tr><td><code>place_name</code></td><td>Primary location label shown in the address block and reused for map aria-label fallback.</td></tr>
+            <tr><td><code>address</code></td><td>Multiline address body; line breaks are preserved with <code>newline_to_br</code>.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Map rendering logic</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Case</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td>Embed provided</td><td>Outputs merchant HTML inside <code>.cl-map</code>; section CSS targets nested iframe sizing/border and applies a monochrome visual filter.</td></tr>
+            <tr><td>Embed missing</td><td>Shows a neutral placeholder panel with decorative map icon instead of blank space.</td></tr>
+            <tr><td>Map semantics</td><td>When embed exists, map container gets contextual <code>aria-label</code> from <code>place_name</code> (fallback: “Location map”).</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Layout and content behavior</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li>Responsive structure: single column by default, two balanced columns from 900px+.</li>
+          <li>Address block is conditional and renders only if <code>place_name</code> or <code>address</code> has content.</li>
+          <li>Location label includes an inline pin icon and uppercase micro-heading styling.</li>
+          <li>Section uses theme tokens for page width, spacing, fonts, and color hierarchy to stay visually consistent with other contact templates.</li>
+          <li>No JavaScript is required; all behavior is Liquid/CSS-driven.</li>
+        </ul>
 
         <h4 class="doc-h4" id="sections-collections-liquid">collections.liquid</h4>
         <p>
