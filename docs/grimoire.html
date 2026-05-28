@@ -676,6 +676,7 @@
             <a class="toc-sub" href="#sections-collection-liquid">collection.liquid</a>
             <a class="toc-sub" href="#sections-cart-liquid">cart.liquid</a>
             <a class="toc-sub" href="#sections-search-liquid">search.liquid</a>
+            <a class="toc-sub" href="#sections-product-recommendations-liquid">product-recommendations.liquid</a>
             <a class="toc-sub" href="#sections-collections-liquid">collections.liquid</a>
           </div>
 
@@ -3221,6 +3222,42 @@
           <li>Includes one <a href="#snippet-product-modal">product-modal</a> and binds product cards through <code>GrimoireQuickView</code> + <code>GrimoireProduct.bindCards</code>.</li>
           <li>Result count and result grid use polite live-region semantics for assistive updates.</li>
           <li>Animations and hover transitions are disabled under <code>prefers-reduced-motion</code>.</li>
+        </ul>
+
+        <h4 class="doc-h4" id="sections-product-recommendations-liquid">product-recommendations.liquid</h4>
+        <p>
+          Product detail companion section that loads Shopify recommendations asynchronously and displays
+          them as a carousel of product cards. Wrapped in <code>&lt;product-recommendations&gt;</code>;
+          theme editor name: <strong>Product Recommendations</strong>.
+        </p>
+
+        <h4 class="doc-h4">Merchant controls</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>eyebrow</code>, <code>heading</code></td><td>Header text rendered through <a href="#snippet-section-title">section-title</a>.</td></tr>
+            <tr><td><code>count</code> (2-10)</td><td>Recommendation limit sent to Shopify recommendations endpoint.</td></tr>
+            <tr><td><code>intent</code></td><td>Chooses recommendation source: <code>related</code> or <code>complementary</code>.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Load and render behavior</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Step</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td>Initial state</td><td>Section is rendered with <code>display:none</code> and an empty <a href="#snippet-product-carousel">product-carousel</a> shell.</td></tr>
+            <tr><td>Fetch request</td><td>JS requests <code>routes.product_recommendations_url</code> with <code>section_id</code>, current <code>product_id</code>, <code>limit</code>, and <code>intent</code>.</td></tr>
+            <tr><td>Server payload</td><td>The same section re-renders on the server; only hidden <code>.pr-fetched-item</code> wrappers are parsed from that response.</td></tr>
+            <tr><td>Hydration</td><td>Each fetched wrapper is injected into a new <code>.pcar-slide</code> inside the carousel track, then <code>GrimoireCarousel.init</code> starts the slider.</td></tr>
+            <tr><td>Visibility guard</td><td>If no items are returned, the section remains hidden and no empty placeholder is shown.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Card and modal integration</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li>Fetched products render with <a href="#snippet-product-card">product-card</a> and the same sale/compare-price logic used in other merchandising rows.</li>
+          <li>The section includes one <a href="#snippet-product-modal">product-modal</a>; cards open quick view via <code>opens_modal: true</code>.</li>
+          <li>On unmount, both quick-view and carousel instances are destroyed to avoid stale listeners.</li>
         </ul>
 
         <h4 class="doc-h4" id="sections-collections-liquid">collections.liquid</h4>
