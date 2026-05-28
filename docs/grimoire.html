@@ -682,6 +682,7 @@
             <a class="toc-sub" href="#sections-custom-section-liquid">custom-section.liquid</a>
             <a class="toc-sub" href="#sections-custom-liquid-liquid">custom-liquid.liquid</a>
             <a class="toc-sub" href="#sections-text-liquid">text.liquid</a>
+            <a class="toc-sub" href="#sections-page-liquid">page.liquid</a>
             <a class="toc-sub" href="#sections-collections-liquid">collections.liquid</a>
           </div>
 
@@ -3477,6 +3478,53 @@
           <li>If no blocks are added, the section renders a dashed placeholder panel (“Add blocks via the theme editor”).</li>
           <li>Placeholder uses dedicated empty classes and keeps editor layout visible without outputting storefront content blocks.</li>
           <li>Desktop increases empty-container side margins and inner padding for better editing affordance.</li>
+        </ul>
+
+        <h4 class="doc-h4" id="sections-page-liquid">page.liquid</h4>
+        <p>
+          Main template section for standard Shopify pages (About, policy pages, editorial pages, etc.).
+          Theme editor name: <strong>Page</strong>. It renders a hero header from the page object and
+          the rich page body, with optional reading-progress and in-page table-of-contents enhancements.
+        </p>
+
+        <h4 class="doc-h4">Merchant controls</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>eyebrow</code></td><td>Small label above page title in the hero (default “Grimoire”).</td></tr>
+            <tr><td><code>show_toc</code></td><td>Enables/disables auto-generated table of contents from <code>h2</code>/<code>h3</code> headings in page content.</td></tr>
+            <tr><td><code>show_progress</code></td><td>Toggles fixed reading progress bar at top of viewport.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Content rendering model</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Area</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td>Hero</td><td>Displays eyebrow, <code>page.title</code> as <code>h1</code>, and publication date when available.</td></tr>
+            <tr><td>Body</td><td>Outputs <code>{{ page.content }}</code> inside a styled prose container (<code>.pg-prose</code>).</td></tr>
+            <tr><td>Typography system</td><td>Applies custom long-form styles for headings, links, blockquotes, code blocks, lists, tables, and horizontal rules.</td></tr>
+            <tr><td>Layout variant</td><td>When TOC is enabled, body gets <code>pg-body--with-toc</code> spacing and a TOC bar above prose.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">JavaScript behavior</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Feature</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td>Reading progress</td><td>Calculates scroll progress against <code>#pg-prose</code> height and updates <code>#pg-reading-bar</code> width on scroll.</td></tr>
+            <tr><td>TOC generation</td><td>Scans prose for <code>h2</code>/<code>h3</code>, auto-slugs missing IDs, and builds anchor links dynamically.</td></tr>
+            <tr><td>Smooth navigation</td><td>TOC links call <code>scrollIntoView</code>; falls back to instant scrolling when reduced-motion is preferred.</td></tr>
+            <tr><td>Active section state</td><td>Uses <code>IntersectionObserver</code> to mark current TOC item with <code>is-active</code>.</td></tr>
+            <tr><td>No heading fallback</td><td>If no <code>h2/h3</code> exist, TOC is hidden and body layout class for TOC is removed.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Accessibility and motion notes</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li>TOC and navigation landmarks include explicit <code>aria-label</code> attributes for section discovery.</li>
+          <li>Progress bar is decorative (<code>aria-hidden</code>, presentational role).</li>
+          <li>Entry animations and transition effects are removed under <code>prefers-reduced-motion</code>.</li>
         </ul>
 
         <h4 class="doc-h4" id="sections-collections-liquid">collections.liquid</h4>
