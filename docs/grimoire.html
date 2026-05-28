@@ -680,6 +680,7 @@
             <a class="toc-sub" href="#sections-recently-viewed-liquid">recently-viewed.liquid</a>
             <a class="toc-sub" href="#sections-product-benefits-liquid">product-benefits.liquid</a>
             <a class="toc-sub" href="#sections-custom-section-liquid">custom-section.liquid</a>
+            <a class="toc-sub" href="#sections-custom-liquid-liquid">custom-liquid.liquid</a>
             <a class="toc-sub" href="#sections-collections-liquid">collections.liquid</a>
           </div>
 
@@ -3407,6 +3408,40 @@
         <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
           <li>Default preset ships as a complete storytelling starter (subheading, heading, body text, image, and grouped CTA button).</li>
           <li>The preset demonstrates nested composition through the <code>group</code> block with mobile stacking enabled.</li>
+        </ul>
+
+        <h4 class="doc-h4" id="sections-custom-liquid-liquid">custom-liquid.liquid</h4>
+        <p>
+          Raw injection section for merchant/admin-authored Liquid and HTML.
+          Theme editor name: <strong>Custom Liquid</strong>. This section is intentionally minimal: it wraps
+          one <code>liquid</code> field in a width-constrained container and applies optional vertical spacing.
+        </p>
+
+        <h4 class="doc-h4">Merchant controls</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>custom_liquid</code></td><td>Main source field. Accepts Liquid, HTML, and app snippets in full section context.</td></tr>
+            <tr><td><code>max_width</code> (480-1600px)</td><td>Constrains inner container width before side padding is applied.</td></tr>
+            <tr><td><code>padding_top</code>, <code>padding_bottom</code></td><td>Section-level vertical spacing controls (0-120px each).</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Rendering behavior</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Case</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td>Content present</td><td>Outputs <code>{{ s.custom_liquid }}</code> directly inside <code>.cl-section__inner</code> (no extra sanitizing or transformation by this section).</td></tr>
+            <tr><td>Content empty</td><td>Shows a dashed editor placeholder (“Add your custom Liquid or HTML...”) to make empty states obvious in theme customization.</td></tr>
+            <tr><td>Layout footprint</td><td>Spans full grid width (<code>grid-column: 1 / -1</code>) but keeps content centered with responsive side padding.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Practical notes</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li>Best used for lightweight embeds, app blocks/snippets, badges, trust widgets, or one-off markup that does not justify a dedicated section file.</li>
+          <li>Because output is direct, any structure/styling responsibility belongs to the snippet or markup the merchant pastes.</li>
+          <li>Unlike <a href="#sections-custom-section-liquid">custom-section.liquid</a>, this section has no internal block system or background canvas controls.</li>
         </ul>
 
         <h4 class="doc-h4" id="sections-collections-liquid">collections.liquid</h4>
