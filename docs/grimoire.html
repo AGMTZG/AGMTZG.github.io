@@ -687,6 +687,7 @@
             <a class="toc-sub" href="#sections-blog-liquid">blog.liquid</a>
             <a class="toc-sub" href="#sections-article-liquid">article.liquid</a>
             <a class="toc-sub" href="#sections-news-grid-liquid">news-grid.liquid</a>
+            <a class="toc-sub" href="#sections-read-also-liquid">read-also.liquid</a>
             <a class="toc-sub" href="#sections-collections-liquid">collections.liquid</a>
           </div>
 
@@ -3699,6 +3700,53 @@
         <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
           <li>All navigation is server-rendered links (tag filtering and pagination) with no AJAX interception in this section.</li>
           <li>Featured and sidebar image hover zoom transitions are disabled under <code>prefers-reduced-motion</code>.</li>
+        </ul>
+
+        <h4 class="doc-h4" id="sections-read-also-liquid">read-also.liquid</h4>
+        <p>
+          Article-page related-reading carousel that surfaces more posts from the same blog stream.
+          Theme editor name: <strong>Read Also</strong>. It excludes the current article and renders a
+          responsive horizontal slider with card metadata.
+        </p>
+
+        <h4 class="doc-h4">Merchant controls</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>eyebrow</code>, <code>heading</code></td><td>Header labels rendered through <a href="#snippet-section-title">section-title</a>.</td></tr>
+            <tr><td>Article source</td><td>Implicitly uses current <code>blog.articles</code> context (no blog picker in schema).</td></tr>
+            <tr><td>Display guard</td><td>Section renders only when <code>blog.articles.size &gt; 1</code>.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Content mapping rules</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Rule</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td>Candidate pool</td><td>Iterates blog articles up to 12 items, then skips the current article by ID.</td></tr>
+            <tr><td>Card fields</td><td>Each slide includes image/placeholder, up to 2 tags, title, optional excerpt (truncated 110 chars), author, and published date.</td></tr>
+            <tr><td>Image fallback</td><td>Uses rotating placeholder variants when article image is absent.</td></tr>
+            <tr><td>No-results case</td><td>If only one article exists in the blog (current post), the entire section is omitted.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Carousel behavior</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Feature</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td>Visible slides</td><td>1 / 2 / 3 / 4 cards at mobile / 540+ / 900+ / 1200+ breakpoints.</td></tr>
+            <tr><td>Navigation</td><td>Prev/next arrows jump by one full visible group and toggle <code>aria-disabled</code> at bounds.</td></tr>
+            <tr><td>Positioning</td><td>Track translates using the selected slide's <code>offsetLeft</code> for precise snapping.</td></tr>
+            <tr><td>Resize handling</td><td><code>ResizeObserver</code> resets index to 0 and recomputes geometry on container size changes.</td></tr>
+            <tr><td>Live updates</td><td>Screen-reader live region announces visible range (for example “1-4 of 8”).</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Progressive enhancement notes</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li>Without JS, cards remain horizontally scrollable via native overflow with scroll-snap.</li>
+          <li>JS mode adds <code>ra-js-active</code>, hides overflow, and enables arrow controls.</li>
+          <li>Hover/track transitions are removed under <code>prefers-reduced-motion</code>.</li>
         </ul>
 
         <h4 class="doc-h4" id="sections-collections-liquid">collections.liquid</h4>
