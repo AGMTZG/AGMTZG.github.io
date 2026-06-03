@@ -482,6 +482,17 @@
       width: 46%;
     }
 
+    /* Hyphenate prose in token/guide tables; never break literal token names in <code> */
+    #snippets .params-table.params-table--guide td:last-child,
+    #snippets .params-table.params-table--guide .table-token-list li {
+      hyphens: auto;
+      -webkit-hyphens: auto;
+    }
+    #snippets .params-table code {
+      hyphens: none;
+      -webkit-hyphens: none;
+    }
+
     /* ── GRID TABLES ── */
     .ref-grid {
       display: grid; grid-template-columns: 1fr 1fr;
@@ -643,12 +654,13 @@
             </a>
             <a class="toc-sub" href="#snippet-css-variables">css-variables.liquid</a>
             <a class="toc-sub" href="#snippet-section-title">section-title.liquid</a>
-            <a class="toc-sub" href="#snippet-image">image.liquid</a>
             <a class="toc-sub" href="#snippet-product-card">product-card.liquid</a>
             <a class="toc-sub" href="#snippet-product-interactions">product-interactions.liquid</a>
             <a class="toc-sub" href="#snippet-product-modal">product-modal.liquid</a>
             <a class="toc-sub" href="#snippet-product-carousel">product-carousel.liquid</a>
             <a class="toc-sub" href="#snippet-meta-tags">meta-tags.liquid</a>
+            <a class="toc-sub" href="#snippet-language-selector">language-selector.liquid</a>
+            <a class="toc-sub" href="#snippet-locale-selector">locale-selector.liquid</a>
             <a class="toc-sub" href="#snippet-worlds-map">worlds-map.liquid</a>
             <a class="toc-link" href="#blocks">
               <span class="toc-dot"></span>Blocks
@@ -748,7 +760,7 @@
         </p>
         <p>
           Out of the box the theme includes <strong>40 sections</strong>, <strong>14 blocks</strong>,
-          <strong>9 snippets</strong>, and <strong>14 templates</strong> (including dedicated layouts for product,
+          <strong>10 snippets</strong>, and <strong>14 templates</strong> (including dedicated layouts for product,
           collection, cart, blog, article, search, password, gift card, and custom pages such as contact and
           about). Styles ship as plain CSS (<code>assets/critical.css</code>, <code>assets/base.css</code>, and
           co-located <code>{% stylesheet %}</code> blocks inside sections). There is no Webpack, Vite, or React
@@ -813,7 +825,7 @@
             <span class="ref-item-desc">Blocks</span>
           </div>
           <div class="ref-item" style="text-align:center; padding: 1rem 0.5rem;">
-            <span style="font-size:1.5rem; font-family:'Merriweather',serif; font-weight:900; color:var(--text); display:block;">9</span>
+            <span style="font-size:1.5rem; font-family:'Merriweather',serif; font-weight:900; color:var(--text); display:block;">10</span>
             <span class="ref-item-desc">Snippets</span>
           </div>
           <div class="ref-item" style="text-align:center; padding: 1rem 0.5rem;">
@@ -1066,8 +1078,9 @@
         <h2 class="doc-h2">Snippets</h2>
         <p class="doc-lead">
           Snippets are reusable Liquid fragments rendered via <code>{% render 'name' %}</code>.
-          All snippets in Grimoire are documented with <code>{% doc %}</code> blocks —
-          parameters are typed and described inline.
+          Grimoire ships <strong>10 snippets</strong> covering design tokens, product UI, SEO,
+          localization, and section headers. Parameters are passed explicitly at each
+          <code>{% render %}</code> call — snippet scope is isolated from the parent template.
         </p>
 
         <div class="callout">
@@ -1075,21 +1088,38 @@
           a rendered snippet unless passed explicitly as parameters.
         </div>
 
+        <h4 class="doc-h4">Inventory</h4>
+        <table class="params-table params-table--guide">
+          <thead><tr><th>Snippet</th><th>Role</th></tr></thead>
+          <tbody>
+            <tr><td><a href="#snippet-css-variables">css-variables</a></td><td>Global CSS custom properties and <code>@font-face</code> rules (~758 lines).</td></tr>
+            <tr><td><a href="#snippet-section-title">section-title</a></td><td>Shared eyebrow + heading + optional CTA; only snippet with a <code>{% doc %}</code> block.</td></tr>
+            <tr><td><a href="#snippet-product-card">product-card</a></td><td>Product tile: media, badges, swatches, price, ATC / quick-view trigger.</td></tr>
+            <tr><td><a href="#snippet-product-interactions">product-interactions</a></td><td>Script-only: <code>window.GrimoireProduct</code> (swatches + modal routing).</td></tr>
+            <tr><td><a href="#snippet-product-modal">product-modal</a></td><td>Quick-view overlay; includes product-interactions.</td></tr>
+            <tr><td><a href="#snippet-product-carousel">product-carousel</a></td><td>Horizontal product-card carousel with arrow controls.</td></tr>
+            <tr><td><a href="#snippet-meta-tags">meta-tags</a></td><td>Title, meta description, canonical, Open Graph, Twitter, JSON-LD.</td></tr>
+            <tr><td><a href="#snippet-language-selector">language-selector</a></td><td>Language dropdown for the announcement bar.</td></tr>
+            <tr><td><a href="#snippet-locale-selector">locale-selector</a></td><td>Country/currency (and optional language) dropdowns.</td></tr>
+            <tr><td><a href="#snippet-worlds-map">worlds-map</a></td><td>Single-line inline SVG world map for Testimonials.</td></tr>
+          </tbody>
+        </table>
+
         <!-- css-variables -->
         <hr class="doc-divider" id="snippet-css-variables">
         <h3 class="doc-h3">css-variables.liquid</h3>
         <p>
-          This snippet is Grimoire’s <strong>global style sheet in one file</strong>. It is not a section
-          you add in the customizer, it runs on every storefront page and outputs a single
+          This snippet is Grimoire’s <strong>global stylesheet in one file</strong>. It is not a section
+          you add in the customizer. It runs on every storefront page and outputs a single
           <code>{% style %}</code> block of CSS custom properties (<code>--token-name</code>) that the rest
           of the theme reads. Sections and snippets reference those variables instead of hard-coding colors
-          or font stacks, so a change in <strong>Theme settings</strong> can ripple across headers, cards,
+          or font stacks. A change in <strong>Theme settings</strong> can ripple across headers, cards,
           carousels, and forms in one place.
         </p>
         <p>
-          It is included in the document <code>&lt;head&gt;</code> from the main layout (and the password
-          and gift card layouts). It accepts <strong>no render parameters</strong>, only Shopify
-          <code>settings.*</code> values and fixed defaults defined in the snippet itself.
+          It is included in the document <code>&lt;head&gt;</code> from the main layout, plus the password
+          and gift-card layouts. It accepts <strong>no render parameters</strong>. Only Shopify
+          <code>settings.*</code> values and fixed defaults defined in the snippet itself are used.
         </p>
 
         <h4 class="doc-h4">What you control vs. what is preset</h4>
@@ -1106,21 +1136,33 @@
               <td>Theme settings</td>
               <td>
                 <ul class="table-token-list">
-                  <li><code>--font-primary--*</code>, <code>--font-heading--*</code></li>
+                  <li><code>--font-primary--*</code>, <code>--font-heading--*</code> (defaults: Merriweather Sans)</li>
                   <li><code>--page-width</code>, <code>--page-margin</code></li>
-                  <li><code>--color-background</code>, <code>--color-foreground</code>, <code>--color-accent</code>, <code>--color-surface</code></li>
+                  <li><code>--color-background</code>, <code>--color-foreground</code>, <code>--color-accent</code>, <code>--color-surface</code> from the active <strong>color-scheme</strong></li>
+                  <li><code>--primary-button-*</code>, <code>--pc-sale-*</code>, <code>--pc-soldout-*</code>, <code>--pc-atc-*</code> from the same scheme</li>
                   <li><code>--style-border-radius-inputs</code></li>
+                  <li><code>--pc-badge-scale</code> from <strong>Badge size</strong> (<code>badge_size</code>)</li>
                 </ul>
               </td>
-              <td>Updates immediately in the theme editor preview and on the live store after save.</td>
+              <td>Updates immediately in the theme-editor preview and on the live store after save.</td>
+            </tr>
+            <tr>
+              <td>Color-scheme groups</td>
+              <td>
+                <ul class="table-token-list">
+                  <li><code>.cs-…</code> classes for each entry in <strong>Theme settings → Colors</strong></li>
+                  <li>Per-scheme overrides for background, text, buttons, sale badges, ATC, and footer background</li>
+                </ul>
+              </td>
+              <td>Sections that set a color-scheme (for example Custom section) wrap content in <code>.cs-…</code> so tokens resolve to that palette.</td>
             </tr>
             <tr>
               <td>Derived from your palette</td>
               <td>
                 <ul class="table-token-list">
-                  <li><code>--is-active-color</code>, <code>--primary-color</code></li>
-                  <li>Primary button hover tokens</li>
-                  <li><code>--pc-sale-bg</code></li>
+                  <li><code>--is-active-color</code>, <code>--primary-color-text</code>, <code>--secondary-color-text</code></li>
+                  <li><code>--secondary-button-*</code> (outline CTAs such as section-title)</li>
+                  <li><code>color-mix()</code> tints for hovers, inactive states, and card borders</li>
                   <li>Collection/product arrow hovers tied to <code>--color-accent</code></li>
                 </ul>
               </td>
@@ -1135,7 +1177,7 @@
                   <li><code>--eyebrow-line-color</code>, <code>--timing</code></li>
                 </ul>
               </td>
-              <td>Not exposed in the theme editor today; they keep contrast and atmosphere stable on dark backgrounds. Future theme updates may surface more of these globally.</td>
+              <td>Not exposed in the theme editor today. They keep contrast and atmosphere stable on dark backgrounds. Future theme updates may surface more of these globally.</td>
             </tr>
             <tr>
               <td>Updated at runtime</td>
@@ -1155,8 +1197,9 @@
         <p>
           Before the <code>:root</code> block, the snippet registers <strong>primary</strong> and
           <strong>heading</strong> font files from Shopify’s CDN (regular, bold, italic combinations) with
-          <code>font-display: swap</code>. Picking fonts in Theme settings is enough (We use the font Merryweather as the default font family), you do not upload
-          font files separately. Every section that uses <code>var(--font-primary--family)</code> or
+          <code>font-display: swap</code>. Picking fonts in Theme settings is enough (defaults:
+          Merriweather Sans for body and headings). You do not upload font files separately. Every
+          section that uses <code>var(--font-primary--family)</code> or
           <code>var(--font-heading--family)</code> picks up the same faces.
         </p>
 
@@ -1177,8 +1220,8 @@
               <td>Site navbar height, announcement offset, mobile drawer, search overlay, cart sidebar (surfaces, text tiers, scrims, quantity controls, checkout hover).</td>
             </tr>
             <tr>
-              <td><code>--color-*</code>, <code>--primary-button-*</code>, <code>--is-*-color</code>, <code>--eyebrow-line-color</code></td>
-              <td>Page background, text, cards, eyebrows and dividers, primary CTA buttons, inactive controls (tabs, icons).</td>
+              <td><code>--color-*</code>, <code>--primary-button-*</code>, <code>--secondary-button-*</code>, <code>--is-*-color</code>, <code>--eyebrow-line-color</code></td>
+              <td>Page background, text, cards, eyebrows and dividers, solid and outline buttons, inactive controls (tabs, icons).</td>
             </tr>
             <tr>
               <td><code>--coll-*</code></td>
@@ -1189,15 +1232,27 @@
               <td><em>Trending products</em> category tabs and carousel arrows (inactive tab color vs. active accent).</td>
             </tr>
             <tr>
-              <td><code>--pc-*</code></td>
-              <td><code>product-card</code> snippet everywhere grids appear: media frame, hover border, image overlay, sale/sold-out badges, title and prices, add-to-cart states, color swatches.</td>
+              <td><code>--pc-*</code>, <code>--pm-*</code></td>
+              <td><code>product-card</code> and <code>product-modal</code>: media frame, hover border, badges, prices, ATC states, swatches, modal backdrop, quantity row, dividers.</td>
+            </tr>
+            <tr>
+              <td><code>--ls-*</code></td>
+              <td><code>language-selector</code> and <code>locale-selector</code> dropdowns: trigger borders, panel shadow, option hover, footer-specific trigger colors.</td>
+            </tr>
+            <tr>
+              <td><code>--tw-*</code></td>
+              <td><em>Testimonials</em> + <code>worlds-map</code>: map path fills, pin dots, review card, arrows, progress track.</td>
+            </tr>
+            <tr>
+              <td><code>--cv-*</code>, <code>--csb-*</code>, <code>--ar-*</code>, …</td>
+              <td>Section-specific groups (contact, article, FAQ, cart, header, footer, etc.) documented by comment blocks in the snippet source.</td>
             </tr>
           </tbody>
         </table>
 
         <h4 class="doc-h4">Practical tips for merchants</h4>
         <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
-          <li>If a section looks “almost right” after a rebrand, start with <strong>accent</strong> and <strong>surface</strong> in Theme settings, many highlights and card backgrounds reference those tokens indirectly.</li>
+          <li>If a section looks “almost right” after a rebrand, start with <strong>accent</strong> and <strong>surface</strong> in Theme settings. Many highlights and card backgrounds reference those tokens indirectly.</li>
           <li>Section-specific colors (slideshow overlay, FAQ tab labels, a single banner background) are controlled in <strong>that section’s settings</strong>, not in this snippet.</li>
           <li>You can use Shopify’s built-in Custom CSS feature to easily add your own styles and personalize the theme without modifying the theme files directly.</li>
         </ul>
@@ -1216,11 +1271,11 @@
           </div>
           <div class="ref-item">
             <span class="ref-item-name">Output</span>
-            <span class="ref-item-desc">One inline <code>&lt;style&gt;</code> block: <code>@font-face</code> rules + <code>:root { … }</code></span>
+            <span class="ref-item-desc">One inline <code>&lt;style&gt;</code> block: <code>@font-face</code> rules, <code>:root { … }</code>, and <code>.cs-* { … }</code> per color-scheme</span>
           </div>
           <div class="ref-item">
             <span class="ref-item-name">Depends on</span>
-            <span class="ref-item-desc">Theme settings IDs: <code>type_primary_font</code>, <code>heading_font</code>, <code>max_page_width</code>, <code>min_page_margin</code>, color pickers, <code>input_corner_radius</code></span>
+            <span class="ref-item-desc">Theme settings IDs: <code>type_primary_font</code>, <code>heading_font</code>, <code>max_page_width</code>, <code>min_page_margin</code>, <code>color_scheme</code>, <code>color_schemes</code>, <code>input_corner_radius</code>, <code>badge_size</code></span>
           </div>
           <div class="ref-item">
             <span class="ref-item-name">Consumed by</span>
@@ -1234,7 +1289,7 @@
         <p>
           Shared <strong>section header</strong> for Grimoire: a short label (eyebrow), a large title,
           and an optional text link styled as a button. You will not add this snippet manually in the
-          theme editor, sections that support it expose <strong>Eyebrow</strong>, <strong>Heading</strong>,
+          theme editor. Sections that support it expose <strong>Eyebrow</strong>, <strong>Heading</strong>,
           and sometimes <strong>Button label</strong> / <strong>Button link</strong> fields in their own
           settings panel. Leaving a field empty hides that part of the header (for example, heading-only
           or eyebrow-only is valid).
@@ -1242,9 +1297,9 @@
 
         <h4 class="doc-h4">What you see on the storefront</h4>
         <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
-          <li><strong>Eyebrow</strong>: Small caps line with horizontal rules on either side (mobile: centered with rules; desktop: left-aligned, rule extends to the right).</li>
+          <li><strong>Eyebrow</strong>: Small caps label in foreground text color with horizontal rules (mobile: centered with rules on both sides; desktop: left-aligned, rule extends to the right).</li>
           <li><strong>Heading</strong>: Large display title using your Theme settings heading font; scales with viewport width.</li>
-          <li><strong>Optional CTA</strong>: Uppercase outline button with a chevron icon, shown only when a button label is set. If a link is missing, the button falls back to <code>#</code>, always set <strong>Button link</strong> when you add a label.</li>
+          <li><strong>Optional CTA</strong>: Uppercase <strong>secondary</strong> (outline) button with a chevron icon, shown only when a button label is set. If a link is missing, the button falls back to <code>#</code>. Always set <strong>Button link</strong> when you add a label.</li>
         </ul>
         <p>
           On viewports <strong>768px and wider</strong>, the heading and CTA sit on one row (title left,
@@ -1345,14 +1400,24 @@
               <td>Header is centered in this section by section-specific CSS overrides.</td>
             </tr>
             <tr>
-              <td>Contact, Coven</td>
+              <td>Team</td>
               <td>
                 <ul class="table-field-list">
                   <li>Eyebrow</li>
                   <li>Heading</li>
                 </ul>
               </td>
-              <td>Hero, channels, and location blocks. Contact hero uses <code>h1</code> for the main page title.</td>
+              <td>Staff grid header on About-style pages.</td>
+            </tr>
+            <tr>
+              <td>Contact hero, Contact channels, Contact location</td>
+              <td>
+                <ul class="table-field-list">
+                  <li>Eyebrow</li>
+                  <li>Heading</li>
+                </ul>
+              </td>
+              <td>Contact template blocks. Contact hero uses <code>h1</code> for the main page title.</td>
             </tr>
             <tr>
               <td>Custom section</td>
@@ -1394,7 +1459,7 @@
         <div class="ref-grid">
           <div class="ref-item">
             <span class="ref-item-name">Styles</span>
-            <span class="ref-item-desc">Co-located <code>{% stylesheet %}</code> in the snippet; uses global tokens such as <code>--primary-color</code> and <code>--font-heading--family</code>.</span>
+            <span class="ref-item-desc">Co-located <code>{% stylesheet %}</code> in the snippet; uses global tokens such as <code>--primary-color-text</code>, <code>--secondary-button-*</code>, and <code>--font-heading--family</code>. Includes a <code>{% doc %}</code> parameter reference.</span>
           </div>
           <div class="ref-item">
             <span class="ref-item-name">Modifier</span>
@@ -1407,92 +1472,6 @@
           <div class="ref-item">
             <span class="ref-item-name">Override pattern</span>
             <span class="ref-item-desc">Target <code>.your-section .section-title</code> in the section’s stylesheet if a one-off layout is needed (see Newsletter).</span>
-          </div>
-        </div>
-
-        <!-- image -->
-        <hr class="doc-divider" id="snippet-image">
-        <h3 class="doc-h3">image.liquid</h3>
-        <p>
-          A small <strong>developer utility</strong> for outputting a Shopify image with responsive
-          URLs. It is not something you add from the theme customizer, merchants add pictures through
-          each section’s <strong>image picker</strong> fields, or through the <strong>Image</strong> block
-          inside <em>Custom section</em> (that block uses its own markup in <code>blocks/cs-image.liquid</code>,
-          not this snippet).
-        </p>
-        <p>
-          Grimoire keeps <code>image.liquid</code> as a documented pattern for theme extensions: pass a
-          Shopify <code>image</code> object, optionally cap resolution, crop to an aspect ratio, or wrap
-          the graphic in a link.
-        </p>
-
-        <h4 class="doc-h4">Where merchants add images instead</h4>
-        <table class="params-table params-table--guide params-table--sections">
-          <thead><tr><th>Context</th><th>How to add or change images</th></tr></thead>
-          <tbody>
-            <tr>
-              <td>Custom section</td>
-              <td>Add an <strong>Image</strong> block: width, alt text, border radius, and alignment are in the block settings.</td>
-            </tr>
-            <tr>
-              <td>Slideshow, Collections, Chronicle, etc.</td>
-              <td>Use that section’s own image or background fields in the customizer.</td>
-            </tr>
-            <tr>
-              <td>Product &amp; collection pages</td>
-              <td>Product media and collection images come from the Shopify admin catalog, not from this snippet.</td>
-            </tr>
-            <tr>
-              <td>Header &amp; footer</td>
-              <td>Logo image picker in the Header section; footer logo in Footer settings.</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <h4 class="doc-h4">What the snippet outputs</h4>
-        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
-          <li><strong>Wrapper</strong>: A <code>&lt;div class="image"&gt;</code> by default, or <code>&lt;a class="image"&gt;</code> when <code>url</code> is set so the whole image is clickable.</li>
-          <li><strong>Picture</strong>: Built with Shopify’s <code>image_url</code> + <code>image_tag</code> filters (responsive <code>srcset</code> is handled by <code>image_tag</code>).</li>
-          <li><strong>Aspect ratio</strong>: When both <code>width</code> and <code>height</code> are passed (with optional <code>crop</code>), Shopify crops to that box. If <code>height</code> is omitted, width defaults to the source image’s native width.</li>
-          <li><strong>Layout CSS</strong>: A co-located stylesheet makes the wrapper full width and the <code>&lt;img&gt;</code> scale with <code>height: auto</code>.</li>
-        </ul>
-
-        <div class="callout tip">
-          <strong>Alt text:</strong> This snippet does not accept a separate alt parameter, it relies on
-          the alt stored on the image in Shopify admin. For editorial blocks, use the Image block in
-          Custom section, which includes a dedicated <strong>Alt text</strong> field.
-        </div>
-
-        <h4 class="doc-h4">Parameters (snippet reference)</h4>
-        <table class="params-table">
-          <thead><tr><th>Param</th><th>Type</th><th>Description</th></tr></thead>
-          <tbody>
-            <tr><td>image</td><td>image</td><td>Required. The Shopify image object (from a product, collection, setting, or block).</td></tr>
-            <tr><td>url</td><td>string</td><td>If set, wraps the image in a link to this URL.</td></tr>
-            <tr><td>class</td><td>string</td><td>Extra class on the wrapper (e.g. for section-specific CSS).</td></tr>
-            <tr><td>width</td><td>number</td><td>Max width in px for the generated CDN URL. Defaults to the image’s full width when height is not used.</td></tr>
-            <tr><td>height</td><td>number</td><td>Height in px; use with <code>width</code> and <code>crop</code> for a fixed crop.</td></tr>
-            <tr><td>crop</td><td>string</td><td>Crop anchor when width and height are set: <code>center</code>, <code>top</code>, <code>bottom</code>, <code>left</code>, <code>right</code>.</td></tr>
-          </tbody>
-        </table>
-
-        <h4 class="doc-h4">For theme developers</h4>
-        <div class="ref-grid">
-          <div class="ref-item">
-            <span class="ref-item-name">Render</span>
-            <span class="ref-item-desc"><code>{% render 'image', image: collection.image, url: collection.url %}</code></span>
-          </div>
-          <div class="ref-item">
-            <span class="ref-item-name">In storefront today</span>
-            <span class="ref-item-desc">Not called by core Grimoire sections; product cards and <code>cs-image</code> use their own image markup.</span>
-          </div>
-          <div class="ref-item">
-            <span class="ref-item-name">LiquidDoc</span>
-            <span class="ref-item-desc">Includes a <code>{% doc %}</code> block with typed parameters and examples in the theme source.</span>
-          </div>
-          <div class="ref-item">
-            <span class="ref-item-name">Extend</span>
-            <span class="ref-item-desc">Reuse or extend the snippet when building new sections; add <code>loading: 'lazy'</code> in a fork if needed for below-the-fold images.</span>
           </div>
         </div>
 
@@ -1509,31 +1488,43 @@
 
         <h4 class="doc-h4">What shoppers see on each card</h4>
         <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
-          <li><strong>Media</strong>: Square image with a subtle gradient overlay; image zooms on hover (behavior depends on hover mode below).</li>
-          <li><strong>Badges</strong>: “Sale” when the product is discounted; “Sold out” when the selected color has no available inventory.</li>
-          <li><strong>Swatches</strong>: Shown only when the product has a <strong>Color</strong> or <strong>Colour</strong> option in Shopify admin. Clicking a swatch updates the preview image, active variant, and sold-out state on that card.</li>
-          <li><strong>Title &amp; price</strong>: Linked to the product page. Compare-at price appears struck through when on sale.</li>
-          <li><strong>Action button</strong>: Either adds one unit to the cart via AJAX (cart drawer opens) or opens the quick view modal first, see the next section.</li>
+          <li><strong>Media</strong>: Portrait image with gradient overlay and hover zoom (behavior depends on <code>hover_mode</code>). Responsive <code>srcset</code> when an <code>image_object</code> is passed.</li>
+          <li><strong>Badges</strong>: “Sale” when discounted; “Sold out” when the active color has no available inventory. On viewports under 640px the sale badge moves below the image; on larger screens it sits on the image.</li>
+          <li><strong>Swatches</strong>: Shown when the product has a <strong>Color</strong>, <strong>Colour</strong>, or <strong>Color/Colour</strong> option. Uses Shopify swatch colors/images when configured. Clicking updates preview image, variant id, price, sold-out state, and color label.</li>
+          <li><strong>Title &amp; price</strong>: Linked to the product page. Compare-at appears struck through when on sale. Optional unit price and “Tax included” when enabled in Theme settings / shop config.</li>
+          <li><strong>Action button</strong>: Default label <code>View More Options</code>. Either opens quick-view (<code>opens_modal: true</code>) or adds one unit via AJAX when modal routing is off.</li>
         </ul>
+
+        <h4 class="doc-h4">Theme settings that affect every card</h4>
+        <table class="params-table params-table--guide">
+          <thead><tr><th>Setting</th><th>Effect</th></tr></thead>
+          <tbody>
+            <tr><td>Show currency code</td><td>Appends ISO currency to prices when a full <code>product</code> object is passed.</td></tr>
+            <tr><td>Show unit price</td><td>Renders unit price line from the first available variant’s measurement.</td></tr>
+            <tr><td>Show first media image</td><td>Swatch clicks keep the product’s first media image instead of variant images; sets <code>data-first-media</code> on the card root.</td></tr>
+            <tr><td>Badge size</td><td>Scales sale/sold-out badges via <code>--pc-badge-scale</code>.</td></tr>
+            <tr><td>Color-scheme</td><td>Sale badge, sold-out badge, and ATC colors from the active scheme tokens.</td></tr>
+          </tbody>
+        </table>
 
         <h4 class="doc-h4">Add to cart: two behaviors</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Behavior</th><th>Shopper experience</th><th>Used on</th></tr></thead>
           <tbody>
             <tr>
-              <td>Direct add</td>
-              <td>One click adds the selected variant to the cart, updates the cart count, and opens the cart drawer.</td>
-              <td><em>Recently viewed</em> (and any card rendered without quick view).</td>
+              <td>Quick-view first</td>
+              <td>Button opens the quick-view modal (quantity, swatches, Buy now) populated from the card DOM.</td>
+              <td><em>Collection</em>, <em>Search</em>, <em>Trending products</em>, <em>Product recommendations</em>, <em>Recently viewed</em> (cards built in JavaScript with <code>data-opens-modal="true"</code>).</td>
             </tr>
             <tr>
-              <td>Quick view first</td>
-              <td>Button opens the quick view modal so shoppers can change quantity, color, or buy before leaving the grid.</td>
-              <td><em>Collection</em>, <em>Search</em>, <em>Trending products</em>, <em>Product recommendations</em>.</td>
+              <td>Direct add</td>
+              <td>One click POSTs to <code>/cart/add.js</code>, updates cart count, dispatches <code>cart:item-added</code>, and opens the cart drawer.</td>
+              <td>Any card rendered with <code>opens_modal: false</code> and no <code>data-opens-modal</code> attribute (not used on live storefront grids today).</td>
             </tr>
           </tbody>
         </table>
         <p>
-          Swatch clicks and quick view are handled by the companion snippets documented below
+          Swatch clicks and quick-view are handled by the companion snippets documented below
           (<a href="#snippet-product-interactions">product-interactions</a>,
           <a href="#snippet-product-modal">product-modal</a>).
         </p>
@@ -1542,17 +1533,17 @@
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Section</th><th>Layout</th></tr></thead>
           <tbody>
-            <tr><td>Collection</td><td>Responsive product grid with filters; cards use quick view.</td></tr>
-            <tr><td>Search</td><td>Product results in a grid; quick view enabled.</td></tr>
+            <tr><td>Collection</td><td>Responsive product grid with filters; cards use quick-view.</td></tr>
+            <tr><td>Search</td><td>Product results in a grid; quick-view enabled.</td></tr>
             <tr><td>Trending products</td><td>Cards inside a <a href="#snippet-product-carousel">product carousel</a> per category tab.</td></tr>
             <tr><td>Product recommendations</td><td>Related products carousel on the product template.</td></tr>
-            <tr><td>Recently viewed</td><td>Carousel on the product template; direct add to cart (no quick view).</td></tr>
+            <tr><td>Recently viewed</td><td>Carousel on the product template; cards are fetched client-side from <code>/products/{handle}.js</code> and injected into an empty <a href="#snippet-product-carousel">product-carousel</a> shell. Quick-view enabled.</td></tr>
           </tbody>
         </table>
 
         <h4 class="doc-h4">Card layout options (set by the theme)</h4>
         <p>
-          These are passed when a section renders the card, not exposed as theme editor toggles on
+          These are passed when a section renders the card. They are not exposed as theme-editor toggles on
           every section today, but useful if you work with a developer:
         </p>
         <table class="params-table">
@@ -1561,7 +1552,7 @@
             <tr><td>hover_mode</td><td><code>full</code> (default) · <code>media-title</code></td><td><code>media-title</code> limits zoom/hover border to the image, title row, or ATC, used on Grimoire grids.</td></tr>
             <tr><td>variant</td><td><code>default</code> · <code>grimoire</code></td><td><code>grimoire</code> applies tighter typography scaling on large screens.</td></tr>
             <tr><td>swatch_shape</td><td><code>circle</code> (default) · <code>rectangle</code></td><td>Shape of color swatch buttons.</td></tr>
-            <tr><td>opens_modal</td><td>true / false</td><td>When true, ATC opens quick view instead of adding immediately.</td></tr>
+            <tr><td>opens_modal</td><td>true / false</td><td>When true, ATC opens quick-view instead of adding immediately.</td></tr>
           </tbody>
         </table>
 
@@ -1589,7 +1580,7 @@
             <tr><td>hover_mode</td><td>string</td><td><code>full</code> or <code>media-title</code>.</td></tr>
             <tr><td>swatch_shape</td><td>string</td><td><code>circle</code> or <code>rectangle</code>.</td></tr>
             <tr><td>variant</td><td>string</td><td><code>default</code> or <code>grimoire</code>.</td></tr>
-            <tr><td>opens_modal</td><td>boolean</td><td>Quick view vs direct cart add.</td></tr>
+            <tr><td>opens_modal</td><td>boolean</td><td>Quick-view vs direct cart add.</td></tr>
           </tbody>
         </table>
 
@@ -1618,8 +1609,9 @@
         <h3 class="doc-h3">product-interactions.liquid</h3>
         <p>
           Loads the shared <code>window.GrimoireProduct</code> script once per page. It powers
-          <strong>color swatches</strong> on product cards and routes <strong>Add to cart</strong> clicks
-          on cards configured to open quick view instead of adding immediately.
+          <strong>color swatches</strong> on product cards and intercepts <strong>Add to cart</strong> clicks
+          when the card button has <code>data-opens-modal="true"</code>. There is no markup or CSS in this
+          file — only the script block.
         </p>
         <p>
           You do not add this snippet yourself in the theme editor. It is included automatically when
@@ -1629,9 +1621,9 @@
 
         <h4 class="doc-h4">What it does on the storefront</h4>
         <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
-          <li><strong>Swatch clicks</strong>: Updates the active swatch, color label, variant id on the ATC button, sold-out badge, and product image (with a short crossfade).</li>
-          <li><strong>ATC with quick view</strong>: When the card button has <code>data-opens-modal</code>, opens the quick view modal populated from that card’s data instead of navigating away.</li>
-          <li><strong>Fallback</strong>: If no modal is present, ATC falls back to the product URL on the card.</li>
+          <li><strong>Swatch clicks</strong>: Updates active swatch, color label, variant id on the ATC button, sold-out badge, price/compare/unit price, and product image (crossfade; respects <code>prefers-reduced-motion</code> and <code>data-first-media</code>).</li>
+          <li><strong>ATC with quick-view</strong>: Prevents navigation and calls <code>quickView.open(cardOuter, trigger)</code> when <code>data-opens-modal</code> is set.</li>
+          <li><strong>Fallback</strong>: If no modal instance is passed, ATC navigates to the product URL on the card.</li>
         </ul>
 
         <h4 class="doc-h4">Sections that rely on it</h4>
@@ -1645,7 +1637,7 @@
         <div class="ref-grid">
           <div class="ref-item">
             <span class="ref-item-name">API</span>
-            <span class="ref-item-desc"><code>GrimoireProduct.bindCards(root, quickView)</code> · <code>GrimoireProduct.swapSwatchImage(...)</code></span>
+            <span class="ref-item-desc"><code>GrimoireProduct.bindCards(root, quickView)</code> · <code>GrimoireProduct.swapSwatchImage(imgEl, newSrc, imgWrap, clearSrcset)</code></span>
           </div>
           <div class="ref-item">
             <span class="ref-item-name">Render</span>
@@ -1661,17 +1653,17 @@
         <hr class="doc-divider" id="snippet-product-modal">
         <h3 class="doc-h3">product-modal.liquid</h3>
         <p>
-          The <strong>quick view</strong> dialog: a full-screen overlay with product image, title, price,
+          The <strong>quick-view</strong> dialog: a full-screen overlay with product image, title, price,
           color swatches, quantity, Add to cart, Buy now, and a link to the full product page. One modal
           shell is rendered per section that needs it (for example Trending products or Collection).
         </p>
 
         <h4 class="doc-h4">Merchant experience</h4>
         <p>
-          Quick view is enabled per product card in sections that support it (for example
-          <em>Trending products</em> cards inside category blocks). In the theme editor, look for settings
-          on the section or block that control quick view / modal behavior, you do not edit
-          <code>product-modal.liquid</code> directly.
+          Quick-view is wired in code: grid and carousel sections pass <code>opens_modal: true</code> when
+          they render each card (and Recently viewed builds equivalent markup in JavaScript). There is no
+          per-section toggle in the theme editor. You do not edit <code>product-modal.liquid</code> from
+          the customizer.
         </p>
         <p>
           Label copy inside the modal (Add to cart, Buy now, View full details, Sale, Sold out, Quantity)
@@ -1688,8 +1680,8 @@
             <tr><td>added_label</td><td>string</td><td>Shown briefly after a successful add. Default: <code>Added ✦</code></td></tr>
             <tr><td>sale_label</td><td>string</td><td>Sale badge text.</td></tr>
             <tr><td>sold_out_label</td><td>string</td><td>Sold out badge text.</td></tr>
-            <tr><td>buy_label</td><td>string</td><td>Dynamic checkout / buy now button.</td></tr>
-            <tr><td>view_link_label</td><td>string</td><td>Link below buttons to the PDP.</td></tr>
+            <tr><td>buy_label</td><td>string</td><td>Dynamic checkout / buy now button. Default: <code>Buy Now</code></td></tr>
+            <tr><td>view_link_label</td><td>string</td><td>Link below buttons to the PDP. Default: <code>View Full Details</code></td></tr>
             <tr><td>qty_label</td><td>string</td><td>Quantity row label.</td></tr>
           </tbody>
         </table>
@@ -1701,7 +1693,7 @@
             <tr><td>Trending products</td><td>One modal per section; cards in each category tab open it.</td></tr>
             <tr><td>Product recommendations</td><td>Related products on the product template.</td></tr>
             <tr><td>Recently viewed</td><td>Bottom strip on the product template.</td></tr>
-            <tr><td>Collection</td><td>PLP grid with quick view on hover ATC.</td></tr>
+            <tr><td>Collection</td><td>PLP grid with quick-view on hover ATC.</td></tr>
             <tr><td>Search</td><td>Search results grid.</td></tr>
           </tbody>
         </table>
@@ -1718,7 +1710,7 @@
           </div>
           <div class="ref-item">
             <span class="ref-item-name">Data source</span>
-            <span class="ref-item-desc">Modal content is filled from <code>data-*</code> attributes on the <code>.pc-card-outer</code> that opened it (no separate Section Rendering fetch in the current implementation).</span>
+            <span class="ref-item-desc">Modal content is cloned from the opening <code>.pc-card-outer</code> (title, prices, image src, swatch buttons, variant id) — no Section Rendering API fetch.</span>
           </div>
         </div>
 
@@ -1729,18 +1721,19 @@
           Wraps a row of <strong>product cards</strong> in a horizontal carousel with previous/next arrows.
           Shows <strong>1 card</strong> on mobile, <strong>3</strong> from 600px, and <strong>4</strong> from
           1024px. Touch scrolling works before JavaScript; arrows and slide snapping activate once
-          <code>GrimoireCarousel</code> initializes.
+          <code>GrimoireCarousel</code> initializes on <code>[data-pcar-carousel]</code>.
         </p>
         <p>
           Merchants do not add this snippet manually — it is embedded inside sections that output
-          product card slides (for example <em>Trending products</em> and <em>Product recommendations</em>).
+          product card slides. <em>Recently viewed</em> renders an empty carousel shell first; its
+          custom element injects <code>.pcar-slide</code> wrappers after fetching product JSON.
         </p>
 
         <h4 class="doc-h4">Parameters (snippet reference)</h4>
         <table class="params-table">
           <thead><tr><th>Param</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
-            <tr><td>slides</td><td>HTML</td><td>Required. Captured Liquid output: each slide should be a <code>&lt;div class="pcar-slide"&gt;</code> wrapping a <code>product-card</code> render.</td></tr>
+            <tr><td>slides</td><td>HTML</td><td>Captured Liquid output: each slide should be a <code>&lt;div class="pcar-slide"&gt;</code> wrapping a <code>product-card</code> render. Optional — Recently viewed omits it and fills the track in JavaScript.</td></tr>
             <tr><td>prev_label</td><td>string</td><td><code>aria-label</code> for the previous arrow. Default: <code>Previous products</code></td></tr>
             <tr><td>next_label</td><td>string</td><td><code>aria-label</code> for the next arrow. Default: <code>Next products</code></td></tr>
           </tbody>
@@ -1750,7 +1743,7 @@
         <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
           <li><strong>Trending products</strong>: One carousel per category tab; re-inits when tabs change.</li>
           <li><strong>Product recommendations</strong>: Related products carousel on the product page.</li>
-          <li><strong>Recently viewed</strong>: Carousel of previously browsed products.</li>
+          <li><strong>Recently viewed</strong>: Empty track at first; JavaScript appends slides after reading handles from <code>localStorage</code>.</li>
         </ul>
 
         <h4 class="doc-h4">Other carousels (do not use this snippet)</h4>
@@ -1812,11 +1805,22 @@
             there is nothing to add or reorder in the theme customizer.
         </p>
         <p>
-          Grimoire does not expose SEO fields inside this snippet. You manage copy and images in
-          <strong>Shopify admin</strong>; the theme reads Shopify’s built-in objects
-          (<code>page_title</code>, <code>page_description</code>, <code>page_image</code>, product data)
-          and outputs the correct tags automatically.
+          Grimoire extends the standard Shopify starter pattern with optional JSON-LD blocks controlled
+          from <strong>Theme settings → SEO</strong>. Product-level structured data still comes from Shopify’s
+          <code>{{ product | structured_data }}</code> filter. You manage page copy and images in
+          <strong>Shopify admin</strong>; this snippet reads <code>page_title</code>,
+          <code>page_description</code>, <code>page_image</code>, and product data automatically.
         </p>
+
+        <h4 class="doc-h4">Theme settings → SEO</h4>
+        <table class="params-table params-table--guide">
+          <thead><tr><th>Setting</th><th>JSON-LD output</th></tr></thead>
+          <tbody>
+            <tr><td>Organization schema</td><td><code>Organization</code> (or chosen type) with name, logo, address, phone, email, founding date — on all pages when enabled.</td></tr>
+            <tr><td>Breadcrumb schema</td><td><code>BreadcrumbList</code> on collection, product, blog, article, and page templates.</td></tr>
+            <tr><td>Sitelinks search box</td><td><code>WebSite</code> + <code>SearchAction</code> on the homepage only (<code>/search?q={search_term_string}</code>).</td></tr>
+          </tbody>
+        </table>
 
         <h4 class="doc-h4">What you control (Shopify admin)</h4>
         <table class="params-table params-table--guide params-table--sections">
@@ -1863,7 +1867,7 @@
             </tr>
             <tr>
               <td>Password</td>
-              <td>Open Graph URL uses the store origin (password layout does not render this snippet, see below).</td>
+              <td>Snippet includes a branch for <code>request.page_type == 'password'</code> (Open Graph URL = store origin), but the password layout does not render this snippet — see below.</td>
             </tr>
           </tbody>
         </table>
@@ -1900,11 +1904,145 @@
           </div>
           <div class="ref-item">
             <span class="ref-item-name">Source</span>
-            <span class="ref-item-desc">Standard Shopify starter pattern (~100 lines); no <code>{% doc %}</code> block in the theme file.</span>
+            <span class="ref-item-desc">~208 lines; charset/viewport/title/canonical/description/OG/Twitter plus optional Organization, BreadcrumbList, and SearchAction JSON-LD. No <code>{% doc %}</code> block.</span>
           </div>
           <div class="ref-item">
             <span class="ref-item-name">Extend</span>
             <span class="ref-item-desc">Add tags (hreflang, robots, theme-color) in this snippet or via apps that inject into <code>content_for_header</code>.</span>
+          </div>
+        </div>
+
+        <!-- language-selector -->
+        <hr class="doc-divider" id="snippet-language-selector">
+        <h3 class="doc-h3">language-selector.liquid</h3>
+        <p>
+          Accessible <strong>language switcher</strong> for stores with more than one published language.
+          It renders a compact custom dropdown (flag emoji + endonym label) that submits Shopify’s
+          localization form when a shopper picks a language. You do not add this snippet from the theme
+          customizer — it is embedded automatically in the <strong>Announcement bar</strong> when
+          Markets supports multiple languages.
+        </p>
+
+        <h4 class="doc-h4">When it appears</h4>
+        <p>
+          The snippet outputs nothing unless <code>localization.available_languages.size &gt; 1</code>.
+          On viewports <strong>600px and wider</strong> it sits in the top-right of the announcement bar.
+          On smaller screens the bar hides the custom control (the native fallback is shown only when
+          JavaScript is disabled).
+        </p>
+
+        <h4 class="doc-h4">What shoppers see</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li><strong>Trigger</strong>: Uppercase label with a flag derived from the language ISO code and a chevron icon.</li>
+          <li><strong>Panel</strong>: List of available languages; selecting one submits the form and reloads the storefront in that locale.</li>
+          <li><strong>Keyboard</strong>: Enter/Space opens the panel; Arrow keys move between options; Escape closes.</li>
+          <li><strong>No-JS fallback</strong>: Native <code>&lt;select&gt;</code> plus an Update button when JavaScript is unavailable.</li>
+        </ul>
+
+        <div class="callout tip">
+          <strong>Markets setup:</strong> Add languages in <strong>Settings → Languages</strong> in Shopify admin.
+          Until at least two languages are published, this snippet does not render.
+        </div>
+
+        <h4 class="doc-h4">Parameters (snippet reference)</h4>
+        <table class="params-table">
+          <thead><tr><th>Param</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>form_id</td><td>string</td><td>Required. Unique ID for the <code>{% form 'localization' %}</code> element (e.g. <code>announcement-language-form</code>).</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">For theme developers</h4>
+        <div class="ref-grid">
+          <div class="ref-item">
+            <span class="ref-item-name">Render</span>
+            <span class="ref-item-desc"><code>{% render 'language-selector', form_id: 'announcement-language-form' %}</code></span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">Used in</span>
+            <span class="ref-item-desc"><code>sections/announcement-bar.liquid</code> (alongside <code>locale-selector</code> for country/currency).</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">Styles</span>
+            <span class="ref-item-desc">Co-located <code>{% stylesheet %}</code>; uses <code>--ls-*</code> tokens from <a href="#snippet-css-variables">css-variables</a>.</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">Behavior</span>
+            <span class="ref-item-desc">Panel portals to <code>&lt;body&gt;</code> on open to escape <code>overflow:hidden</code> ancestors; closes sibling locale panels automatically.</span>
+          </div>
+        </div>
+
+        <!-- locale-selector -->
+        <hr class="doc-divider" id="snippet-locale-selector">
+        <h3 class="doc-h3">locale-selector.liquid</h3>
+        <p>
+          Combined <strong>country/region and currency</strong> switcher (and optionally language) for
+          Shopify Markets. It renders one or two custom dropdowns inside a localization form, with flag
+          emojis for countries and support for grouping Eurozone markets into a single EUR entry.
+          Merchants do not add this snippet manually — it appears in the <strong>Announcement bar</strong>
+          and <strong>Footer</strong> when multiple countries or languages are available.
+        </p>
+
+        <h4 class="doc-h4">Where it appears</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Section</th><th>Context</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Announcement bar</td>
+              <td><code>announcement-bar</code></td>
+              <td>Country/currency dropdown only (<code>show_language: false</code>); language switching is handled by <a href="#snippet-language-selector">language-selector</a>. Visible from 600px+.</td>
+            </tr>
+            <tr>
+              <td>Footer</td>
+              <td><code>footer</code></td>
+              <td>Full country + language dropdowns when Markets provides both; styled for the footer surface.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Theme setting: stack market currencies</h4>
+        <p>
+          When <strong>Theme settings → Currency format → Group currencies by market</strong> is enabled,
+          countries that share the same currency (e.g. Eurozone) collapse into one dropdown entry shown
+          with the EU flag and a label like <code>EUR | €</code>. Disable this to list every country
+          separately with its full name.
+        </p>
+
+        <h4 class="doc-h4">What shoppers see</h4>
+        <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
+          <li><strong>Country trigger</strong>: Flag + ISO code (or EUR) and currency symbol.</li>
+          <li><strong>Language trigger</strong> (footer only, when multiple languages exist): Language name with chevron.</li>
+          <li><strong>Selection</strong>: Choosing an option submits the localization form and reloads the store in the new market/locale.</li>
+          <li><strong>No-JS fallback</strong>: Native <code>&lt;select&gt;</code> elements with an Update button.</li>
+        </ul>
+
+        <h4 class="doc-h4">Parameters (snippet reference)</h4>
+        <table class="params-table">
+          <thead><tr><th>Param</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>form_id</td><td>string</td><td>Optional. Form element ID. Default: <code>locale-selector-form</code>.</td></tr>
+            <tr><td>context</td><td>string</td><td>Layout variant: <code>announcement-bar</code> or <code>footer</code>. Controls positioning and trigger styling. Default: <code>footer</code>.</td></tr>
+            <tr><td>show_language</td><td>boolean</td><td>When <code>false</code>, hides the language dropdown inside this snippet (country only). Default: language shown when multiple languages exist.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">For theme developers</h4>
+        <div class="ref-grid">
+          <div class="ref-item">
+            <span class="ref-item-name">Render</span>
+            <span class="ref-item-desc"><code>{% render 'locale-selector', form_id: 'footer-localization-form', context: 'footer' %}</code></span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">Used in</span>
+            <span class="ref-item-desc"><code>sections/announcement-bar.liquid</code>, <code>sections/footer.liquid</code></span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">Depends on</span>
+            <span class="ref-item-desc">Theme setting <code>stack_market_currencies</code>; Shopify <code>localization</code> object.</span>
+          </div>
+          <div class="ref-item">
+            <span class="ref-item-name">Behavior</span>
+            <span class="ref-item-desc">Dropdown panels portal to <code>&lt;body&gt;</code>; re-inits on <code>shopify:section:load</code> in the theme editor.</span>
           </div>
         </div>
 
@@ -1995,8 +2133,9 @@
         </table>
 
         <div class="callout tip">
-          <strong>Appearance:</strong> Map colors and pin animation are defined in <code>sections/testimonials.liquid</code>, not in the theme editor.
-          The SVG file itself is static markup; change fills or strokes in code if you need a different look.
+          <strong>Appearance:</strong> Map colors and pin animation use <code>--tw-*</code> tokens from
+          <a href="#snippet-css-variables">css-variables</a> and styles in <code>sections/testimonials.liquid</code>,
+          not theme editor controls. The SVG is a single ~98&nbsp;KB line of static markup.
         </div>
 
         <h4 class="doc-h4">For theme developers</h4>
@@ -2015,7 +2154,7 @@
           </div>
           <div class="ref-item">
             <span class="ref-item-name">No {% doc %}</span>
-            <span class="ref-item-desc">Asset-only snippet (~2k lines of SVG). No Liquid parameters or theme settings.</span>
+            <span class="ref-item-desc">Asset-only snippet (one line, ~98&nbsp;KB SVG). No Liquid parameters or theme settings.</span>
           </div>
         </div>
 
@@ -3335,6 +3474,7 @@
             <tr><td>Color swatches</td><td>Detects color option names (<code>color/colour</code> variants), builds swatch buttons, and marks sold-out colors.</td></tr>
             <tr><td>Image selection</td><td>Prefers selected variant media; falls back to product featured image or placeholder SVG.</td></tr>
             <tr><td>Price formatting</td><td>Uses section <code>data-money-format</code> and a JS formatter to match storefront currency output.</td></tr>
+            <tr><td>Quick view</td><td>JS-built ATC buttons include <code>data-opens-modal="true"</code> (same as Liquid grids).</td></tr>
             <tr><td>Sold-out states</td><td>Shows card-level sold-out badge and disables CTA states when unavailable.</td></tr>
           </tbody>
         </table>
