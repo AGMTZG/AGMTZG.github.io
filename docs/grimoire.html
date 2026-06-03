@@ -484,11 +484,14 @@
 
     /* Hyphenate prose in token/guide tables; never break literal token names in <code> */
     #snippets .params-table.params-table--guide td:last-child,
-    #snippets .params-table.params-table--guide .table-token-list li {
+    #snippets .params-table.params-table--guide .table-token-list li,
+    #blocks .params-table.params-table--guide td:last-child,
+    #blocks .params-table.params-table--guide .table-token-list li {
       hyphens: auto;
       -webkit-hyphens: auto;
     }
-    #snippets .params-table code {
+    #snippets .params-table code,
+    #blocks .params-table code {
       hyphens: none;
       -webkit-hyphens: none;
     }
@@ -666,6 +669,17 @@
               <span class="toc-dot"></span>Blocks
             </a>
             <a class="toc-sub" href="#blocks-cs">Custom Section (cs-*)</a>
+            <a class="toc-sub" href="#block-cs-heading">cs-heading.liquid</a>
+            <a class="toc-sub" href="#block-cs-subheading">cs-subheading.liquid</a>
+            <a class="toc-sub" href="#block-cs-text">cs-text.liquid</a>
+            <a class="toc-sub" href="#block-cs-button">cs-button.liquid</a>
+            <a class="toc-sub" href="#block-cs-image">cs-image.liquid</a>
+            <a class="toc-sub" href="#block-cs-video">cs-video.liquid</a>
+            <a class="toc-sub" href="#block-cs-icon-item">cs-icon-item.liquid</a>
+            <a class="toc-sub" href="#block-cs-quote">cs-quote.liquid</a>
+            <a class="toc-sub" href="#block-cs-badge">cs-badge.liquid</a>
+            <a class="toc-sub" href="#block-cs-divider">cs-divider.liquid</a>
+            <a class="toc-sub" href="#block-cs-spacer">cs-spacer.liquid</a>
             <a class="toc-sub" href="#blocks-faq">faq-item.liquid</a>
             <a class="toc-sub" href="#blocks-group">group.liquid</a>
             <a class="toc-link" href="#sections">
@@ -759,7 +773,7 @@
           editing code.
         </p>
         <p>
-          Out of the box the theme includes <strong>40 sections</strong>, <strong>14 blocks</strong>,
+          Out of the box the theme includes <strong>40 sections</strong>, <strong>13 blocks</strong>,
           <strong>10 snippets</strong>, and <strong>14 templates</strong> (including dedicated layouts for product,
           collection, cart, blog, article, search, password, gift card, and custom pages such as contact and
           about). Styles ship as plain CSS (<code>assets/critical.css</code>, <code>assets/base.css</code>, and
@@ -821,7 +835,7 @@
             <span class="ref-item-desc">Sections</span>
           </div>
           <div class="ref-item" style="text-align:center; padding: 1rem 0.5rem;">
-            <span style="font-size:1.5rem; font-family:'Merriweather',serif; font-weight:900; color:var(--text); display:block;">14</span>
+            <span style="font-size:1.5rem; font-family:'Merriweather',serif; font-weight:900; color:var(--text); display:block;">13</span>
             <span class="ref-item-desc">Blocks</span>
           </div>
           <div class="ref-item" style="text-align:center; padding: 1rem 0.5rem;">
@@ -1033,6 +1047,8 @@
         <p>
           Use <strong>Group</strong> when you need a nested row or column of blocks. You can stack up
           to 16 blocks per Custom section instance, duplicate the section on the page if you need more.
+          The same <code>cs-*</code> set is also available in the lighter <strong>Text</strong> section
+          (see <a href="#sections-text-liquid">text.liquid</a>).
         </p>
 
         <h3 class="doc-h3">Special-purpose sections</h3>
@@ -2165,71 +2181,263 @@
         <div class="section-eyebrow">Reference</div>
         <h2 class="doc-h2">Blocks</h2>
         <p class="doc-lead">
-          Blocks are nestable units that live inside sections. Grimoire ships with 14 blocks
-          across three categories: custom section primitives (<code>cs-*</code>),
-          content blocks (<code>faq-item</code>, <code>text</code>), and the layout container
-          (<code>group</code>).
+          Blocks are nestable units declared in a section’s <code>{% schema %}</code>. Grimoire ships
+          <strong>13 blocks</strong>: eleven <code>cs-*</code> layout primitives, one FAQ row
+          (<code>faq-item</code>), and one nested container (<code>group</code>). Merchants add, reorder,
+          and configure them from the theme editor.
         </p>
-        <p>
-          Blocks are declared in a section's <code>{% schema %}</code> under the <code>"blocks"</code>
-          key. Merchants add, reorder, and configure them from the theme editor.
-        </p>
+
+        <h4 class="doc-h4">Where blocks appear</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Parent section</th><th>Block types</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><a href="#sections-custom-section-liquid">custom-section.liquid</a></td>
+              <td>All 11 <code>cs-*</code> types + <code>group</code></td>
+              <td>Full page-builder surface: section title, width, background canvas, up to <strong>16</strong> top-level blocks.</td>
+            </tr>
+            <tr>
+              <td><a href="#sections-text-liquid">text.liquid</a></td>
+              <td>Same 11 <code>cs-*</code> types + <code>group</code></td>
+              <td>Lightweight block stack with max-width and padding only. No section-title shell or background image.</td>
+            </tr>
+            <tr>
+              <td><a href="#sections-faq-liquid">faq.liquid</a></td>
+              <td><code>faq-item</code> only</td>
+              <td>Up to <strong>20</strong> accordion rows grouped by category tabs.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Inventory</h4>
+        <table class="params-table params-table--guide">
+          <thead><tr><th>Block</th><th>Editor name</th><th>Role</th></tr></thead>
+          <tbody>
+            <tr><td><a href="#block-cs-heading">cs-heading</a></td><td>Heading</td><td>Primary titles with tag, size, weight, and color controls.</td></tr>
+            <tr><td><a href="#block-cs-subheading">cs-subheading</a></td><td>Subheading</td><td>Eyebrow-style label with letter-spacing and uppercase toggle.</td></tr>
+            <tr><td><a href="#block-cs-text">cs-text</a></td><td>Text</td><td>Rich-text body copy with max-width constraint.</td></tr>
+            <tr><td><a href="#block-cs-button">cs-button</a></td><td>Button</td><td>Outline CTA with optional chevron and hover fill animation.</td></tr>
+            <tr><td><a href="#block-cs-image">cs-image</a></td><td>Image</td><td>Responsive editorial image with width preset and radius.</td></tr>
+            <tr><td><a href="#block-cs-video">cs-video</a></td><td>Video</td><td>Shopify-hosted or YouTube/Vimeo embed with aspect-ratio control.</td></tr>
+            <tr><td><a href="#block-cs-icon-item">cs-icon-item</a></td><td>Icon item</td><td>Icon + title + description for feature grids.</td></tr>
+            <tr><td><a href="#block-cs-quote">cs-quote</a></td><td>Quote</td><td>Pull quote with optional author attribution.</td></tr>
+            <tr><td><a href="#block-cs-badge">cs-badge</a></td><td>Badge</td><td>Short label chip (outlined, filled, or ghost).</td></tr>
+            <tr><td><a href="#block-cs-divider">cs-divider</a></td><td>Divider</td><td>Line, dots, or ornament separator; optional centered label.</td></tr>
+            <tr><td><a href="#block-cs-spacer">cs-spacer</a></td><td>Spacer</td><td>Vertical whitespace with separate mobile height.</td></tr>
+            <tr><td><a href="#blocks-faq">faq-item</a></td><td>FAQ Item</td><td>Single accordion question/answer row for the FAQ section.</td></tr>
+            <tr><td><a href="#blocks-group">group</a></td><td>Group</td><td>Nested flex container for rows or columns of child blocks.</td></tr>
+          </tbody>
+        </table>
 
         <!-- cs-* blocks -->
         <hr class="doc-divider" id="blocks-cs">
-        <h3 class="doc-h3">Custom Section Blocks <code>cs-*</code></h3>
+        <h3 class="doc-h3">Custom Section blocks <code>cs-*</code></h3>
         <p>
-          These are the modular blocks used inside <code>custom-section.liquid</code>. Think of them as
-          a visual layout kit: headings, text, media, CTA, separators, and spacing. Merchants can stack
-          and reorder them to build landing-style content without editing code.
+          Modular layout primitives shared by <strong>Custom section</strong> and <strong>Text</strong>.
+          Stack headings, copy, media, CTAs, and spacing without editing Liquid. Nest child blocks
+          inside <a href="#blocks-group">group</a> when you need rows of icon items, badges, or buttons.
         </p>
 
         <h4 class="doc-h4">Quick catalog</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Block</th><th>Best for</th><th>Main controls</th></tr></thead>
           <tbody>
-            <tr><td><code>cs-heading</code></td><td>Primary section titles</td><td>Text, HTML tag (<code>h1</code>-<code>h4</code>), size, weight, color, alignment, top/bottom spacing</td></tr>
-            <tr><td><code>cs-subheading</code></td><td>Eyebrow or subtitle copy</td><td>Text, size, color, alignment, letter spacing, uppercase toggle, top/bottom spacing</td></tr>
-            <tr><td><code>cs-text</code></td><td>Body copy and rich text</td><td>Rich text, size, color, alignment, max width (0 = full), top/bottom spacing</td></tr>
-            <tr><td><code>cs-button</code></td><td>Primary CTA action</td><td>Label, URL, arrow icon on/off, icon side, fill hover animation, size, alignment</td></tr>
-            <tr><td><code>cs-image</code></td><td>Editorial image blocks</td><td>Image picker, alt text override, width preset, corner radius, alignment, top/bottom spacing</td></tr>
-            <tr><td><code>cs-video</code></td><td>Embedded product/story video</td><td>Shopify video or YouTube/Vimeo URL, autoplay/loop/muted, aspect ratio, radius, caption, top/bottom spacing</td></tr>
-            <tr><td><code>cs-icon-item</code></td><td>Feature/benefit points</td><td>Icon set, title, rich text, vertical/horizontal layout, alignment (vertical mode), icon size, top/bottom spacing</td></tr>
+            <tr><td><code>cs-heading</code></td><td>Primary section titles</td><td>Text, HTML tag (<code>h1</code>–<code>h4</code>), font size/weight, color, alignment, top/bottom spacing</td></tr>
+            <tr><td><code>cs-subheading</code></td><td>Eyebrow or subtitle copy</td><td>Inline rich text, font size, color, alignment, letter spacing, uppercase toggle, top/bottom spacing</td></tr>
+            <tr><td><code>cs-text</code></td><td>Body copy</td><td>Rich text, font size, color, alignment, max width (0 = full), top/bottom spacing</td></tr>
+            <tr><td><code>cs-button</code></td><td>Primary CTA</td><td>Label, URL, chevron on/off and side, hover fill animation, size, alignment, six color pickers</td></tr>
+            <tr><td><code>cs-image</code></td><td>Editorial imagery</td><td>Image picker, alt override, width preset, corner radius, alignment, top/bottom spacing</td></tr>
+            <tr><td><code>cs-video</code></td><td>Product or story video</td><td>Shopify video or YouTube/Vimeo URL, autoplay/loop/muted, aspect ratio, radius, caption, top/bottom spacing</td></tr>
+            <tr><td><code>cs-icon-item</code></td><td>Feature or benefit points</td><td>Icon (15 options), title, rich text, vertical/horizontal layout, alignment, icon size, top/bottom spacing</td></tr>
             <tr><td><code>cs-quote</code></td><td>Testimonial-style pull quote</td><td>Quote text, author name/role, size, alignment, top/bottom spacing</td></tr>
-            <tr><td><code>cs-badge</code></td><td>Short labels (new, limited, bestseller)</td><td>Label, variant (outlined/filled/ghost), size, corner radius, alignment</td></tr>
-            <tr><td><code>cs-divider</code></td><td>Visual section breaks</td><td>Optional label, style (line/dots/ornament when label is empty), top/bottom spacing</td></tr>
-            <tr><td><code>cs-spacer</code></td><td>Vertical breathing room</td><td>Desktop height and mobile height</td></tr>
+            <tr><td><code>cs-badge</code></td><td>Short labels (New, Limited, Bestseller)</td><td>Label, style (<code>outlined</code> / <code>filled</code> / <code>ghost</code>), size, corner radius, alignment</td></tr>
+            <tr><td><code>cs-divider</code></td><td>Visual section breaks</td><td>Optional label; when empty, style is <code>line</code>, <code>dots</code>, or <code>ornament</code>; top/bottom spacing</td></tr>
+            <tr><td><code>cs-spacer</code></td><td>Vertical breathing room</td><td>Desktop height and mobile height (separate ranges)</td></tr>
           </tbody>
         </table>
 
         <h4 class="doc-h4">Merchant behavior notes</h4>
         <ul style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
-          <li><strong>Spacing pattern:</strong> Most <code>cs-*</code> blocks expose <code>top_spacing</code> and <code>bottom_spacing</code>. Keep one side at <code>0</code> when stacking many blocks to avoid double gaps.</li>
-          <li><strong>Text hierarchy:</strong> Use <code>cs-subheading</code> + <code>cs-heading</code> + <code>cs-text</code> as a predictable trio for readability.</li>
-          <li><strong>Media accessibility:</strong> Set <code>alt</code> on <code>cs-image</code> when needed; set <code>video_title</code> on <code>cs-video</code> for iframe accessibility.</li>
-          <li><strong>Video source priority:</strong> In <code>cs-video</code>, Shopify-hosted video overrides the external URL if both are set.</li>
-          <li><strong>Responsive spacing:</strong> <code>cs-spacer</code> has a dedicated mobile height, useful for tightening long desktop compositions on phones.</li>
+          <li><strong>Spacing pattern:</strong> Most <code>cs-*</code> blocks expose <code>top_spacing</code> and <code>bottom_spacing</code> (0–80px). Keep one side at <code>0</code> when stacking blocks to avoid double gaps.</li>
+          <li><strong>Text hierarchy:</strong> Use <code>cs-subheading</code> + <code>cs-heading</code> + <code>cs-text</code> as a predictable trio for scannable layouts.</li>
+          <li><strong>Media accessibility:</strong> Set <code>alt</code> on <code>cs-image</code> when needed. Set <code>video_title</code> on <code>cs-video</code> for iframe accessibility.</li>
+          <li><strong>Video source priority:</strong> In <code>cs-video</code>, a Shopify-hosted video overrides the external URL when both are set.</li>
+          <li><strong>Responsive spacing:</strong> <code>cs-spacer</code> has a dedicated mobile height for tightening long desktop compositions on phones.</li>
+          <li><strong>Button colors:</strong> <code>cs-button</code> exposes per-block color pickers for text, border, background, hover border, fill, and fill text. Defaults mirror the active color-scheme.</li>
         </ul>
 
         <h4 class="doc-h4">Developer implementation notes</h4>
         <div class="ref-grid">
           <div class="ref-item">
             <span class="ref-item-name">Preset model</span>
-            <span class="ref-item-desc">Each file defines <code>{% schema %}</code> + <code>presets</code>, so blocks can be inserted from the editor drawer with sensible defaults.</span>
+            <span class="ref-item-desc">Each file defines <code>{% schema %}</code> + <code>presets</code>, so blocks insert from the editor drawer with sensible defaults. <code>cs-badge</code> ships three named presets (outlined, filled, ghost).</span>
           </div>
           <div class="ref-item">
             <span class="ref-item-name">Tokenized styling</span>
-            <span class="ref-item-desc">Visual output relies on theme CSS variables (<code>--color-foreground</code>, <code>--primary-button-border</code>, font tokens), so global Theme Settings flow into every block.</span>
+            <span class="ref-item-desc">Output relies on theme CSS variables (<code>--color-foreground</code>, <code>--primary-button-*</code>, <code>--csb-*</code>, font tokens). Global Theme settings flow into every block.</span>
           </div>
           <div class="ref-item">
             <span class="ref-item-name">Per-block CSS</span>
-            <span class="ref-item-desc">Most blocks ship with local <code>{% stylesheet %}</code> and inline style variables for settings-driven values (size, spacing, alignment).</span>
+            <span class="ref-item-desc">Most blocks ship co-located <code>{% stylesheet %}</code> plus inline style variables for settings-driven size, spacing, and alignment.</span>
           </div>
           <div class="ref-item">
             <span class="ref-item-name">Safe rendering</span>
             <span class="ref-item-desc">Blocks guard against blank core content (<code>text</code>, <code>label</code>, media), preventing empty markup in merchant layouts.</span>
           </div>
         </div>
+
+        <hr class="doc-divider" id="block-cs-heading">
+        <h4 class="doc-h4">cs-heading.liquid</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td><code>text</code></td><td>inline_richtext</td><td>Heading copy. Default: <code>Heading</code></td></tr>
+            <tr><td><code>tag</code></td><td>select</td><td><code>h1</code>–<code>h4</code>. Default: <code>h2</code></td></tr>
+            <tr><td><code>font_size</code></td><td>range</td><td>16–80px. Default: 36px</td></tr>
+            <tr><td><code>font_weight</code></td><td>select</td><td><code>400</code>, <code>600</code>, <code>700</code>. Default: <code>700</code></td></tr>
+            <tr><td><code>color</code></td><td>color</td><td>Text color picker</td></tr>
+            <tr><td><code>text_align</code></td><td>select</td><td><code>left</code>, <code>center</code>, <code>right</code></td></tr>
+            <tr><td><code>top_spacing</code>, <code>bottom_spacing</code></td><td>range</td><td>0–80px, step 4</td></tr>
+          </tbody>
+        </table>
+
+        <hr class="doc-divider" id="block-cs-subheading">
+        <h4 class="doc-h4">cs-subheading.liquid</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td><code>text</code></td><td>inline_richtext</td><td>Default: <code>Subheading</code></td></tr>
+            <tr><td><code>font_size</code></td><td>range</td><td>8–24px. Default: 12px</td></tr>
+            <tr><td><code>color</code></td><td>color</td><td>Text color</td></tr>
+            <tr><td><code>text_align</code></td><td>select</td><td><code>left</code>, <code>center</code>, <code>right</code></td></tr>
+            <tr><td><code>letter_spacing</code></td><td>range</td><td>0–20px. Default: 4px</td></tr>
+            <tr><td><code>uppercase</code></td><td>checkbox</td><td>Default: on</td></tr>
+            <tr><td><code>top_spacing</code>, <code>bottom_spacing</code></td><td>range</td><td>0–80px. Default bottom: 8px</td></tr>
+          </tbody>
+        </table>
+
+        <hr class="doc-divider" id="block-cs-text">
+        <h4 class="doc-h4">cs-text.liquid</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td><code>text</code></td><td>richtext</td><td>Body copy with lists, links, emphasis</td></tr>
+            <tr><td><code>font_size</code></td><td>range</td><td>12–24px. Default: 16px</td></tr>
+            <tr><td><code>color</code></td><td>color</td><td>Text color</td></tr>
+            <tr><td><code>text_align</code></td><td>select</td><td><code>left</code>, <code>center</code>, <code>right</code></td></tr>
+            <tr><td><code>max_width</code></td><td>range</td><td>0–900px. <code>0</code> = full width. Default: 680px</td></tr>
+            <tr><td><code>top_spacing</code>, <code>bottom_spacing</code></td><td>range</td><td>0–80px. Default bottom: 8px</td></tr>
+          </tbody>
+        </table>
+
+        <hr class="doc-divider" id="block-cs-button">
+        <h4 class="doc-h4">cs-button.liquid</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td><code>label</code></td><td>text</td><td>Default: <code>Shop Now</code></td></tr>
+            <tr><td><code>link</code></td><td>url</td><td>Button destination</td></tr>
+            <tr><td><code>show_icon</code></td><td>checkbox</td><td>Chevron icon. Default: on</td></tr>
+            <tr><td><code>icon_position</code></td><td>select</td><td><code>left</code> or <code>right</code>. Default: <code>right</code></td></tr>
+            <tr><td><code>show_fill</code></td><td>checkbox</td><td>Hover fill sweep animation. Default: on</td></tr>
+            <tr><td><code>size</code></td><td>select</td><td><code>sm</code>, <code>md</code>, <code>lg</code></td></tr>
+            <tr><td><code>align</code></td><td>select</td><td><code>left</code>, <code>center</code>, <code>right</code></td></tr>
+            <tr><td><code>text_color</code>, <code>border_color</code>, <code>bg_color</code></td><td>color</td><td>Idle state colors</td></tr>
+            <tr><td><code>hover_border_color</code>, <code>fill_color</code>, <code>fill_text_color</code></td><td>color</td><td>Hover and fill-animation colors</td></tr>
+          </tbody>
+        </table>
+
+        <hr class="doc-divider" id="block-cs-image">
+        <h4 class="doc-h4">cs-image.liquid</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td><code>image</code></td><td>image_picker</td><td>Source image</td></tr>
+            <tr><td><code>alt</code></td><td>text</td><td>Override; blank falls back to image alt from admin</td></tr>
+            <tr><td><code>width</code></td><td>select</td><td><code>160px</code>, <code>280px</code>, <code>480px</code>, <code>720px</code>, <code>100%</code>. Default: <code>480px</code></td></tr>
+            <tr><td><code>border_radius</code></td><td>range</td><td>0–48px. Default: 0</td></tr>
+            <tr><td><code>align</code></td><td>select</td><td><code>left</code>, <code>center</code>, <code>right</code></td></tr>
+            <tr><td><code>top_spacing</code>, <code>bottom_spacing</code></td><td>range</td><td>0–80px. Default bottom: 8px</td></tr>
+          </tbody>
+        </table>
+
+        <hr class="doc-divider" id="block-cs-video">
+        <h4 class="doc-h4">cs-video.liquid</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td><code>video</code></td><td>video</td><td>Shopify-hosted file (takes priority over URL)</td></tr>
+            <tr><td><code>video_url</code></td><td>video_url</td><td>YouTube or Vimeo when no hosted video</td></tr>
+            <tr><td><code>video_title</code></td><td>text</td><td>Accessibility title for iframe embeds</td></tr>
+            <tr><td><code>autoplay</code>, <code>loop</code>, <code>muted</code></td><td>checkbox</td><td>Playback flags (<code>muted</code> applies to native video)</td></tr>
+            <tr><td><code>aspect_ratio</code></td><td>select</td><td><code>16_9</code>, <code>4_3</code>, <code>1_1</code>, <code>9_16</code></td></tr>
+            <tr><td><code>border_radius</code></td><td>range</td><td>0–32px</td></tr>
+            <tr><td><code>caption</code></td><td>text</td><td>Optional line below the player</td></tr>
+            <tr><td><code>top_spacing</code>, <code>bottom_spacing</code></td><td>range</td><td>0–80px</td></tr>
+          </tbody>
+        </table>
+
+        <hr class="doc-divider" id="block-cs-icon-item">
+        <h4 class="doc-h4">cs-icon-item.liquid</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td><code>icon</code></td><td>select</td><td><code>sparkle</code>, <code>moon</code>, <code>star</code>, <code>heart</code>, <code>shield</code>, <code>leaf</code>, <code>drop</code>, <code>flame</code>, <code>check</code>, <code>lock</code>, <code>eye</code>, <code>diamond</code>, <code>globe</code>, <code>infinity</code>, <code>arrow</code></td></tr>
+            <tr><td><code>title</code></td><td>text</td><td>Feature headline</td></tr>
+            <tr><td><code>text</code></td><td>richtext</td><td>Supporting description</td></tr>
+            <tr><td><code>layout</code></td><td>select</td><td><code>vertical</code> (icon above) or <code>horizontal</code> (icon beside)</td></tr>
+            <tr><td><code>align</code></td><td>select</td><td>Horizontal anchoring in vertical layout</td></tr>
+            <tr><td><code>icon_size</code></td><td>range</td><td>16–64px. Default: 32px</td></tr>
+            <tr><td><code>top_spacing</code>, <code>bottom_spacing</code></td><td>range</td><td>0–80px</td></tr>
+          </tbody>
+        </table>
+
+        <hr class="doc-divider" id="block-cs-quote">
+        <h4 class="doc-h4">cs-quote.liquid</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td><code>quote</code></td><td>textarea</td><td>Pull-quote body</td></tr>
+            <tr><td><code>author_name</code>, <code>author_role</code></td><td>text</td><td>Optional attribution lines</td></tr>
+            <tr><td><code>size</code></td><td>select</td><td><code>sm</code>, <code>md</code>, <code>lg</code></td></tr>
+            <tr><td><code>align</code></td><td>select</td><td><code>left</code>, <code>center</code>, <code>right</code></td></tr>
+            <tr><td><code>top_spacing</code>, <code>bottom_spacing</code></td><td>range</td><td>0–80px</td></tr>
+          </tbody>
+        </table>
+
+        <hr class="doc-divider" id="block-cs-badge">
+        <h4 class="doc-h4">cs-badge.liquid</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td><code>label</code></td><td>text</td><td>Default: <code>New</code></td></tr>
+            <tr><td><code>style</code></td><td>select</td><td><code>outlined</code>, <code>filled</code>, <code>ghost</code>. Label in editor: “Variant”</td></tr>
+            <tr><td><code>size</code></td><td>select</td><td><code>sm</code>, <code>md</code>, <code>lg</code></td></tr>
+            <tr><td><code>border_radius</code></td><td>range</td><td>0–100px. <code>100</code> = pill shape</td></tr>
+            <tr><td><code>align</code></td><td>select</td><td><code>left</code>, <code>center</code>, <code>right</code></td></tr>
+          </tbody>
+        </table>
+
+        <hr class="doc-divider" id="block-cs-divider">
+        <h4 class="doc-h4">cs-divider.liquid</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td><code>label</code></td><td>text</td><td>Optional centered label; blank renders a plain divider</td></tr>
+            <tr><td><code>style</code></td><td>select</td><td><code>line</code>, <code>dots</code>, <code>ornament</code> (when no label)</td></tr>
+            <tr><td><code>top_spacing</code>, <code>bottom_spacing</code></td><td>range</td><td>0–80px</td></tr>
+          </tbody>
+        </table>
+
+        <hr class="doc-divider" id="block-cs-spacer">
+        <h4 class="doc-h4">cs-spacer.liquid</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td><code>height</code></td><td>range</td><td>Desktop: 8–240px, step 8. Default: 48px</td></tr>
+            <tr><td><code>height_mobile</code></td><td>range</td><td>Mobile: 8–160px, step 8. Default: 32px</td></tr>
+          </tbody>
+        </table>
 
         <!-- faq-item -->
         <hr class="doc-divider" id="blocks-faq">
@@ -2244,10 +2452,10 @@
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting ID</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
-            <tr><td><code>icon</code></td><td>select</td><td>Leading icon in the question row. Options: <code>crystal</code>, <code>candle</code>, <code>moon</code>, <code>star</code>, <code>scroll</code>, <code>flame</code>.</td></tr>
+            <tr><td><code>icon</code></td><td>select</td><td>Leading icon in the question row. Options: <code>crystal</code>, <code>candle</code>, <code>moon</code>, <code>star</code>, <code>scroll</code>, <code>flame</code>. Default: <code>crystal</code></td></tr>
             <tr><td><code>question</code></td><td>text</td><td>Question text shown in the collapsible trigger button.</td></tr>
             <tr><td><code>answer</code></td><td>richtext</td><td>Expandable answer content (paragraphs, links, emphasis, lists).</td></tr>
-            <tr><td><code>category</code></td><td>select</td><td>Tab group key used by the parent FAQ section. Built-in options: <em>General</em>, <em>Orders</em>, <em>Shipping</em>, <em>Products</em>, <em>Payments</em>, <em>Returns</em>, <em>Gifts</em>, <em>Support</em>.</td></tr>
+            <tr><td><code>category</code></td><td>select</td><td>Tab group key used by the parent FAQ section: <em>General</em>, <em>Orders</em>, <em>Shipping</em>, <em>Products</em>, <em>Payments</em>, <em>Returns</em>, <em>Gifts</em>, <em>Support</em>. Default: <em>General</em>.</td></tr>
           </tbody>
         </table>
 
@@ -2255,36 +2463,38 @@
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Part</th><th>How it works</th></tr></thead>
           <tbody>
-            <tr><td>Category grouping</td><td>The block writes <code>data-category</code> and <code>data-category-name</code>; <code>faq.liquid</code> reads these to build category tabs and filter visible items.</td></tr>
-            <tr><td>Accessible accordion</td><td>Trigger button includes <code>aria-expanded</code> + <code>aria-controls</code>; panel uses <code>role="region"</code> + <code>aria-labelledby</code> for screen-reader linkage.</td></tr>
-            <tr><td>Stable IDs</td><td>Button/panel IDs use <code>block.id</code> (<code>faq-btn-*</code>, <code>faq-panel-*</code>) so each row remains uniquely addressable after reordering.</td></tr>
+            <tr><td>Category grouping</td><td>The block writes <code>data-category</code> and <code>data-category-name</code>. <code>faq.liquid</code> reads these to build category tabs and filter visible items.</td></tr>
+            <tr><td>Accessible accordion</td><td>Trigger button includes <code>aria-expanded</code> and <code>aria-controls</code>. Panel uses <code>role="region"</code> and <code>aria-labelledby</code> for screen-reader linkage.</td></tr>
+            <tr><td>Stable IDs</td><td>Button and panel IDs use <code>block.id</code> (<code>faq-btn-*</code>, <code>faq-panel-*</code>) so each row stays uniquely addressable after reordering.</td></tr>
             <tr><td>Default fallback</td><td>If a category ever resolves blank, Liquid falls back to <strong>General</strong> before slug generation.</td></tr>
           </tbody>
         </table>
 
         <div class="callout tip">
-          <strong>Content tip:</strong> Keep question phrasing short and specific (one line where possible), and move longer guidance into the <code>answer</code> rich text to preserve scannability in dense FAQ lists.
+          <strong>Content tip:</strong> Keep question phrasing short and specific (one line where possible). Move longer guidance into the <code>answer</code> rich text to preserve scannability in dense FAQ lists.
         </div>
 
         <!-- group -->
         <hr class="doc-divider" id="blocks-group">
         <h3 class="doc-h3">group.liquid</h3>
         <p>
-          A nested layout container block. It wraps child blocks and applies a local flex layout
-          (row or column), spacing, alignment, and optional mobile stacking. Use it when one
-          Custom Section needs internal structure (for example, icon cards in a row under a heading).
+          A nested layout container block. It wraps child blocks via <code>{% content_for 'blocks' %}</code>
+          and applies a local flex layout (row or column), spacing, alignment, and optional mobile stacking.
+          Use it when one Custom section needs internal structure (for example, icon cards in a row under a heading).
+          The only block file with a <code>{% doc %}</code> tag. Nested blocks accept any theme block type
+          (<code>@theme</code>).
         </p>
 
         <h4 class="doc-h4">Schema settings</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting ID</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
-            <tr><td><code>layout_direction</code></td><td>select</td><td>Main flow of child blocks: <code>horizontal</code> (row) or <code>vertical</code> (column).</td></tr>
-            <tr><td><code>stack_on_mobile</code></td><td>checkbox</td><td>When enabled and layout is horizontal, row becomes column under <code>640px</code>.</td></tr>
-            <tr><td><code>gap</code></td><td>range</td><td>Space between children (0–64px, step 4). Applied via <code>--blk-gap</code>.</td></tr>
-            <tr><td><code>alignment</code></td><td>select</td><td>Cross-axis alignment (<code>flex-start</code>, <code>center</code>, <code>flex-end</code>).</td></tr>
-            <tr><td><code>justify</code></td><td>select</td><td>Main-axis distribution for horizontal mode (<code>flex-start</code>, <code>center</code>, <code>flex-end</code>, <code>space-between</code>).</td></tr>
-            <tr><td><code>padding</code></td><td>range</td><td>Inner padding (0–80px). Horizontal mode pads left/right; vertical mode pads top/bottom.</td></tr>
+            <tr><td><code>layout_direction</code></td><td>select</td><td>Main flow of child blocks: <code>horizontal</code> (row) or <code>vertical</code> (column). Default: <code>vertical</code></td></tr>
+            <tr><td><code>stack_on_mobile</code></td><td>checkbox</td><td>When enabled and layout is horizontal, row becomes column under <code>640px</code>. Default: on</td></tr>
+            <tr><td><code>gap</code></td><td>range</td><td>Space between children (0–64px, step 4). Applied via <code>--blk-gap</code>. Default: 16px</td></tr>
+            <tr><td><code>alignment</code></td><td>select</td><td>Cross-axis alignment: <code>flex-start</code>, <code>center</code>, <code>flex-end</code></td></tr>
+            <tr><td><code>justify</code></td><td>select</td><td>Main-axis distribution for horizontal mode: <code>flex-start</code>, <code>center</code>, <code>flex-end</code>, <code>space-between</code></td></tr>
+            <tr><td><code>padding</code></td><td>range</td><td>Inner padding (0–80px). Horizontal mode pads left/right. Vertical mode pads top/bottom.</td></tr>
           </tbody>
         </table>
 
@@ -2293,13 +2503,13 @@
           <thead><tr><th>Mode</th><th>Result</th></tr></thead>
           <tbody>
             <tr><td>Horizontal</td><td>Children render in a wrapped row (<code>flex-wrap: wrap</code>), honoring <code>alignment</code>, <code>justify</code>, and horizontal padding.</td></tr>
-            <tr><td>Vertical</td><td>Children render in a column stack; <code>alignment</code> controls horizontal anchoring of each child.</td></tr>
-            <tr><td>Horizontal + stack on mobile</td><td>At small screens, row switches to column so cards/buttons do not compress.</td></tr>
+            <tr><td>Vertical</td><td>Children render in a column stack. <code>alignment</code> controls horizontal anchoring of each child.</td></tr>
+            <tr><td>Horizontal + stack on mobile</td><td>At small screens, row switches to column so cards or buttons do not compress.</td></tr>
           </tbody>
         </table>
 
         <div class="callout tip">
-          <strong>Composition tip:</strong> Use one top-level vertical group for section flow, then add inner horizontal groups for rows of icon items, badges, or buttons.
+          <strong>Composition tip:</strong> Use one top-level vertical group for section flow. Add inner horizontal groups for rows of icon items, badges, or buttons.
         </div>
 
         <div class="code-label"><span>blocks/group.liquid (render)</span></div>
@@ -3552,7 +3762,7 @@
           <thead><tr><th>Aspect</th><th>Behavior</th></tr></thead>
           <tbody>
             <tr><td>Block renderer</td><td>Uses Shopify native <code>content_for 'blocks'</code>; block order and nesting are fully editor-driven.</td></tr>
-            <tr><td>Allowed blocks</td><td>Supports 11 <code>cs-*</code> primitives plus <code>group</code>, up to <strong>16</strong> top-level blocks.</td></tr>
+            <tr><td>Allowed blocks</td><td>Eleven <code>cs-*</code> primitives plus <code>group</code> (twelve types total), up to <strong>16</strong> top-level blocks.</td></tr>
             <tr><td>Section vs block spacing</td><td>Section controls outer rhythm and global gaps; each block still applies its own top/bottom spacing settings.</td></tr>
             <tr><td>Canvas mode</td><td>When a background image is set, the block wrapper switches to <code>cs__blocks--canvas</code> to add internal vertical breathing space above the image layer.</td></tr>
             <tr><td>Template placement</td><td>No <code>disabled_on</code> restriction in this section schema, so it can be used in any group where the template allows sections.</td></tr>
@@ -3621,7 +3831,7 @@
           <thead><tr><th>Aspect</th><th>Behavior</th></tr></thead>
           <tbody>
             <tr><td>Renderer</td><td>Uses Shopify native <code>content_for 'blocks'</code> for all block output.</td></tr>
-            <tr><td>Allowed block types</td><td>Supports the same modular set as the custom builder: badge, button, divider, heading, icon item, image, quote, spacer, subheading, text, video, and group.</td></tr>
+            <tr><td>Allowed block types</td><td>Same twelve types as Custom section: <code>cs-badge</code>, <code>cs-button</code>, <code>cs-divider</code>, <code>cs-heading</code>, <code>cs-icon-item</code>, <code>cs-image</code>, <code>cs-quote</code>, <code>cs-spacer</code>, <code>cs-subheading</code>, <code>cs-text</code>, <code>cs-video</code>, and <code>group</code>.</td></tr>
             <tr><td>No section title shell</td><td>Unlike <a href="#sections-custom-section-liquid">custom-section.liquid</a>, there is no built-in eyebrow/heading wrapper at section level.</td></tr>
           </tbody>
         </table>
