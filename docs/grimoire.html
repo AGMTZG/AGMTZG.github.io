@@ -2980,7 +2980,7 @@
         <div class="section-doc-prose">
 <p><strong>Theme editor:</strong> Image Hotspot</p>
         <p>Large lifestyle image with up to ten clickable hotspots. Each hotspot opens a tooltip with title, text, optional product link, or custom URL. Editor preview highlights the active hotspot block.</p>
-        <p><strong>Where to use it:</strong> Product education, “shop the look”, or editorial pages.</p>
+        <p><strong>Where to use it:</strong> Any template via <strong>Add section</strong> in the theme editor. The schema has no <code>enabled_on</code> limit and Grimoire does not include this section in a default preset JSON. Typical placements: homepage (<code>index.json</code>), About (<code>page.about-us.json</code>), a generic Page (<code>page.json</code>), Contact (<code>page.contact.json</code>), or a collection template (<code>collection.json</code>) above or below <a href="#sections-collection-liquid">collection.liquid</a>.</p>
         <p><strong>How to customize:</strong> Upload the base image. Add <strong>Hotspot</strong> blocks and position pins in the theme editor (percentage-based coordinates). Choose product-linked or custom content per hotspot. A <code>&lt;noscript&gt;</code> list fallback lists items when JS is off.</p>
         <p><strong>Limits:</strong> <strong>10</strong> hotspot blocks max (<code>max_blocks: 10</code>).</p>
         </div>
@@ -3361,7 +3361,7 @@
         <div class="section-doc-prose">
 <p><strong>Theme editor:</strong> News Grid</p>
         <p>Magazine-style grid: one featured article and a sidebar of smaller cards, with optional category filter tabs.</p>
-        <p><strong>Where to use it:</strong> Dedicated news or journal pages (not the default blog template unless you add it).</p>
+        <p><strong>Where to use it:</strong> Dedicated news or journal pages (not the default blog template).</p>
         <p><strong>How to customize:</strong> Header via <a href="#snippet-section-title">section-title</a>. Article count is fixed in implementation (one featured + four sidebar items). Configure which blog to pull and filter labels in settings.</p>
         <p><strong>Limits:</strong> No blocks. Behavior is settings-driven.</p>
         </div>
@@ -3410,7 +3410,7 @@
         <p>Multi-step guided quiz (2–5 stages) with image options per answer. Results map to <strong>Recommendation</strong> blocks that show up to four products when answer paths match.</p>
         <p><strong>Where to use it:</strong> Homepage, landing pages, or a dedicated “find your product” page.</p>
         <p><strong>How to customize:</strong> Set <strong>Number of stages</strong> and label each stage’s question and four options (text + image). Add many <strong>Recommendation</strong> blocks: each ties stage answers to a <strong>product list</strong> (max four products per block). Tune result screen copy and disclaimer.</p>
-        <p><strong>Limits:</strong> Stage option images and questions are section settings (s1–s5). Recommendation blocks are unlimited in count but each product list field caps at <strong>4</strong> products. Heavy configuration — plan answer keys before adding blocks.</p>
+        <p><strong>Limits:</strong> Stage option images and questions are section settings (s1–s5). Recommendation blocks are unlimited in count but each product list field caps at <strong>4</strong> products. Heavy configuration. Plan answer keys before adding blocks.</p>
         </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
@@ -3524,7 +3524,7 @@
         <div class="section-doc-prose">
 <p><strong>Theme editor:</strong> Signup Flyout</p>
         <p>Global newsletter popup: delayed flyout panel with copy, form, and dismiss controls. Lives in the header group so it can appear site-wide.</p>
-        <p><strong>Where to use it:</strong> <code>enabled_on: header</code> group — add once in the header section group customize view.</p>
+        <p><strong>Where to use it:</strong> <code>enabled_on: header</code> group. Add once in the header section group customize view.</p>
         <p><strong>How to customize:</strong> Set delay, frequency cookie behavior, headline, and success state in settings. Does not use blocks. Test on a fresh browser session to verify timing rules.</p>
         <p><strong>Limits:</strong> One flyout per header group installation. No blocks.</p>
         </div>
@@ -3629,7 +3629,7 @@
         <div class="section-doc-prose">
 <p><strong>Theme editor:</strong> Contact Location</p>
         <p>Store address, hours, and optional Google Maps embed with section header.</p>
-        <p><strong>Where to use it:</strong> Contact page, typically after the hero.</p>
+        <p><strong>Where to use it:</strong> Any template. Grimoire’s preset stacks it on the contact page after <a href="#sections-contact-hero-liquid">contact-hero</a>. You can also add it to the homepage, About, or any Page template from <strong>Add section</strong> in the theme editor. No <code>enabled_on</code> restriction in schema.</p>
         <p><strong>How to customize:</strong> Fill address fields and map embed URL in settings. Eyebrow and heading via <a href="#snippet-section-title">section-title</a>.</p>
         <p><strong>Limits:</strong> No blocks. Preset: Store information.</p>
         </div>
@@ -3652,7 +3652,7 @@ San Fra...</code></td></tr>
         <div class="section-doc-prose">
 <p><strong>Theme editor:</strong> Chronicle</p>
         <p>About-page timeline: alternating <strong>Chapter</strong> blocks with eyebrow, heading, rich body, image, and left/right image placement.</p>
-        <p><strong>Where to use it:</strong> <code>templates/page.about-us.json</code> and brand story pages.</p>
+        <p><strong>Where to use it:</strong> Any template. Grimoire’s preset uses it on About (<code>page.about-us.json</code>). You can also add it to the homepage, Contact, or any Page template from <strong>Add section</strong> in the theme editor. No <code>enabled_on</code> restriction in schema.</p>
         <p><strong>How to customize:</strong> Add chapter blocks in narrative order. Toggle image side per chapter. Section-level settings control overall intro (if any). Preset ships three chapters.</p>
         <p><strong>Limits:</strong> No <code>max_blocks</code> cap on chapters in schema. No snippets.</p>
         </div>
@@ -3684,7 +3684,7 @@ San Fra...</code></td></tr>
         <div class="section-doc-prose">
 <p><strong>Theme editor:</strong> Team</p>
         <p>Staff or founder grid: photo, name, role, and short bio per <strong>Member</strong> block, with section header.</p>
-        <p><strong>Where to use it:</strong> About page (<code>page.about-us.json</code> includes a preset team section).</p>
+        <p><strong>Where to use it:</strong> Any template. Grimoire’s preset includes it on About (<code>page.about-us.json</code>). You can also add it to the homepage, Contact, or any Page template from <strong>Add section</strong> in the theme editor. No <code>enabled_on</code> restriction in schema.</p>
         <p><strong>How to customize:</strong> Add member blocks with portrait images and bios. Reorder in the editor. Header via <a href="#snippet-section-title">section-title</a>.</p>
         <p><strong>Limits:</strong> No block count cap in schema. Preset includes three members.</p>
         </div>
