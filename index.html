@@ -759,96 +759,6 @@
 
 
     /* ══════════════════════════════════════
-       SUPPORT
-    ══════════════════════════════════════ */
-    #support { background: var(--bg); }
-
-    .support-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: start;
-    }
-
-    .support-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-    }
-
-    label {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--dark);
-    }
-
-    input, textarea, select {
-      font-family: 'Figtree', sans-serif;
-      font-size: 0.95rem;
-      padding: 0.8rem 1rem;
-      border: 1.5px solid var(--border);
-      border-radius: 8px;
-      background: var(--white);
-      color: var(--dark);
-      transition: border-color 0.2s, box-shadow 0.2s;
-      outline: none;
-      resize: vertical;
-    }
-    input:focus, textarea:focus, select:focus {
-      border-color: var(--purple);
-      box-shadow: 0 0 0 3px rgba(107,33,254,0.12);
-    }
-    textarea { min-height: 130px; }
-
-    .support-info {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      padding-top: 0.5rem;
-    }
-
-    .support-info p {
-      font-size: 1rem;
-      color: var(--mid);
-      line-height: 1.7;
-    }
-
-    .contact-links {
-      display: flex;
-      flex-direction: column;
-      gap: 0.9rem;
-    }
-
-    .contact-link {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      text-decoration: none;
-      color: var(--dark);
-      font-weight: 500;
-      font-size: 0.95rem;
-      transition: color 0.2s;
-    }
-    .contact-link:hover { color: var(--purple); }
-    .contact-link-icon {
-      width: 36px; height: 36px;
-      border-radius: 8px;
-      background: var(--purple-pale);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .contact-link-icon svg { width: 18px; height: 18px; stroke: var(--purple); fill: none; stroke-width: 2; }
-
-
-    /* ══════════════════════════════════════
        FOOTER
     ══════════════════════════════════════ */
     footer {
@@ -946,7 +856,6 @@
       .exp-tab.active { border-bottom-color: var(--purple); }
       .skills-grid { grid-template-columns: repeat(2, 1fr); }
       .docs-grid { grid-template-columns: 1fr; }
-      .support-inner { grid-template-columns: 1fr; }
       .footer-top { flex-direction: column; gap: 1.5rem; }
       .footer-cta { flex-direction: column; gap: 1.5rem; text-align: center; }
       .footer-cta-btns { justify-content: center; }
@@ -985,7 +894,7 @@
             and software that actually solves problems.
           </p>
           <div class="btn-group reveal reveal-delay-3">
-            <a class="btn-primary" href="#support">Get In Touch</a>
+            <a class="btn-primary" href="support/support.html">Get In Touch</a>
             <a class="btn-outline" href="#projects">Browse Projects</a>
           </div>
         </div>
@@ -1324,79 +1233,6 @@
 
 
   <!-- ══════════════════════════════════════
-       SUPPORT
-  ══════════════════════════════════════ -->
-  <section id="support">
-    <div class="container">
-      <h2 class="section-title reveal">Get In Touch<span class="dot">.</span></h2>
-
-      <div class="support-inner">
-
-        <form class="support-form reveal" onsubmit="handleSubmit(event)">
-          <div class="form-group">
-            <label for="name">Your name</label>
-            <input type="text" id="name" placeholder="Jane Smith" required>
-          </div>
-          <div class="form-group">
-            <label for="email">Email address</label>
-            <input type="email" id="email" placeholder="jane@company.com" required>
-          </div>
-          <div class="form-group">
-            <label for="subject">Subject</label>
-            <select id="subject">
-              <option value="">Select a topic…</option>
-              <option>Project collaboration</option>
-              <option>Freelance inquiry</option>
-              <option>Bug report</option>
-              <option>Documentation feedback</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="message">Message</label>
-            <textarea id="message" placeholder="Tell me what you're working on…" required></textarea>
-          </div>
-          <button type="submit" class="btn-primary" style="align-self:flex-start">Send Message</button>
-          <p id="form-success" style="display:none;color:#22c55e;font-weight:600;margin-top:0.5rem">
-            Thanks! I'll get back to you shortly.
-          </p>
-        </form>
-
-        <div class="support-info reveal reveal-delay-1">
-          <p>
-            Have a project in mind, a bug to report, or just want to say hello?
-            Fill out the form or reach me directly through any of the channels below.
-            I typically respond within 24 hours.
-          </p>
-
-          <div class="contact-links">
-            <a class="contact-link" href="mailto:alberto@example.com">
-              <span class="contact-link-icon">
-                <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 4 10 9 10-9"/></svg>
-              </span>
-              alberto@example.com
-            </a>
-            <a class="contact-link" href="https://github.com/AGMTZG" target="_blank">
-              <span class="contact-link-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-              </span>
-              github.com/AGMTZG
-            </a>
-            <a class="contact-link" href="https://linkedin.com" target="_blank">
-              <span class="contact-link-icon">
-                <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-              </span>
-              linkedin.com/in/albertomtz
-            </a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ══════════════════════════════════════
        FOOTER
   ══════════════════════════════════════ -->
   <div id="footer-placeholder"></div>
@@ -1435,15 +1271,6 @@
       });
     });
 
-    /* ── Contact form ── */
-    function handleSubmit(e) {
-      e.preventDefault();
-      document.getElementById('form-success').style.display = 'block';
-      e.target.reset();
-      setTimeout(() => {
-        document.getElementById('form-success').style.display = 'none';
-      }, 4000);
-    }
   </script>
 
 </body>
