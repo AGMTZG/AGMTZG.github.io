@@ -711,32 +711,6 @@
 
 
     /* ══════════════════════════════════════
-       MY STORY
-    ══════════════════════════════════════ */
-    #story { background: var(--bg); }
-
-    .story-text {
-      max-width: 740px;
-      display: flex;
-      flex-direction: column;
-      gap: 1.3rem;
-    }
-
-    .story-text p {
-      font-size: 1.02rem;
-      color: var(--mid);
-      line-height: 1.8;
-    }
-
-    .story-text a {
-      color: var(--purple);
-      text-decoration: none;
-      font-weight: 600;
-    }
-    .story-text a:hover { text-decoration: underline; }
-
-
-    /* ══════════════════════════════════════
        DOCS (placeholder)
     ══════════════════════════════════════ */
     #docs { background: var(--white); }
@@ -1186,43 +1160,64 @@
 
       <div class="exp-layout reveal">
         <div class="exp-tabs" role="tablist">
-          <button class="exp-tab active" data-panel="p1" role="tab">Freelance</button>
-          <button class="exp-tab" data-panel="p2" role="tab">Startup</button>
-          <button class="exp-tab" data-panel="p3" role="tab">Enterprise</button>
+          <button class="exp-tab active" data-panel="p1" role="tab">Sinttecom</button>
+          <button class="exp-tab" data-panel="p2" role="tab">Genera Creative</button>
+          <button class="exp-tab" data-panel="p3" role="tab">Certa Technologies</button>
+          <button class="exp-tab" data-panel="p4" role="tab">Covia</button>
+          <button class="exp-tab" data-panel="p5" role="tab">CAP San Pedro</button>
         </div>
 
         <div class="exp-panels">
 
           <div class="exp-panel active" id="p1">
-            <p class="exp-role">Software Engineer <span>@ Freelance</span></p>
-            <p class="exp-date">Jan 2022 — Present</p>
+            <p class="exp-role">Fullstack Developer <span>@ Sinttecom</span></p>
+            <p class="exp-date">2022 — 2026</p>
             <ul class="exp-bullets">
-              <li>Designed and delivered full-stack web applications for clients across logistics, HR, and e-commerce verticals.</li>
-              <li>Built RESTful APIs in Laravel and Node.js, integrated third-party payment and notification services.</li>
-              <li>Worked directly with clients to gather requirements, iterate on designs, and deliver on tight deadlines.</li>
-              <li>Maintained 100% on-time delivery record across 8+ projects.</li>
+              <li>Modernized and refactored a mission-critical ERP built on legacy Laravel code, stabilizing the platform and eliminating recurring system failures for 300+ concurrent users.</li>
+              <li>Engineered an automated GitLab CI/CD pipeline for a restricted cPanel environment using custom webhooks, transitioning from manual FTP deployments to a modern DevOps workflow.</li>
+              <li>Managed and optimized a system processing 2M+ annual transactions, replacing manual Excel workflows with automated, high-performance digital processes.</li>
+              <li>Enhanced backend reliability and database speed with complex Laravel Query Builder logic and efficient Eloquent domain modeling for high-traffic financial modules.</li>
+              <li>Standardized Docker containerization across the Laravel development lifecycle, ensuring seamless transitions between local and staging environments.</li>
             </ul>
           </div>
 
           <div class="exp-panel" id="p2">
-            <p class="exp-role">Backend Developer <span>@ TechStartup</span></p>
-            <p class="exp-date">Jun 2020 — Dec 2021</p>
+            <p class="exp-role">WordPress Developer <span>@ Genera Creative Group</span></p>
+            <p class="exp-date">2020 — 2021</p>
             <ul class="exp-bullets">
-              <li>Led backend development of a SaaS platform serving 5,000+ active users.</li>
-              <li>Migrated a monolithic PHP app to a microservices architecture, reducing API response times by 60%.</li>
-              <li>Implemented CI/CD pipelines with GitHub Actions and Docker, cutting deployment time from hours to minutes.</li>
-              <li>Mentored two junior developers on best practices in API design and database optimization.</li>
+              <li>Built and maintained a professional WordPress site using Beaver Builder, aligning with brand identity while improving user engagement and SEO metrics.</li>
+              <li>Developed custom themes and plugins from scratch following SOLID principles, ensuring scalability, maintainability, and clean code standards.</li>
+              <li>Created high-converting landing pages with Beaver Builder's advanced modules, optimizing asset loading to maintain fast PageSpeed scores.</li>
             </ul>
           </div>
 
           <div class="exp-panel" id="p3">
-            <p class="exp-role">Junior Software Engineer <span>@ CorpTech</span></p>
-            <p class="exp-date">Jan 2019 — May 2020</p>
+            <p class="exp-role">Fullstack Developer <span>@ Certa Technologies</span></p>
+            <p class="exp-date">2019 — 2020</p>
             <ul class="exp-bullets">
-              <li>Contributed to internal tools used by 500+ employees across HR and finance departments.</li>
-              <li>Built and maintained Angular modules for data-heavy dashboards and reporting views.</li>
-              <li>Collaborated in a Scrum team of 8, participating in sprint planning, code reviews, and retrospectives.</li>
-              <li>Improved query performance on legacy Oracle DB by 40% through indexing and query refactoring.</li>
+              <li>Developed a .NET-based form builder backed by SQL Server to create multiple-choice surveys and evaluations.</li>
+              <li>Implemented JSON-based form definitions consumed by a React Native mobile application.</li>
+              <li>Enabled survey completion on mobile devices, including response tracking and evidence submission.</li>
+            </ul>
+          </div>
+
+          <div class="exp-panel" id="p4">
+            <p class="exp-role">Fullstack Developer <span>@ Materias Primas (now Covia)</span></p>
+            <p class="exp-date">2018 — 2019</p>
+            <ul class="exp-bullets">
+              <li>Developed an ERP module to manage carrier check-in and check-out processes.</li>
+              <li>Implemented tracking of incoming and outgoing materials.</li>
+              <li>Worked with .NET Core backend components and SQL Server databases.</li>
+            </ul>
+          </div>
+
+          <div class="exp-panel" id="p5">
+            <p class="exp-role">Fullstack Developer <span>@ CAP San Pedro Garza García</span></p>
+            <p class="exp-date">2016 — 2017</p>
+            <ul class="exp-bullets">
+              <li>Developed a system to manage digital patient records using .NET Core, replacing large manual paper forms.</li>
+              <li>Generated charts and reports for case follow-up.</li>
+              <li>Contributed to backend business logic and SQL Server data persistence.</li>
             </ul>
           </div>
 
@@ -1285,41 +1280,6 @@
             <li>Technical writing</li>
           </ul>
         </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ══════════════════════════════════════
-       MY STORY
-  ══════════════════════════════════════ -->
-  <section id="story">
-    <div class="container">
-      <h2 class="section-title reveal">My Story<span class="dot">.</span></h2>
-      <div class="story-text reveal">
-        <p>
-          My journey into software started with curiosity — I wanted to understand how
-          the things I used every day actually worked. That curiosity turned into a
-          degree in Computer Science and never really stopped.
-        </p>
-        <p>
-          I started out building small tools as a <a href="#support">freelancer</a>, learning how to turn
-          vague requirements into working software. Over time that experience pushed me
-          toward more complex problems: distributed systems, API design, and building
-          products that scale.
-        </p>
-        <p>
-          I'm most at home working across the full stack — designing a data model in the
-          morning, wiring up a Liquid template in the afternoon. I believe great software
-          comes from understanding both sides of the wire. <a href="#projects">Grimoire</a> is a good
-          example: a production-ready Shopify skeleton theme built for modularity and speed,
-          following platform best practices from the ground up.
-        </p>
-        <p>
-          When I'm not shipping code, I'm probably reading about system design, experimenting
-          with Go, or trying to understand why the last query was slow.
-          I'm always open to interesting projects and collaborations.
-        </p>
       </div>
     </div>
   </section>
