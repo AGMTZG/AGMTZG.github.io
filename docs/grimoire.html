@@ -740,7 +740,6 @@
             </a>
             <a class="toc-sub" href="#theme-settings-logos">Logos</a>
             <a class="toc-sub" href="#theme-settings-typography">Typography</a>
-            <a class="toc-sub" href="#theme-settings-layout">Layout</a>
             <a class="toc-sub" href="#theme-settings-colors">Colors</a>
             <a class="toc-sub" href="#theme-settings-seo">SEO</a>
             <a class="toc-sub" href="#theme-settings-social">Social media</a>
@@ -892,7 +891,7 @@
         <div class="ref-grid">
           <div class="ref-item">
             <span class="ref-item-name">1. Theme settings</span>
-            <span class="ref-item-desc">Logos, typography, layout, colors, SEO, search, products, favicon, and more. Applies to the entire store.</span>
+            <span class="ref-item-desc">Logos, typography, colors, SEO, search, products, favicon, and more. Applies to the entire store.</span>
           </div>
           <div class="ref-item">
             <span class="ref-item-name">2. Header &amp; footer groups</span>
@@ -907,7 +906,7 @@
         <h3 class="doc-h3">Theme settings (store-wide)</h3>
         <p>
           Open the customizer and click the gear icon or <strong>Theme settings</strong> in the left sidebar.
-          Grimoire exposes <strong>12 setting groups</strong> that control logos, typography, layout, colors,
+          Grimoire exposes <strong>11 setting groups</strong> that control logos, typography, colors,
           SEO, social links, search, sharing, currency display, product defaults, favicon, and animations.
           Full reference in the <a href="#theme-settings">Theme Settings</a> chapter at the end of this guide.
         </p>
@@ -916,7 +915,6 @@
           <tbody>
             <tr><td>Logos</td><td>Header and footer logo images (desktop and mobile), sizes, and text fallback.</td></tr>
             <tr><td>Typography</td><td>Primary font (body and UI) and heading font. Loaded via <a href="#snippet-css-variables">css-variables</a>.</td></tr>
-            <tr><td>Layout</td><td>Page width (narrow or wide) and minimum page margin.</td></tr>
             <tr><td>Colors</td><td>Color schemes (background, text, buttons, badges, footer) and input corner radius.</td></tr>
             <tr><td>SEO</td><td>Organization JSON-LD, breadcrumb schema, and Sitelinks search box. Output via <a href="#snippet-meta-tags">meta-tags</a>.</td></tr>
             <tr><td>Social media</td><td>Profile URLs for the footer icon row.</td></tr>
@@ -1089,7 +1087,7 @@
 
         <h3 class="doc-h3">Recommended workflow</h3>
         <ol style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:1rem; line-height:2;">
-          <li>Configure <strong>Theme settings</strong> (fonts, colors, page width).</li>
+          <li>Configure <strong>Theme settings</strong> (fonts and colors).</li>
           <li>Set up <strong>Header</strong> and <strong>Footer</strong> (logo, menus, newsletter, social links).</li>
           <li>Customize the <strong>Home</strong> template: slideshow, collections, trending products, then add storytelling sections as needed.</li>
           <li>Review <strong>Product</strong> and <strong>Collection</strong> templates, adjust product blocks, filters, and merchandising sections.</li>
@@ -3736,7 +3734,7 @@ San Fra...</code></td></tr>
         </p>
 
         <div class="callout">
-          <strong>How changes apply:</strong> Typography, layout, and color scheme updates rebuild
+          <strong>How changes apply:</strong> Typography and color scheme updates rebuild
           <code>--page-width</code>, <code>--color-background</code>, button tokens, and related variables
           on every page load. Search, sharing, and product flags affect specific sections and snippets
           at render time. Nothing here replaces section settings in the header or footer groups.
@@ -3750,7 +3748,6 @@ San Fra...</code></td></tr>
           <tbody>
             <tr><td><a href="#theme-settings-logos">Logos</a></td><td><a href="#sections-header-liquid">header.liquid</a>, <a href="#sections-footer-liquid">footer.liquid</a>, gift card layout</td></tr>
             <tr><td><a href="#theme-settings-typography">Typography</a></td><td><a href="#snippet-css-variables">css-variables</a> (<code>--font-primary--*</code>, <code>--font-heading--*</code>)</td></tr>
-            <tr><td><a href="#theme-settings-layout">Layout</a></td><td><code>layout/theme.liquid</code> grid, all sections using <code>--page-width</code></td></tr>
             <tr><td><a href="#theme-settings-colors">Colors</a></td><td><a href="#snippet-css-variables">css-variables</a> color scheme tokens</td></tr>
             <tr><td><a href="#theme-settings-seo">SEO</a></td><td><a href="#snippet-meta-tags">meta-tags</a> JSON-LD blocks</td></tr>
             <tr><td><a href="#theme-settings-social">Social media</a></td><td>Footer social icon row</td></tr>
@@ -3796,20 +3793,6 @@ San Fra...</code></td></tr>
           <tbody>
             <tr><td><code>type_primary_font</code></td><td>font_picker</td><td>Body and UI font. Default: Merriweather Sans (medium).</td></tr>
             <tr><td><code>heading_font</code></td><td>font_picker</td><td>Heading font for <code>h1</code>–<code>h4</code> and section titles. Default: Merriweather Sans (extra bold).</td></tr>
-          </tbody>
-        </table>
-
-        <hr class="doc-divider" id="theme-settings-layout">
-        <h3 class="doc-h3">Layout</h3>
-        <p>
-          Controls the main content column on desktop. Exposed as <code>--page-width</code> and
-          <code>--page-margin</code> in <a href="#snippet-css-variables">css-variables</a>.
-        </p>
-        <table class="params-table params-table--guide params-table--sections">
-          <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
-          <tbody>
-            <tr><td><code>max_page_width</code></td><td>select</td><td>Maximum content width. Default: <code>90rem</code> (narrow). Options: <code>90rem</code>, <code>110rem</code> (wide).</td></tr>
-            <tr><td><code>min_page_margin</code></td><td>range</td><td>Minimum horizontal padding. Default: <code>20</code> px. Range: 10–100 px.</td></tr>
           </tbody>
         </table>
 
@@ -4001,7 +3984,7 @@ San Fra...</code></td></tr>
         <h4 class="doc-h4">Recommended order</h4>
         <ol style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:0; line-height:2;">
           <li><strong>Logos</strong> and <strong>Typography</strong> so header and footer match your brand.</li>
-          <li><strong>Colors</strong> and <strong>Layout</strong> before tuning individual sections.</li>
+          <li><strong>Colors</strong> before tuning individual sections.</li>
           <li><strong>Social media</strong>, <strong>Search</strong>, and <strong>Products</strong> for storefront behavior.</li>
           <li><strong>SEO</strong> once content and navigation are stable.</li>
           <li>Header and footer <em>sections</em> for menus, drawer copy, and newsletter strings.</li>
