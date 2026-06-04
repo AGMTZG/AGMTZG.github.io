@@ -487,6 +487,8 @@
     #snippets .params-table.params-table--guide .table-token-list li,
     #blocks .params-table.params-table--guide td:last-child,
     #blocks .params-table.params-table--guide .table-token-list li,
+    #sections .section-doc-prose p,
+    #sections .section-doc-prose li,
     #sections .params-table.params-table--guide td:last-child {
       hyphens: auto;
       -webkit-hyphens: auto;
@@ -977,7 +979,7 @@
             </tr>
             <tr>
               <td>About page</td>
-              <td>Breadcrumb, Page intro, Chronicle (story chapters), Coven (team or values), plus any sections you add</td>
+              <td>Breadcrumb, Page intro, Chronicle (story chapters), Team (profiles or values), plus any sections you add</td>
             </tr>
             <tr>
               <td>List collections</td>
@@ -2605,11 +2607,16 @@
           </div>
         </div>
         <h3 class="doc-h3">Section reference</h3>
-        <p>One entry per file in <code>sections/</code>. Schema tables are generated from each section’s <code>{% schema %}</code> block.</p>
+        <p>One entry per file in <code>sections/</code>. Each section below includes a merchant-focused overview plus schema tables synced from the Liquid <code>{% schema %}</code> block.</p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-announcement-bar">announcement-bar.liquid</h4>
-        <p>Top-of-site promo strip in the <strong>Header group</strong>. Rotates up to six message blocks and hosts language/locale selectors on desktop.</p>
-        <p>Theme editor name: <strong>Announcement bar</strong> · max <strong>6</strong> blocks · CSS class <code>shopify-section--announcement-bar</code>.</p>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> Announcement bar</p>
+        <p>Thin promo strip fixed above the main header. Use it for shipping thresholds, sale deadlines, or store-wide notices without editing the header section itself.</p>
+        <p><strong>Where to use it:</strong> Lives in the <strong>Header group</strong> in <em>Theme settings → Sections</em>. It appears on every template that loads the header group. Language and country selectors render here on viewports 600px and wider (see <a href="#snippet-language-selector">language-selector</a> and <a href="#snippet-locale-selector">locale-selector</a>).</p>
+        <p><strong>How to customize:</strong> Turn the bar on or off with <strong>Show announcement bar</strong>. Add one or more <strong>Message</strong> blocks. Each message can include optional link text and URL. When multiple messages exist, they auto-rotate; set <strong>Seconds per message</strong> (3–10s). Match bar colors to your brand with the three color pickers.</p>
+        <p><strong>Limits:</strong> Up to <strong>6</strong> message blocks (<code>max_blocks: 6</code>). Only available in the header section group. CSS hook: <code>shopify-section--announcement-bar</code>.</p>
+        </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
@@ -2634,8 +2641,13 @@
         <p><strong>Presets:</strong> <strong>Announcement bar</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-header-liquid">header.liquid</h4>
-        <p>Main navigation: logo, menus, search overlay, cart drawer, and sticky/hide-on-scroll behavior.</p>
-        <p>Theme editor name: <strong>Header</strong>.</p>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> Header</p>
+        <p>Global site navigation: logo, primary menu, mobile drawer, predictive search overlay, and AJAX cart sidebar. Custom elements <code>&lt;site-navbar&gt;</code>, <code>&lt;search-overlay&gt;</code>, and <code>&lt;cart-sidebar&gt;</code> handle scroll behavior and cart API updates.</p>
+        <p><strong>Where to use it:</strong> Part of the <strong>Header group</strong> on all storefront templates. Configure menus under <em>Content → Menus</em> in Shopify admin, then pick the main menu in section settings (default handle <code>main-menu</code>).</p>
+        <p><strong>How to customize:</strong> Choose <strong>Scroll behavior</strong>: hide-on-scroll (default), sticky, or static. Enable <strong>Transparent header</strong> on the homepage hero so the slideshow shows through; set <strong>Transparent header text color</strong> for contrast. Edit drawer, search, and cart empty-state copy in the settings panel. Logo and menu items come from theme settings and navigation menus, not this section file.</p>
+        <p><strong>Limits:</strong> No blocks. Settings-only section. Pair with <a href="#sections-signup-flyout-liquid">signup-flyout</a> in the same header group if you want a newsletter popup.</p>
+        </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
@@ -2659,8 +2671,13 @@
         </table>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-footer-liquid">footer.liquid</h4>
-        <p>Site footer: menus, newsletter, social links, payment icons, and locale selector.</p>
-        <p>Theme editor name: <strong>Footer</strong>.</p>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> Footer</p>
+        <p>Site-wide footer with brand blurb, two link columns, newsletter signup, optional Follow on Shop, payment icons, and Markets locale switching via <a href="#snippet-locale-selector">locale-selector</a> (footer context).</p>
+        <p><strong>Where to use it:</strong> <strong>Footer group</strong> on all pages. Assign menus for <strong>Explore</strong> and <strong>Information</strong> columns under <em>Content → Menus</em>.</p>
+        <p><strong>How to customize:</strong> Fill brand description and newsletter strings. Toggle payment icons and Follow on Shop. Social links typically come from theme settings (check Theme settings → Social media). The newsletter form uses Shopify’s customer API like other signup sections.</p>
+        <p><strong>Limits:</strong> No blocks. No per-template restriction in schema.</p>
+        </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
@@ -2680,8 +2697,13 @@
         </table>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-password-liquid">password.liquid</h4>
-        <p>Password-page content in <code>layout/password.liquid</code>: coming-soon copy and newsletter capture.</p>
-        <p>Theme editor name: <strong>Password page</strong>.</p>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> Password page</p>
+        <p>Content for the password-protected storefront: coming-soon headline, description, and email capture. Rendered through <code>layout/password.liquid</code> (not the main theme layout).</p>
+        <p><strong>Where to use it:</strong> <code>templates/password.json</code> only, while the store is password-protected in Shopify admin.</p>
+        <p><strong>How to customize:</strong> Set eyebrow, heading (blank uses shop name), and description. Shoppers submit email via a built-in customer form; success and error states are handled in Liquid. Password entry uses the separate password modal in the layout.</p>
+        <p><strong>Limits:</strong> No blocks. Does not load <a href="#snippet-meta-tags">meta-tags</a> or the standard header/footer groups.</p>
+        </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
@@ -2693,8 +2715,13 @@
         </table>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-404-liquid">404.liquid</h4>
-        <p>Storefront 404 page with heading, description, and optional secondary CTA.</p>
-        <p>Theme editor name: <strong>404</strong>.</p>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> 404</p>
+        <p>Friendly “page not found” layout with primary and optional secondary actions so shoppers can recover instead of hitting a dead end.</p>
+        <p><strong>Where to use it:</strong> <code>templates/404.json</code> automatically when a URL does not exist.</p>
+        <p><strong>How to customize:</strong> Edit heading and description. Primary button returns home. Toggle <strong>Show secondary button</strong> and set label plus URL (for example all products collection).</p>
+        <p><strong>Limits:</strong> No blocks. Settings-only.</p>
+        </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
@@ -2709,8 +2736,13 @@
         </table>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-breadcrumb-liquid">breadcrumb.liquid</h4>
-        <p>Wayfinding trail built from optional blocks (home, collection, blog, search, current).</p>
-        <p>Theme editor name: <strong>Breadcrumb</strong>.</p>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> Breadcrumb</p>
+        <p>Horizontal wayfinding trail (Home › Collection › Product) built from optional blocks so you control which crumbs appear per template.</p>
+        <p><strong>Where to use it:</strong> Common on product, collection, blog, article, page, and search templates. <strong>Disabled on the homepage</strong> (<code>disabled_on: index</code>) so the home page stays clean.</p>
+        <p><strong>How to customize:</strong> Add at most one of each block type: <strong>Home</strong>, <strong>Search</strong>, <strong>Blog</strong>, <strong>Collection</strong>, <strong>Current page</strong>. Reorder blocks in the editor; each type can only appear once. Separator style is controlled in section settings.</p>
+        <p><strong>Limits:</strong> Each block type limited to <strong>1</strong> instance. No snippets.</p>
+        </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
@@ -2746,8 +2778,13 @@
         <p><strong>Presets:</strong> <strong>Breadcrumb</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-slideshow-liquid">slideshow.liquid</h4>
-        <p>Full-bleed homepage hero powered by Swiper 11.</p>
-        <p>Theme editor name: <strong>Slideshow</strong> · max <strong>8</strong> blocks.</p>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> Slideshow</p>
+        <p>Full-bleed homepage hero carousel powered by <strong>Swiper 11</strong>: background image or video per slide, headline, subcopy, CTA, and slide counter. Touch-friendly with custom prev/next controls.</p>
+        <p><strong>Where to use it:</strong> Typically first on <code>templates/index.json</code>. Works on any template that needs a cinematic hero.</p>
+        <p><strong>How to customize:</strong> Add <strong>Slide</strong> blocks (image, optional video, text, button link). Set autoplay delay in section settings. Without JavaScript, slides stack vertically for accessibility.</p>
+        <p><strong>Limits:</strong> Up to <strong>8</strong> slides (<code>max_blocks: 8</code>). Not the same as <a href="#snippet-product-carousel">product-carousel</a> used for product grids.</p>
+        </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
@@ -2771,8 +2808,13 @@
         <p><strong>Presets:</strong> <strong>Slideshow</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-collections-liquid">collections.liquid</h4>
-        <p>Homepage category carousel of merchant-defined collection cards.</p>
-        <p>Theme editor name: <strong>Collections Hero</strong>.</p>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> Collections Hero</p>
+        <p>Homepage-style carousel of collection cards: image, title, description, and link per category block. Distinct from the <strong>Main Collection</strong> PLP section (<a href="#sections-collection-liquid">collection.liquid</a>).</p>
+        <p><strong>Where to use it:</strong> Homepage (<code>index.json</code>) and <code>list-collections.json</code>. Uses <a href="#snippet-section-title">section-title</a> for eyebrow, heading, and optional CTA.</p>
+        <p><strong>How to customize:</strong> Add <strong>Category</strong> blocks (max 15). Pick a collection or custom image and copy per card. Section settings control header text, carousel behavior, and card styling. App blocks (<code>@app</code>) can extend the section if an app provides them.</p>
+        <p><strong>Limits:</strong> <strong>15</strong> category blocks max. Uses the section’s own carousel JS, not <code>GrimoireCarousel</code>.</p>
+        </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
@@ -2806,8 +2848,13 @@
         <p><strong>Presets:</strong> <strong>Collections Hero</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-trending-products-liquid">trending-products.liquid</h4>
-        <p>Tabbed product carousels by category with quick-view modals.</p>
-        <p>Theme editor name: <strong>Trending Products</strong>.</p>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> Trending Products</p>
+        <p>Tabbed product carousels: each tab is a category label with its own hand-picked product list, quick-view modals, and shared header from <a href="#snippet-section-title">section-title</a>.</p>
+        <p><strong>Where to use it:</strong> Homepage and landing pages. Preset included on index.</p>
+        <p><strong>How to customize:</strong> Add up to <strong>5</strong> <strong>Category tab</strong> blocks. In each tab, select products (respect <strong>Products to show</strong> per tab, 1–12). Set section eyebrow, heading, and optional “view all” button. Cards use <code>opens_modal: true</code> and one <a href="#snippet-product-modal">product-modal</a> per section instance.</p>
+        <p><strong>Limits:</strong> <strong>5</strong> tabs max. Snippets: section-title, product-card, product-carousel, product-modal, product-interactions (via modal).</p>
+        </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
@@ -2831,8 +2878,13 @@
         <p><strong>Presets:</strong> <strong>Trending Products</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-blog-featured-liquid">blog-featured.liquid</h4>
-        <p>Highlights one blog article with image, excerpt, and read CTA.</p>
-        <p>Theme editor name: <strong>Featured Article</strong>.</p>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> Featured Article</p>
+        <p>Spotlights a single article from a chosen blog: large image, meta, excerpt, tags, and a fixed “Read article” CTA.</p>
+        <p><strong>Where to use it:</strong> Top of <code>templates/blog.json</code> above the main blog grid.</p>
+        <p><strong>How to customize:</strong> Select the <strong>Blog</strong> source. The section surfaces the blog’s featured article (or latest, per theme logic). Toggle meta, excerpt, and tags. CTA label is fixed in code (<code>Read article</code>).</p>
+        <p><strong>Limits:</strong> No blocks. No product snippets.</p>
+        </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
@@ -2847,8 +2899,13 @@
         </table>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-newsletter-liquid">newsletter.liquid</h4>
-        <p>Email signup section with eyebrow, heading, and Shopify customer form.</p>
-        <p>Theme editor name: <strong>Newsletter</strong>.</p>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> Newsletter</p>
+        <p>Centered email signup band with eyebrow, heading, description, and Shopify customer form. Uses <a href="#snippet-section-title">section-title</a> (newsletter section centers the header via CSS).</p>
+        <p><strong>Where to use it:</strong> Homepage, blog template footer area, or any page needing a list-building strip.</p>
+        <p><strong>How to customize:</strong> Edit all copy fields and success message. Form tags contacts as newsletter subscribers. No blocks to add.</p>
+        <p><strong>Limits:</strong> Settings-only. Distinct from footer newsletter and <a href="#sections-signup-flyout-liquid">signup-flyout</a>.</p>
+        </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
@@ -2864,8 +2921,13 @@
         </table>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-marquee-liquid">marquee.liquid</h4>
-        <p>Infinite horizontal ticker of short text blocks.</p>
-        <p>Theme editor name: <strong>Marquee</strong>.</p>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> Marquee</p>
+        <p>Infinite horizontal ticker of short phrases with optional separator character. Good for brand mantras, trust lines, or promo repetition.</p>
+        <p><strong>Where to use it:</strong> Homepage bands or between sections on landing pages.</p>
+        <p><strong>How to customize:</strong> Add <strong>Marquee item</strong> blocks with one line of text each. Tune font size (rem), loop speed (seconds), separator (default ✦), and pause-on-hover. Duplicate items in the track for seamless looping.</p>
+        <p><strong>Limits:</strong> No <code>max_blocks</code> cap in schema (add enough items to fill wide screens). Preset ships five sample items.</p>
+        </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
@@ -2887,8 +2949,13 @@
         <p><strong>Presets:</strong> <strong>Marquee</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-countdown-timer-hero-liquid">countdown-timer-hero.liquid</h4>
-        <p>Full-width hero with live countdown, headline, and CTA.</p>
-        <p>Theme editor name: <strong>Countdown Timer Hero</strong>.</p>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> Countdown Timer Hero</p>
+        <p>Launch or sale hero with live countdown timer, headline, subcopy, optional pill CTA, and background image or color. Wrapped in <code>&lt;countdown-timer-hero&gt;</code>.</p>
+        <p><strong>Where to use it:</strong> Landing pages and homepage takeovers for timed campaigns.</p>
+        <p><strong>How to customize:</strong> Set end date/time fields in section settings. Style overlay, typography, and button. Timer updates in the browser; verify timezone expectations when scheduling launches.</p>
+        <p><strong>Limits:</strong> No blocks. Settings-only.</p>
+        </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
@@ -2910,8 +2977,13 @@
         <p><strong>Presets:</strong> <strong>Countdown Timer Hero</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-image-hotspot-liquid">image-hotspot.liquid</h4>
-        <p>Interactive image with up to ten clickable hotspot tooltips.</p>
-        <p>Theme editor name: <strong>Image Hotspot</strong> · max <strong>10</strong> blocks.</p>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> Image Hotspot</p>
+        <p>Large lifestyle image with up to ten clickable hotspots. Each hotspot opens a tooltip with title, text, optional product link, or custom URL. Editor preview highlights the active hotspot block.</p>
+        <p><strong>Where to use it:</strong> Product education, “shop the look”, or editorial pages.</p>
+        <p><strong>How to customize:</strong> Upload the base image. Add <strong>Hotspot</strong> blocks and position pins in the theme editor (percentage-based coordinates). Choose product-linked or custom content per hotspot. A <code>&lt;noscript&gt;</code> list fallback lists items when JS is off.</p>
+        <p><strong>Limits:</strong> <strong>10</strong> hotspot blocks max (<code>max_blocks: 10</code>).</p>
+        </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
@@ -2944,8 +3016,13 @@
         <p><strong>Presets:</strong> <strong>Image Hotspot</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-product-liquid">product.liquid</h4>
-        <p>Product detail buy box: media gallery, variant picker, price, buy buttons, and reorderable blocks.</p>
-        <p>Theme editor name: <strong>Product</strong>.</p>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> Product</p>
+        <p>Main product template buy box: media gallery (images, video, 3D), variant picker, quantity, buy buttons, description, pickup availability, and share. Blocks are reorderable in the editor.</p>
+        <p><strong>Where to use it:</strong> <code>templates/product.json</code> only (<code>enabled_on: product</code>).</p>
+        <p><strong>How to customize:</strong> Drag blocks in the sidebar to change layout order (for example move <strong>Description</strong> above <strong>Price</strong>). Each block type allows <strong>one</strong> instance. Variant picker supports radio or dropdown style. Media settings control gallery layout and zoom.</p>
+        <p><strong>Limits:</strong> Blocks (each limit 1): title, price, variant_picker, quantity_selector, buy_buttons, description, pickup_availability, share. Outputs JSON-LD via Shopify’s product structured data filter in the layout/snippet layer.</p>
+        </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
@@ -2989,8 +3066,13 @@
         <p><strong>Presets:</strong> <strong>Product</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-collection-liquid">collection.liquid</h4>
-        <p>Collection PLP with filters, sort, product grid, pagination, and quick-view modals. Not the homepage carousel — see <a href="#sections-collections-liquid">collections.liquid</a>.</p>
-        <p>Theme editor name: <strong>Main Collection</strong>.</p>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> Main Collection</p>
+        <p>Collection listing page (PLP): filters, sort, responsive product grid, pagination, and quick-view modals. Renders <a href="#snippet-product-card">product-card</a> with <code>opens_modal: true</code>.</p>
+        <p><strong>Where to use it:</strong> <code>templates/collection.json</code>. Do not confuse with <a href="#sections-collections-liquid">collections.liquid</a> (homepage category carousel).</p>
+        <p><strong>How to customize:</strong> Configure filter groups and grid columns in section settings. Header via <a href="#snippet-section-title">section-title</a>. One <a href="#snippet-product-modal">product-modal</a> per section. Optional <code>@app</code> blocks below the grid for app widgets.</p>
+        <p><strong>Limits:</strong> Product grid is Liquid-driven from the collection object, not merchant-added product blocks. Filter drawer locks body scroll when open.</p>
+        </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
@@ -3007,8 +3089,13 @@
         <p><strong>@app</strong> (<code>@app</code>)</p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-cart-liquid">cart.liquid</h4>
-        <p>Full cart page with line items, quantity controls, notes, checkout CTA, and empty state.</p>
-        <p>Theme editor name: <strong>Cart</strong>.</p>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> Cart</p>
+        <p>Full cart page: line items, quantity updates, cart note, subtotal, checkout button, and empty state. Header uses <a href="#snippet-section-title">section-title</a> with <code>h1</code> for SEO.</p>
+        <p><strong>Where to use it:</strong> <code>templates/cart.json</code>.</p>
+        <p><strong>How to customize:</strong> Edit eyebrow and heading. Cart line behavior follows Shopify cart object; AJAX updates also sync with the header <code>cart-sidebar</code>. Configure empty-state messaging in settings.</p>
+        <p><strong>Limits:</strong> No blocks. Complements the drawer cart in the header, not a replacement.</p>
+        </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
@@ -3027,8 +3114,13 @@
         </table>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-search-liquid">search.liquid</h4>
-        <p>Search results page with product grid and quick-view modals.</p>
-        <p>Theme editor name: <strong>Search</strong>.</p>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> Search</p>
+        <p>Search results page with query field, results count, and product grid using the same card + quick-view pattern as collection.</p>
+        <p><strong>Where to use it:</strong> <code>templates/search.json</code>. Header search overlay in the navbar uses predictive search separately.</p>
+        <p><strong>How to customize:</strong> Tune labels and empty-state copy. Product results render via <a href="#snippet-product-card">product-card</a> and <a href="#snippet-product-modal">product-modal</a>. Non-product results depend on Shopify search settings.</p>
+        <p><strong>Limits:</strong> No blocks in schema.</p>
+        </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
@@ -3041,8 +3133,13 @@
         </table>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-product-recommendations-liquid">product-recommendations.liquid</h4>
-        <p>Shopify-powered related products carousel on the product template.</p>
-        <p>Theme editor name: <strong>Product Recommendations</strong>.</p>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> Product Recommendations</p>
+        <p>Shopify-powered related products carousel below the buy box. Uses recommendation intent from Shopify with a merchant-controlled product count.</p>
+        <p><strong>Where to use it:</strong> <code>templates/product.json</code> only (<code>enabled_on: product</code>).</p>
+        <p><strong>How to customize:</strong> Set eyebrow and heading. Choose how many products to show (2–10). Section fetches recommendations via the Product Recommendations API; cards open quick view.</p>
+        <p><strong>Limits:</strong> Snippets: section-title, product-carousel, product-card, product-modal. No blocks.</p>
+        </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
@@ -3056,8 +3153,13 @@
         <p><strong>Presets:</strong> <strong>Product Recommendations</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-recently-viewed-liquid">recently-viewed.liquid</h4>
-        <p>Client-side recently viewed carousel on the product template (<code>localStorage</code> + quick view). Limited to one instance.</p>
-        <p>Theme editor name: <strong>Recently Viewed</strong> · limit <strong>1</strong> per template.</p>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> Recently Viewed</p>
+        <p>Per-visitor product strip based on <code>localStorage</code> browsing history. Cards are built in JavaScript from <code>/products/{handle}.js</code>, not Liquid loops.</p>
+        <p><strong>Where to use it:</strong> Product template footer (<code>enabled_on: product</code>).</p>
+        <p><strong>How to customize:</strong> Set eyebrow, heading, and max products (2–8). Current product is excluded automatically. Section stays hidden until at least one valid handle exists.</p>
+        <p><strong>Limits:</strong> <strong>One</strong> section instance per template (<code>limit: 1</code>). Snippets: section-title, product-carousel (empty shell filled by JS), product-card (hidden style loader), product-modal. Quick view enabled on JS-built cards.</p>
+        </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
@@ -3070,8 +3172,13 @@
         <p><strong>Presets:</strong> <strong>Recently Viewed</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-product-benefits-liquid">product-benefits.liquid</h4>
-        <p>Product-page trust grid of up to eight benefit tiles. Limited to one instance per template.</p>
-        <p>Theme editor name: <strong>Product Benefits</strong> · limit <strong>1</strong> per template · CSS class <code>product-benefits</code>.</p>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> Product Benefits</p>
+        <p>Row of trust icons (shipping, returns, payment, etc.) under the product story. Each benefit is a block with icon picker, title, and short text.</p>
+        <p><strong>Where to use it:</strong> Product template (<code>enabled_on: product</code>).</p>
+        <p><strong>How to customize:</strong> Add up to <strong>8</strong> <strong>Benefit</strong> blocks. Reorder in the editor. Section hides entirely if no blocks are present.</p>
+        <p><strong>Limits:</strong> <strong>1</strong> section per product template (<code>limit: 1</code>). Up to <strong>8</strong> benefit blocks. Static CSS only (no JavaScript).</p>
+        </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
@@ -3093,8 +3200,13 @@
         <p><strong>Presets:</strong> <strong>Product Benefits</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-custom-section-liquid">custom-section.liquid</h4>
-        <p>Flexible page builder with eleven <code>cs-*</code> blocks + <code>group</code>, optional background canvas, and section title.</p>
-        <p>Theme editor name: <strong>Custom section</strong> · max <strong>16</strong> blocks.</p>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> Custom section</p>
+        <p>Full page-builder: stack <code>cs-*</code> blocks and nested <a href="#blocks-group">group</a> rows with optional full-bleed background image, section title, width, and spacing controls.</p>
+        <p><strong>Where to use it:</strong> Any template (landing pages, about, contact, homepage additions). Default Grimoire preset demonstrates a story + CTA layout.</p>
+        <p><strong>How to customize:</strong> Toggle <strong>Show section title</strong> for eyebrow/heading (via <a href="#snippet-section-title">section-title</a>). Add blocks from the drawer (heading, text, image, video, button, etc.). Use <strong>Group</strong> for rows of icon items or buttons. Set max width, alignment, padding, and <strong>Blocks gap</strong>.</p>
+        <p><strong>Limits:</strong> <strong>16</strong> top-level blocks max. Allowed types: all eleven <code>cs-*</code> blocks plus <code>group</code>. Block settings documented under <a href="#blocks">Blocks</a>.</p>
+        </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
@@ -3118,8 +3230,13 @@
         <p><strong>Presets:</strong> <strong>t:general.custom_section</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-custom-liquid-liquid">custom-liquid.liquid</h4>
-        <p>Single Liquid/HTML field for app embeds or advanced markup.</p>
-        <p>Theme editor name: <strong>Custom Liquid</strong>.</p>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> Custom Liquid</p>
+        <p>Raw Liquid or HTML injection for app widgets, tracking snippets, or advanced markup. No block system.</p>
+        <p><strong>Where to use it:</strong> Any template when you need a one-off embed without creating a new section file.</p>
+        <p><strong>How to customize:</strong> Paste code into the <strong>Custom Liquid</strong> field. Adjust max width and vertical padding. Empty field shows a dashed placeholder in the editor only.</p>
+        <p><strong>Limits:</strong> No blocks. Unlike <a href="#sections-custom-section-liquid">custom-section</a>, there is no background canvas or title shell. Use only if you trust the code source.</p>
+        </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
@@ -3133,8 +3250,13 @@
         <p><strong>Presets:</strong> <strong>Custom Liquid</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-text-liquid">text.liquid</h4>
-        <p>Lightweight <code>cs-*</code> block stack without custom-section chrome.</p>
-        <p>Theme editor name: <strong>Text</strong>.</p>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> Text</p>
+        <p>Lightweight wrapper for the same <code>cs-*</code> and <code>group</code> blocks as Custom section, without section title or background image options.</p>
+        <p><strong>Where to use it:</strong> Editorial rows on pages where you already have a hero from <a href="#sections-page-liquid">page</a> or <a href="#sections-custom-section-liquid">custom-section</a>.</p>
+        <p><strong>How to customize:</strong> Add blocks inside the section. Set <strong>Max width</strong> (400–1400px) and top/bottom padding. Empty section shows an “Add blocks” placeholder in the editor.</p>
+        <p><strong>Limits:</strong> No <code>max_blocks</code> in schema (Shopify default applies). Same eleven <code>cs-*</code> types + <code>group</code> as custom-section.</p>
+        </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
@@ -3149,8 +3271,13 @@
         <p><strong>Presets:</strong> <strong>Text</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-page-liquid">page.liquid</h4>
-        <p>Renders a Shopify page body with optional table of contents and reading progress.</p>
-        <p>Theme editor name: <strong>Page</strong>.</p>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> Page</p>
+        <p>Renders Shopify page content from admin with optional hero, table of contents, and reading progress bar for long editorial content.</p>
+        <p><strong>Where to use it:</strong> <code>templates/page.json</code> and custom page templates (<code>page.contact.json</code>, etc.) — schema restricts to <code>page</code> template only (<code>enabled_on</code>).</p>
+        <p><strong>How to customize:</strong> Toggle TOC and progress bar. Page title and body come from the page resource in admin. Pair with Custom section blocks above or below for richer layouts.</p>
+        <p><strong>Limits:</strong> No blocks. Does not use section-title snippet for the main H1 (handled in section markup).</p>
+        </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
@@ -3163,8 +3290,13 @@
         <p><strong>Presets:</strong> <strong>Page</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-cta-with-video-liquid">cta-with-video.liquid</h4>
-        <p>Split layout: copy + CTA beside autoplaying background video with poster fallback.</p>
-        <p>Theme editor name: <strong>CTA with Video</strong>.</p>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> CTA with Video</p>
+        <p>Split or stacked promo band: copy and button beside a background video (hosted or URL) with poster fallback and overlay controls.</p>
+        <p><strong>Where to use it:</strong> Homepage, about, or campaign landing sections.</p>
+        <p><strong>How to customize:</strong> Upload video or paste URL. Set poster image for mobile and low-bandwidth. Tune overlay opacity, text alignment, and CTA link. Autoplay respects muted conventions; fallback image persists if autoplay is blocked.</p>
+        <p><strong>Limits:</strong> No blocks. Settings-only.</p>
+        </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
@@ -3183,8 +3315,13 @@
         <p><strong>Presets:</strong> <strong>CTA with Video</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-blog-liquid">blog.liquid</h4>
-        <p>Blog index grid with section header and paginated article cards.</p>
-        <p>Theme editor name: <strong>Blog</strong>.</p>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> Blog</p>
+        <p>Blog index: section header plus a responsive grid of article cards with image, meta, excerpt, and pagination.</p>
+        <p><strong>Where to use it:</strong> <code>templates/blog.json</code> (below Featured Article if present).</p>
+        <p><strong>How to customize:</strong> Eyebrow and heading via <a href="#snippet-section-title">section-title</a>. Articles per page and card layout come from section settings. Content is pulled from the blog’s articles in admin.</p>
+        <p><strong>Limits:</strong> No blocks.</p>
+        </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
@@ -3200,8 +3337,13 @@
         </table>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-article-liquid">article.liquid</h4>
-        <p>Single blog article layout: hero, metadata, rich body, tags, comments, and share controls.</p>
-        <p>Theme editor name: <strong>Article</strong>.</p>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> Article</p>
+        <p>Single article template: hero image, author/date, rich content, tags, comments form, and share controls. Optional sidebar TOC when enabled.</p>
+        <p><strong>Where to use it:</strong> <code>templates/article.json</code>.</p>
+        <p><strong>How to customize:</strong> Toggle comments, share buttons, and sidebar features in settings. Article body uses Shopify article object; prose styles are section-scoped.</p>
+        <p><strong>Limits:</strong> No blocks. Pair with <a href="#sections-read-also-liquid">read-also</a> at the bottom.</p>
+        </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
@@ -3216,8 +3358,13 @@
         </table>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-news-grid-liquid">news-grid.liquid</h4>
-        <p>Editorial news/blog card grid with category filtering.</p>
-        <p>Theme editor name: <strong>News Grid</strong>.</p>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> News Grid</p>
+        <p>Magazine-style grid: one featured article and a sidebar of smaller cards, with optional category filter tabs.</p>
+        <p><strong>Where to use it:</strong> Dedicated news or journal pages (not the default blog template unless you add it).</p>
+        <p><strong>How to customize:</strong> Header via <a href="#snippet-section-title">section-title</a>. Article count is fixed in implementation (one featured + four sidebar items). Configure which blog to pull and filter labels in settings.</p>
+        <p><strong>Limits:</strong> No blocks. Behavior is settings-driven.</p>
+        </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
@@ -3236,8 +3383,13 @@
         <p><strong>Presets:</strong> <strong>News Grid</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-read-also-liquid">read-also.liquid</h4>
-        <p>Article-page carousel of related blog posts.</p>
-        <p>Theme editor name: <strong>Read Also</strong>.</p>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> Read Also</p>
+        <p>Horizontal carousel of related blog posts at the end of an article. Uses its own carousel markup (not <a href="#snippet-product-carousel">product-carousel</a>).</p>
+        <p><strong>Where to use it:</strong> <code>templates/article.json</code> only (<code>enabled_on: article</code>).</p>
+        <p><strong>How to customize:</strong> Set eyebrow, heading, and max articles (4–16). Posts are selected by theme logic from the same blog. Toggle tag, excerpt, and meta display.</p>
+        <p><strong>Limits:</strong> No blocks. Snippet: section-title only.</p>
+        </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
@@ -3253,8 +3405,13 @@
         <p><strong>Presets:</strong> <strong>Read Also</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-product-finder-liquid">product-finder.liquid</h4>
-        <p>Multi-step quiz that routes shoppers to a product or collection based on answers.</p>
-        <p>Theme editor name: <strong>Product Finder</strong>.</p>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> Product Finder</p>
+        <p>Multi-step guided quiz (2–5 stages) with image options per answer. Results map to <strong>Recommendation</strong> blocks that show up to four products when answer paths match.</p>
+        <p><strong>Where to use it:</strong> Homepage, landing pages, or a dedicated “find your product” page.</p>
+        <p><strong>How to customize:</strong> Set <strong>Number of stages</strong> and label each stage’s question and four options (text + image). Add many <strong>Recommendation</strong> blocks: each ties stage answers to a <strong>product list</strong> (max four products per block). Tune result screen copy and disclaimer.</p>
+        <p><strong>Limits:</strong> Stage option images and questions are section settings (s1–s5). Recommendation blocks are unlimited in count but each product list field caps at <strong>4</strong> products. Heavy configuration — plan answer keys before adding blocks.</p>
+        </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
@@ -3329,8 +3486,13 @@
         <p><strong>Presets:</strong> <strong>Product Finder</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-testimonials-liquid">testimonials.liquid</h4>
-        <p>Interactive world-map testimonials with pins synced to review cards.</p>
-        <p>Theme editor name: <strong>Testimonials</strong>.</p>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> Testimonials</p>
+        <p>Social proof with an interactive world map (<a href="#snippet-worlds-map">worlds-map</a>), review cards, pins, and auto-advance. Each testimonial block ties a country to quote, rating, and optional product link.</p>
+        <p><strong>Where to use it:</strong> About page, homepage, or social-proof landing sections.</p>
+        <p><strong>How to customize:</strong> Add up to <strong>12</strong> <strong>Testimonial</strong> blocks. Pick a country from the dropdown (must match SVG map codes). Set quote, stars (0 hides stars), name, role, avatar, and optional product. Adjust autoplay seconds (3–10) in section settings.</p>
+        <p><strong>Limits:</strong> <strong>12</strong> testimonial blocks max. Country list in block settings is curated to match the map — adding countries requires theme code changes.</p>
+        </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
@@ -3359,8 +3521,13 @@
         <p><strong>Presets:</strong> <strong>Testimonials</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-signup-flyout-liquid">signup-flyout.liquid</h4>
-        <p>Global newsletter popup with timing and copy controls.</p>
-        <p>Theme editor name: <strong>Signup Flyout</strong>.</p>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> Signup Flyout</p>
+        <p>Global newsletter popup: delayed flyout panel with copy, form, and dismiss controls. Lives in the header group so it can appear site-wide.</p>
+        <p><strong>Where to use it:</strong> <code>enabled_on: header</code> group — add once in the header section group customize view.</p>
+        <p><strong>How to customize:</strong> Set delay, frequency cookie behavior, headline, and success state in settings. Does not use blocks. Test on a fresh browser session to verify timing rules.</p>
+        <p><strong>Limits:</strong> One flyout per header group installation. No blocks.</p>
+        </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
@@ -3380,8 +3547,13 @@
         <p><strong>Presets:</strong> <strong>Signup Flyout</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-faq-liquid">faq.liquid</h4>
-        <p>Tabbed FAQ accordion powered by <a href="#blocks-faq">faq-item</a> blocks.</p>
-        <p>Theme editor name: <strong>FAQ</strong> · max <strong>20</strong> blocks.</p>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> FAQ</p>
+        <p>Tabbed FAQ accordion: category tabs filter <a href="#blocks-faq">faq-item</a> rows with icons, questions, and rich-text answers.</p>
+        <p><strong>Where to use it:</strong> Support pages, product help, or homepage trust sections.</p>
+        <p><strong>How to customize:</strong> Add up to <strong>20</strong> <strong>FAQ Item</strong> blocks. Assign each a <strong>Category</strong> (General, Orders, Shipping, etc.) for tab grouping. Header via <a href="#snippet-section-title">section-title</a>. Empty section prompts you to add questions in the editor.</p>
+        <p><strong>Limits:</strong> <code>max_blocks: 20</code>. Only block type: <code>faq-item</code>. Uses <code>{% content_for 'blocks' %}</code>.</p>
+        </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
@@ -3399,8 +3571,13 @@
         <p><strong>Presets:</strong> <strong>FAQ</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-contact-hero-liquid">contact-hero.liquid</h4>
-        <p>Contact page hero with eyebrow, heading, and intro copy (<code>h1</code> via section-title).</p>
-        <p>Theme editor name: <strong>Contact Hero</strong>.</p>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> Contact Hero</p>
+        <p>Top-of-page contact hero with eyebrow, <code>h1</code> heading, intro text, and optional contact form or static content area (per section settings).</p>
+        <p><strong>Where to use it:</strong> <code>templates/page.contact.json</code> and similar contact templates.</p>
+        <p><strong>How to customize:</strong> Edit eyebrow and heading in section settings (rendered through <a href="#snippet-section-title">section-title</a> with <code>heading_tag: h1</code>). Configure form labels and success messages if a form is enabled.</p>
+        <p><strong>Limits:</strong> No blocks. Preset: Store information.</p>
+        </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
@@ -3418,8 +3595,13 @@
         <p><strong>Presets:</strong> <strong>Contact Hero</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-contact-channels-liquid">contact-channels.liquid</h4>
-        <p>Contact page grid of support/sales CTA cards.</p>
-        <p>Theme editor name: <strong>Contact Channels</strong>.</p>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> Contact Channels</p>
+        <p>Grid of contact cards (email, chat, wholesale, etc.). Each block is a channel with icon, title, description, and link.</p>
+        <p><strong>Where to use it:</strong> Contact page below hero and location sections.</p>
+        <p><strong>How to customize:</strong> Add <strong>Channel</strong> blocks. Reorder cards. Header via <a href="#snippet-section-title">section-title</a>. Preset includes three sample channels.</p>
+        <p><strong>Limits:</strong> No max on channel block count in schema. Settings-only section wrapper.</p>
+        </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
@@ -3444,8 +3626,13 @@
         <p><strong>Presets:</strong> <strong>Contact Channels</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-contact-location-liquid">contact-location.liquid</h4>
-        <p>Contact page location block with address, hours, and map embed.</p>
-        <p>Theme editor name: <strong>Contact Location</strong>.</p>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> Contact Location</p>
+        <p>Store address, hours, and optional Google Maps embed with section header.</p>
+        <p><strong>Where to use it:</strong> Contact page, typically after the hero.</p>
+        <p><strong>How to customize:</strong> Fill address fields and map embed URL in settings. Eyebrow and heading via <a href="#snippet-section-title">section-title</a>.</p>
+        <p><strong>Limits:</strong> No blocks. Preset: Store information.</p>
+        </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
@@ -3462,8 +3649,13 @@ San Fra...</code></td></tr>
         <p><strong>Presets:</strong> <strong>Contact Location</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-chronicle-liquid">chronicle.liquid</h4>
-        <p>About-page timeline: alternating story chapters with eyebrow, heading, body, and image side.</p>
-        <p>Theme editor name: <strong>Chronicle</strong>.</p>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> Chronicle</p>
+        <p>About-page timeline: alternating <strong>Chapter</strong> blocks with eyebrow, heading, rich body, image, and left/right image placement.</p>
+        <p><strong>Where to use it:</strong> <code>templates/page.about-us.json</code> and brand story pages.</p>
+        <p><strong>How to customize:</strong> Add chapter blocks in narrative order. Toggle image side per chapter. Section-level settings control overall intro (if any). Preset ships three chapters.</p>
+        <p><strong>Limits:</strong> No <code>max_blocks</code> cap on chapters in schema. No snippets.</p>
+        </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
@@ -3489,8 +3681,13 @@ San Fra...</code></td></tr>
         <p><strong>Presets:</strong> <strong>Chronicle</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-team-liquid">team.liquid</h4>
-        <p>Staff grid with photo, name, role, and bio blocks.</p>
-        <p>Theme editor name: <strong>Team</strong>.</p>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> Team</p>
+        <p>Staff or founder grid: photo, name, role, and short bio per <strong>Member</strong> block, with section header.</p>
+        <p><strong>Where to use it:</strong> About page (<code>page.about-us.json</code> includes a preset team section).</p>
+        <p><strong>How to customize:</strong> Add member blocks with portrait images and bios. Reorder in the editor. Header via <a href="#snippet-section-title">section-title</a>.</p>
+        <p><strong>Limits:</strong> No block count cap in schema. Preset includes three members.</p>
+        </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
