@@ -3574,7 +3574,7 @@
         <div class="section-doc-prose">
 <p><strong>Theme editor:</strong> Contact Hero</p>
         <p>Top-of-page contact hero with eyebrow, <code>h1</code> heading, intro text, and optional contact form or static content area (per section settings).</p>
-        <p><strong>Where to use it:</strong> <code>templates/page.contact.json</code> and similar contact templates.</p>
+        <p><strong>Where to use it:</strong> Any template. Grimoire’s preset stacks it on the dedicated contact page (<code>page.contact.json</code>). Merchants can also add it to the homepage, a landing page, or any page template from <strong>Add section</strong> in the theme editor. The schema has no <code>enabled_on</code> restriction.</p>
         <p><strong>How to customize:</strong> Edit eyebrow and heading in section settings (rendered through <a href="#snippet-section-title">section-title</a> with <code>heading_tag: h1</code>). Configure form labels and success messages if a form is enabled.</p>
         <p><strong>Limits:</strong> No blocks. Preset: Store information.</p>
         </div>
@@ -3598,7 +3598,7 @@
         <div class="section-doc-prose">
 <p><strong>Theme editor:</strong> Contact Channels</p>
         <p>Grid of contact cards (email, chat, wholesale, etc.). Each block is a channel with icon, title, description, and link.</p>
-        <p><strong>Where to use it:</strong> Contact page below hero and location sections.</p>
+        <p><strong>Where to use it:</strong> Any template. In the default theme it sits on the contact page under <a href="#sections-contact-hero-liquid">contact-hero</a> and <a href="#sections-contact-location-liquid">contact-location</a>. You can reuse the same channel grid on the home page, footer area of a landing page, or anywhere else. No <code>enabled_on</code> limit in schema.</p>
         <p><strong>How to customize:</strong> Add <strong>Channel</strong> blocks. Reorder cards. Header via <a href="#snippet-section-title">section-title</a>. Preset includes three sample channels.</p>
         <p><strong>Limits:</strong> No max on channel block count in schema. Settings-only section wrapper.</p>
         </div>
