@@ -830,10 +830,11 @@
           <li><strong>Inactive UI</strong>: <code>#505050</code> (tabs, idle controls, eyebrows)</li>
         </ul>
         <p>
-          Typography uses two <code>font_picker</code> settings (primary and heading), with all weights loaded via
+          The default typeface is <strong>Merriweather Sans</strong>. Typography uses two
+          <code>font_picker</code> settings (primary and heading), with all weights loaded via
           <code>font_face</code> and exposed as <code>--font-primary--*</code> and <code>--font-heading--*</code>.
           Motion defaults to <code>--timing: 0.3s</code>. Editorial patterns, uppercase eyebrows, hairline dividers,
-          and luminous primary buttons, are consistent across sections and the reusable <code>section-title</code>
+          and luminous primary buttons are consistent across sections and the reusable <code>section-title</code>
           snippet.
         </p>
 
@@ -1109,9 +1110,9 @@
         <h2 class="doc-h2">Snippets</h2>
         <p class="doc-lead">
           Snippets are reusable Liquid fragments rendered via <code>{% render 'name' %}</code>.
-          Grimoire ships <strong>10 snippets</strong> covering design tokens, product UI, SEO,
+          Grimoire ships <strong>10 snippets</strong> covering design tokens, product UI,
           localization, and section headers. Parameters are passed explicitly at each
-          <code>{% render %}</code> call — snippet scope is isolated from the parent template.
+          <code>{% render %}</code> call. Snippet scope is isolated from the parent template.
         </p>
 
         <div class="callout">
