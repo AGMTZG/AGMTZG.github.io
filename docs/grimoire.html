@@ -2644,7 +2644,7 @@
         <div class="section-doc-prose">
 <p><strong>Theme editor:</strong> Header</p>
         <p>Global site navigation: logo, primary menu, mobile drawer, predictive search overlay, and AJAX cart sidebar. Custom elements <code>&lt;site-navbar&gt;</code>, <code>&lt;search-overlay&gt;</code>, and <code>&lt;cart-sidebar&gt;</code> handle scroll behavior and cart API updates.</p>
-        <p><strong>Where to use it:</strong> Part of the <strong>Header group</strong> on all storefront templates. Configure menus under <em>Content → Menus</em> in Shopify admin, then pick the main menu in section settings (default handle <code>main-menu</code>).</p>
+        <p><strong>Role in the theme:</strong> Always loaded from <code>layout/theme.liquid</code> via <code>{% sections 'header-group' %}</code>. You do not add it per template. Edit it under <strong>Theme settings → Header</strong> (header group). Menus come from <em>Content → Menus</em> in admin; pick the main menu in section settings (default handle <code>main-menu</code>).</p>
         <p><strong>How to customize:</strong> Choose <strong>Scroll behavior</strong>: hide-on-scroll (default), sticky, or static. Enable <strong>Transparent header</strong> on the homepage hero so the slideshow shows through; set <strong>Transparent header text color</strong> for contrast. Edit drawer, search, and cart empty-state copy in the settings panel. Logo and menu items come from theme settings and navigation menus, not this section file.</p>
         <p><strong>Limits:</strong> No blocks. Settings-only section. Pair with <a href="#sections-signup-flyout-liquid">signup-flyout</a> in the same header group if you want a newsletter popup.</p>
         </div>
@@ -2674,7 +2674,7 @@
         <div class="section-doc-prose">
 <p><strong>Theme editor:</strong> Footer</p>
         <p>Site-wide footer with brand blurb, two link columns, newsletter signup, optional Follow on Shop, payment icons, and Markets locale switching via <a href="#snippet-locale-selector">locale-selector</a> (footer context).</p>
-        <p><strong>Where to use it:</strong> <strong>Footer group</strong> on all pages. Assign menus for <strong>Explore</strong> and <strong>Information</strong> columns under <em>Content → Menus</em>.</p>
+        <p><strong>Role in the theme:</strong> Always loaded from <code>layout/theme.liquid</code> via <code>{% sections 'footer-group' %}</code>. Same as the header: one global instance, not placed on individual templates. Assign <strong>Explore</strong> and <strong>Information</strong> menus under <em>Content → Menus</em>.</p>
         <p><strong>How to customize:</strong> Fill brand description and newsletter strings. Toggle payment icons and Follow on Shop. Social links typically come from theme settings (check Theme settings → Social media). The newsletter form uses Shopify’s customer API like other signup sections.</p>
         <p><strong>Limits:</strong> No blocks. No per-template restriction in schema.</p>
         </div>
@@ -2699,8 +2699,8 @@
         <h4 class="doc-h4" id="sections-password-liquid">password.liquid</h4>
         <div class="section-doc-prose">
 <p><strong>Theme editor:</strong> Password page</p>
-        <p>Content for the password-protected storefront: coming-soon headline, description, and email capture. Rendered through <code>layout/password.liquid</code> (not the main theme layout).</p>
-        <p><strong>Where to use it:</strong> <code>templates/password.json</code> only, while the store is password-protected in Shopify admin.</p>
+        <p>Editable body for the password storefront: coming-soon headline, description, and email capture. Shopify still owns the actual password gate; this section only styles the page around it.</p>
+        <p><strong>Layout binding:</strong> <code>layout/password.liquid</code> outputs <code>{{ content_for_layout }}</code>, which resolves to the single section in <code>templates/password.json</code>. No <code>header-group</code> or <code>footer-group</code>. Shown while the store is password-protected in admin. Password entry uses the modal defined in the password layout, not this section.</p>
         <p><strong>How to customize:</strong> Set eyebrow, heading (blank uses shop name), and description. Shoppers submit email via a built-in customer form; success and error states are handled in Liquid. Password entry uses the separate password modal in the layout.</p>
         <p><strong>Limits:</strong> No blocks. Does not load <a href="#snippet-meta-tags">meta-tags</a> or the standard header/footer groups.</p>
         </div>
@@ -2718,7 +2718,7 @@
         <div class="section-doc-prose">
 <p><strong>Theme editor:</strong> 404</p>
         <p>Friendly “page not found” layout with primary and optional secondary actions so shoppers can recover instead of hitting a dead end.</p>
-        <p><strong>Where to use it:</strong> <code>templates/404.json</code> automatically when a URL does not exist.</p>
+        <p><strong>When it runs:</strong> Shopify serves <code>templates/404.json</code> for unknown URLs. You customize copy under <strong>Theme editor → 404</strong>. It is not a section you add to other templates.</p>
         <p><strong>How to customize:</strong> Edit heading and description. Primary button returns home. Toggle <strong>Show secondary button</strong> and set label plus URL (for example all products collection).</p>
         <p><strong>Limits:</strong> No blocks. Settings-only.</p>
         </div>
@@ -3019,7 +3019,7 @@
         <div class="section-doc-prose">
 <p><strong>Theme editor:</strong> Product</p>
         <p>Main product template buy box: media gallery (images, video, 3D), variant picker, quantity, buy buttons, description, pickup availability, and share. Blocks are reorderable in the editor.</p>
-        <p><strong>Where to use it:</strong> <code>templates/product.json</code> only (<code>enabled_on: product</code>).</p>
+        <p><strong>What it renders:</strong> The current <code>product</code> object (variants, media, price, inventory). Schema restricts it to the product template (<code>enabled_on: product</code>). In the default preset it is the <code>main</code> section in <code>product.json</code>. Sibling sections on that template (breadcrumb, product-benefits, recommendations, recently-viewed) sit above or below this buy box. You do not reuse it on collection or homepage templates.</p>
         <p><strong>How to customize:</strong> Drag blocks in the sidebar to change layout order (for example move <strong>Description</strong> above <strong>Price</strong>). Each block type allows <strong>one</strong> instance. Variant picker supports radio or dropdown style. Media settings control gallery layout and zoom.</p>
         <p><strong>Limits:</strong> Blocks (each limit 1): title, price, variant_picker, quantity_selector, buy_buttons, description, pickup_availability, share. Outputs JSON-LD via Shopify’s product structured data filter in the layout/snippet layer.</p>
         </div>
@@ -3069,7 +3069,7 @@
         <div class="section-doc-prose">
 <p><strong>Theme editor:</strong> Main Collection</p>
         <p>Collection listing page (PLP): filters, sort, responsive product grid, pagination, and quick-view modals. Renders <a href="#snippet-product-card">product-card</a> with <code>opens_modal: true</code>.</p>
-        <p><strong>Where to use it:</strong> <code>templates/collection.json</code>. Do not confuse with <a href="#sections-collections-liquid">collections.liquid</a> (homepage category carousel).</p>
+        <p><strong>What it renders:</strong> The active <code>collection</code> and its products for the URL the shopper opened. It is the main PLP body in <code>collection.json</code>, not a marketing block you drop elsewhere. Do not confuse with <a href="#sections-collections-liquid">collections.liquid</a>, which is a homepage category carousel with its own blocks.</p>
         <p><strong>How to customize:</strong> Configure filter groups and grid columns in section settings. Header via <a href="#snippet-section-title">section-title</a>. One <a href="#snippet-product-modal">product-modal</a> per section. Optional <code>@app</code> blocks below the grid for app widgets.</p>
         <p><strong>Limits:</strong> Product grid is Liquid-driven from the collection object, not merchant-added product blocks. Filter drawer locks body scroll when open.</p>
         </div>
@@ -3092,9 +3092,9 @@
         <div class="section-doc-prose">
 <p><strong>Theme editor:</strong> Cart</p>
         <p>Full cart page: line items, quantity updates, cart note, subtotal, checkout button, and empty state. Header uses <a href="#snippet-section-title">section-title</a> with <code>h1</code> for SEO.</p>
-        <p><strong>Where to use it:</strong> <code>templates/cart.json</code>.</p>
-        <p><strong>How to customize:</strong> Edit eyebrow and heading. Cart line behavior follows Shopify cart object; AJAX updates also sync with the header <code>cart-sidebar</code>. Configure empty-state messaging in settings.</p>
-        <p><strong>Limits:</strong> No blocks. Complements the drawer cart in the header, not a replacement.</p>
+        <p><strong>What it renders:</strong> The Shopify <code>cart</code> object at <code>/cart</code> (main section in <code>cart.json</code>). The header <code>cart-sidebar</code> is a separate UI over the same cart data for quick edits. Shoppers who need the full checkout flow land here; the drawer is for mini-cart actions.</p>
+        <p><strong>How to customize:</strong> Edit eyebrow and heading. Line items and quantities follow Shopify’s cart API. Configure empty-state messaging in settings.</p>
+        <p><strong>Limits:</strong> No blocks. Not interchangeable with the header drawer.</p>
         </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
@@ -3117,7 +3117,7 @@
         <div class="section-doc-prose">
 <p><strong>Theme editor:</strong> Search</p>
         <p>Search results page with query field, results count, and product grid using the same card + quick-view pattern as collection.</p>
-        <p><strong>Where to use it:</strong> <code>templates/search.json</code>. Header search overlay in the navbar uses predictive search separately.</p>
+        <p><strong>Two search surfaces:</strong> (1) <strong>Header</strong> — <code>&lt;search-overlay&gt;</code> in <a href="#sections-header-liquid">header.liquid</a> for predictive search while browsing; submits to <code>/search</code>. (2) <strong>This section</strong> — the full results layout at <code>/search?q=…</code> driven by <code>search</code> and <code>search.results</code> in <code>search.json</code>. Customize overlay copy in the header section. Customize results-page labels here.</p>
         <p><strong>How to customize:</strong> Tune labels and empty-state copy. Product results render via <a href="#snippet-product-card">product-card</a> and <a href="#snippet-product-modal">product-modal</a>. Non-product results depend on Shopify search settings.</p>
         <p><strong>Limits:</strong> No blocks in schema.</p>
         </div>
@@ -3318,7 +3318,7 @@
         <div class="section-doc-prose">
 <p><strong>Theme editor:</strong> Blog</p>
         <p>Blog index: section header plus a responsive grid of article cards with image, meta, excerpt, and pagination.</p>
-        <p><strong>Where to use it:</strong> <code>templates/blog.json</code> (below Featured Article if present).</p>
+        <p><strong>What it renders:</strong> The current <code>blog</code> and its <code>articles</code> with pagination. It is the listing body on the blog template (default <code>main</code> in <code>blog.json</code>). Optional sections on the same template (for example blog-featured) only frame the index. Distinct from <a href="#sections-news-grid-liquid">news-grid</a> on the homepage.</p>
         <p><strong>How to customize:</strong> Eyebrow and heading via <a href="#snippet-section-title">section-title</a>. Articles per page and card layout come from section settings. Content is pulled from the blog’s articles in admin.</p>
         <p><strong>Limits:</strong> No blocks.</p>
         </div>
@@ -3340,7 +3340,7 @@
         <div class="section-doc-prose">
 <p><strong>Theme editor:</strong> Article</p>
         <p>Single article template: hero image, author/date, rich content, tags, comments form, and share controls. Optional sidebar TOC when enabled.</p>
-        <p><strong>Where to use it:</strong> <code>templates/article.json</code>.</p>
+        <p><strong>What it renders:</strong> One <code>article</code> (title, content, image, comments). Default <code>main</code> in <code>article.json</code>. Breadcrumb and <a href="#sections-read-also-liquid">read-also</a> on that template wrap the story. They do not replace this section’s body.</p>
         <p><strong>How to customize:</strong> Toggle comments, share buttons, and sidebar features in settings. Article body uses Shopify article object; prose styles are section-scoped.</p>
         <p><strong>Limits:</strong> No blocks. Pair with <a href="#sections-read-also-liquid">read-also</a> at the bottom.</p>
         </div>
