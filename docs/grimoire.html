@@ -489,7 +489,10 @@
     #blocks .params-table.params-table--guide .table-token-list li,
     #sections .section-doc-prose p,
     #sections .section-doc-prose li,
-    #sections .params-table.params-table--guide td:last-child {
+    #sections .params-table.params-table--guide td:last-child,
+    #theme-settings p,
+    #theme-settings li,
+    #theme-settings .params-table.params-table--guide td:last-child {
       hyphens: auto;
       -webkit-hyphens: auto;
     }
@@ -735,6 +738,18 @@
             <a class="toc-link" href="#theme-settings">
               <span class="toc-dot"></span>Theme Settings
             </a>
+            <a class="toc-sub" href="#theme-settings-logos">Logos</a>
+            <a class="toc-sub" href="#theme-settings-typography">Typography</a>
+            <a class="toc-sub" href="#theme-settings-layout">Layout</a>
+            <a class="toc-sub" href="#theme-settings-colors">Colors</a>
+            <a class="toc-sub" href="#theme-settings-seo">SEO</a>
+            <a class="toc-sub" href="#theme-settings-social">Social media</a>
+            <a class="toc-sub" href="#theme-settings-search">Search</a>
+            <a class="toc-sub" href="#theme-settings-sharing">Social sharing</a>
+            <a class="toc-sub" href="#theme-settings-currency">Currency format</a>
+            <a class="toc-sub" href="#theme-settings-products">Products</a>
+            <a class="toc-sub" href="#theme-settings-favicon">Favicon</a>
+            <a class="toc-sub" href="#theme-settings-animations">Animations</a>
           </div>
         </nav>
       </div>
@@ -877,7 +892,7 @@
         <div class="ref-grid">
           <div class="ref-item">
             <span class="ref-item-name">1. Theme settings</span>
-            <span class="ref-item-desc">Typography, page width, margins, colors, favicon — applies to the entire store</span>
+            <span class="ref-item-desc">Logos, typography, layout, colors, SEO, search, products, favicon, and more. Applies to the entire store.</span>
           </div>
           <div class="ref-item">
             <span class="ref-item-name">2. Header &amp; footer groups</span>
@@ -892,33 +907,30 @@
         <h3 class="doc-h3">Theme settings (store-wide)</h3>
         <p>
           Open the customizer and click the gear icon or <strong>Theme settings</strong> in the left sidebar.
-          Grimoire exposes three groups that control the look of the whole storefront:
+          Grimoire exposes <strong>12 setting groups</strong> that control logos, typography, layout, colors,
+          SEO, social links, search, sharing, currency display, product defaults, favicon, and animations.
+          Full reference in the <a href="#theme-settings">Theme Settings</a> chapter at the end of this guide.
         </p>
-        <table class="params-table">
+        <table class="params-table params-table--guide">
           <thead><tr><th>Group</th><th>What you control</th></tr></thead>
           <tbody>
-            <tr>
-              <td>Typography</td>
-              <td><strong>Primary font</strong> (body and UI) and <strong>Heading font</strong>. Changes apply everywhere text is rendered.</td>
-            </tr>
-            <tr>
-              <td>Layout</td>
-              <td><strong>Page width</strong> (narrow or wide) and <strong>minimum page margin</strong>. Affects how much horizontal space your content uses on desktop.</td>
-            </tr>
-            <tr>
-              <td>Colors</td>
-              <td><strong>Background</strong>, <strong>foreground</strong>, <strong>accent</strong>, <strong>surface</strong>, <strong>input corner radius</strong>, and <strong>favicon</strong>. These feed the theme’s design tokens so header, cards, buttons, and product tiles stay consistent.</td>
-            </tr>
+            <tr><td>Logos</td><td>Header and footer logo images (desktop and mobile), sizes, and text fallback.</td></tr>
+            <tr><td>Typography</td><td>Primary font (body and UI) and heading font. Loaded via <a href="#snippet-css-variables">css-variables</a>.</td></tr>
+            <tr><td>Layout</td><td>Page width (narrow or wide) and minimum page margin.</td></tr>
+            <tr><td>Colors</td><td>Color schemes (background, text, buttons, badges, footer) and input corner radius.</td></tr>
+            <tr><td>SEO</td><td>Organization JSON-LD, breadcrumb schema, and Sitelinks search box. Output via <a href="#snippet-meta-tags">meta-tags</a>.</td></tr>
+            <tr><td>Social media</td><td>Profile URLs for the footer icon row.</td></tr>
+            <tr><td>Search</td><td>Results page pagination, content types, and header predictive search.</td></tr>
+            <tr><td>Social sharing</td><td>Default share networks on product and article pages.</td></tr>
+            <tr><td>Currency format</td><td>Currency code suffix and Markets currency grouping.</td></tr>
+            <tr><td>Products</td><td>Card image source, unit price, and badge scale.</td></tr>
+            <tr><td>Favicon</td><td>Browser tab icon on all storefront layouts.</td></tr>
+            <tr><td>Animations</td><td>Scroll reveal on sections such as Chronicle and Team.</td></tr>
           </tbody>
         </table>
-        <p style="color:var(--text-soft); margin-bottom:1rem; line-height:1.75;">
-          Additional store-wide controls are planned for future theme updates, for example button styles,
-          card and product-tile treatments, motion preferences, and more header/footer defaults, so you can
-          refine the look of Grimoire entirely from the theme editor without editing code.
-        </p>
         <div class="callout tip">
-          <strong>Tip:</strong> Set colors and fonts in Theme settings before fine-tuning individual sections.
-          Section-level options override layout details, but they inherit the global palette and type scale.
+          <strong>Tip:</strong> Set colors, fonts, and logos in Theme settings before fine-tuning individual sections.
+          Section options override local layout, but they inherit the global palette and type scale.
         </div>
 
         <h3 class="doc-h3">Header and footer (always on)</h3>
@@ -3716,59 +3728,284 @@ San Fra...</code></td></tr>
         <div class="section-eyebrow">Configuration</div>
         <h2 class="doc-h2">Theme Settings</h2>
         <p class="doc-lead">
-          All global settings are defined in <code>config/settings_schema.json</code> and
-          exposed in the theme editor under <em>Theme settings</em>. Changes apply site-wide
-          via CSS custom properties in <code>css-variables.liquid</code>.
+          Global merchant controls live in <code>config/settings_schema.json</code> and appear in the
+          theme editor under <strong>Theme settings</strong> (gear icon in the customizer sidebar).
+          Values are read as <code>settings.*</code> across Liquid files. Visual tokens flow into
+          <a href="#snippet-css-variables">css-variables.liquid</a> as CSS custom properties.
+          SEO toggles output JSON-LD through <a href="#snippet-meta-tags">meta-tags.liquid</a>.
         </p>
 
-        <div class="settings-group">
-          <h4 class="doc-h4">Colors</h4>
-          <table class="settings-table">
-            <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
-            <tbody>
-              <tr><td>background_color</td><td>color</td><td>Main page background. Default: <code>#0d0d0d</code></td></tr>
-              <tr><td>foreground_color</td><td>color</td><td>Primary text and icon color. Default: <code>#dddbd7</code></td></tr>
-              <tr><td>accent_color</td><td>color</td><td>Accent — borders, active states, primary button. Default: <code>#dddbd7</code></td></tr>
-              <tr><td>surface_color</td><td>color</td><td>Card and panel backgrounds. Default: <code>#111111</code></td></tr>
-            </tbody>
-          </table>
+        <div class="callout">
+          <strong>How changes apply:</strong> Typography, layout, and color scheme updates rebuild
+          <code>--page-width</code>, <code>--color-background</code>, button tokens, and related variables
+          on every page load. Search, sharing, and product flags affect specific sections and snippets
+          at render time. Nothing here replaces section settings in the header or footer groups.
+          Those remain under <a href="#sections-header-liquid">header.liquid</a> and
+          <a href="#sections-footer-liquid">footer.liquid</a>.
         </div>
 
-        <div class="settings-group">
-          <h4 class="doc-h4">Typography</h4>
-          <table class="settings-table">
-            <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
-            <tbody>
-              <tr><td>type_primary_font</td><td>font_picker</td><td>Body and UI font. All weights and italic variants are loaded</td></tr>
-              <tr><td>heading_font</td><td>font_picker</td><td>Heading font — used for all <code>&lt;h1&gt;</code>–<code>&lt;h4&gt;</code> elements</td></tr>
-            </tbody>
-          </table>
-        </div>
+        <h4 class="doc-h4">Setting groups</h4>
+        <table class="params-table params-table--guide">
+          <thead><tr><th>Customizer group</th><th>Primary consumers</th></tr></thead>
+          <tbody>
+            <tr><td><a href="#theme-settings-logos">Logos</a></td><td><a href="#sections-header-liquid">header.liquid</a>, <a href="#sections-footer-liquid">footer.liquid</a>, gift card layout</td></tr>
+            <tr><td><a href="#theme-settings-typography">Typography</a></td><td><a href="#snippet-css-variables">css-variables</a> (<code>--font-primary--*</code>, <code>--font-heading--*</code>)</td></tr>
+            <tr><td><a href="#theme-settings-layout">Layout</a></td><td><code>layout/theme.liquid</code> grid, all sections using <code>--page-width</code></td></tr>
+            <tr><td><a href="#theme-settings-colors">Colors</a></td><td><a href="#snippet-css-variables">css-variables</a> color scheme tokens</td></tr>
+            <tr><td><a href="#theme-settings-seo">SEO</a></td><td><a href="#snippet-meta-tags">meta-tags</a> JSON-LD blocks</td></tr>
+            <tr><td><a href="#theme-settings-social">Social media</a></td><td>Footer social icon row</td></tr>
+            <tr><td><a href="#theme-settings-search">Search</a></td><td><a href="#sections-header-liquid">header.liquid</a> overlay, <a href="#sections-search-liquid">search.liquid</a> results page</td></tr>
+            <tr><td><a href="#theme-settings-sharing">Social sharing</a></td><td><a href="#sections-product-liquid">product.liquid</a>, <a href="#sections-article-liquid">article.liquid</a> share blocks</td></tr>
+            <tr><td><a href="#theme-settings-currency">Currency format</a></td><td><a href="#snippet-product-card">product-card</a>, <a href="#snippet-product-modal">product-modal</a>, <a href="#snippet-locale-selector">locale-selector</a></td></tr>
+            <tr><td><a href="#theme-settings-products">Products</a></td><td>Product cards, product page, quick view modal</td></tr>
+            <tr><td><a href="#theme-settings-favicon">Favicon</a></td><td><code>layout/theme.liquid</code> <code>&lt;link rel="icon"&gt;</code></td></tr>
+            <tr><td><a href="#theme-settings-animations">Animations</a></td><td><a href="#sections-chronicle-liquid">chronicle.liquid</a>, <a href="#sections-team-liquid">team.liquid</a>, other reveal sections</td></tr>
+          </tbody>
+        </table>
 
-        <div class="settings-group">
-          <h4 class="doc-h4">Layout</h4>
-          <table class="settings-table">
-            <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
-            <tbody>
-              <tr><td>max_page_width</td><td>range</td><td>Maximum content width in px. Exposed as <code>--page-width</code></td></tr>
-              <tr><td>min_page_margin</td><td>range</td><td>Minimum horizontal padding in px. Exposed as <code>--page-margin</code></td></tr>
-              <tr><td>input_corner_radius</td><td>range</td><td>Border-radius for inputs and buttons in px</td></tr>
-            </tbody>
-          </table>
-        </div>
+        <hr class="doc-divider" id="theme-settings-logos">
+        <h3 class="doc-h3">Logos</h3>
+        <p>
+          Separate assets for header and footer, each with desktop and mobile variants. If no image is
+          uploaded, header and footer fall back to <strong>Logo text</strong> (defaults to the shop name).
+        </p>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>logo</code></td><td>image_picker</td><td>Header logo on desktop.</td></tr>
+            <tr><td><code>logo_width</code></td><td>range</td><td>Header logo width. Default: <code>90</code> px. Range: 50–200 px.</td></tr>
+            <tr><td><code>logo_mobile</code></td><td>image_picker</td><td>Header logo on mobile and tablet. Falls back to desktop logo.</td></tr>
+            <tr><td><code>logo_mobile_width</code></td><td>range</td><td>Mobile header logo width. Default: <code>70</code> px. Range: 40–160 px.</td></tr>
+            <tr><td><code>footer_logo</code></td><td>image_picker</td><td>Footer logo on desktop.</td></tr>
+            <tr><td><code>footer_logo_max_height</code></td><td>range</td><td>Footer logo height. Default: <code>52</code> px. Range: 24–100 px.</td></tr>
+            <tr><td><code>footer_logo_mobile</code></td><td>image_picker</td><td>Footer logo on mobile. Falls back to desktop footer logo.</td></tr>
+            <tr><td><code>footer_logo_mobile_max_height</code></td><td>range</td><td>Mobile footer logo height. Default: <code>40</code> px. Range: 24–100 px.</td></tr>
+            <tr><td><code>logo_text</code></td><td>text</td><td>Text fallback when no logo image. Default: <code>Grimoire</code>.</td></tr>
+          </tbody>
+        </table>
 
-        <div class="settings-group">
-          <h4 class="doc-h4">Header</h4>
-          <table class="settings-table">
-            <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
-            <tbody>
-              <tr><td>header_transparent</td><td>checkbox</td><td>Makes header transparent on page load, useful over full-bleed hero images</td></tr>
-              <tr><td>header_hide_on_scroll</td><td>checkbox</td><td>Hides the header when scrolling down, reveals on scroll up</td></tr>
-              <tr><td>main_menu</td><td>link_list</td><td>Primary navigation menu</td></tr>
-              <tr><td>logo</td><td>image_picker</td><td>Site logo. Falls back to <code>shop.name</code> text if not set</td></tr>
-            </tbody>
-          </table>
-        </div>
+        <hr class="doc-divider" id="theme-settings-typography">
+        <h3 class="doc-h3">Typography</h3>
+        <p>
+          Both fonts load regular, bold, and italic faces through Shopify’s font picker. Changes apply
+          site wide via <code>--font-primary--family</code> and <code>--font-heading--family</code> in
+          <a href="#snippet-css-variables">css-variables</a>.
+        </p>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>type_primary_font</code></td><td>font_picker</td><td>Body and UI font. Default: Merriweather Sans (medium).</td></tr>
+            <tr><td><code>heading_font</code></td><td>font_picker</td><td>Heading font for <code>h1</code>–<code>h4</code> and section titles. Default: Merriweather Sans (extra bold).</td></tr>
+          </tbody>
+        </table>
+
+        <hr class="doc-divider" id="theme-settings-layout">
+        <h3 class="doc-h3">Layout</h3>
+        <p>
+          Controls the main content column on desktop. Exposed as <code>--page-width</code> and
+          <code>--page-margin</code> in <a href="#snippet-css-variables">css-variables</a>.
+        </p>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>max_page_width</code></td><td>select</td><td>Maximum content width. Default: <code>90rem</code> (narrow). Options: <code>90rem</code>, <code>110rem</code> (wide).</td></tr>
+            <tr><td><code>min_page_margin</code></td><td>range</td><td>Minimum horizontal padding. Default: <code>20</code> px. Range: 10–100 px.</td></tr>
+          </tbody>
+        </table>
+
+        <hr class="doc-divider" id="theme-settings-colors">
+        <h3 class="doc-h3">Colors</h3>
+        <p>
+          Grimoire uses Shopify <strong>color schemes</strong>. Edit scheme definitions under
+          <strong>Theme settings → Colors</strong>, then pick the active scheme with
+          <code>color_scheme</code>. Tokens map to CSS variables such as <code>--color-background</code>,
+          <code>--primary-button-bg</code>, <code>--pc-sale-bg</code>, and <code>--footer-bg</code> in
+          <a href="#snippet-css-variables">css-variables</a>. You can maintain multiple named schemes
+          for future per-section overrides.
+        </p>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>color_schemes</code></td><td>color_scheme_group</td><td>Editable palette definitions (see fields below).</td></tr>
+            <tr><td><code>color_scheme</code></td><td>color_scheme</td><td>Active scheme for the storefront. Default: <code>scheme-1</code>.</td></tr>
+            <tr><td><code>input_corner_radius</code></td><td>range</td><td>Border radius for inputs and buttons. Default: <code>4</code> px. Range: 0–10 px. Maps to <code>--style-border-radius-inputs</code>.</td></tr>
+          </tbody>
+        </table>
+        <h4 class="doc-h4">Fields inside each color scheme</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Field</th><th>Maps to (examples)</th></tr></thead>
+          <tbody>
+            <tr><td><code>background</code>, <code>background_gradient</code></td><td><code>--color-background</code></td></tr>
+            <tr><td><code>text</code></td><td><code>--color-foreground</code></td></tr>
+            <tr><td><code>text_accent</code></td><td><code>--color-accent</code></td></tr>
+            <tr><td><code>surface</code></td><td><code>--color-surface</code> (cards and panels)</td></tr>
+            <tr><td><code>btn_primary_*</code> (6 fields)</td><td>Primary button default and hover states</td></tr>
+            <tr><td><code>attention</code>, <code>success</code></td><td>Form errors and success states</td></tr>
+            <tr><td><code>sale_bg</code>, <code>sale_text</code></td><td>Product card sale badge</td></tr>
+            <tr><td><code>soldout_bg</code>, <code>soldout_text</code></td><td>Product card sold out badge</td></tr>
+            <tr><td><code>atc_bg</code>, <code>atc_text</code></td><td>Add to cart button on product cards</td></tr>
+            <tr><td><code>footer_bg</code></td><td>Footer background</td></tr>
+          </tbody>
+        </table>
+
+        <hr class="doc-divider" id="theme-settings-seo">
+        <h3 class="doc-h3">SEO</h3>
+        <p>
+          Optional structured data appended by <a href="#snippet-meta-tags">meta-tags.liquid</a>.
+          Page titles and descriptions still come from Shopify admin content. See also the
+          <a href="#snippet-meta-tags">meta-tags</a> chapter for JSON-LD behavior per template.
+        </p>
+        <h4 class="doc-h4">Business information</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>seo_org_enabled</code></td><td>checkbox</td><td>Output Organization schema on all pages. Default: <code>false</code>.</td></tr>
+            <tr><td><code>seo_org_type</code></td><td>select</td><td>Schema type. Default: <code>OnlineStore</code>. Options: <code>OnlineStore</code>, <code>LocalBusiness</code>, <code>Organization</code>.</td></tr>
+            <tr><td><code>seo_org_name</code></td><td>text</td><td>Business name. Falls back to shop name.</td></tr>
+            <tr><td><code>seo_org_founded</code></td><td>text</td><td>Founding year (for example <code>2008</code>).</td></tr>
+            <tr><td><code>seo_org_description</code></td><td>textarea</td><td>Business description.</td></tr>
+            <tr><td><code>seo_org_logo</code></td><td>image_picker</td><td>Logo for schema. Minimum 112×112 px recommended.</td></tr>
+            <tr><td><code>seo_org_address</code></td><td>text</td><td>Street address.</td></tr>
+            <tr><td><code>seo_org_city</code></td><td>text</td><td>City.</td></tr>
+            <tr><td><code>seo_org_postal_code</code></td><td>text</td><td>Postal code.</td></tr>
+            <tr><td><code>seo_org_country</code></td><td>text</td><td>Two letter ISO country code (for example <code>MX</code>, <code>US</code>).</td></tr>
+            <tr><td><code>seo_org_address_2</code></td><td>text</td><td>Second location address, if applicable.</td></tr>
+            <tr><td><code>seo_org_phone</code></td><td>text</td><td>Phone number.</td></tr>
+            <tr><td><code>seo_org_email</code></td><td>text</td><td>Contact email.</td></tr>
+          </tbody>
+        </table>
+        <h4 class="doc-h4">Other schema</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>seo_breadcrumb_enabled</code></td><td>checkbox</td><td>Output <code>BreadcrumbList</code> JSON-LD on product, collection, blog, article, and page templates. Default: <code>false</code>.</td></tr>
+            <tr><td><code>seo_searchaction_enabled</code></td><td>checkbox</td><td>Output <code>SearchAction</code> on the homepage for Google Sitelinks search box. Default: <code>false</code>. Google shows this only on high traffic sites.</td></tr>
+          </tbody>
+        </table>
+
+        <hr class="doc-divider" id="theme-settings-social">
+        <h3 class="doc-h3">Social media</h3>
+        <p>
+          Profile URLs for the footer icon row. Leave blank to hide a network. Icons render only when
+          the matching URL is set.
+        </p>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>social_instagram</code></td><td>url</td><td>Instagram profile URL.</td></tr>
+            <tr><td><code>social_tiktok</code></td><td>url</td><td>TikTok profile URL.</td></tr>
+            <tr><td><code>social_facebook</code></td><td>url</td><td>Facebook profile URL.</td></tr>
+            <tr><td><code>social_youtube</code></td><td>url</td><td>YouTube channel URL.</td></tr>
+            <tr><td><code>social_twitter</code></td><td>url</td><td>Twitter / X profile URL.</td></tr>
+            <tr><td><code>social_linkedin</code></td><td>url</td><td>LinkedIn profile URL.</td></tr>
+            <tr><td><code>social_pinterest</code></td><td>url</td><td>Pinterest profile URL.</td></tr>
+          </tbody>
+        </table>
+
+        <hr class="doc-divider" id="theme-settings-search">
+        <h3 class="doc-h3">Search</h3>
+        <p>
+          Two surfaces share these settings. The header <code>&lt;search-overlay&gt;</code> uses predictive
+          search while typing. The <a href="#sections-search-liquid">search.liquid</a> section handles
+          full results at <code>/search</code>.
+        </p>
+        <h4 class="doc-h4">Search results</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>search_include_articles</code></td><td>checkbox</td><td>Include blog articles in search. Default: <code>true</code>.</td></tr>
+            <tr><td><code>search_include_pages</code></td><td>checkbox</td><td>Include CMS pages in search. Default: <code>true</code>.</td></tr>
+            <tr><td><code>search_results_per_page</code></td><td>range</td><td>Results per page on <code>/search</code>. Default: <code>20</code>. Range: 12–48.</td></tr>
+          </tbody>
+        </table>
+        <h4 class="doc-h4">Predictive search</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>search_predictive_enabled</code></td><td>checkbox</td><td>Instant results in the header overlay. When off, the search icon goes straight to <code>/search</code>. Default: <code>true</code>.</td></tr>
+            <tr><td><code>search_predictive_limit</code></td><td>range</td><td>Max results per content type in the overlay. Default: <code>4</code>. Range: 3–8.</td></tr>
+          </tbody>
+        </table>
+
+        <hr class="doc-divider" id="theme-settings-sharing">
+        <h3 class="doc-h3">Social sharing</h3>
+        <p>
+          Default share networks for product and article pages. Individual sections can still expose
+          per-block toggles, but these globals define which networks are available theme wide.
+        </p>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>share_show_facebook</code></td><td>checkbox</td><td>Show Facebook. Default: <code>true</code>.</td></tr>
+            <tr><td><code>share_show_twitter</code></td><td>checkbox</td><td>Show X (Twitter). Default: <code>true</code>.</td></tr>
+            <tr><td><code>share_show_pinterest</code></td><td>checkbox</td><td>Show Pinterest. Default: <code>true</code>.</td></tr>
+            <tr><td><code>share_show_linkedin</code></td><td>checkbox</td><td>Show LinkedIn. Default: <code>false</code>.</td></tr>
+            <tr><td><code>share_show_whatsapp</code></td><td>checkbox</td><td>Show WhatsApp. Default: <code>false</code>.</td></tr>
+            <tr><td><code>share_show_email</code></td><td>checkbox</td><td>Show email share. Default: <code>false</code>.</td></tr>
+            <tr><td><code>share_show_copy_link</code></td><td>checkbox</td><td>Show copy link button. Default: <code>true</code>.</td></tr>
+          </tbody>
+        </table>
+
+        <hr class="doc-divider" id="theme-settings-currency">
+        <h3 class="doc-h3">Currency format</h3>
+        <p>
+          Affects price display on product cards, the quick view modal, and the product page. Also
+          changes how countries appear in <a href="#snippet-locale-selector">locale-selector</a>.
+        </p>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>show_currency_code</code></td><td>checkbox</td><td>Append ISO code to prices (for example <code>$10.00 USD</code>). Default: <code>false</code>.</td></tr>
+            <tr><td><code>stack_market_currencies</code></td><td>checkbox</td><td>Group Eurozone countries into one currency entry with the EU flag. Default: <code>false</code>.</td></tr>
+          </tbody>
+        </table>
+
+        <hr class="doc-divider" id="theme-settings-products">
+        <h3 class="doc-h3">Products</h3>
+        <p>
+          Store wide product card and PDP defaults. Section level product blocks can override share
+          labels, but card media and badge scale follow these globals.
+        </p>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>show_first_media_image</code></td><td>checkbox</td><td>Use the first product media image instead of the selected variant image on cards. Default: <code>false</code>.</td></tr>
+            <tr><td><code>show_unit_price</code></td><td>checkbox</td><td>Show unit price (for example per kg) on cards and the product page. Default: <code>false</code>.</td></tr>
+            <tr><td><code>badge_size</code></td><td>range</td><td>Sale and sold out badge scale. Default: <code>100</code>%. Range: 70–100%. Maps to <code>--pc-badge-scale</code>.</td></tr>
+          </tbody>
+        </table>
+
+        <hr class="doc-divider" id="theme-settings-favicon">
+        <h3 class="doc-h3">Favicon</h3>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>favicon</code></td><td>image_picker</td><td>Browser tab icon. Rendered at 32×32 px from <code>layout/theme.liquid</code>. Use a square source image.</td></tr>
+          </tbody>
+        </table>
+
+        <hr class="doc-divider" id="theme-settings-animations">
+        <h3 class="doc-h3">Animations</h3>
+        <p>
+          Controls scroll reveal on sections that opt in (Chronicle, Team, and similar). When disabled,
+          content appears immediately. The theme still respects the visitor’s OS
+          <code>prefers-reduced-motion</code> setting regardless of this toggle.
+        </p>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>animations_enabled</code></td><td>checkbox</td><td>Enable scroll animations. Default: <code>true</code>.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 class="doc-h4">Recommended order</h4>
+        <ol style="color:var(--text-soft); padding-left:1.4rem; margin-bottom:0; line-height:2;">
+          <li><strong>Logos</strong> and <strong>Typography</strong> so header and footer match your brand.</li>
+          <li><strong>Colors</strong> and <strong>Layout</strong> before tuning individual sections.</li>
+          <li><strong>Social media</strong>, <strong>Search</strong>, and <strong>Products</strong> for storefront behavior.</li>
+          <li><strong>SEO</strong> once content and navigation are stable.</li>
+          <li>Header and footer <em>sections</em> for menus, drawer copy, and newsletter strings.</li>
+        </ol>
       </section>
 
     </main>
