@@ -742,13 +742,13 @@
             <a class="toc-sub" href="#snippet-css-variables">css-variables.liquid</a>
             <a class="toc-sub" href="#snippet-section-title">section-title.liquid</a>
             <a class="toc-sub" href="#snippet-product-card">product-card.liquid</a>
-            <a class="toc-sub" href="#snippet-product-interactions">product-interactions.liquid</a>
-            <a class="toc-sub" href="#snippet-product-modal">product-modal.liquid</a>
-            <a class="toc-sub" href="#snippet-product-carousel">product-carousel.liquid</a>
+            <a class="toc-sub" href="#snippet-quick-view-bindings">quick-view-bindings.liquid</a>
+            <a class="toc-sub" href="#snippet-quick-view-modal">quick-view-modal.liquid</a>
+            <a class="toc-sub" href="#snippet-product-carousel-shell">product-carousel-shell.liquid</a>
             <a class="toc-sub" href="#snippet-meta-tags">meta-tags.liquid</a>
             <a class="toc-sub" href="#snippet-language-selector">language-selector.liquid</a>
             <a class="toc-sub" href="#snippet-locale-selector">locale-selector.liquid</a>
-            <a class="toc-sub" href="#snippet-worlds-map">worlds-map.liquid</a>
+            <a class="toc-sub" href="#snippet-testimonials-worlds-map">testimonials-worlds-map.liquid</a>
             <a class="toc-link" href="#blocks">
               <span class="toc-dot"></span>Blocks
             </a>
@@ -1198,8 +1198,8 @@
         <h2 class="doc-h2">Snippets</h2>
         <p class="doc-lead">
           Snippets are reusable Liquid fragments rendered via <code>{% render 'name' %}</code>.
-          Grimoire ships <strong>10 snippets</strong> covering design tokens, product UI,
-          localization, and section headers. Parameters are passed explicitly at each
+          Grimoire ships <strong>23 snippets</strong> covering design tokens, product UI,
+          filtering, localization, and section headers. Parameters are passed explicitly at each
           <code>{% render %}</code> call. Snippet scope is isolated from the parent template.
         </p>
 
@@ -1209,19 +1209,37 @@
         </div>
 
         <h4 class="doc-h4">Inventory</h4>
+        <p>
+          All 23 files in <code>snippets/</code>. The ten with links have a full reference entry
+          below; the rest are internal plumbing that sections render for you, listed here so the
+          inventory is complete.
+        </p>
         <table class="params-table params-table--guide">
           <thead><tr><th>Snippet</th><th>Role</th></tr></thead>
           <tbody>
-            <tr><td><a href="#snippet-css-variables">css-variables</a></td><td>Global CSS custom properties and <code>@font-face</code> rules (~758 lines).</td></tr>
+            <tr><td><a href="#snippet-css-variables">css-variables</a></td><td>Global CSS custom properties and <code>@font-face</code> rules.</td></tr>
             <tr><td><a href="#snippet-section-title">section-title</a></td><td>Shared eyebrow + heading + optional CTA; only snippet with a <code>{% doc %}</code> block.</td></tr>
             <tr><td><a href="#snippet-product-card">product-card</a></td><td>Product tile: media, badges, swatches, price, ATC / quick-view trigger.</td></tr>
-            <tr><td><a href="#snippet-product-interactions">product-interactions</a></td><td>Script-only: <code>window.GrimoireProduct</code> (swatches + modal routing).</td></tr>
-            <tr><td><a href="#snippet-product-modal">product-modal</a></td><td>Quick-view overlay; includes product-interactions.</td></tr>
-            <tr><td><a href="#snippet-product-carousel">product-carousel</a></td><td>Horizontal product-card carousel with arrow controls.</td></tr>
+            <tr><td><a href="#snippet-quick-view-bindings">quick-view-bindings</a></td><td>Script-only: <code>window.GrimoireProduct</code> (swatches + modal routing).</td></tr>
+            <tr><td><a href="#snippet-quick-view-modal">quick-view-modal</a></td><td>Quick-view overlay; includes quick-view-bindings.</td></tr>
+            <tr><td><a href="#snippet-product-carousel-shell">product-carousel-shell</a></td><td>Horizontal product-card carousel with arrow controls.</td></tr>
             <tr><td><a href="#snippet-meta-tags">meta-tags</a></td><td>Title, meta description, canonical, Open Graph, Twitter, JSON-LD.</td></tr>
-            <tr><td><a href="#snippet-language-selector">language-selector</a></td><td>Language dropdown for the announcement bar.</td></tr>
-            <tr><td><a href="#snippet-locale-selector">locale-selector</a></td><td>Country/currency (and optional language) dropdowns.</td></tr>
-            <tr><td><a href="#snippet-worlds-map">worlds-map</a></td><td>Single-line inline SVG world map for Testimonials.</td></tr>
+            <tr><td><a href="#snippet-language-selector">language-selector</a></td><td>Standalone language dropdown. Not rendered by any section — the footer uses locale-selector instead.</td></tr>
+            <tr><td><a href="#snippet-locale-selector">locale-selector</a></td><td>Country/currency (and optional language) dropdowns. This is the one the footer renders.</td></tr>
+            <tr><td><a href="#snippet-testimonials-worlds-map">testimonials-worlds-map</a></td><td>Inline SVG world map for Testimonials.</td></tr>
+            <tr><td>arrow-glyph</td><td>Shared affordance icon: chevron, arrow, or diagonal.</td></tr>
+            <tr><td>collection-card</td><td>Collection tile, shared by Featured collections and Collection list.</td></tr>
+            <tr><td>collection-featured-panel</td><td>The large highlighted panel in the Featured collections split layout.</td></tr>
+            <tr><td>facets</td><td>Filtering drawer and toolbar: filter groups, active pills, sort.</td></tr>
+            <tr><td>facets-js</td><td>Behaviour for <code>facets</code>: drawer open/close, AJAX filter and sort.</td></tr>
+            <tr><td>nav-item</td><td>One top-level menu item, with up to two nested levels.</td></tr>
+            <tr><td>pdp-assets</td><td>Shared CSS and JS for Product and Featured product.</td></tr>
+            <tr><td>pdp-shipping</td><td>Shipping information accordion, shared by Product and Featured product.</td></tr>
+            <tr><td>product-badges</td><td>Discount percentage, sold-out, and tag-based badges on cards and PDP.</td></tr>
+            <tr><td>product-card-countdown</td><td>Compact limited-edition countdown overlay for product cards.</td></tr>
+            <tr><td>scroll-lock</td><td>Owner-based page scroll lock, so nested modals and drawers can't unlock each other.</td></tr>
+            <tr><td>scroll-reveal</td><td>Shared reveal-on-scroll system: CSS plus one IntersectionObserver. Respects <code>prefers-reduced-motion</code>.</td></tr>
+            <tr><td>tp-tab-product-slides</td><td>Product slides for the Trending products tab panels.</td></tr>
           </tbody>
         </table>
 
@@ -1353,7 +1371,7 @@
             </tr>
             <tr>
               <td><code>--pc-*</code>, <code>--pm-*</code></td>
-              <td><code>product-card</code> and <code>product-modal</code>: media frame, hover border, badges, prices, ATC states, swatches, modal backdrop, quantity row, dividers.</td>
+              <td><code>product-card</code> and <code>quick-view-modal</code>: media frame, hover border, badges, prices, ATC states, swatches, modal backdrop, quantity row, dividers.</td>
             </tr>
             <tr>
               <td><code>--ls-*</code></td>
@@ -1361,7 +1379,7 @@
             </tr>
             <tr>
               <td><code>--tw-*</code></td>
-              <td><em>Testimonials</em> + <code>worlds-map</code>: map path fills, pin dots, review card, arrows, progress track.</td>
+              <td><em>Testimonials</em> + <code>testimonials-worlds-map</code>: map path fills, pin dots, review card, arrows, progress track.</td>
             </tr>
             <tr>
               <td><code>--cv-*</code>, <code>--csb-*</code>, <code>--ar-*</code>, …</td>
@@ -1645,8 +1663,8 @@
         </table>
         <p>
           Swatch clicks and quick-view are handled by the companion snippets documented below
-          (<a href="#snippet-product-interactions">product-interactions</a>,
-          <a href="#snippet-product-modal">product-modal</a>).
+          (<a href="#snippet-quick-view-bindings">quick-view-bindings</a>,
+          <a href="#snippet-quick-view-modal">quick-view-modal</a>).
         </p>
 
         <h4 class="doc-h4">Where product cards appear</h4>
@@ -1655,9 +1673,9 @@
           <tbody>
             <tr><td>Collection</td><td>Responsive product grid with filters; cards use quick-view.</td></tr>
             <tr><td>Search</td><td>Product results in a grid; quick-view enabled.</td></tr>
-            <tr><td>Trending products</td><td>Cards inside a <a href="#snippet-product-carousel">product carousel</a> per category tab.</td></tr>
+            <tr><td>Trending products</td><td>Cards inside a <a href="#snippet-product-carousel-shell">product carousel</a> per category tab.</td></tr>
             <tr><td>Product recommendations</td><td>Related products carousel on the product template.</td></tr>
-            <tr><td>Recently viewed</td><td>Carousel on the product template; cards are fetched client-side from <code>/products/{handle}.js</code> and injected into an empty <a href="#snippet-product-carousel">product-carousel</a> shell. Quick-view enabled.</td></tr>
+            <tr><td>Recently viewed</td><td>Carousel on the product template; cards are fetched client-side from <code>/products/{handle}.js</code> and injected into an empty <a href="#snippet-product-carousel-shell">product-carousel-shell</a> shell. Quick-view enabled.</td></tr>
           </tbody>
         </table>
 
@@ -1716,7 +1734,7 @@
           </div>
           <div class="ref-item">
             <span class="ref-item-name">Carousel slide</span>
-            <span class="ref-item-desc">Wrap each render in <code>&lt;div class="pcar-slide"&gt;</code> when passing slides to <a href="#snippet-product-carousel">product-carousel</a>.</span>
+            <span class="ref-item-desc">Wrap each render in <code>&lt;div class="pcar-slide"&gt;</code> when passing slides to <a href="#snippet-product-carousel-shell">product-carousel-shell</a>.</span>
           </div>
           <div class="ref-item">
             <span class="ref-item-name">Events</span>
@@ -1724,9 +1742,9 @@
           </div>
         </div>
 
-        <!-- product-interactions -->
-        <hr class="doc-divider" id="snippet-product-interactions">
-        <h3 class="doc-h3">product-interactions.liquid</h3>
+        <!-- quick-view-bindings -->
+        <hr class="doc-divider" id="snippet-quick-view-bindings">
+        <h3 class="doc-h3">quick-view-bindings.liquid</h3>
         <p>
           Loads the shared <code>window.GrimoireProduct</code> script once per page. It powers
           <strong>color swatches</strong> on product cards and intercepts <strong>Add to cart</strong> clicks
@@ -1735,7 +1753,7 @@
         </p>
         <p>
           You do not add this snippet yourself in the theme editor. It is included automatically when
-          a section renders <code>product-modal.liquid</code>. Merchants only see the outcome: tapping a
+          a section renders <code>quick-view-modal.liquid</code>. Merchants only see the outcome: tapping a
           swatch updates the card image and variant; tapping ATC on a quick-view card opens the modal.
         </p>
 
@@ -1757,7 +1775,7 @@
         <div class="ref-grid">
           <div class="ref-item">
             <span class="ref-item-name">API</span>
-            <span class="ref-item-desc"><code>GrimoireProduct.bindCards(root, quickView)</code> · <code>GrimoireProduct.swapSwatchImage(imgEl, newSrc, imgWrap, clearSrcset)</code></span>
+            <span class="ref-item-desc"><code>GrimoireProduct.bindCards(root, quickView)</code> · <code>GrimoireProduct.swapSwatchImage(img, imgWrap, newSrc, opts)</code> · <code>GrimoireProduct.formatMoney(cents)</code> · <code>GrimoireProduct.syncDiscountBadge(...)</code></span>
           </div>
           <div class="ref-item">
             <span class="ref-item-name">Render</span>
@@ -1769,9 +1787,9 @@
           </div>
         </div>
 
-        <!-- product-modal -->
-        <hr class="doc-divider" id="snippet-product-modal">
-        <h3 class="doc-h3">product-modal.liquid</h3>
+        <!-- quick-view-modal -->
+        <hr class="doc-divider" id="snippet-quick-view-modal">
+        <h3 class="doc-h3">quick-view-modal.liquid</h3>
         <p>
           The <strong>quick-view</strong> dialog: a full-screen overlay with product image, title, price,
           color swatches, quantity, Add to cart, Buy now, and a link to the full product page. One modal
@@ -1782,7 +1800,7 @@
         <p>
           Quick-view is wired in code: grid and carousel sections pass <code>opens_modal: true</code> when
           they render each card (and Recently viewed builds equivalent markup in JavaScript). There is no
-          per-section toggle in the theme editor. You do not edit <code>product-modal.liquid</code> from
+          per-section toggle in the theme editor. You do not edit <code>quick-view-modal.liquid</code> from
           the customizer.
         </p>
         <p>
@@ -1826,7 +1844,7 @@
           </div>
           <div class="ref-item">
             <span class="ref-item-name">Includes</span>
-            <span class="ref-item-desc">Renders <code>product-interactions.liquid</code> at the bottom of the snippet.</span>
+            <span class="ref-item-desc">Renders <code>quick-view-bindings.liquid</code> at the bottom of the snippet.</span>
           </div>
           <div class="ref-item">
             <span class="ref-item-name">Data source</span>
@@ -1834,9 +1852,9 @@
           </div>
         </div>
 
-        <!-- product-carousel -->
-        <hr class="doc-divider" id="snippet-product-carousel">
-        <h3 class="doc-h3">product-carousel.liquid</h3>
+        <!-- product-carousel-shell -->
+        <hr class="doc-divider" id="snippet-product-carousel-shell">
+        <h3 class="doc-h3">product-carousel-shell.liquid</h3>
         <p>
           Wraps a row of <strong>product cards</strong> in a horizontal carousel with previous/next arrows.
           Shows <strong>1 card</strong> on mobile, <strong>3</strong> from 600px, and <strong>4</strong> from
@@ -1869,7 +1887,7 @@
         <h4 class="doc-h4">Other carousels (do not use this snippet)</h4>
         <p>
           Some sections implement their own carousel markup and JavaScript.
-          They are <strong>not</strong> built with <code>product-carousel.liquid</code> or
+          They are <strong>not</strong> built with <code>product-carousel-shell.liquid</code> or
           <code>GrimoireCarousel</code>:
         </p>
         <table class="params-table params-table--guide params-table--sections">
@@ -1895,7 +1913,7 @@
         </p>
 
         <div class="callout tip">
-          <strong>Scope:</strong> <code>product-carousel.liquid</code> exists so every product-card row shares
+          <strong>Scope:</strong> <code>product-carousel-shell.liquid</code> exists so every product-card row shares
           the same arrow behavior and breakpoints. Category, article, and hero carousels stay separate by design.
         </div>
 
@@ -1911,7 +1929,7 @@
           </div>
           <div class="ref-item">
             <span class="ref-item-name">Pattern</span>
-            <span class="ref-item-desc">Capture slides in Liquid, <code>{% render 'product-carousel', slides: tab_slides %}</code>, then init in the section’s custom element.</span>
+            <span class="ref-item-desc">Capture slides in Liquid, <code>{% render 'product-carousel-shell', slides: tab_slides %}</code>, then init in the section’s custom element.</span>
           </div>
         </div>
 
@@ -2166,9 +2184,9 @@
           </div>
         </div>
 
-        <!-- worlds-map -->
-        <hr class="doc-divider" id="snippet-worlds-map">
-        <h3 class="doc-h3">worlds-map.liquid</h3>
+        <!-- testimonials-worlds-map -->
+        <hr class="doc-divider" id="snippet-testimonials-worlds-map">
+        <h3 class="doc-h3">testimonials-worlds-map.liquid</h3>
         <p>
           A single large <strong>inline SVG world map</strong> (country paths with ISO-style <code>id</code> attributes such as
           <code>US</code>, <code>FR</code>, <code>BR</code>). You never add this file from the snippet list, it is included by the
@@ -2262,7 +2280,7 @@
         <div class="ref-grid">
           <div class="ref-item">
             <span class="ref-item-name">Render</span>
-            <span class="ref-item-desc"><code>{% render 'worlds-map' %}</code>: no parameters. Used only from <code>sections/testimonials.liquid</code>.</span>
+            <span class="ref-item-desc"><code>{% render 'testimonials-worlds-map' %}</code>: no parameters. Used only from <code>sections/testimonials.liquid</code>.</span>
           </div>
           <div class="ref-item">
             <span class="ref-item-name">Markup</span>
@@ -2898,7 +2916,7 @@
 <p>Full-bleed homepage hero carousel powered by <strong>Swiper 11</strong>: background image or video per slide, headline, subcopy, CTA, and slide counter. Touch-friendly with custom prev/next controls.</p>
         <p><strong>Where to use it:</strong> Typically first on <code>templates/index.json</code>. Works on any template that needs a cinematic hero.</p>
         <p><strong>How to customize:</strong> Add <strong>Slide</strong> blocks (image, optional video, text, button link). Set autoplay delay in section settings. Without JavaScript, slides stack vertically for accessibility.</p>
-        <p><strong>Limits:</strong> Up to <strong>8</strong> slides (<code>max_blocks: 8</code>). Not the same as <a href="#snippet-product-carousel">product-carousel</a> used for product grids.</p>
+        <p><strong>Limits:</strong> Up to <strong>8</strong> slides (<code>max_blocks: 8</code>). Not the same as <a href="#snippet-product-carousel-shell">product-carousel-shell</a> used for product grids.</p>
         </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
@@ -3014,8 +3032,8 @@
 <p><strong>Theme editor:</strong> Trending products</p>
 <p>Tabbed product carousels: each tab is a category label with its own hand-picked product list, quick-view modals, and shared header from <a href="#snippet-section-title">section-title</a>.</p>
         <p><strong>Where to use it:</strong> Homepage and landing pages. Preset included on index.</p>
-        <p><strong>How to customize:</strong> Add up to <strong>5</strong> <strong>Category tab</strong> blocks. In each tab, select products (respect <strong>Products to show</strong> per tab, 1–12). Set section eyebrow, heading, and optional “view all” button. Cards use <code>opens_modal: true</code> and one <a href="#snippet-product-modal">product-modal</a> per section instance.</p>
-        <p><strong>Limits:</strong> <strong>5</strong> tabs max. Snippets: section-title, product-card, product-carousel, product-modal, product-interactions (via modal).</p>
+        <p><strong>How to customize:</strong> Add up to <strong>5</strong> <strong>Category tab</strong> blocks. In each tab, select products (respect <strong>Products to show</strong> per tab, 1–12). Set section eyebrow, heading, and optional “view all” button. Cards use <code>opens_modal: true</code> and one <a href="#snippet-quick-view-modal">quick-view-modal</a> per section instance.</p>
+        <p><strong>Limits:</strong> <strong>5</strong> tabs max. Snippets: section-title, product-card, product-carousel-shell, quick-view-modal, quick-view-bindings (via modal).</p>
         </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
@@ -3359,7 +3377,7 @@
 <p><strong>Theme editor:</strong> Collection</p>
 <p>Collection listing page (PLP): filters, sort, responsive product grid, pagination, and quick-view modals. Renders <a href="#snippet-product-card">product-card</a> with <code>opens_modal: true</code>.</p>
         <p><strong>What it renders:</strong> The active <code>collection</code> and its products for the URL the shopper opened. It is the main PLP body in <code>collection.json</code>, not a marketing block you drop elsewhere. Do not confuse with <a href="#sections-collections-liquid">collections.liquid</a>, which is a homepage category carousel with its own blocks.</p>
-        <p><strong>How to customize:</strong> Configure filter groups and grid columns in section settings. Header via <a href="#snippet-section-title">section-title</a>. One <a href="#snippet-product-modal">product-modal</a> per section. Optional <code>@app</code> blocks below the grid for app widgets.</p>
+        <p><strong>How to customize:</strong> Configure filter groups and grid columns in section settings. Header via <a href="#snippet-section-title">section-title</a>. One <a href="#snippet-quick-view-modal">quick-view-modal</a> per section. Optional <code>@app</code> blocks below the grid for app widgets.</p>
         <p><strong>Limits:</strong> Product grid is Liquid-driven from the collection object, not merchant-added product blocks. Filter drawer locks body scroll when open.</p>
         </div>
         <h4 class="doc-h4">Section settings</h4>
@@ -3449,7 +3467,7 @@
 <p><strong>Theme editor:</strong> Search</p>
 <p>Search results page with query field, results count, and product grid using the same card + quick-view pattern as collection.</p>
         <p><strong>Two search surfaces:</strong> (1) <strong>Header</strong> — <code>&lt;search-overlay&gt;</code> in <a href="#sections-header-liquid">header.liquid</a> for predictive search while browsing; submits to <code>/search</code>. (2) <strong>This section</strong> — the full results layout at <code>/search?q=…</code> driven by <code>search</code> and <code>search.results</code> in <code>search.json</code>. Customize overlay copy in the header section. Customize results-page labels here.</p>
-        <p><strong>How to customize:</strong> Tune labels and empty-state copy. Product results render via <a href="#snippet-product-card">product-card</a> and <a href="#snippet-product-modal">product-modal</a>. Non-product results depend on Shopify search settings.</p>
+        <p><strong>How to customize:</strong> Tune labels and empty-state copy. Product results render via <a href="#snippet-product-card">product-card</a> and <a href="#snippet-quick-view-modal">quick-view-modal</a>. Non-product results depend on Shopify search settings.</p>
         <p><strong>Limits:</strong> No blocks in schema.</p>
         </div>
         <h4 class="doc-h4">Section settings</h4>
@@ -3472,7 +3490,7 @@
 <p>Shopify-powered related products carousel below the buy box. Uses recommendation intent from Shopify with a merchant-controlled product count.</p>
         <p><strong>Where to use it:</strong> <code>templates/product.json</code> only (<code>enabled_on: product</code>).</p>
         <p><strong>How to customize:</strong> Set eyebrow and heading. Choose how many products to show (2–10). Section fetches recommendations via the Product Recommendations API; cards open quick view.</p>
-        <p><strong>Limits:</strong> Snippets: section-title, product-carousel, product-card, product-modal. No blocks.</p>
+        <p><strong>Limits:</strong> Snippets: section-title, product-carousel-shell, product-card, quick-view-modal. No blocks.</p>
         </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
@@ -3492,7 +3510,7 @@
 <p>Per-visitor product strip based on <code>localStorage</code> browsing history. Cards are built in JavaScript from <code>/products/{handle}.js</code>, not Liquid loops.</p>
         <p><strong>Where to use it:</strong> Product template footer (<code>enabled_on: product</code>).</p>
         <p><strong>How to customize:</strong> Set eyebrow, heading, and max products (2–8). Current product is excluded automatically. Section stays hidden until at least one valid handle exists.</p>
-        <p><strong>Limits:</strong> <strong>One</strong> section instance per template (<code>limit: 1</code>). Snippets: section-title, product-carousel (empty shell filled by JS), product-card (hidden style loader), product-modal. Quick view enabled on JS-built cards.</p>
+        <p><strong>Limits:</strong> <strong>One</strong> section instance per template (<code>limit: 1</code>). Snippets: section-title, product-carousel-shell (empty shell filled by JS), product-card (hidden style loader), quick-view-modal. Quick view enabled on JS-built cards.</p>
         </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
@@ -3761,7 +3779,7 @@
         <h4 class="doc-h4" id="sections-read-also-liquid">read-also.liquid</h4>
         <div class="section-doc-prose">
 <p><strong>Theme editor:</strong> Related blog posts</p>
-<p>Horizontal carousel of related blog posts at the end of an article. Uses its own carousel markup (not <a href="#snippet-product-carousel">product-carousel</a>).</p>
+<p>Horizontal carousel of related blog posts at the end of an article. Uses its own carousel markup (not <a href="#snippet-product-carousel-shell">product-carousel-shell</a>).</p>
         <p><strong>Where to use it:</strong> <code>templates/article.json</code> only (<code>enabled_on: article</code>).</p>
         <p><strong>How to customize:</strong> Set eyebrow, heading, and max articles (4–16). Posts are selected by theme logic from the same blog. Toggle tag, excerpt, and meta display.</p>
         <p><strong>Limits:</strong> No blocks. Snippet: section-title only.</p>
@@ -3830,7 +3848,7 @@
         <h4 class="doc-h4" id="sections-testimonials-liquid">testimonials.liquid</h4>
         <div class="section-doc-prose">
 <p><strong>Theme editor:</strong> Testimonials</p>
-<p>Social proof with an interactive world map (<a href="#snippet-worlds-map">worlds-map</a>), review cards, pins, and auto-advance. Each testimonial block ties a country to quote, rating, and optional product link.</p>
+<p>Social proof with an interactive world map (<a href="#snippet-testimonials-worlds-map">testimonials-worlds-map</a>), review cards, pins, and auto-advance. Each testimonial block ties a country to quote, rating, and optional product link.</p>
         <p><strong>Where to use it:</strong> About page, homepage, or social-proof landing sections.</p>
         <p><strong>How to customize:</strong> Add up to <strong>12</strong> <strong>Testimonial</strong> blocks. Pick a country from the dropdown (must match SVG map codes). Set quote, stars (0 hides stars), name, role, avatar, and optional product. Adjust autoplay seconds (3–10) in section settings.</p>
         <p><strong>Limits:</strong> <strong>12</strong> testimonial blocks max. Country list in block settings is curated to match the map — adding countries requires theme code changes.</p>
@@ -4104,7 +4122,7 @@ City, State 00000</code></td></tr>
             <tr><td><a href="#theme-settings-social">Social media</a></td><td>Footer social icon row</td></tr>
             <tr><td><a href="#theme-settings-search">Search</a></td><td><a href="#sections-header-liquid">header.liquid</a> overlay, <a href="#sections-search-liquid">search.liquid</a> results page</td></tr>
             <tr><td><a href="#theme-settings-sharing">Social sharing</a></td><td><a href="#sections-product-liquid">product.liquid</a>, <a href="#sections-article-liquid">article.liquid</a> share blocks</td></tr>
-            <tr><td><a href="#theme-settings-currency">Currency format</a></td><td><a href="#snippet-product-card">product-card</a>, <a href="#snippet-product-modal">product-modal</a>, <a href="#snippet-locale-selector">locale-selector</a></td></tr>
+            <tr><td><a href="#theme-settings-currency">Currency format</a></td><td><a href="#snippet-product-card">product-card</a>, <a href="#snippet-quick-view-modal">quick-view-modal</a>, <a href="#snippet-locale-selector">locale-selector</a></td></tr>
             <tr><td><a href="#theme-settings-products">Products</a></td><td>Product cards, product page, quick view modal</td></tr>
             <tr><td><a href="#theme-settings-favicon">Favicon</a></td><td><code>layout/theme.liquid</code> <code>&lt;link rel="icon"&gt;</code></td></tr>
             <tr><td><a href="#theme-settings-animations">Animations</a></td><td><a href="#sections-chronicle-liquid">chronicle.liquid</a>, <a href="#sections-team-liquid">team.liquid</a>, other reveal sections</td></tr>
