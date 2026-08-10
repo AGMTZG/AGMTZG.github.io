@@ -3042,7 +3042,19 @@
         <p><strong>Where to use it:</strong> Homepage and landing pages. Preset included on index.</p>
         <p><strong>How to customize:</strong> Add up to <strong>5</strong> <strong>Category tab</strong> blocks. In each tab, select products (respect <strong>Products to show</strong> per tab, 1–12). Set section eyebrow, heading, and optional “view all” button. Cards use <code>opens_modal: true</code> and one <a href="#snippet-quick-view-modal">quick-view-modal</a> per section instance.</p>
         <p><strong>Image size:</strong> <strong>3:4 portrait, at least 900 × 1200 px.</strong> This is the product card ratio, shared with Product recommendations, Recently viewed, Collection, and Search. Set it on the product images themselves, not here.</p>
-        <p><strong>Limits:</strong> <strong>5</strong> tabs max. Snippets: section-title, product-card, product-carousel-shell, quick-view-modal, quick-view-bindings (via modal).</p>
+        <p><strong>Limited-edition badge and countdown:</strong> a product can carry a <strong>LIMITED</strong> label with a live countdown on its card. There is no theme setting for it — it is driven by a product metafield, so you turn it on per product, and it shows anywhere that product's card appears, not only in this section.</p>
+        <ol style="color:var(--text-soft); padding-left:1.4rem; margin:0 0 1rem; line-height:1.9;">
+          <li>In your Shopify admin, go to <strong>Settings → Metafields and metaobjects → Products</strong>. You can also open any product and choose <strong>Add definition</strong> from its <strong>Metafields</strong> section.</li>
+          <li>Give it a <strong>Name</strong> — <em>Limited until</em> works.</li>
+          <li>Edit <strong>Namespace and key</strong> so it reads exactly <code>custom.limited_until</code>. Shopify generates this from the name, so it will not match unless you change it by hand. This is the step people miss.</li>
+          <li>Choose <strong>Date and time</strong> as the type, then <strong>Save</strong>.</li>
+          <li>Open the product you want to flag, scroll to its <strong>Metafields</strong>, and set <em>Limited until</em> to the moment the drop closes.</li>
+        </ol>
+        <p>
+          The badge and countdown appear as soon as that date is in the future and remove themselves once it passes, so there is nothing to undo afterwards. Products without the metafield are untouched.
+          Keep the date within days or weeks: the counter shows days alongside a running clock, so a date years out renders as <code>1240d 00:08:21</code>, which reads as broken rather than urgent.
+        </p>
+        <p><strong>Limits:</strong> <strong>5</strong> tabs max. Snippets: section-title, product-card, product-badges, product-card-countdown, product-carousel-shell, quick-view-modal, quick-view-bindings (via modal).</p>
         </div>
         <h4 class="doc-h4">Section settings</h4>
         <table class="params-table params-table--guide params-table--sections">
