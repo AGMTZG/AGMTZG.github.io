@@ -706,8 +706,11 @@
             <a class="toc-sub" href="#sections-marquee-liquid">marquee.liquid</a>
             <a class="toc-sub" href="#sections-countdown-timer-hero-liquid">countdown-timer-hero.liquid</a>
             <a class="toc-sub" href="#sections-image-hotspot-liquid">image-hotspot.liquid</a>
+            <a class="toc-sub" href="#sections-shoppable-image-liquid">shoppable-image.liquid</a>
             <a class="toc-sub" href="#sections-product-liquid">product.liquid</a>
+            <a class="toc-sub" href="#sections-featured-product-liquid">featured-product.liquid</a>
             <a class="toc-sub" href="#sections-collection-liquid">collection.liquid</a>
+            <a class="toc-sub" href="#sections-list-collections-liquid">list-collections.liquid</a>
             <a class="toc-sub" href="#sections-cart-liquid">cart.liquid</a>
             <a class="toc-sub" href="#sections-search-liquid">search.liquid</a>
             <a class="toc-sub" href="#sections-product-recommendations-liquid">product-recommendations.liquid</a>
@@ -717,7 +720,7 @@
             <a class="toc-sub" href="#sections-custom-liquid-liquid">custom-liquid.liquid</a>
             <a class="toc-sub" href="#sections-text-liquid">text.liquid</a>
             <a class="toc-sub" href="#sections-page-liquid">page.liquid</a>
-            <a class="toc-sub" href="#sections-cta-with-video-liquid">cta-with-video.liquid</a>
+            <a class="toc-sub" href="#sections-cta-liquid">cta.liquid</a>
             <a class="toc-sub" href="#sections-blog-liquid">blog.liquid</a>
             <a class="toc-sub" href="#sections-article-liquid">article.liquid</a>
             <a class="toc-sub" href="#sections-news-grid-liquid">news-grid.liquid</a>
@@ -727,9 +730,9 @@
             <a class="toc-sub" href="#sections-signup-flyout-liquid">signup-flyout.liquid</a>
             <a class="toc-sub" href="#sections-faq-liquid">faq.liquid</a>
             <a class="toc-sub" href="#sections-contact-hero-liquid">contact-hero.liquid</a>
-            <a class="toc-sub" href="#sections-contact-channels-liquid">contact-channels.liquid</a>
             <a class="toc-sub" href="#sections-contact-location-liquid">contact-location.liquid</a>
             <a class="toc-sub" href="#sections-chronicle-liquid">chronicle.liquid</a>
+            <a class="toc-sub" href="#sections-how-we-make-liquid">how-we-make.liquid</a>
             <a class="toc-sub" href="#sections-team-liquid">team.liquid</a>
           </div>
 
@@ -791,8 +794,8 @@
           editing code.
         </p>
         <p>
-          Out of the box the theme includes <strong>39 sections</strong>, <strong>13 blocks</strong>,
-          <strong>10 snippets</strong>, and <strong>14 templates</strong> (including dedicated layouts for product,
+          Out of the box the theme includes <strong>42 sections</strong>, <strong>13 blocks</strong>,
+          <strong>23 snippets</strong>, and <strong>14 templates</strong> (including dedicated layouts for product,
           collection, cart, blog, article, search, password, gift card, and custom pages such as contact and
           about). Styles ship as plain CSS (<code>assets/critical.css</code>, <code>assets/base.css</code>, and
           co-located <code>{% stylesheet %}</code> blocks inside sections).
@@ -849,7 +852,7 @@
         <h3 class="doc-h3">Theme inventory</h3>
         <div class="ref-grid" style="grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin-top: 0.8rem;">
           <div class="ref-item" style="text-align:center; padding: 1rem 0.5rem;">
-            <span style="font-size:1.5rem; font-family:'Merriweather',serif; font-weight:900; color:var(--text); display:block;">39</span>
+            <span style="font-size:1.5rem; font-family:'Merriweather',serif; font-weight:900; color:var(--text); display:block;">42</span>
             <span class="ref-item-desc">Sections</span>
           </div>
           <div class="ref-item" style="text-align:center; padding: 1rem 0.5rem;">
@@ -857,7 +860,7 @@
             <span class="ref-item-desc">Blocks</span>
           </div>
           <div class="ref-item" style="text-align:center; padding: 1rem 0.5rem;">
-            <span style="font-size:1.5rem; font-family:'Merriweather',serif; font-weight:900; color:var(--text); display:block;">10</span>
+            <span style="font-size:1.5rem; font-family:'Merriweather',serif; font-weight:900; color:var(--text); display:block;">23</span>
             <span class="ref-item-desc">Snippets</span>
           </div>
           <div class="ref-item" style="text-align:center; padding: 1rem 0.5rem;">
@@ -2539,7 +2542,7 @@
         <div class="section-eyebrow">Reference</div>
         <h2 class="doc-h2">Sections</h2>
         <p class="doc-lead">
-          Grimoire ships <strong>39 sections</strong> in <code>sections/</code>.
+          Grimoire ships <strong>42 sections</strong> in <code>sections/</code>.
           Each file exposes a <code>{% schema %}</code> for the theme editor.
         </p>
         <div class="section-group">
@@ -2564,13 +2567,16 @@
             <span class="section-chip">marquee.liquid</span>
             <span class="section-chip">countdown-timer-hero.liquid</span>
             <span class="section-chip">image-hotspot.liquid</span>
+            <span class="section-chip">shoppable-image.liquid</span>
           </div>
         </div>
         <div class="section-group">
           <div class="section-group-label">Commerce</div>
           <div class="section-chips">
             <span class="section-chip">product.liquid</span>
+            <span class="section-chip">featured-product.liquid</span>
             <span class="section-chip">collection.liquid</span>
+            <span class="section-chip">list-collections.liquid</span>
             <span class="section-chip">cart.liquid</span>
             <span class="section-chip">search.liquid</span>
             <span class="section-chip">product-recommendations.liquid</span>
@@ -2585,7 +2591,7 @@
             <span class="section-chip">custom-liquid.liquid</span>
             <span class="section-chip">text.liquid</span>
             <span class="section-chip">page.liquid</span>
-            <span class="section-chip">cta-with-video.liquid</span>
+            <span class="section-chip">cta.liquid</span>
           </div>
         </div>
         <div class="section-group">
@@ -2610,9 +2616,9 @@
           <div class="section-group-label">About &amp; Contact</div>
           <div class="section-chips">
             <span class="section-chip">contact-hero.liquid</span>
-            <span class="section-chip">contact-channels.liquid</span>
             <span class="section-chip">contact-location.liquid</span>
             <span class="section-chip">chronicle.liquid</span>
+            <span class="section-chip">how-we-make.liquid</span>
             <span class="section-chip">team.liquid</span>
           </div>
         </div>
@@ -2622,7 +2628,7 @@
         <h4 class="doc-h4" id="sections-announcement-bar">announcement-bar.liquid</h4>
         <div class="section-doc-prose">
 <p><strong>Theme editor:</strong> Announcement bar</p>
-        <p>Thin promo strip fixed above the main header. Use it for shipping thresholds, sale deadlines, or store-wide notices without editing the header section itself.</p>
+<p>Thin promo strip fixed above the main header. Use it for shipping thresholds, sale deadlines, or store-wide notices without editing the header section itself.</p>
         <p><strong>Where to use it:</strong> Lives in the <strong>Header group</strong> in <em>Theme settings → Sections</em>. It appears on every template that loads the header group. Language and country selectors render here on viewports 600px and wider (see <a href="#snippet-language-selector">language-selector</a> and <a href="#snippet-locale-selector">locale-selector</a>).</p>
         <p><strong>How to customize:</strong> Turn the bar on or off with <strong>Show announcement bar</strong>. Add one or more <strong>Message</strong> blocks. Each message can include optional link text and URL. When multiple messages exist, they auto-rotate; set <strong>Seconds per message</strong> (3–10s). Match bar colors to your brand with the three color pickers.</p>
         <p><strong>Limits:</strong> Up to <strong>6</strong> message blocks (<code>max_blocks: 6</code>). Only available in the header section group. CSS hook: <code>shopify-section--announcement-bar</code>.</p>
@@ -2632,10 +2638,11 @@
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
             <tr><td><code>enabled</code></td><td>checkbox</td><td>Show announcement bar. Default: <code>true</code></td></tr>
-            <tr><td><code>announcement_bg</code></td><td>color</td><td>Background color. Default: <code>#0a0a0a</code></td></tr>
-            <tr><td><code>announcement_color</code></td><td>color</td><td>Text color. Default: <code>#dddbd7</code></td></tr>
-            <tr><td><code>announcement_accent</code></td><td>color</td><td>Link color. Default: <code>#e8e8e8</code></td></tr>
-            <tr><td><code>rotation_speed</code></td><td>range</td><td>Seconds per message. Default: <code>5</code>. Range: 3–10s</td></tr>
+            <tr><td><code>color_scheme</code></td><td>color_scheme</td><td>Color scheme. Default: <code>scheme-1</code></td></tr>
+            <tr><td><code>rotation_speed</code></td><td>range</td><td>Scroll speed. Default: <code>30</code></td></tr>
+            <tr><td><code>uppercase</code></td><td>checkbox</td><td>Uppercase text. Default: <code>true</code></td></tr>
+            <tr><td><code>separator</code></td><td>text</td><td>Separator. Default: <code>✦</code></td></tr>
+            <tr><td><code>pause_on_hover</code></td><td>checkbox</td><td>Pause on hover. Default: <code>true</code></td></tr>
           </tbody>
         </table>
         <h4 class="doc-h4">Blocks</h4>
@@ -2653,7 +2660,7 @@
         <h4 class="doc-h4" id="sections-header-liquid">header.liquid</h4>
         <div class="section-doc-prose">
 <p><strong>Theme editor:</strong> Header</p>
-        <p>Global site navigation: logo, primary menu, mobile drawer, predictive search overlay, and AJAX cart sidebar. Custom elements <code>&lt;site-navbar&gt;</code>, <code>&lt;search-overlay&gt;</code>, and <code>&lt;cart-sidebar&gt;</code> handle scroll behavior and cart API updates.</p>
+<p>Global site navigation: logo, primary menu, mobile drawer, predictive search overlay, and AJAX cart sidebar. Custom elements <code>&lt;site-navbar&gt;</code>, <code>&lt;search-overlay&gt;</code>, and <code>&lt;cart-sidebar&gt;</code> handle scroll behavior and cart API updates.</p>
         <p><strong>Role in the theme:</strong> Always loaded from <code>layout/theme.liquid</code> via <code>{% sections 'header-group' %}</code>. You do not add it per template. Edit it under <strong>Theme settings → Header</strong> (header group). Menus come from <em>Content → Menus</em> in admin; pick the main menu in section settings (default handle <code>main-menu</code>).</p>
         <p><strong>How to customize:</strong> Choose <strong>Scroll behavior</strong>: hide-on-scroll (default), sticky, or static. Enable <strong>Transparent header</strong> on the homepage hero so the slideshow shows through; set <strong>Transparent header text color</strong> for contrast. Edit drawer, search, and cart empty-state copy in the settings panel. Logo and menu items come from theme settings and navigation menus, not this section file.</p>
         <p><strong>Limits:</strong> No blocks. Settings-only section. Pair with <a href="#sections-signup-flyout-liquid">signup-flyout</a> in the same header group if you want a newsletter popup.</p>
@@ -2666,14 +2673,15 @@
             <tr><td><code>transparent_header</code></td><td>checkbox</td><td>Transparent header. Default: <code>true</code></td></tr>
             <tr><td><code>transparent_text_color</code></td><td>color</td><td>Transparent header text color. Default: <code>#ffffff</code></td></tr>
             <tr><td><code>menu</code></td><td>link_list</td><td>Main menu. Default: <code>main-menu</code></td></tr>
+            <tr><td><code>customer_account_menu</code></td><td>link_list</td><td>Customer account menu. Default: <code>customer-account-main-menu</code></td></tr>
             <tr><td><code>drawer_eyebrow</code></td><td>text</td><td>Eyebrow. Default: <code>Grimoire</code></td></tr>
             <tr><td><code>drawer_heading</code></td><td>text</td><td>Heading. Default: <code>Menu</code></td></tr>
-            <tr><td><code>search_title</code></td><td>text</td><td>Title. Default: <code>Search</code></td></tr>
+            <tr><td><code>search_title</code></td><td>text</td><td>Heading. Default: <code>Search</code></td></tr>
             <tr><td><code>search_placeholder</code></td><td>text</td><td>Input placeholder. Default: <code>Search...</code></td></tr>
             <tr><td><code>search_hint</code></td><td>text</td><td>Hint text. Default: <code>Press Enter to search</code></td></tr>
             <tr><td><code>eyebrow</code></td><td>text</td><td>Eyebrow. Default: <code>Grimoire</code></td></tr>
             <tr><td><code>cart_heading</code></td><td>text</td><td>Heading. Default: <code>Your Cart</code></td></tr>
-            <tr><td><code>cart_empty_title</code></td><td>text</td><td>Empty state title. Default: <code>Your cart is empty</code></td></tr>
+            <tr><td><code>cart_empty_title</code></td><td>text</td><td>Empty state heading. Default: <code>Your cart is empty</code></td></tr>
             <tr><td><code>cart_empty_subtitle</code></td><td>text</td><td>Empty state message. Default: <code>Add something to get started</code></td></tr>
             <tr><td><code>cart_checkout_label</code></td><td>text</td><td>Checkout button. Default: <code>Checkout</code></td></tr>
             <tr><td><code>cart_view_label</code></td><td>text</td><td>View cart button. Default: <code>View cart</code></td></tr>
@@ -2683,7 +2691,7 @@
         <h4 class="doc-h4" id="sections-footer-liquid">footer.liquid</h4>
         <div class="section-doc-prose">
 <p><strong>Theme editor:</strong> Footer</p>
-        <p>Site-wide footer with brand blurb, two link columns, newsletter signup, optional Follow on Shop, payment icons, and Markets locale switching via <a href="#snippet-locale-selector">locale-selector</a> (footer context).</p>
+<p>Site-wide footer with brand blurb, two link columns, newsletter signup, optional Follow on Shop, payment icons, and Markets locale switching via <a href="#snippet-locale-selector">locale-selector</a> (footer context).</p>
         <p><strong>Role in the theme:</strong> Always loaded from <code>layout/theme.liquid</code> via <code>{% sections 'footer-group' %}</code>. Same as the header: one global instance, not placed on individual templates. Assign <strong>Explore</strong> and <strong>Information</strong> menus under <em>Content → Menus</em>.</p>
         <p><strong>How to customize:</strong> Fill brand description and newsletter strings. Toggle payment icons and Follow on Shop. Social links typically come from theme settings (check Theme settings → Social media). The newsletter form uses Shopify’s customer API like other signup sections.</p>
         <p><strong>Limits:</strong> No blocks. No per-template restriction in schema.</p>
@@ -2694,22 +2702,23 @@
           <tbody>
             <tr><td><code>brand_description</code></td><td>textarea</td><td>Brand description. Default: <code>Curated products and collections craf...</code></td></tr>
             <tr><td><code>nav_1_heading</code></td><td>text</td><td>Heading. Default: <code>Explore</code></td></tr>
-            <tr><td><code>nav_1_menu</code></td><td>link_list</td><td>Menu</td></tr>
+            <tr><td><code>nav_1_menu</code></td><td>link_list</td><td>Menu. Default: <code>footer</code></td></tr>
             <tr><td><code>nav_2_heading</code></td><td>text</td><td>Heading. Default: <code>Information</code></td></tr>
-            <tr><td><code>nav_2_menu</code></td><td>link_list</td><td>Menu</td></tr>
+            <tr><td><code>nav_2_menu</code></td><td>link_list</td><td>Menu. Default: <code>footer</code></td></tr>
             <tr><td><code>newsletter_heading</code></td><td>text</td><td>Heading. Default: <code>Stay in the loop</code></td></tr>
             <tr><td><code>newsletter_description</code></td><td>textarea</td><td>Description. Default: <code>New arrivals, guides and offers deliv...</code></td></tr>
             <tr><td><code>newsletter_placeholder</code></td><td>text</td><td>Email placeholder. Default: <code>your@email.com</code></td></tr>
             <tr><td><code>newsletter_button_label</code></td><td>text</td><td>Button label. Default: <code>Join</code></td></tr>
             <tr><td><code>show_follow_on_shop</code></td><td>checkbox</td><td>Show Follow on Shop button. Default: <code>true</code></td></tr>
+            <tr><td><code>copyright_text</code></td><td>text</td><td>Copyright text</td></tr>
             <tr><td><code>show_payment_icons</code></td><td>checkbox</td><td>Show payment icons. Default: <code>true</code></td></tr>
           </tbody>
         </table>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-password-liquid">password.liquid</h4>
         <div class="section-doc-prose">
-<p><strong>Theme editor:</strong> Password page</p>
-        <p>Editable body for the password storefront: coming-soon headline, description, and email capture. Shopify still owns the actual password gate; this section only styles the page around it.</p>
+<p><strong>Theme editor:</strong> Password</p>
+<p>Editable body for the password storefront: coming-soon headline, description, and email capture. Shopify still owns the actual password gate; this section only styles the page around it.</p>
         <p><strong>Layout binding:</strong> <code>layout/password.liquid</code> outputs <code>{{ content_for_layout }}</code>, which resolves to the single section in <code>templates/password.json</code>. No <code>header-group</code> or <code>footer-group</code>. Shown while the store is password-protected in admin. Password entry uses the modal defined in the password layout, not this section.</p>
         <p><strong>How to customize:</strong> Set eyebrow, heading (blank uses shop name), and description. Shoppers submit email via a built-in customer form; success and error states are handled in Liquid. Password entry uses the separate password modal in the layout.</p>
         <p><strong>Limits:</strong> No blocks. Does not load <a href="#snippet-meta-tags">meta-tags</a> or the standard header/footer groups.</p>
@@ -2719,15 +2728,22 @@
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
             <tr><td><code>eyebrow</code></td><td>text</td><td>Eyebrow label. Default: <code>Coming Soon</code></td></tr>
-            <tr><td><code>heading</code></td><td>text</td><td>Heading</td></tr>
-            <tr><td><code>subtext</code></td><td>textarea</td><td>Description. Default: <code>We are putting the finishing touches on so…</code></td></tr>
+            <tr><td><code>heading</code></td><td>text</td><td>Store name override</td></tr>
+            <tr><td><code>subtext</code></td><td>textarea</td><td>Description. Default: <code>We are putting the finishing touches ...</code></td></tr>
+            <tr><td><code>stay_label</code></td><td>text</td><td>&quot;Stay tuned&quot; label. Default: <code>Stay tuned!</code></td></tr>
+            <tr><td><code>email_placeholder</code></td><td>text</td><td>Email placeholder. Default: <code>E-mail address</code></td></tr>
+            <tr><td><code>notify_label</code></td><td>text</td><td>Button label. Default: <code>Notify me</code></td></tr>
+            <tr><td><code>success_message</code></td><td>text</td><td>Success message. Default: <code>You are on the list — we will let you...</code></td></tr>
+            <tr><td><code>enter_label</code></td><td>text</td><td>&quot;Enter&quot; button label. Default: <code>Enter using password</code></td></tr>
+            <tr><td><code>panel_image</code></td><td>image_picker</td><td>Left panel image</td></tr>
+            <tr><td><code>panel_image_alt</code></td><td>text</td><td>Image alt text</td></tr>
           </tbody>
         </table>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-404-liquid">404.liquid</h4>
         <div class="section-doc-prose">
-<p><strong>Theme editor:</strong> 404</p>
-        <p>Friendly “page not found” layout with primary and optional secondary actions so shoppers can recover instead of hitting a dead end.</p>
+<p><strong>Theme editor:</strong> Not found</p>
+<p>Friendly “page not found” layout with primary and optional secondary actions so shoppers can recover instead of hitting a dead end.</p>
         <p><strong>When it runs:</strong> Shopify serves <code>templates/404.json</code> for unknown URLs. You customize copy under <strong>Theme editor → 404</strong>. It is not a section you add to other templates.</p>
         <p><strong>How to customize:</strong> Edit heading and description. Primary button returns home. Toggle <strong>Show secondary button</strong> and set label plus URL (for example all products collection).</p>
         <p><strong>Limits:</strong> No blocks. Settings-only.</p>
@@ -2736,6 +2752,7 @@
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
+            <tr><td><code>eyebrow_label</code></td><td>text</td><td>Eyebrow label. Default: <code>Error 404</code></td></tr>
             <tr><td><code>heading</code></td><td>text</td><td>Heading. Default: <code>Page not found.</code></td></tr>
             <tr><td><code>description</code></td><td>textarea</td><td>Description. Default: <code>The page you&#x27;re looking for doesn&#x27;t e...</code></td></tr>
             <tr><td><code>primary_label</code></td><td>text</td><td>Primary button label. Default: <code>Back to home</code></td></tr>
@@ -2748,7 +2765,7 @@
         <h4 class="doc-h4" id="sections-breadcrumb-liquid">breadcrumb.liquid</h4>
         <div class="section-doc-prose">
 <p><strong>Theme editor:</strong> Breadcrumb</p>
-        <p>Horizontal wayfinding trail (Home › Collection › Product) built from optional blocks so you control which crumbs appear per template.</p>
+<p>Horizontal wayfinding trail (Home › Collection › Product) built from optional blocks so you control which crumbs appear per template.</p>
         <p><strong>Where to use it:</strong> Common on product, collection, blog, article, page, and search templates. <strong>Disabled on the homepage</strong> (<code>disabled_on: index</code>) so the home page stays clean.</p>
         <p><strong>How to customize:</strong> Add at most one of each block type: <strong>Home</strong>, <strong>Search</strong>, <strong>Blog</strong>, <strong>Collection</strong>, <strong>Current page</strong>. Reorder blocks in the editor; each type can only appear once. Separator style is controlled in section settings.</p>
         <p><strong>Limits:</strong> Each block type limited to <strong>1</strong> instance. No snippets.</p>
@@ -2757,11 +2774,12 @@
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
+            <tr><td><code>color_scheme</code></td><td>color_scheme</td><td>Color scheme. Default: <code>scheme-1</code></td></tr>
             <tr><td><code>separator</code></td><td>select</td><td>Separator. Default: <code>chevron</code>. Options: <code>chevron</code>, <code>slash</code>, <code>dot</code>, <code>arrow</code></td></tr>
           </tbody>
         </table>
         <h4 class="doc-h4">Blocks</h4>
-        <p><strong>Home</strong> (<code>home</code>) (limit 1)</p>
+        <p><strong>Home</strong> (<code>home</code>)</p>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
@@ -2769,28 +2787,28 @@
             <tr><td><code>show_icon</code></td><td>checkbox</td><td>Show home icon. Default: <code>true</code></td></tr>
           </tbody>
         </table>
-        <p><strong>Search</strong> (<code>search</code>) (limit 1)</p>
+        <p><strong>Search</strong> (<code>search</code>)</p>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
             <tr><td><code>label</code></td><td>text</td><td>Label. Default: <code>Search</code></td></tr>
           </tbody>
         </table>
-        <p><strong>Blog</strong> (<code>blog</code>) (limit 1)</p>
+        <p><strong>Blog</strong> (<code>blog</code>)</p>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
             <tr><td><code>label</code></td><td>text</td><td>Label</td></tr>
           </tbody>
         </table>
-        <p><strong>Collection</strong> (<code>collection</code>) (limit 1)</p>
-        <p><strong>Current page</strong> (<code>current</code>) (limit 1)</p>
+        <p><strong>Collection</strong> (<code>collection</code>)</p>
+        <p><strong>Current page</strong> (<code>current</code>)</p>
         <p><strong>Presets:</strong> <strong>Breadcrumb</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-slideshow-liquid">slideshow.liquid</h4>
         <div class="section-doc-prose">
 <p><strong>Theme editor:</strong> Slideshow</p>
-        <p>Full-bleed homepage hero carousel powered by <strong>Swiper 11</strong>: background image or video per slide, headline, subcopy, CTA, and slide counter. Touch-friendly with custom prev/next controls.</p>
+<p>Full-bleed homepage hero carousel powered by <strong>Swiper 11</strong>: background image or video per slide, headline, subcopy, CTA, and slide counter. Touch-friendly with custom prev/next controls.</p>
         <p><strong>Where to use it:</strong> Typically first on <code>templates/index.json</code>. Works on any template that needs a cinematic hero.</p>
         <p><strong>How to customize:</strong> Add <strong>Slide</strong> blocks (image, optional video, text, button link). Set autoplay delay in section settings. Without JavaScript, slides stack vertically for accessibility.</p>
         <p><strong>Limits:</strong> Up to <strong>8</strong> slides (<code>max_blocks: 8</code>). Not the same as <a href="#snippet-product-carousel">product-carousel</a> used for product grids.</p>
@@ -2799,7 +2817,18 @@
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
-            <tr><td><code>autoplay_delay</code></td><td>range</td><td>Autoplay delay. Default: <code>5000</code>. Range: 3000–9500ms</td></tr>
+            <tr><td><code>scrim_color</code></td><td>color</td><td>Scrim and overlay color</td></tr>
+            <tr><td><code>scrim_strength</code></td><td>range</td><td>Scrim strength. Default: <code>0</code></td></tr>
+            <tr><td><code>overlay_tint</code></td><td>range</td><td>Overlay tint. Default: <code>0</code></td></tr>
+            <tr><td><code>focal_enabled</code></td><td>checkbox</td><td>Set a framing point. Default: <code>false</code></td></tr>
+            <tr><td><code>focal_x</code></td><td>range</td><td>Horizontal position. Default: <code>50</code></td></tr>
+            <tr><td><code>focal_y</code></td><td>range</td><td>Vertical position. Default: <code>50</code></td></tr>
+            <tr><td><code>eyebrow_color</code></td><td>color</td><td>Eyebrow color</td></tr>
+            <tr><td><code>heading_color</code></td><td>color</td><td>Heading color</td></tr>
+            <tr><td><code>nav_color</code></td><td>color</td><td>Navigation bars color</td></tr>
+            <tr><td><code>button_style</code></td><td>select</td><td>Default button style. Default: <code>primary</code>. Options: <code>primary</code>, <code>secondary</code>, <code>outline</code></td></tr>
+            <tr><td><code>autoplay</code></td><td>checkbox</td><td>Enable autoplay. Default: <code>true</code></td></tr>
+            <tr><td><code>autoplay_delay</code></td><td>range</td><td>Autoplay delay. Default: <code>5</code></td></tr>
           </tbody>
         </table>
         <h4 class="doc-h4">Blocks</h4>
@@ -2807,20 +2836,34 @@
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
-            <tr><td><code>bg_image</code></td><td>image_picker</td><td>Background image</td></tr>
+            <tr><td><code>content_position</code></td><td>select</td><td>Content position. Default: <code>bottom-left</code>. Options: <code>middle-left</code>, <code>middle-center</code>, <code>middle-right</code>, <code>bottom-left</code>, <code>bottom-center</code>, <code>bottom-right</code></td></tr>
+            <tr><td><code>content_position_mobile</code></td><td>select</td><td>Content position. Default: <code>bottom-left</code>. Options: <code>middle-left</code>, <code>middle-center</code>, <code>middle-right</code>, <code>bottom-left</code>, <code>bottom-center</code>, <code>bottom-right</code></td></tr>
             <tr><td><code>eyebrow</code></td><td>text</td><td>Eyebrow</td></tr>
             <tr><td><code>title</code></td><td>text</td><td>Heading</td></tr>
-            <tr><td><code>description</code></td><td>textarea</td><td>Description</td></tr>
+            <tr><td><code>bg_video</code></td><td>video</td><td>Background video</td></tr>
+            <tr><td><code>bg_image</code></td><td>image_picker</td><td>Background image</td></tr>
+            <tr><td><code>focal_override</code></td><td>checkbox</td><td>Override framing point. Default: <code>false</code></td></tr>
+            <tr><td><code>focal_x</code></td><td>range</td><td>Horizontal position. Default: <code>50</code></td></tr>
+            <tr><td><code>focal_y</code></td><td>range</td><td>Vertical position. Default: <code>50</code></td></tr>
             <tr><td><code>cta_text</code></td><td>text</td><td>Button text</td></tr>
             <tr><td><code>cta_url</code></td><td>url</td><td>Button link</td></tr>
+            <tr><td><code>button_style_override</code></td><td>checkbox</td><td>Override section button style. Default: <code>false</code></td></tr>
+            <tr><td><code>button_style</code></td><td>select</td><td>Button style. Default: <code>primary</code>. Options: <code>primary</code>, <code>secondary</code>, <code>outline</code></td></tr>
+            <tr><td><code>overlay_override</code></td><td>checkbox</td><td>Override section overlay. Default: <code>false</code></td></tr>
+            <tr><td><code>scrim_color</code></td><td>color</td><td>Scrim and overlay color</td></tr>
+            <tr><td><code>scrim_strength</code></td><td>range</td><td>Scrim strength. Default: <code>0</code></td></tr>
+            <tr><td><code>overlay_tint</code></td><td>range</td><td>Overlay tint. Default: <code>0</code></td></tr>
+            <tr><td><code>eyebrow_color</code></td><td>color</td><td>Eyebrow color</td></tr>
+            <tr><td><code>heading_color</code></td><td>color</td><td>Heading color</td></tr>
+            <tr><td><code>nav_color</code></td><td>color</td><td>Navigation bars color</td></tr>
           </tbody>
         </table>
         <p><strong>Presets:</strong> <strong>Slideshow</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-collections-liquid">collections.liquid</h4>
         <div class="section-doc-prose">
-<p><strong>Theme editor:</strong> Collections Hero</p>
-        <p>Homepage-style carousel of collection cards: image, title, description, and link per category block. Distinct from the <strong>Main Collection</strong> PLP section (<a href="#sections-collection-liquid">collection.liquid</a>).</p>
+<p><strong>Theme editor:</strong> Featured collections</p>
+<p>Homepage-style carousel of collection cards: image, title, description, and link per category block. Distinct from the <strong>Collection</strong> PLP section (<a href="#sections-collection-liquid">collection.liquid</a>).</p>
         <p><strong>Where to use it:</strong> Homepage (<code>index.json</code>), the collections list (<code>list-collections.json</code>), and the single collection template (<code>collection.json</code>). For example above or below the main PLP section (<a href="#sections-collection-liquid">collection.liquid</a>). Uses <a href="#snippet-section-title">section-title</a> for eyebrow, heading, and optional CTA.</p>
         <p><strong>How to customize:</strong> Toggle <strong>Show featured collection</strong> to show or hide the optional featured category split block (label, title, description, image, link, and reviews stat in section settings). To surface more collections, add <strong>Category</strong> blocks in the Shopify theme editor. Each block becomes a card in the horizontal carousel (max <strong>15</strong>). Pick a collection or custom image and copy per card. Section settings also control header text and carousel behavior. App blocks (<code>@app</code>) can extend the section if an app provides them.</p>
         <p><strong>Limits:</strong> <strong>15</strong> category blocks max. Uses the section’s own carousel JS, not <code>GrimoireCarousel</code>.</p>
@@ -2833,19 +2876,34 @@
             <tr><td><code>heading</code></td><td>text</td><td>Heading. Default: <code>Discover the Collections</code></td></tr>
             <tr><td><code>btn_label</code></td><td>text</td><td>Button label. Default: <code>View all collections</code></td></tr>
             <tr><td><code>btn_url</code></td><td>url</td><td>Button link</td></tr>
+            <tr><td><code>card_label_position</code></td><td>select</td><td>Label position. Default: <code>below</code>. Options: <code>below</code>, <code>overlay</code></td></tr>
+            <tr><td><code>card_image_ratio</code></td><td>select</td><td>Image ratio. Default: <code>portrait</code>. Options: <code>portrait</code>, <code>square</code>, <code>landscape</code></td></tr>
+            <tr><td><code>arrow_style</code></td><td>select</td><td>Arrow style. Default: <code>diagonal</code>. Options: <code>chevron</code>, <code>diagonal</code>, <code>arrow</code>, <code>none</code></td></tr>
+            <tr><td><code>card_text_align</code></td><td>select</td><td>Card label alignment. Default: <code>left</code>. Options: <code>left</code>, <code>center</code></td></tr>
+            <tr><td><code>card_below_text_color</code></td><td>color</td><td>Below label color</td></tr>
+            <tr><td><code>card_scrim_color</code></td><td>color</td><td>Scrim and overlay color</td></tr>
+            <tr><td><code>card_scrim_opacity</code></td><td>range</td><td>Scrim strength. Default: <code>55</code></td></tr>
+            <tr><td><code>card_overlay_opacity</code></td><td>range</td><td>Overlay tint. Default: <code>0</code></td></tr>
+            <tr><td><code>card_overlay_text_color</code></td><td>color</td><td>Overlay label color. Default: <code>#ffffff</code></td></tr>
             <tr><td><code>show_featured</code></td><td>checkbox</td><td>Show featured collection. Default: <code>true</code></td></tr>
-            <tr><td><code>featured_label</code></td><td>text</td><td>Label. Default: <code>Featured</code></td></tr>
-            <tr><td><code>featured_title</code></td><td>text</td><td>Title. Default: <code>Our Best Sellers</code></td></tr>
-            <tr><td><code>featured_description</code></td><td>textarea</td><td>Description. Default: <code>Handpicked favorites loved by our cus...</code></td></tr>
+            <tr><td><code>featured_above_fold</code></td><td>checkbox</td><td>Image above the fold. Default: <code>false</code></td></tr>
+            <tr><td><code>featured_position</code></td><td>select</td><td>Featured position. Default: <code>left</code>. Options: <code>left</code>, <code>right</code></td></tr>
+            <tr><td><code>featured_content_position</code></td><td>select</td><td>Content position. Default: <code>bottom</code>. Options: <code>bottom</code>, <code>center</code></td></tr>
+            <tr><td><code>featured_eyebrow</code></td><td>text</td><td>Eyebrow text. Default: <code>Fringe Collection</code></td></tr>
+            <tr><td><code>featured_title</code></td><td>text</td><td>Heading. Default: <code>TOP SELLING CANDLES</code></td></tr>
             <tr><td><code>featured_image</code></td><td>image_picker</td><td>Image</td></tr>
             <tr><td><code>featured_url</code></td><td>url</td><td>Link</td></tr>
-            <tr><td><code>featured_cta_text</code></td><td>text</td><td>CTA button text. Default: <code>Explore collection</code></td></tr>
-            <tr><td><code>reviews_count</code></td><td>text</td><td>Reviews stat. Default: <code>4.9 ★★★★★</code></td></tr>
-            <tr><td><code>reviews_label</code></td><td>text</td><td>Reviews label. Default: <code>Based on thousands of verified reviews</code></td></tr>
+            <tr><td><code>featured_cta_text</code></td><td>text</td><td>Button label. Default: <code>View all collections</code></td></tr>
+            <tr><td><code>featured_button_style</code></td><td>select</td><td>Button style. Default: <code>secondary</code>. Options: <code>primary</code>, <code>secondary</code>, <code>outline</code></td></tr>
+            <tr><td><code>featured_eyebrow_color</code></td><td>color</td><td>Eyebrow color</td></tr>
+            <tr><td><code>featured_title_color</code></td><td>color</td><td>Heading color</td></tr>
+            <tr><td><code>featured_scrim_color</code></td><td>color</td><td>Scrim and overlay color</td></tr>
+            <tr><td><code>featured_scrim_opacity</code></td><td>range</td><td>Scrim strength. Default: <code>55</code></td></tr>
+            <tr><td><code>featured_overlay_opacity</code></td><td>range</td><td>Overlay tint. Default: <code>0</code></td></tr>
           </tbody>
         </table>
         <h4 class="doc-h4">Blocks</h4>
-        <p><strong>Category</strong> (<code>category</code>) (limit 15)</p>
+        <p><strong>Category</strong> (<code>category</code>)</p>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
@@ -2854,13 +2912,20 @@
             <tr><td><code>url</code></td><td>url</td><td>Link</td></tr>
           </tbody>
         </table>
-        <p><strong>@app</strong> (<code>@app</code>)</p>
-        <p><strong>Presets:</strong> <strong>Collections Hero</strong></p>
+        <p><strong>Custom Liquid</strong> (<code>custom_liquid</code>)</p>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>custom_liquid</code></td><td>liquid</td><td>Custom Liquid</td></tr>
+          </tbody>
+        </table>
+        <p><strong>App blocks</strong> (<code>@app</code>) — merchants can drop in blocks from any installed app.</p>
+        <p><strong>Presets:</strong> <strong>Featured collections</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-trending-products-liquid">trending-products.liquid</h4>
         <div class="section-doc-prose">
-<p><strong>Theme editor:</strong> Trending Products</p>
-        <p>Tabbed product carousels: each tab is a category label with its own hand-picked product list, quick-view modals, and shared header from <a href="#snippet-section-title">section-title</a>.</p>
+<p><strong>Theme editor:</strong> Trending products</p>
+<p>Tabbed product carousels: each tab is a category label with its own hand-picked product list, quick-view modals, and shared header from <a href="#snippet-section-title">section-title</a>.</p>
         <p><strong>Where to use it:</strong> Homepage and landing pages. Preset included on index.</p>
         <p><strong>How to customize:</strong> Add up to <strong>5</strong> <strong>Category tab</strong> blocks. In each tab, select products (respect <strong>Products to show</strong> per tab, 1–12). Set section eyebrow, heading, and optional “view all” button. Cards use <code>opens_modal: true</code> and one <a href="#snippet-product-modal">product-modal</a> per section instance.</p>
         <p><strong>Limits:</strong> <strong>5</strong> tabs max. Snippets: section-title, product-card, product-carousel, product-modal, product-interactions (via modal).</p>
@@ -2871,13 +2936,15 @@
           <tbody>
             <tr><td><code>eyebrow</code></td><td>text</td><td>Eyebrow text. Default: <code>Trending Now</code></td></tr>
             <tr><td><code>heading</code></td><td>text</td><td>Heading. Default: <code>Featured Products</code></td></tr>
-            <tr><td><code>products_to_show</code></td><td>range</td><td>Products to show per category. Default: <code>8</code>. Range: 1–12</td></tr>
+            <tr><td><code>products_to_show</code></td><td>range</td><td>Products to show per category. Default: <code>8</code></td></tr>
+            <tr><td><code>enable_desktop_slider</code></td><td>checkbox</td><td>Enable carousel on desktop. Default: <code>true</code></td></tr>
+            <tr><td><code>show_quick_view</code></td><td>checkbox</td><td>Enable quick view. Default: <code>true</code></td></tr>
             <tr><td><code>btn_label</code></td><td>text</td><td>Button label. Default: <code>View all</code></td></tr>
             <tr><td><code>btn_url</code></td><td>url</td><td>Button link</td></tr>
           </tbody>
         </table>
         <h4 class="doc-h4">Blocks</h4>
-        <p><strong>Category tab</strong> (<code>tab</code>) (limit 5)</p>
+        <p><strong>Category tab</strong> (<code>tab</code>)</p>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
@@ -2885,12 +2952,12 @@
             <tr><td><code>products</code></td><td>product_list</td><td>Products</td></tr>
           </tbody>
         </table>
-        <p><strong>Presets:</strong> <strong>Trending Products</strong></p>
+        <p><strong>Presets:</strong> <strong>Trending products</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-blog-featured-liquid">blog-featured.liquid</h4>
         <div class="section-doc-prose">
-<p><strong>Theme editor:</strong> Featured Article</p>
-        <p>Spotlights a single article from a chosen blog: large image, meta, excerpt, tags, and a fixed “Read article” CTA.</p>
+<p><strong>Theme editor:</strong> Featured article</p>
+<p>Spotlights a single article from a chosen blog: large image, meta, excerpt, tags, and a fixed “Read article” CTA.</p>
         <p><strong>Where to use it:</strong> Top of <code>templates/blog.json</code> above the main blog grid.</p>
         <p><strong>How to customize:</strong> Select the <strong>Blog</strong> source. The section surfaces the blog’s featured article (or latest, per theme logic). Toggle meta, excerpt, and tags. CTA label is fixed in code (<code>Read article</code>).</p>
         <p><strong>Limits:</strong> No blocks. No product snippets.</p>
@@ -2901,17 +2968,18 @@
           <tbody>
             <tr><td><code>blog</code></td><td>blog</td><td>Blog</td></tr>
             <tr><td><code>eyebrow</code></td><td>text</td><td>Eyebrow label. Default: <code>Featured</code></td></tr>
-            <tr><td><code>cta_label</code></td><td>text</td><td>CTA label. Default: <code>Read article</code></td></tr>
-            <tr><td><code>show_meta</code></td><td>checkbox</td><td>Show author &amp; date. Default: <code>true</code></td></tr>
+            <tr><td><code>cta_label</code></td><td>text</td><td>Button label. Default: <code>Read article</code></td></tr>
+            <tr><td><code>show_meta</code></td><td>checkbox</td><td>Show author and date. Default: <code>true</code></td></tr>
             <tr><td><code>show_excerpt</code></td><td>checkbox</td><td>Show excerpt. Default: <code>true</code></td></tr>
             <tr><td><code>show_tags</code></td><td>checkbox</td><td>Show tags. Default: <code>true</code></td></tr>
           </tbody>
         </table>
+        <p><strong>Presets:</strong> <strong>Featured article</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-newsletter-liquid">newsletter.liquid</h4>
         <div class="section-doc-prose">
 <p><strong>Theme editor:</strong> Newsletter</p>
-        <p>Centered email signup band with eyebrow, heading, description, and Shopify customer form. Uses <a href="#snippet-section-title">section-title</a> (newsletter section centers the header via CSS).</p>
+<p>Centered email signup band with eyebrow, heading, description, and Shopify customer form. Uses <a href="#snippet-section-title">section-title</a> (newsletter section centers the header via CSS).</p>
         <p><strong>Where to use it:</strong> Homepage, blog template footer area, or any page needing a list-building strip.</p>
         <p><strong>How to customize:</strong> Edit all copy fields and success message. Form tags contacts as newsletter subscribers. No blocks to add.</p>
         <p><strong>Limits:</strong> Settings-only. Distinct from footer newsletter and <a href="#sections-signup-flyout-liquid">signup-flyout</a>.</p>
@@ -2929,11 +2997,12 @@
             <tr><td><code>note</code></td><td>text</td><td>Fine print. Default: <code>No spam. Unsubscribe anytime.</code></td></tr>
           </tbody>
         </table>
+        <p><strong>Presets:</strong> <strong>Newsletter</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-marquee-liquid">marquee.liquid</h4>
         <div class="section-doc-prose">
 <p><strong>Theme editor:</strong> Marquee</p>
-        <p>Infinite horizontal ticker of short phrases with optional separator character. Good for brand mantras, trust lines, or promo repetition.</p>
+<p>Infinite horizontal ticker of short phrases with optional separator character. Good for brand mantras, trust lines, or promo repetition.</p>
         <p><strong>Where to use it:</strong> Homepage bands or between sections on landing pages.</p>
         <p><strong>How to customize:</strong> Add <strong>Marquee item</strong> blocks with one line of text each. Tune font size (rem), loop speed (seconds), separator (default ✦), and pause-on-hover. Duplicate items in the track for seamless looping.</p>
         <p><strong>Limits:</strong> No <code>max_blocks</code> cap in schema (add enough items to fill wide screens). Preset ships five sample items.</p>
@@ -2942,10 +3011,13 @@
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
-            <tr><td><code>font_size</code></td><td>range</td><td>Font size (rem). Default: <code>1</code>. Range: 0.7–4rem</td></tr>
-            <tr><td><code>speed</code></td><td>range</td><td>Speed (seconds per loop). Default: <code>30</code>. Range: 8–80</td></tr>
+            <tr><td><code>color_scheme</code></td><td>color_scheme</td><td>Color scheme. Default: <code>scheme-1</code></td></tr>
+            <tr><td><code>font_size</code></td><td>select</td><td>Text size. Default: <code>1</code>. Options: <code>0.75</code>, <code>1</code>, <code>1.4</code></td></tr>
+            <tr><td><code>speed</code></td><td>range</td><td>Speed (seconds per loop). Default: <code>30</code></td></tr>
             <tr><td><code>separator</code></td><td>text</td><td>Separator. Default: <code>✦</code></td></tr>
+            <tr><td><code>uppercase</code></td><td>checkbox</td><td>Uppercase text. Default: <code>true</code></td></tr>
             <tr><td><code>pause_on_hover</code></td><td>checkbox</td><td>Pause on hover. Default: <code>true</code></td></tr>
+            <tr><td><code>attach_to_previous</code></td><td>checkbox</td><td>Attach to previous section. Default: <code>false</code></td></tr>
           </tbody>
         </table>
         <h4 class="doc-h4">Blocks</h4>
@@ -2960,8 +3032,8 @@
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-countdown-timer-hero-liquid">countdown-timer-hero.liquid</h4>
         <div class="section-doc-prose">
-<p><strong>Theme editor:</strong> Countdown Timer Hero</p>
-        <p>Launch or sale hero with live countdown timer, headline, subcopy, optional pill CTA, and background image or color. Wrapped in <code>&lt;countdown-timer-hero&gt;</code>.</p>
+<p><strong>Theme editor:</strong> Countdown timer hero</p>
+<p>Launch or sale hero with live countdown timer, headline, subcopy, optional pill CTA, and background image or color. Wrapped in <code>&lt;countdown-timer-hero&gt;</code>.</p>
         <p><strong>Where to use it:</strong> Landing pages and homepage takeovers for timed campaigns.</p>
         <p><strong>How to customize:</strong> Set end date/time fields in section settings. Style overlay, typography, and button. Timer updates in the browser; verify timezone expectations when scheduling launches.</p>
         <p><strong>Limits:</strong> No blocks. Settings-only.</p>
@@ -2970,26 +3042,42 @@
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
-            <tr><td><code>heading</code></td><td>text</td><td>Heading. Default: <code>Limited Edition</code></td></tr>
-            <tr><td><code>description</code></td><td>textarea</td><td>Description. Default: <code>Indulge in a limited-time collection ...</code></td></tr>
-            <tr><td><code>end_date</code></td><td>text</td><td>End date</td></tr>
+            <tr><td><code>autoplay</code></td><td>checkbox</td><td>Auto-advance deals. Default: <code>false</code></td></tr>
+            <tr><td><code>autoplay_delay</code></td><td>range</td><td>Autoplay delay. Default: <code>5</code></td></tr>
             <tr><td><code>show_expired_message</code></td><td>checkbox</td><td>Show message when expired. Default: <code>true</code></td></tr>
             <tr><td><code>expired_message</code></td><td>text</td><td>Expired message. Default: <code>This offer has ended.</code></td></tr>
-            <tr><td><code>cta_label</code></td><td>text</td><td>Button label. Default: <code>Shop Now</code></td></tr>
-            <tr><td><code>cta_url</code></td><td>url</td><td>Button link</td></tr>
-            <tr><td><code>button_style</code></td><td>select</td><td>Button style. Default: <code>primary</code>. Options: <code>primary</code>, <code>secondary</code>, <code>outline</code></td></tr>
-            <tr><td><code>background_image</code></td><td>image_picker</td><td>Background image</td></tr>
+            <tr><td><code>button_style</code></td><td>select</td><td>Default button style. Default: <code>primary</code>. Options: <code>primary</code>, <code>secondary</code>, <code>outline</code></td></tr>
             <tr><td><code>enable_grayscale</code></td><td>checkbox</td><td>Grayscale filter. Default: <code>true</code></td></tr>
-            <tr><td><code>overlay_opacity</code></td><td>range</td><td>Overlay opacity. Default: <code>40</code>. Range: 0–100%</td></tr>
-            <tr><td><code>section_height</code></td><td>select</td><td>Section height. Default: <code>full</code>. Options: <code>full</code>, <code>large</code>, <code>medium</code></td></tr>
+            <tr><td><code>show_decorative_mark</code></td><td>checkbox</td><td>Decorative mark behind image. Default: <code>true</code></td></tr>
+            <tr><td><code>section_height</code></td><td>select</td><td>Banner height. Default: <code>full</code>. Options: <code>full</code>, <code>large</code>, <code>medium</code></td></tr>
           </tbody>
         </table>
-        <p><strong>Presets:</strong> <strong>Countdown Timer Hero</strong></p>
+        <h4 class="doc-h4">Blocks</h4>
+        <p><strong>Deal</strong> (<code>deal</code>)</p>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>heading</code></td><td>text</td><td>Heading. Default: <code>Featured Offer</code></td></tr>
+            <tr><td><code>subtitle</code></td><td>text</td><td>Subtitle. Default: <code>Shop the deal before the countdown en...</code></td></tr>
+            <tr><td><code>discount</code></td><td>text</td><td>Discount badge. Default: <code>-12%</code></td></tr>
+            <tr><td><code>description</code></td><td>textarea</td><td>Description. Default: <code>A handpicked selection at a special p...</code></td></tr>
+            <tr><td><code>end_date</code></td><td>text</td><td>End date</td></tr>
+            <tr><td><code>expired_message</code></td><td>text</td><td>Expired message</td></tr>
+            <tr><td><code>cta_label</code></td><td>text</td><td>Button label. Default: <code>Shop Now</code></td></tr>
+            <tr><td><code>cta_url</code></td><td>url</td><td>Button link</td></tr>
+            <tr><td><code>button_style_override</code></td><td>checkbox</td><td>Override section button style. Default: <code>false</code></td></tr>
+            <tr><td><code>button_style</code></td><td>select</td><td>Button style. Default: <code>primary</code>. Options: <code>primary</code>, <code>secondary</code>, <code>outline</code></td></tr>
+            <tr><td><code>image</code></td><td>image_picker</td><td>Image</td></tr>
+            <tr><td><code>image_fit</code></td><td>select</td><td>Image display. Default: <code>cover</code>. Options: <code>cover</code>, <code>contain</code></td></tr>
+            <tr><td><code>image_alt</code></td><td>text</td><td>Image alt text</td></tr>
+          </tbody>
+        </table>
+        <p><strong>Presets:</strong> <strong>Countdown timer hero</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-image-hotspot-liquid">image-hotspot.liquid</h4>
         <div class="section-doc-prose">
-<p><strong>Theme editor:</strong> Image Hotspot</p>
-        <p>Large lifestyle image with up to ten clickable hotspots. Each hotspot opens a tooltip with title, text, optional product link, or custom URL. Editor preview highlights the active hotspot block.</p>
+<p><strong>Theme editor:</strong> Image hotspot</p>
+<p>Large lifestyle image with up to ten clickable hotspots. Each hotspot opens a tooltip with title, text, optional product link, or custom URL. Editor preview highlights the active hotspot block.</p>
         <p><strong>Where to use it:</strong> Any template via <strong>Add section</strong> in the theme editor. The schema has no <code>enabled_on</code> limit and Grimoire does not include this section in a default preset JSON. Typical placements: homepage (<code>index.json</code>), About (<code>page.about-us.json</code>), a generic Page (<code>page.json</code>), Contact (<code>page.contact.json</code>), or a collection template (<code>collection.json</code>) above or below <a href="#sections-collection-liquid">collection.liquid</a>.</p>
         <p><strong>How to customize:</strong> Upload the base image. Add <strong>Hotspot</strong> blocks and position pins in the theme editor (percentage-based coordinates). Choose product-linked or custom content per hotspot. A <code>&lt;noscript&gt;</code> list fallback lists items when JS is off.</p>
         <p><strong>Limits:</strong> <strong>10</strong> hotspot blocks max (<code>max_blocks: 10</code>).</p>
@@ -2998,15 +3086,9 @@
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
-            <tr><td><code>eyebrow</code></td><td>text</td><td>Eyebrow text. Default: <code>Featured</code></td></tr>
-            <tr><td><code>heading</code></td><td>text</td><td>Heading. Default: <code>Shop the look</code></td></tr>
-            <tr><td><code>description</code></td><td>textarea</td><td>Description. Default: <code>Click the pins on the image to discov...</code></td></tr>
-            <tr><td><code>cta_label</code></td><td>text</td><td>Button label. Default: <code>Explore collection</code></td></tr>
-            <tr><td><code>cta_url</code></td><td>url</td><td>Button link</td></tr>
             <tr><td><code>image</code></td><td>image_picker</td><td>Image</td></tr>
             <tr><td><code>image_alt</code></td><td>text</td><td>Image alt text</td></tr>
-            <tr><td><code>section_height</code></td><td>select</td><td>Section height. Default: <code>medium</code>. Options: <code>small</code>, <code>medium</code>, <code>large</code></td></tr>
-            <tr><td><code>overlay_opacity</code></td><td>range</td><td>Overlay opacity. Default: <code>0</code>. Range: 0–80%</td></tr>
+            <tr><td><code>overlay_opacity</code></td><td>range</td><td>Overlay opacity. Default: <code>0</code></td></tr>
           </tbody>
         </table>
         <h4 class="doc-h4">Blocks</h4>
@@ -3014,21 +3096,52 @@
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
-            <tr><td><code>position_x</code></td><td>range</td><td>Horizontal position. Default: <code>50</code>. Range: 0–100%</td></tr>
-            <tr><td><code>position_y</code></td><td>range</td><td>Vertical position. Default: <code>50</code>. Range: 0–100%</td></tr>
-            <tr><td><code>tooltip_type</code></td><td>select</td><td>Tooltip type. Default: <code>product</code>. Options: <code>product</code>, <code>custom</code></td></tr>
+            <tr><td><code>position_x</code></td><td>range</td><td>Horizontal position. Default: <code>50</code></td></tr>
+            <tr><td><code>position_y</code></td><td>range</td><td>Vertical position. Default: <code>50</code></td></tr>
             <tr><td><code>product</code></td><td>product</td><td>Product</td></tr>
-            <tr><td><code>custom_label</code></td><td>text</td><td>Label</td></tr>
-            <tr><td><code>custom_description</code></td><td>textarea</td><td>Description</td></tr>
-            <tr><td><code>custom_link</code></td><td>url</td><td>Link URL</td></tr>
           </tbody>
         </table>
-        <p><strong>Presets:</strong> <strong>Image Hotspot</strong></p>
+        <p><strong>Presets:</strong> <strong>Image hotspot</strong></p>
+        <hr class="doc-divider">
+        <h4 class="doc-h4" id="sections-shoppable-image-liquid">shoppable-image.liquid</h4>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> Shoppable image</p>
+        <p>One lifestyle photo with clickable hotspots pinned to the products in it. Shoppers tap a dot to see the product and add it to the cart without leaving the page.</p>
+        <p><strong>Where to use it:</strong> Any template. Grimoire&#x27;s preset uses it on the home page as a lookbook. It cannot go in the header, footer, or promotional section groups (<code>disabled_on</code>).</p>
+        <p><strong>How to customize:</strong> Upload the image, then add a <strong>Hotspot</strong> block per product. Position each dot with the horizontal and vertical percentage fields — 0% is the left or top edge, 100% the right or bottom. Watch the preview as you drag the values so a dot never lands on top of a label.</p>
+        <p><strong>Limits:</strong> Up to <strong>8</strong> hotspots (<code>max_blocks: 8</code>). With no image the section shows placeholder media, and with no products assigned it renders as a plain image — the product panel only appears once at least one hotspot has a product.</p>
+        </div>
+        <h4 class="doc-h4">Section settings</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>eyebrow</code></td><td>text</td><td>Eyebrow. Default: <code>Curated Together</code></td></tr>
+            <tr><td><code>heading</code></td><td>text</td><td>Heading. Default: <code>Shop the Look</code></td></tr>
+            <tr><td><code>image</code></td><td>image_picker</td><td>Image</td></tr>
+            <tr><td><code>image_alt</code></td><td>text</td><td>Image alt text</td></tr>
+            <tr><td><code>overlay_opacity</code></td><td>range</td><td>Overlay opacity. Default: <code>0</code></td></tr>
+            <tr><td><code>layout_reverse</code></td><td>checkbox</td><td>Swap columns. Default: <code>false</code></td></tr>
+            <tr><td><code>show_quick_view</code></td><td>checkbox</td><td>Enable quick view. Default: <code>true</code></td></tr>
+            <tr><td><code>btn_label</code></td><td>text</td><td>Button label. Default: <code>View all</code></td></tr>
+            <tr><td><code>btn_url</code></td><td>url</td><td>Button link</td></tr>
+          </tbody>
+        </table>
+        <h4 class="doc-h4">Blocks</h4>
+        <p><strong>Product hotspot</strong> (<code>product_hotspot</code>)</p>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>position_x</code></td><td>range</td><td>Horizontal position. Default: <code>50</code></td></tr>
+            <tr><td><code>position_y</code></td><td>range</td><td>Vertical position. Default: <code>50</code></td></tr>
+            <tr><td><code>product</code></td><td>product</td><td>Product</td></tr>
+          </tbody>
+        </table>
+        <p><strong>Presets:</strong> <strong>Shoppable image</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-product-liquid">product.liquid</h4>
         <div class="section-doc-prose">
 <p><strong>Theme editor:</strong> Product</p>
-        <p>Main product template buy box: media gallery (images, video, 3D), variant picker, quantity, buy buttons, description, pickup availability, and share. Blocks are reorderable in the editor.</p>
+<p>Main product template buy box: media gallery (images, video, 3D), variant picker, quantity, buy buttons, description, pickup availability, and share. Blocks are reorderable in the editor.</p>
         <p><strong>What it renders:</strong> The current <code>product</code> object (variants, media, price, inventory). Schema restricts it to the product template (<code>enabled_on: product</code>). In the default preset it is the <code>main</code> section in <code>product.json</code>. Sibling sections on that template (breadcrumb, product-benefits, recommendations, recently-viewed) sit above or below this buy box. You do not reuse it on collection or homepage templates.</p>
         <p><strong>How to customize:</strong> Drag blocks in the sidebar to change layout order (for example move <strong>Description</strong> above <strong>Price</strong>). Each block type allows <strong>one</strong> instance. Variant picker supports radio or dropdown style. Media settings control gallery layout and zoom.</p>
         <p><strong>Limits:</strong> Blocks (each limit 1): title, price, variant_picker, quantity_selector, buy_buttons, description, pickup_availability, share. Outputs JSON-LD via Shopify’s product structured data filter in the layout/snippet layer.</p>
@@ -3041,44 +3154,123 @@
             <tr><td><code>show_vendor</code></td><td>checkbox</td><td>Show vendor. Default: <code>true</code></td></tr>
             <tr><td><code>show_type</code></td><td>checkbox</td><td>Show product type. Default: <code>false</code></td></tr>
             <tr><td><code>show_sku</code></td><td>checkbox</td><td>Show SKU. Default: <code>true</code></td></tr>
-            <tr><td><code>show_quantity_selector</code></td><td>checkbox</td><td>Show quantity selector. Default: <code>true</code></td></tr>
-            <tr><td><code>show_share_buttons</code></td><td>checkbox</td><td>Show share button. Default: <code>true</code></td></tr>
             <tr><td><code>enable_sticky_info</code></td><td>checkbox</td><td>Sticky product info on desktop. Default: <code>true</code></td></tr>
           </tbody>
         </table>
         <h4 class="doc-h4">Blocks</h4>
-        <p><strong>Title</strong> (<code>title</code>) (limit 1)</p>
-        <p><strong>Price</strong> (<code>price</code>) (limit 1)</p>
-        <p><strong>Variant picker</strong> (<code>variant_picker</code>) (limit 1)</p>
+        <p><strong>Title</strong> (<code>title</code>)</p>
+        <p><strong>Price</strong> (<code>price</code>)</p>
+        <p><strong>Variant picker</strong> (<code>variant_picker</code>)</p>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
             <tr><td><code>picker_type</code></td><td>select</td><td>Style. Default: <code>radio</code>. Options: <code>radio</code>, <code>select</code></td></tr>
           </tbody>
         </table>
-        <p><strong>Quantity selector</strong> (<code>quantity_selector</code>) (limit 1)</p>
-        <p><strong>Pickup availability</strong> (<code>pickup_availability</code>) (limit 1)</p>
-        <p><strong>Buy buttons</strong> (<code>buy_buttons</code>) (limit 1)</p>
+        <p><strong>Quantity selector</strong> (<code>quantity_selector</code>)</p>
+        <p><strong>Pickup availability</strong> (<code>pickup_availability</code>)</p>
+        <p><strong>Payment icons</strong> (<code>payment_icons</code>)</p>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>label</code></td><td>text</td><td>Label. Default: <code>Accepted payment methods</code></td></tr>
+          </tbody>
+        </table>
+        <p><strong>Buy buttons</strong> (<code>buy_buttons</code>)</p>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
             <tr><td><code>show_dynamic_checkout</code></td><td>checkbox</td><td>Show dynamic checkout button. Default: <code>true</code></td></tr>
           </tbody>
         </table>
-        <p><strong>Description</strong> (<code>description</code>) (limit 1)</p>
-        <p><strong>Share</strong> (<code>share</code>) (limit 1)</p>
+        <p><strong>Description</strong> (<code>description</code>)</p>
+        <p><strong>Share</strong> (<code>share</code>)</p>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
             <tr><td><code>share_label</code></td><td>text</td><td>Label. Default: <code>Share:</code></td></tr>
           </tbody>
         </table>
+        <p><strong>Custom Liquid</strong> (<code>custom_liquid</code>)</p>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>custom_liquid</code></td><td>liquid</td><td>Custom Liquid</td></tr>
+          </tbody>
+        </table>
+        <p><strong>App blocks</strong> (<code>@app</code>) — merchants can drop in blocks from any installed app.</p>
         <p><strong>Presets:</strong> <strong>Product</strong></p>
+        <hr class="doc-divider">
+        <h4 class="doc-h4" id="sections-featured-product-liquid">featured-product.liquid</h4>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> Featured product</p>
+        <p>Puts one product, with its full buy experience, anywhere on the store. Same block system as the main product page, so the layout is yours to arrange.</p>
+        <p><strong>Where to use it:</strong> Any template. Grimoire&#x27;s preset places it on the home page to spotlight a hero product. Add it from <strong>Add section</strong> in the theme editor. It cannot go in the header, footer, or promotional section groups (<code>disabled_on</code>).</p>
+        <p><strong>How to customize:</strong> Pick the product in section settings, then add and reorder blocks to build the buy panel: <strong>Title</strong>, <strong>Price</strong>, <strong>Variant picker</strong>, <strong>Quantity selector</strong>, <strong>Buy buttons</strong>, <strong>Description</strong>, <strong>Pickup availability</strong>, <strong>Payment icons</strong> and <strong>Share</strong>. Drop in <strong>Custom Liquid</strong> for your own markup, or an app block for anything an installed app provides.</p>
+        <p><strong>Limits:</strong> One product per section — add the section again to feature a second. No cap on block count. If no product is selected, the section falls back to placeholder media so the layout never collapses.</p>
+        </div>
+        <h4 class="doc-h4">Section settings</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>eyebrow</code></td><td>text</td><td>Eyebrow. Default: <code>Featured</code></td></tr>
+            <tr><td><code>heading</code></td><td>text</td><td>Heading. Default: <code>Our Featured Product</code></td></tr>
+            <tr><td><code>product</code></td><td>product</td><td>Product</td></tr>
+            <tr><td><code>image_position</code></td><td>select</td><td>Image position. Default: <code>left</code>. Options: <code>left</code>, <code>right</code></td></tr>
+            <tr><td><code>show_vendor</code></td><td>checkbox</td><td>Show vendor. Default: <code>true</code></td></tr>
+            <tr><td><code>show_sku</code></td><td>checkbox</td><td>Show SKU. Default: <code>false</code></td></tr>
+            <tr><td><code>image_ratio</code></td><td>select</td><td>Image ratio. Default: <code>3/4</code>. Options: <code>3/4</code>, <code>1/1</code>, <code>4/3</code></td></tr>
+            <tr><td><code>featured_above_fold</code></td><td>checkbox</td><td>Image above the fold. Default: <code>false</code></td></tr>
+          </tbody>
+        </table>
+        <h4 class="doc-h4">Blocks</h4>
+        <p><strong>Title</strong> (<code>title</code>)</p>
+        <p><strong>Price</strong> (<code>price</code>)</p>
+        <p><strong>Variant picker</strong> (<code>variant_picker</code>)</p>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>picker_type</code></td><td>select</td><td>Style. Default: <code>radio</code>. Options: <code>radio</code>, <code>select</code></td></tr>
+          </tbody>
+        </table>
+        <p><strong>Quantity selector</strong> (<code>quantity_selector</code>)</p>
+        <p><strong>Buy buttons</strong> (<code>buy_buttons</code>)</p>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>show_dynamic_checkout</code></td><td>checkbox</td><td>Show dynamic checkout button. Default: <code>true</code></td></tr>
+          </tbody>
+        </table>
+        <p><strong>Description</strong> (<code>description</code>)</p>
+        <p><strong>Pickup availability</strong> (<code>pickup_availability</code>)</p>
+        <p><strong>Payment icons</strong> (<code>payment_icons</code>)</p>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>label</code></td><td>text</td><td>Label. Default: <code>Accepted payment methods</code></td></tr>
+          </tbody>
+        </table>
+        <p><strong>Share</strong> (<code>share</code>)</p>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>share_label</code></td><td>text</td><td>Label. Default: <code>Share:</code></td></tr>
+          </tbody>
+        </table>
+        <p><strong>Custom Liquid</strong> (<code>custom_liquid</code>)</p>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>custom_liquid</code></td><td>liquid</td><td>Custom Liquid</td></tr>
+          </tbody>
+        </table>
+        <p><strong>App blocks</strong> (<code>@app</code>) — merchants can drop in blocks from any installed app.</p>
+        <p><strong>Presets:</strong> <strong>Featured product</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-collection-liquid">collection.liquid</h4>
         <div class="section-doc-prose">
-<p><strong>Theme editor:</strong> Main Collection</p>
-        <p>Collection listing page (PLP): filters, sort, responsive product grid, pagination, and quick-view modals. Renders <a href="#snippet-product-card">product-card</a> with <code>opens_modal: true</code>.</p>
+<p><strong>Theme editor:</strong> Collection</p>
+<p>Collection listing page (PLP): filters, sort, responsive product grid, pagination, and quick-view modals. Renders <a href="#snippet-product-card">product-card</a> with <code>opens_modal: true</code>.</p>
         <p><strong>What it renders:</strong> The active <code>collection</code> and its products for the URL the shopper opened. It is the main PLP body in <code>collection.json</code>, not a marketing block you drop elsewhere. Do not confuse with <a href="#sections-collections-liquid">collections.liquid</a>, which is a homepage category carousel with its own blocks.</p>
         <p><strong>How to customize:</strong> Configure filter groups and grid columns in section settings. Header via <a href="#snippet-section-title">section-title</a>. One <a href="#snippet-product-modal">product-modal</a> per section. Optional <code>@app</code> blocks below the grid for app widgets.</p>
         <p><strong>Limits:</strong> Product grid is Liquid-driven from the collection object, not merchant-added product blocks. Filter drawer locks body scroll when open.</p>
@@ -3089,19 +3281,61 @@
           <tbody>
             <tr><td><code>banner_height</code></td><td>select</td><td>Banner height. Default: <code>medium</code>. Options: <code>small</code>, <code>medium</code>, <code>large</code></td></tr>
             <tr><td><code>show_description</code></td><td>checkbox</td><td>Show collection description. Default: <code>true</code></td></tr>
-            <tr><td><code>products_per_page</code></td><td>range</td><td>Products per page. Default: <code>24</code>. Range: 8–48</td></tr>
+            <tr><td><code>banner_eyebrow</code></td><td>text</td><td>Banner eyebrow label. Default: <code>Collection</code></td></tr>
+            <tr><td><code>products_per_page</code></td><td>range</td><td>Products per page. Default: <code>24</code></td></tr>
             <tr><td><code>columns_desktop</code></td><td>select</td><td>Columns (desktop). Default: <code>4</code>. Options: <code>3</code>, <code>4</code>, <code>5</code></td></tr>
+            <tr><td><code>empty_message</code></td><td>text</td><td>Empty collection message. Default: <code>No products found in this collection.</code></td></tr>
             <tr><td><code>show_filters</code></td><td>checkbox</td><td>Enable filters. Default: <code>true</code></td></tr>
+            <tr><td><code>filters_heading</code></td><td>text</td><td>Filters drawer heading. Default: <code>Filters</code></td></tr>
             <tr><td><code>show_sort</code></td><td>checkbox</td><td>Enable sort by. Default: <code>true</code></td></tr>
           </tbody>
         </table>
         <h4 class="doc-h4">Blocks</h4>
-        <p><strong>@app</strong> (<code>@app</code>)</p>
+        <p><strong>Custom Liquid</strong> (<code>custom_liquid</code>)</p>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>custom_liquid</code></td><td>liquid</td><td>Custom Liquid</td></tr>
+          </tbody>
+        </table>
+        <p><strong>App blocks</strong> (<code>@app</code>) — merchants can drop in blocks from any installed app.</p>
+        <hr class="doc-divider">
+        <h4 class="doc-h4" id="sections-list-collections-liquid">list-collections.liquid</h4>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> Collection list</p>
+        <p>Automatic grid of every collection in the store, paginated. This is what powers the <code>/collections</code> page.</p>
+        <p><strong>Where to use it:</strong> The <code>list-collections.json</code> template, which Shopify serves at <code>/collections</code>. You can also add it to any other template from <strong>Add section</strong>. It cannot go in the header, footer, or promotional section groups (<code>disabled_on</code>).</p>
+        <p><strong>How to customize:</strong> Set how many collections appear per page and how many columns the grid uses on desktop; the grid drops to three columns on tablet and two on mobile on its own. Toggle the product count under each name. Header via <a href="#snippet-section-title">section-title</a>.</p>
+        <p><strong>Limits:</strong> Lists collections automatically — there is nothing to curate here, and no way to reorder or exclude one. For a hand-picked, ordered set use <a href="#sections-collections-liquid">collections</a> instead. Each card uses the collection&#x27;s featured image; if a collection has none, Shopify falls back to the first product&#x27;s image, and an empty collection gets a placeholder. Runs without JavaScript.</p>
+        </div>
+        <h4 class="doc-h4">Section settings</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>eyebrow</code></td><td>text</td><td>Eyebrow. Default: <code>Collection</code></td></tr>
+            <tr><td><code>heading</code></td><td>text</td><td>Heading. Default: <code>Shop by category</code></td></tr>
+            <tr><td><code>columns</code></td><td>select</td><td>Columns on desktop. Default: <code>4</code>. Options: <code>3</code>, <code>4</code></td></tr>
+            <tr><td><code>image_ratio</code></td><td>select</td><td>Image ratio. Default: <code>portrait</code>. Options: <code>portrait</code>, <code>square</code>, <code>landscape</code></td></tr>
+            <tr><td><code>arrow_style</code></td><td>select</td><td>Arrow style. Default: <code>diagonal</code>. Options: <code>diagonal</code>, <code>chevron</code>, <code>none</code></td></tr>
+            <tr><td><code>show_product_count</code></td><td>checkbox</td><td>Show product count. Default: <code>true</code></td></tr>
+            <tr><td><code>collections_per_page</code></td><td>range</td><td>Collections per page. Default: <code>12</code></td></tr>
+          </tbody>
+        </table>
+        <h4 class="doc-h4">Blocks</h4>
+        <p><strong>Custom Liquid</strong> (<code>custom_liquid</code>)</p>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>custom_liquid</code></td><td>liquid</td><td>Custom Liquid</td></tr>
+          </tbody>
+        </table>
+        <p><strong>App blocks</strong> (<code>@app</code>) — merchants can drop in blocks from any installed app.</p>
+        <p><strong>Presets:</strong> <strong>Collection list</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-cart-liquid">cart.liquid</h4>
         <div class="section-doc-prose">
 <p><strong>Theme editor:</strong> Cart</p>
-        <p>Full cart page: line items, quantity updates, cart note, subtotal, checkout button, and empty state. Header uses <a href="#snippet-section-title">section-title</a> with <code>h1</code> for SEO.</p>
+<p>Full cart page: line items, quantity updates, cart note, subtotal, checkout button, and empty state. Header uses <a href="#snippet-section-title">section-title</a> with <code>h1</code> for SEO.</p>
         <p><strong>What it renders:</strong> The Shopify <code>cart</code> object at <code>/cart</code> (main section in <code>cart.json</code>). The header <code>cart-sidebar</code> is a separate UI over the same cart data for quick edits. Shoppers who need the full checkout flow land here; the drawer is for mini-cart actions.</p>
         <p><strong>How to customize:</strong> Edit eyebrow and heading. Line items and quantities follow Shopify’s cart API. Configure empty-state messaging in settings.</p>
         <p><strong>Limits:</strong> No blocks. Not interchangeable with the header drawer.</p>
@@ -3117,8 +3351,8 @@
             <tr><td><code>continue_link_label</code></td><td>text</td><td>Continue shopping label. Default: <code>← Continue browsing</code></td></tr>
             <tr><td><code>show_order_note</code></td><td>checkbox</td><td>Show order note field. Default: <code>true</code></td></tr>
             <tr><td><code>note_placeholder</code></td><td>text</td><td>Note field placeholder. Default: <code>Special instructions or gift notes</code></td></tr>
-            <tr><td><code>empty_title</code></td><td>text</td><td>Empty cart title. Default: <code>Your cart is empty</code></td></tr>
-            <tr><td><code>empty_sub</code></td><td>text</td><td>Empty cart message. Default: <code>Add products to your cart to continue.</code></td></tr>
+            <tr><td><code>empty_title</code></td><td>text</td><td>Empty cart heading. Default: <code>Your cart is empty</code></td></tr>
+            <tr><td><code>empty_sub</code></td><td>text</td><td>Empty cart message. Default: <code>Add products to your cart to continue...</code></td></tr>
             <tr><td><code>empty_link_label</code></td><td>text</td><td>Empty cart button label. Default: <code>Continue shopping</code></td></tr>
           </tbody>
         </table>
@@ -3126,7 +3360,7 @@
         <h4 class="doc-h4" id="sections-search-liquid">search.liquid</h4>
         <div class="section-doc-prose">
 <p><strong>Theme editor:</strong> Search</p>
-        <p>Search results page with query field, results count, and product grid using the same card + quick-view pattern as collection.</p>
+<p>Search results page with query field, results count, and product grid using the same card + quick-view pattern as collection.</p>
         <p><strong>Two search surfaces:</strong> (1) <strong>Header</strong> — <code>&lt;search-overlay&gt;</code> in <a href="#sections-header-liquid">header.liquid</a> for predictive search while browsing; submits to <code>/search</code>. (2) <strong>This section</strong> — the full results layout at <code>/search?q=…</code> driven by <code>search</code> and <code>search.results</code> in <code>search.json</code>. Customize overlay copy in the header section. Customize results-page labels here.</p>
         <p><strong>How to customize:</strong> Tune labels and empty-state copy. Product results render via <a href="#snippet-product-card">product-card</a> and <a href="#snippet-product-modal">product-modal</a>. Non-product results depend on Shopify search settings.</p>
         <p><strong>Limits:</strong> No blocks in schema.</p>
@@ -3135,17 +3369,20 @@
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
-            <tr><td><code>eyebrow</code></td><td>text</td><td>Eyebrow. Default: <code>Search</code></td></tr>
+            <tr><td><code>eyebrow</code></td><td>text</td><td>Eyebrow label. Default: <code>Search</code></td></tr>
             <tr><td><code>heading</code></td><td>text</td><td>Heading. Default: <code>What are you looking for?</code></td></tr>
             <tr><td><code>placeholder</code></td><td>text</td><td>Input placeholder. Default: <code>Search products, articles, pages…</code></td></tr>
             <tr><td><code>button_label</code></td><td>text</td><td>Button label. Default: <code>Search</code></td></tr>
+            <tr><td><code>show_filters</code></td><td>checkbox</td><td>Enable filters. Default: <code>true</code></td></tr>
+            <tr><td><code>filters_heading</code></td><td>text</td><td>Filters drawer heading. Default: <code>Filters</code></td></tr>
+            <tr><td><code>show_sort</code></td><td>checkbox</td><td>Enable sort by. Default: <code>true</code></td></tr>
           </tbody>
         </table>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-product-recommendations-liquid">product-recommendations.liquid</h4>
         <div class="section-doc-prose">
-<p><strong>Theme editor:</strong> Product Recommendations</p>
-        <p>Shopify-powered related products carousel below the buy box. Uses recommendation intent from Shopify with a merchant-controlled product count.</p>
+<p><strong>Theme editor:</strong> Product recommendations</p>
+<p>Shopify-powered related products carousel below the buy box. Uses recommendation intent from Shopify with a merchant-controlled product count.</p>
         <p><strong>Where to use it:</strong> <code>templates/product.json</code> only (<code>enabled_on: product</code>).</p>
         <p><strong>How to customize:</strong> Set eyebrow and heading. Choose how many products to show (2–10). Section fetches recommendations via the Product Recommendations API; cards open quick view.</p>
         <p><strong>Limits:</strong> Snippets: section-title, product-carousel, product-card, product-modal. No blocks.</p>
@@ -3154,18 +3391,18 @@
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
-            <tr><td><code>eyebrow</code></td><td>text</td><td>Eyebrow text. Default: <code>From the Grimoire</code></td></tr>
-            <tr><td><code>heading</code></td><td>text</td><td>Heading. Default: <code>Echoes You May Seek</code></td></tr>
-            <tr><td><code>count</code></td><td>range</td><td>Number of products. Default: <code>4</code>. Range: 2–10</td></tr>
+            <tr><td><code>eyebrow</code></td><td>text</td><td>Eyebrow. Default: <code>Recommended</code></td></tr>
+            <tr><td><code>heading</code></td><td>text</td><td>Heading. Default: <code>You May Also Like</code></td></tr>
+            <tr><td><code>count</code></td><td>range</td><td>Number of products. Default: <code>4</code></td></tr>
             <tr><td><code>intent</code></td><td>select</td><td>Recommendation type. Default: <code>related</code>. Options: <code>related</code>, <code>complementary</code></td></tr>
           </tbody>
         </table>
-        <p><strong>Presets:</strong> <strong>Product Recommendations</strong></p>
+        <p><strong>Presets:</strong> <strong>Product recommendations</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-recently-viewed-liquid">recently-viewed.liquid</h4>
         <div class="section-doc-prose">
-<p><strong>Theme editor:</strong> Recently Viewed</p>
-        <p>Per-visitor product strip based on <code>localStorage</code> browsing history. Cards are built in JavaScript from <code>/products/{handle}.js</code>, not Liquid loops.</p>
+<p><strong>Theme editor:</strong> Recently viewed</p>
+<p>Per-visitor product strip based on <code>localStorage</code> browsing history. Cards are built in JavaScript from <code>/products/{handle}.js</code>, not Liquid loops.</p>
         <p><strong>Where to use it:</strong> Product template footer (<code>enabled_on: product</code>).</p>
         <p><strong>How to customize:</strong> Set eyebrow, heading, and max products (2–8). Current product is excluded automatically. Section stays hidden until at least one valid handle exists.</p>
         <p><strong>Limits:</strong> <strong>One</strong> section instance per template (<code>limit: 1</code>). Snippets: section-title, product-carousel (empty shell filled by JS), product-card (hidden style loader), product-modal. Quick view enabled on JS-built cards.</p>
@@ -3174,17 +3411,17 @@
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
-            <tr><td><code>eyebrow</code></td><td>text</td><td>Eyebrow text. Default: <code>Your Path</code></td></tr>
+            <tr><td><code>eyebrow</code></td><td>text</td><td>Eyebrow label. Default: <code>Your Path</code></td></tr>
             <tr><td><code>heading</code></td><td>text</td><td>Heading. Default: <code>Recently Witnessed</code></td></tr>
-            <tr><td><code>count</code></td><td>range</td><td>Max products to show. Default: <code>4</code>. Range: 2–8</td></tr>
+            <tr><td><code>count</code></td><td>range</td><td>Max products to show. Default: <code>4</code></td></tr>
           </tbody>
         </table>
-        <p><strong>Presets:</strong> <strong>Recently Viewed</strong></p>
+        <p><strong>Presets:</strong> <strong>Recently viewed</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-product-benefits-liquid">product-benefits.liquid</h4>
         <div class="section-doc-prose">
-<p><strong>Theme editor:</strong> Product Benefits</p>
-        <p>Row of trust icons (shipping, returns, payment, etc.) under the product story. Each benefit is a block with icon picker, title, and short text.</p>
+<p><strong>Theme editor:</strong> Product benefits</p>
+<p>Row of trust icons (shipping, returns, payment, etc.) under the product story. Each benefit is a block with icon picker, title, and short text.</p>
         <p><strong>Where to use it:</strong> Product template (<code>enabled_on: product</code>).</p>
         <p><strong>How to customize:</strong> Add up to <strong>8</strong> <strong>Benefit</strong> blocks. Reorder in the editor. Section hides entirely if no blocks are present.</p>
         <p><strong>Limits:</strong> <strong>1</strong> section per product template (<code>limit: 1</code>). Up to <strong>8</strong> benefit blocks. Static CSS only (no JavaScript).</p>
@@ -3193,26 +3430,26 @@
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
-            <tr><td><code>columns</code></td><td>range</td><td>Columns. Default: <code>2</code>. Range: 2–4</td></tr>
+            <tr><td><code>columns</code></td><td>range</td><td>Columns. Default: <code>2</code></td></tr>
           </tbody>
         </table>
         <h4 class="doc-h4">Blocks</h4>
-        <p><strong>Benefit</strong> (<code>benefit</code>) (limit 8)</p>
+        <p><strong>Benefit</strong> (<code>benefit</code>)</p>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
-            <tr><td><code>icon</code></td><td>select</td><td>Icon. Default: <code>truck</code>. Options: <code>truck</code>, <code>shield</code>, <code>leaf</code>, <code>star</code>, <code>clock</code>, <code>tag</code>, <code>refresh</code>, <code>lock</code>, <code>…</code></td></tr>
+            <tr><td><code>icon</code></td><td>select</td><td>Icon. Default: <code>truck</code>. Options: <code>truck</code>, <code>shield</code>, <code>leaf</code>, <code>star</code>, <code>clock</code>, <code>tag</code>, <code>refresh</code>, <code>lock</code>, <code>custom</code></td></tr>
             <tr><td><code>custom_svg</code></td><td>textarea</td><td>Custom SVG</td></tr>
             <tr><td><code>label</code></td><td>text</td><td>Label. Default: <code>Label</code></td></tr>
             <tr><td><code>value</code></td><td>text</td><td>Value. Default: <code>Value</code></td></tr>
           </tbody>
         </table>
-        <p><strong>Presets:</strong> <strong>Product Benefits</strong></p>
+        <p><strong>Presets:</strong> <strong>Product benefits</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-custom-section-liquid">custom-section.liquid</h4>
         <div class="section-doc-prose">
 <p><strong>Theme editor:</strong> Custom section</p>
-        <p>Full page-builder: stack <code>cs-*</code> blocks and nested <a href="#blocks-group">group</a> rows with optional full-bleed background image, section title, width, and spacing controls.</p>
+<p>Full page-builder: stack <code>cs-*</code> blocks and nested <a href="#blocks-group">group</a> rows with optional full-bleed background image, section title, width, and spacing controls.</p>
         <p><strong>Where to use it:</strong> Any template (landing pages, about, contact, homepage additions). Default Grimoire preset demonstrates a story + CTA layout.</p>
         <p><strong>How to customize:</strong> Toggle <strong>Show section title</strong> for eyebrow/heading (via <a href="#snippet-section-title">section-title</a>). Add blocks from the drawer (heading, text, image, video, button, etc.). Use <strong>Group</strong> for rows of icon items or buttons. Set max width, alignment, padding, and <strong>Blocks gap</strong>.</p>
         <p><strong>Limits:</strong> <strong>16</strong> top-level blocks max. Allowed types: all eleven <code>cs-*</code> blocks plus <code>group</code>. Block settings documented under <a href="#blocks">Blocks</a>.</p>
@@ -3221,28 +3458,39 @@
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
-            <tr><td><code>show_title</code></td><td>checkbox</td><td>Show section title. Default: <code>false</code></td></tr>
+            <tr><td><code>show_title</code></td><td>checkbox</td><td>Show section heading. Default: <code>false</code></td></tr>
             <tr><td><code>eyebrow</code></td><td>text</td><td>Eyebrow label</td></tr>
             <tr><td><code>heading</code></td><td>text</td><td>Heading</td></tr>
             <tr><td><code>heading_tag</code></td><td>select</td><td>Heading tag. Default: <code>h2</code>. Options: <code>h1</code>, <code>h2</code>, <code>h3</code></td></tr>
             <tr><td><code>max_width</code></td><td>select</td><td>Content width. Default: <code>normal</code>. Options: <code>narrow</code>, <code>normal</code>, <code>full</code></td></tr>
-            <tr><td><code>content_align</code></td><td>select</td><td>Content alignment. Default: <code>center</code>. Options: <code>flex-start</code>, <code>center</code>, <code>flex-end</code></td></tr>
-            <tr><td><code>blocks_gap</code></td><td>range</td><td>Gap between blocks. Default: <code>16</code>. Range: 0–64px</td></tr>
-            <tr><td><code>margin_top</code></td><td>range</td><td>Margin top. Default: <code>0</code>. Range: 0–120px</td></tr>
-            <tr><td><code>padding_top</code></td><td>range</td><td>Padding top. Default: <code>60</code>. Range: 0–160px</td></tr>
-            <tr><td><code>padding_bottom</code></td><td>range</td><td>Padding bottom. Default: <code>60</code>. Range: 0–160px</td></tr>
+            <tr><td><code>content_align</code></td><td>select</td><td>Content alignment. Default: <code>center</code>. Options: <code>left</code>, <code>center</code>, <code>right</code></td></tr>
+            <tr><td><code>blocks_gap</code></td><td>range</td><td>Gap between blocks. Default: <code>16</code></td></tr>
+            <tr><td><code>margin_top</code></td><td>range</td><td>Margin top. Default: <code>0</code></td></tr>
+            <tr><td><code>padding_top</code></td><td>range</td><td>Padding top. Default: <code>60</code></td></tr>
+            <tr><td><code>padding_bottom</code></td><td>range</td><td>Padding bottom. Default: <code>60</code></td></tr>
             <tr><td><code>background_image</code></td><td>image_picker</td><td>Background image</td></tr>
-            <tr><td><code>overlay_opacity</code></td><td>range</td><td>Overlay opacity. Default: <code>40</code>. Range: 0–100%</td></tr>
+            <tr><td><code>overlay_opacity</code></td><td>range</td><td>Overlay opacity. Default: <code>40</code></td></tr>
           </tbody>
         </table>
         <h4 class="doc-h4">Blocks</h4>
-        <p>Allowed types: <code>cs-button</code>, <code>cs-heading</code>, <code>cs-image</code>, <code>cs-subheading</code>, <code>cs-text</code>, <code>cs-spacer</code>, <code>cs-divider</code>, <code>cs-video</code>, <code>cs-icon-item</code>, <code>cs-badge</code>, <code>cs-quote</code>, <code>group</code>. See the <a href="#blocks">Blocks</a> chapter for settings on each <code>cs-*</code> primitive.</p>
-        <p><strong>Presets:</strong> <strong>t:general.custom_section</strong></p>
+        <p><strong>cs-button</strong> (<code>cs-button</code>)</p>
+        <p><strong>cs-heading</strong> (<code>cs-heading</code>)</p>
+        <p><strong>cs-image</strong> (<code>cs-image</code>)</p>
+        <p><strong>cs-subheading</strong> (<code>cs-subheading</code>)</p>
+        <p><strong>cs-text</strong> (<code>cs-text</code>)</p>
+        <p><strong>cs-spacer</strong> (<code>cs-spacer</code>)</p>
+        <p><strong>cs-divider</strong> (<code>cs-divider</code>)</p>
+        <p><strong>cs-video</strong> (<code>cs-video</code>)</p>
+        <p><strong>cs-icon-item</strong> (<code>cs-icon-item</code>)</p>
+        <p><strong>cs-badge</strong> (<code>cs-badge</code>)</p>
+        <p><strong>cs-quote</strong> (<code>cs-quote</code>)</p>
+        <p><strong>group</strong> (<code>group</code>)</p>
+        <p><strong>Presets:</strong> <strong>Custom section</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-custom-liquid-liquid">custom-liquid.liquid</h4>
         <div class="section-doc-prose">
 <p><strong>Theme editor:</strong> Custom Liquid</p>
-        <p>Raw Liquid or HTML injection for app widgets, tracking snippets, or advanced markup. No block system.</p>
+<p>Raw Liquid or HTML injection for app widgets, tracking snippets, or advanced markup. No block system.</p>
         <p><strong>Where to use it:</strong> Any template when you need a one-off embed without creating a new section file.</p>
         <p><strong>How to customize:</strong> Paste code into the <strong>Custom Liquid</strong> field. Adjust max width and vertical padding. Empty field shows a dashed placeholder in the editor only.</p>
         <p><strong>Limits:</strong> No blocks. Unlike <a href="#sections-custom-section-liquid">custom-section</a>, there is no background canvas or title shell. Use only if you trust the code source.</p>
@@ -3252,9 +3500,9 @@
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
             <tr><td><code>custom_liquid</code></td><td>liquid</td><td>Custom Liquid</td></tr>
-            <tr><td><code>max_width</code></td><td>range</td><td>Max width. Default: <code>1400</code>. Range: 480–1600px</td></tr>
-            <tr><td><code>padding_top</code></td><td>range</td><td>Top. Default: <code>0</code>. Range: 0–120px</td></tr>
-            <tr><td><code>padding_bottom</code></td><td>range</td><td>Bottom. Default: <code>0</code>. Range: 0–120px</td></tr>
+            <tr><td><code>content_width</code></td><td>select</td><td>Content width. Default: <code>normal</code>. Options: <code>narrow</code>, <code>normal</code>, <code>full</code></td></tr>
+            <tr><td><code>padding_top</code></td><td>range</td><td>Top. Default: <code>0</code></td></tr>
+            <tr><td><code>padding_bottom</code></td><td>range</td><td>Bottom. Default: <code>0</code></td></tr>
           </tbody>
         </table>
         <p><strong>Presets:</strong> <strong>Custom Liquid</strong></p>
@@ -3262,7 +3510,7 @@
         <h4 class="doc-h4" id="sections-text-liquid">text.liquid</h4>
         <div class="section-doc-prose">
 <p><strong>Theme editor:</strong> Text</p>
-        <p>Lightweight wrapper for the same <code>cs-*</code> and <code>group</code> blocks as Custom section, without section title or background image options.</p>
+<p>Lightweight wrapper for the same <code>cs-*</code> and <code>group</code> blocks as Custom section, without section title or background image options.</p>
         <p><strong>Where to use it:</strong> Editorial rows on pages where you already have a hero from <a href="#sections-page-liquid">page</a> or <a href="#sections-custom-section-liquid">custom-section</a>.</p>
         <p><strong>How to customize:</strong> Add blocks inside the section. Set <strong>Max width</strong> (400–1400px) and top/bottom padding. Empty section shows an “Add blocks” placeholder in the editor.</p>
         <p><strong>Limits:</strong> No <code>max_blocks</code> in schema (Shopify default applies). Same eleven <code>cs-*</code> types + <code>group</code> as custom-section.</p>
@@ -3271,19 +3519,30 @@
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
-            <tr><td><code>max_width</code></td><td>range</td><td>Content max width. Default: <code>1400</code>. Range: 400–1400px</td></tr>
-            <tr><td><code>padding_top</code></td><td>range</td><td>Top padding. Default: <code>0</code>. Range: 0–64px</td></tr>
-            <tr><td><code>padding_bottom</code></td><td>range</td><td>Bottom padding. Default: <code>0</code>. Range: 0–64px</td></tr>
+            <tr><td><code>max_width</code></td><td>select</td><td>Content width. Default: <code>normal</code>. Options: <code>narrow</code>, <code>normal</code>, <code>full</code></td></tr>
+            <tr><td><code>padding_top</code></td><td>range</td><td>Top padding. Default: <code>0</code></td></tr>
+            <tr><td><code>padding_bottom</code></td><td>range</td><td>Bottom padding. Default: <code>0</code></td></tr>
           </tbody>
         </table>
         <h4 class="doc-h4">Blocks</h4>
-        <p>Allowed types: <code>cs-badge</code>, <code>cs-button</code>, <code>cs-divider</code>, <code>cs-heading</code>, <code>cs-icon-item</code>, <code>cs-image</code>, <code>cs-quote</code>, <code>cs-spacer</code>, <code>cs-subheading</code>, <code>cs-text</code>, <code>cs-video</code>, <code>group</code>. See the <a href="#blocks">Blocks</a> chapter for settings on each <code>cs-*</code> primitive.</p>
+        <p><strong>cs-badge</strong> (<code>cs-badge</code>)</p>
+        <p><strong>cs-button</strong> (<code>cs-button</code>)</p>
+        <p><strong>cs-divider</strong> (<code>cs-divider</code>)</p>
+        <p><strong>cs-heading</strong> (<code>cs-heading</code>)</p>
+        <p><strong>cs-icon-item</strong> (<code>cs-icon-item</code>)</p>
+        <p><strong>cs-image</strong> (<code>cs-image</code>)</p>
+        <p><strong>cs-quote</strong> (<code>cs-quote</code>)</p>
+        <p><strong>cs-spacer</strong> (<code>cs-spacer</code>)</p>
+        <p><strong>cs-subheading</strong> (<code>cs-subheading</code>)</p>
+        <p><strong>cs-text</strong> (<code>cs-text</code>)</p>
+        <p><strong>cs-video</strong> (<code>cs-video</code>)</p>
+        <p><strong>group</strong> (<code>group</code>)</p>
         <p><strong>Presets:</strong> <strong>Text</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-page-liquid">page.liquid</h4>
         <div class="section-doc-prose">
 <p><strong>Theme editor:</strong> Page</p>
-        <p>Renders Shopify page content from admin with optional hero, table of contents, and reading progress bar for long editorial content.</p>
+<p>Renders Shopify page content from admin with optional hero, table of contents, and reading progress bar for long editorial content.</p>
         <p><strong>Where to use it:</strong> <code>templates/page.json</code> and custom page templates (<code>page.contact.json</code>, etc.) — schema restricts to <code>page</code> template only (<code>enabled_on</code>).</p>
         <p><strong>How to customize:</strong> Toggle TOC and progress bar. Page title and body come from the page resource in admin. Pair with Custom section blocks above or below for richer layouts.</p>
         <p><strong>Limits:</strong> No blocks. Does not use section-title snippet for the main H1 (handled in section markup).</p>
@@ -3294,15 +3553,16 @@
           <tbody>
             <tr><td><code>eyebrow</code></td><td>text</td><td>Eyebrow label. Default: <code>Grimoire</code></td></tr>
             <tr><td><code>show_toc</code></td><td>checkbox</td><td>Show table of contents. Default: <code>true</code></td></tr>
+            <tr><td><code>toc_label</code></td><td>text</td><td>Table of contents label. Default: <code>Contents</code></td></tr>
             <tr><td><code>show_progress</code></td><td>checkbox</td><td>Show reading progress bar. Default: <code>true</code></td></tr>
           </tbody>
         </table>
         <p><strong>Presets:</strong> <strong>Page</strong></p>
         <hr class="doc-divider">
-        <h4 class="doc-h4" id="sections-cta-with-video-liquid">cta-with-video.liquid</h4>
+        <h4 class="doc-h4" id="sections-cta-liquid">cta.liquid</h4>
         <div class="section-doc-prose">
-<p><strong>Theme editor:</strong> CTA with Video</p>
-        <p>Split or stacked promo band: copy and button beside a background video (hosted or URL) with poster fallback and overlay controls.</p>
+<p><strong>Theme editor:</strong> Media banner</p>
+<p>Split or stacked promo band: copy and button beside a background video (hosted or URL) with poster fallback and overlay controls.</p>
         <p><strong>Where to use it:</strong> Homepage, about, or campaign landing sections.</p>
         <p><strong>How to customize:</strong> Upload video or paste URL. Set poster image for mobile and low-bandwidth. Tune overlay opacity, text alignment, and CTA link. Autoplay respects muted conventions; fallback image persists if autoplay is blocked.</p>
         <p><strong>Limits:</strong> No blocks. Settings-only.</p>
@@ -3312,22 +3572,29 @@
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
             <tr><td><code>video</code></td><td>video</td><td>Background video</td></tr>
-            <tr><td><code>fallback_image</code></td><td>image_picker</td><td>Fallback image</td></tr>
-            <tr><td><code>overlay_opacity</code></td><td>range</td><td>Overlay opacity. Default: <code>40</code>. Range: 0–100%</td></tr>
+            <tr><td><code>fallback_image</code></td><td>image_picker</td><td>Image</td></tr>
+            <tr><td><code>enable_grayscale</code></td><td>checkbox</td><td>Grayscale filter. Default: <code>true</code></td></tr>
+            <tr><td><code>scrim_color</code></td><td>color</td><td>Scrim and overlay color</td></tr>
+            <tr><td><code>scrim_strength</code></td><td>range</td><td>Scrim strength. Default: <code>0</code></td></tr>
+            <tr><td><code>overlay_tint</code></td><td>range</td><td>Overlay tint. Default: <code>40</code></td></tr>
+            <tr><td><code>heading_color</code></td><td>color</td><td>Heading color</td></tr>
+            <tr><td><code>subheading_color</code></td><td>color</td><td>Subheading color</td></tr>
             <tr><td><code>heading</code></td><td>text</td><td>Heading. Default: <code>Your Headline Here</code></td></tr>
             <tr><td><code>subheading</code></td><td>textarea</td><td>Subheading. Default: <code>A short description that supports you...</code></td></tr>
             <tr><td><code>button_label</code></td><td>text</td><td>Button label. Default: <code>Shop Now</code></td></tr>
             <tr><td><code>button_url</code></td><td>url</td><td>Button URL</td></tr>
             <tr><td><code>button_style</code></td><td>select</td><td>Button style. Default: <code>primary</code>. Options: <code>primary</code>, <code>secondary</code>, <code>outline</code></td></tr>
+            <tr><td><code>content_position</code></td><td>select</td><td>Content position. Default: <code>middle-center</code>. Options: <code>top-left</code>, <code>top-center</code>, <code>top-right</code>, <code>middle-left</code>, <code>middle-center</code>, <code>middle-right</code>, <code>bottom-left</code>, <code>bottom-center</code>, <code>bottom-right</code></td></tr>
+            <tr><td><code>content_position_mobile</code></td><td>select</td><td>Content position. Default: <code>middle-center</code>. Options: <code>top-left</code>, <code>top-center</code>, <code>top-right</code>, <code>middle-left</code>, <code>middle-center</code>, <code>middle-right</code>, <code>bottom-left</code>, <code>bottom-center</code>, <code>bottom-right</code></td></tr>
             <tr><td><code>section_height</code></td><td>select</td><td>Section height. Default: <code>medium</code>. Options: <code>small</code>, <code>medium</code>, <code>large</code></td></tr>
           </tbody>
         </table>
-        <p><strong>Presets:</strong> <strong>CTA with Video</strong></p>
+        <p><strong>Presets:</strong> <strong>Media banner</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-blog-liquid">blog.liquid</h4>
         <div class="section-doc-prose">
 <p><strong>Theme editor:</strong> Blog</p>
-        <p>Blog index: section header plus a responsive grid of article cards with image, meta, excerpt, and pagination.</p>
+<p>Blog index: section header plus a responsive grid of article cards with image, meta, excerpt, and pagination.</p>
         <p><strong>What it renders:</strong> The current <code>blog</code> and its <code>articles</code> with pagination. It is the listing body on the blog template (default <code>main</code> in <code>blog.json</code>). Optional sections on the same template (for example blog-featured) only frame the index. Distinct from <a href="#sections-news-grid-liquid">news-grid</a> on the homepage.</p>
         <p><strong>How to customize:</strong> Eyebrow and heading via <a href="#snippet-section-title">section-title</a>. Articles per page and card layout come from section settings. Content is pulled from the blog’s articles in admin.</p>
         <p><strong>Limits:</strong> No blocks.</p>
@@ -3339,17 +3606,18 @@
             <tr><td><code>eyebrow</code></td><td>text</td><td>Eyebrow label. Default: <code>Our Blog</code></td></tr>
             <tr><td><code>heading</code></td><td>text</td><td>Heading. Default: <code>All Articles</code></td></tr>
             <tr><td><code>columns_desktop</code></td><td>select</td><td>Columns (desktop). Default: <code>3</code>. Options: <code>2</code>, <code>3</code>, <code>4</code></td></tr>
-            <tr><td><code>articles_per_page</code></td><td>range</td><td>Articles per page. Default: <code>9</code>. Range: 3–24</td></tr>
+            <tr><td><code>articles_per_page</code></td><td>range</td><td>Articles per page. Default: <code>9</code></td></tr>
             <tr><td><code>show_tags</code></td><td>checkbox</td><td>Show tags. Default: <code>true</code></td></tr>
             <tr><td><code>show_excerpt</code></td><td>checkbox</td><td>Show excerpt. Default: <code>true</code></td></tr>
-            <tr><td><code>show_meta</code></td><td>checkbox</td><td>Show author &amp; date. Default: <code>true</code></td></tr>
+            <tr><td><code>show_meta</code></td><td>checkbox</td><td>Show author and date. Default: <code>true</code></td></tr>
           </tbody>
         </table>
+        <p><strong>Presets:</strong> <strong>Blog</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-article-liquid">article.liquid</h4>
         <div class="section-doc-prose">
 <p><strong>Theme editor:</strong> Article</p>
-        <p>Single article template: hero image, author/date, rich content, tags, comments form, and share controls. Optional sidebar TOC when enabled.</p>
+<p>Single article template: hero image, author/date, rich content, tags, comments form, and share controls. Optional sidebar TOC when enabled.</p>
         <p><strong>What it renders:</strong> One <code>article</code> (title, content, image, comments). Default <code>main</code> in <code>article.json</code>. Breadcrumb and <a href="#sections-read-also-liquid">read-also</a> on that template wrap the story. They do not replace this section’s body.</p>
         <p><strong>How to customize:</strong> Toggle comments, share buttons, and sidebar features in settings. Article body uses Shopify article object; prose styles are section-scoped.</p>
         <p><strong>Limits:</strong> No blocks. Pair with <a href="#sections-read-also-liquid">read-also</a> at the bottom.</p>
@@ -3358,9 +3626,10 @@
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
+            <tr><td><code>color_scheme</code></td><td>color_scheme</td><td>Color scheme. Default: <code>scheme-1</code></td></tr>
             <tr><td><code>show_hero_image</code></td><td>checkbox</td><td>Show article image. Default: <code>true</code></td></tr>
             <tr><td><code>show_tags</code></td><td>checkbox</td><td>Show tags. Default: <code>true</code></td></tr>
-            <tr><td><code>show_meta</code></td><td>checkbox</td><td>Show author &amp; date. Default: <code>true</code></td></tr>
+            <tr><td><code>show_meta</code></td><td>checkbox</td><td>Show author and date. Default: <code>true</code></td></tr>
             <tr><td><code>show_share</code></td><td>checkbox</td><td>Show share buttons. Default: <code>true</code></td></tr>
             <tr><td><code>show_toc</code></td><td>checkbox</td><td>Show table of contents. Default: <code>true</code></td></tr>
             <tr><td><code>show_reading_progress</code></td><td>checkbox</td><td>Show reading progress bar. Default: <code>true</code></td></tr>
@@ -3369,8 +3638,8 @@
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-news-grid-liquid">news-grid.liquid</h4>
         <div class="section-doc-prose">
-<p><strong>Theme editor:</strong> News Grid</p>
-        <p>Magazine-style grid: one featured article and a sidebar of smaller cards, with optional category filter tabs.</p>
+<p><strong>Theme editor:</strong> Blog posts</p>
+<p>Magazine-style grid: one featured article and a sidebar of smaller cards, with optional category filter tabs.</p>
         <p><strong>Where to use it:</strong> Dedicated news or journal pages (not the default blog template).</p>
         <p><strong>How to customize:</strong> Header via <a href="#snippet-section-title">section-title</a>. Article count is fixed in implementation (one featured + four sidebar items). Configure which blog to pull and filter labels in settings.</p>
         <p><strong>Limits:</strong> No blocks. Behavior is settings-driven.</p>
@@ -3379,23 +3648,33 @@
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
+            <tr><td><code>eyebrow</code></td><td>text</td><td>Eyebrow label. Default: <code>Latest News</code></td></tr>
             <tr><td><code>heading</code></td><td>text</td><td>Section heading. Default: <code>From the Journal</code></td></tr>
+            <tr><td><code>cta_label</code></td><td>text</td><td>Header button label. Default: <code>View all news</code></td></tr>
             <tr><td><code>blog</code></td><td>blog</td><td>Blog source</td></tr>
-            <tr><td><code>article_count</code></td><td>range</td><td>Articles to show. Default: <code>5</code>. Range: 5–5</td></tr>
+            <tr><td><code>featured_article</code></td><td>article</td><td>Article</td></tr>
             <tr><td><code>image_height</code></td><td>select</td><td>Featured image height. Default: <code>medium</code>. Options: <code>small</code>, <code>medium</code>, <code>large</code></td></tr>
             <tr><td><code>show_excerpt</code></td><td>checkbox</td><td>Show excerpt. Default: <code>true</code></td></tr>
+            <tr><td><code>read_more_label</code></td><td>text</td><td>Read more label. Default: <code>Read more</code></td></tr>
+            <tr><td><code>featured_scrim_color</code></td><td>color</td><td>Scrim and overlay color</td></tr>
+            <tr><td><code>featured_scrim_strength</code></td><td>range</td><td>Scrim strength. Default: <code>90</code></td></tr>
+            <tr><td><code>featured_overlay_tint</code></td><td>range</td><td>Overlay tint. Default: <code>0</code></td></tr>
+            <tr><td><code>featured_heading_color</code></td><td>color</td><td>Heading color</td></tr>
+            <tr><td><code>featured_text_color</code></td><td>color</td><td>Excerpt color</td></tr>
+            <tr><td><code>featured_link_color</code></td><td>color</td><td>Read more color</td></tr>
+            <tr><td><code>featured_badge_color</code></td><td>color</td><td>Date and tag color</td></tr>
             <tr><td><code>show_date</code></td><td>checkbox</td><td>Show date. Default: <code>true</code></td></tr>
             <tr><td><code>show_tags</code></td><td>checkbox</td><td>Show tags. Default: <code>true</code></td></tr>
-            <tr><td><code>padding_top</code></td><td>range</td><td>Padding top. Default: <code>0</code>. Range: 0–100px</td></tr>
-            <tr><td><code>padding_bottom</code></td><td>range</td><td>Padding bottom. Default: <code>0</code>. Range: 0–100px</td></tr>
+            <tr><td><code>padding_top</code></td><td>range</td><td>Padding top. Default: <code>0</code></td></tr>
+            <tr><td><code>padding_bottom</code></td><td>range</td><td>Padding bottom. Default: <code>0</code></td></tr>
           </tbody>
         </table>
-        <p><strong>Presets:</strong> <strong>News Grid</strong></p>
+        <p><strong>Presets:</strong> <strong>Blog posts</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-read-also-liquid">read-also.liquid</h4>
         <div class="section-doc-prose">
-<p><strong>Theme editor:</strong> Read Also</p>
-        <p>Horizontal carousel of related blog posts at the end of an article. Uses its own carousel markup (not <a href="#snippet-product-carousel">product-carousel</a>).</p>
+<p><strong>Theme editor:</strong> Related blog posts</p>
+<p>Horizontal carousel of related blog posts at the end of an article. Uses its own carousel markup (not <a href="#snippet-product-carousel">product-carousel</a>).</p>
         <p><strong>Where to use it:</strong> <code>templates/article.json</code> only (<code>enabled_on: article</code>).</p>
         <p><strong>How to customize:</strong> Set eyebrow, heading, and max articles (4–16). Posts are selected by theme logic from the same blog. Toggle tag, excerpt, and meta display.</p>
         <p><strong>Limits:</strong> No blocks. Snippet: section-title only.</p>
@@ -3406,18 +3685,18 @@
           <tbody>
             <tr><td><code>eyebrow</code></td><td>text</td><td>Eyebrow label. Default: <code>More from the blog</code></td></tr>
             <tr><td><code>heading</code></td><td>text</td><td>Heading. Default: <code>Read Also</code></td></tr>
-            <tr><td><code>articles_limit</code></td><td>range</td><td>Max articles to load. Default: <code>12</code>. Range: 4–16</td></tr>
+            <tr><td><code>articles_limit</code></td><td>range</td><td>Max articles to load. Default: <code>12</code></td></tr>
             <tr><td><code>show_tags</code></td><td>checkbox</td><td>Show tags. Default: <code>true</code></td></tr>
             <tr><td><code>show_excerpt</code></td><td>checkbox</td><td>Show excerpt. Default: <code>true</code></td></tr>
-            <tr><td><code>show_meta</code></td><td>checkbox</td><td>Show author &amp; date. Default: <code>true</code></td></tr>
+            <tr><td><code>show_meta</code></td><td>checkbox</td><td>Show author and date. Default: <code>true</code></td></tr>
           </tbody>
         </table>
-        <p><strong>Presets:</strong> <strong>Read Also</strong></p>
+        <p><strong>Presets:</strong> <strong>Related blog posts</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-product-finder-liquid">product-finder.liquid</h4>
         <div class="section-doc-prose">
-<p><strong>Theme editor:</strong> Product Finder</p>
-        <p>Multi-step guided quiz (2–5 stages) with image options per answer. Results map to <strong>Recommendation</strong> blocks that show up to four products when answer paths match.</p>
+<p><strong>Theme editor:</strong> Product finder</p>
+<p>Multi-step guided quiz (2–5 stages) with image options per answer. Results map to <strong>Recommendation</strong> blocks that show up to four products when answer paths match.</p>
         <p><strong>Where to use it:</strong> Homepage, landing pages, or a dedicated “find your product” page.</p>
         <p><strong>How to customize:</strong> Set <strong>Number of stages</strong> and label each stage’s question and four options (text + image). Add many <strong>Recommendation</strong> blocks: each ties stage answers to a <strong>product list</strong> (max four products per block). Tune result screen copy and disclaimer.</p>
         <p><strong>Limits:</strong> Stage option images and questions are section settings (s1–s5). Recommendation blocks are unlimited in count but each product list field caps at <strong>4</strong> products. Heavy configuration. Plan answer keys before adding blocks.</p>
@@ -3426,79 +3705,45 @@
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
-            <tr><td><code>stage_count</code></td><td>select</td><td>Number of stages. Default: <code>3</code>. Options: <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code></td></tr>
             <tr><td><code>eyebrow</code></td><td>text</td><td>Eyebrow. Default: <code>Find Your Product</code></td></tr>
             <tr><td><code>heading</code></td><td>text</td><td>Heading. Default: <code>Product Finder</code></td></tr>
             <tr><td><code>subheading</code></td><td>textarea</td><td>Subheading. Default: <code>Answer a few questions and we&#x27;ll find...</code></td></tr>
-            <tr><td><code>s1_question</code></td><td>text</td><td>Question. Default: <code>What are you looking for?</code></td></tr>
-            <tr><td><code>s1_opt1</code></td><td>text</td><td>Option 1 label. Default: <code>Quality</code></td></tr>
-            <tr><td><code>s1_opt1_img</code></td><td>image_picker</td><td>Option 1 image</td></tr>
-            <tr><td><code>s1_opt2</code></td><td>text</td><td>Option 2 label. Default: <code>Connection</code></td></tr>
-            <tr><td><code>s1_opt2_img</code></td><td>image_picker</td><td>Option 2 image</td></tr>
-            <tr><td><code>s1_opt3</code></td><td>text</td><td>Option 3 label. Default: <code>Variety</code></td></tr>
-            <tr><td><code>s1_opt3_img</code></td><td>image_picker</td><td>Option 3 image</td></tr>
-            <tr><td><code>s1_opt4</code></td><td>text</td><td>Option 4 label. Default: <code>Clarity</code></td></tr>
-            <tr><td><code>s1_opt4_img</code></td><td>image_picker</td><td>Option 4 image</td></tr>
-            <tr><td><code>s2_question</code></td><td>text</td><td>Question. Default: <code>What type of product do you prefer?</code></td></tr>
-            <tr><td><code>s2_opt1</code></td><td>text</td><td>Option 1 label. Default: <code>Jewelry</code></td></tr>
-            <tr><td><code>s2_opt1_img</code></td><td>image_picker</td><td>Option 1 image</td></tr>
-            <tr><td><code>s2_opt2</code></td><td>text</td><td>Option 2 label. Default: <code>Candle</code></td></tr>
-            <tr><td><code>s2_opt2_img</code></td><td>image_picker</td><td>Option 2 image</td></tr>
-            <tr><td><code>s2_opt3</code></td><td>text</td><td>Option 3 label. Default: <code>Gemstone</code></td></tr>
-            <tr><td><code>s2_opt3_img</code></td><td>image_picker</td><td>Option 3 image</td></tr>
-            <tr><td><code>s2_opt4</code></td><td>text</td><td>Option 4 label. Default: <code>Incense</code></td></tr>
-            <tr><td><code>s2_opt4_img</code></td><td>image_picker</td><td>Option 4 image</td></tr>
-            <tr><td><code>s3_question</code></td><td>text</td><td>Question. Default: <code>What is your style preference?</code></td></tr>
-            <tr><td><code>s3_opt1</code></td><td>text</td><td>Option 1 label. Default: <code>Natural</code></td></tr>
-            <tr><td><code>s3_opt1_img</code></td><td>image_picker</td><td>Option 1 image</td></tr>
-            <tr><td><code>s3_opt2</code></td><td>text</td><td>Option 2 label. Default: <code>Bold</code></td></tr>
-            <tr><td><code>s3_opt2_img</code></td><td>image_picker</td><td>Option 2 image</td></tr>
-            <tr><td><code>s3_opt3</code></td><td>text</td><td>Option 3 label. Default: <code>Calm</code></td></tr>
-            <tr><td><code>s3_opt3_img</code></td><td>image_picker</td><td>Option 3 image</td></tr>
-            <tr><td><code>s3_opt4</code></td><td>text</td><td>Option 4 label. Default: <code>Light</code></td></tr>
-            <tr><td><code>s3_opt4_img</code></td><td>image_picker</td><td>Option 4 image</td></tr>
-            <tr><td><code>s4_question</code></td><td>text</td><td>Question</td></tr>
-            <tr><td><code>s4_opt1</code></td><td>text</td><td>Option 1 label. Default: <code>Option 1</code></td></tr>
-            <tr><td><code>s4_opt1_img</code></td><td>image_picker</td><td>Option 1 image</td></tr>
-            <tr><td><code>s4_opt2</code></td><td>text</td><td>Option 2 label. Default: <code>Option 2</code></td></tr>
-            <tr><td><code>s4_opt2_img</code></td><td>image_picker</td><td>Option 2 image</td></tr>
-            <tr><td><code>s4_opt3</code></td><td>text</td><td>Option 3 label. Default: <code>Option 3</code></td></tr>
-            <tr><td><code>s4_opt3_img</code></td><td>image_picker</td><td>Option 3 image</td></tr>
-            <tr><td><code>s4_opt4</code></td><td>text</td><td>Option 4 label. Default: <code>Option 4</code></td></tr>
-            <tr><td><code>s4_opt4_img</code></td><td>image_picker</td><td>Option 4 image</td></tr>
-            <tr><td><code>s5_question</code></td><td>text</td><td>Question</td></tr>
-            <tr><td><code>s5_opt1</code></td><td>text</td><td>Option 1 label. Default: <code>Option 1</code></td></tr>
-            <tr><td><code>s5_opt1_img</code></td><td>image_picker</td><td>Option 1 image</td></tr>
-            <tr><td><code>s5_opt2</code></td><td>text</td><td>Option 2 label. Default: <code>Option 2</code></td></tr>
-            <tr><td><code>s5_opt2_img</code></td><td>image_picker</td><td>Option 2 image</td></tr>
-            <tr><td><code>s5_opt3</code></td><td>text</td><td>Option 3 label. Default: <code>Option 3</code></td></tr>
-            <tr><td><code>s5_opt3_img</code></td><td>image_picker</td><td>Option 3 image</td></tr>
-            <tr><td><code>s5_opt4</code></td><td>text</td><td>Option 4 label. Default: <code>Option 4</code></td></tr>
-            <tr><td><code>s5_opt4_img</code></td><td>image_picker</td><td>Option 4 image</td></tr>
             <tr><td><code>result_label</code></td><td>text</td><td>Result eyebrow. Default: <code>Your Results</code></td></tr>
             <tr><td><code>result_heading</code></td><td>text</td><td>Result heading. Default: <code>Here Are Your Picks</code></td></tr>
             <tr><td><code>reset_label</code></td><td>text</td><td>Reset button label. Default: <code>Start over</code></td></tr>
+            <tr><td><code>result_empty_label</code></td><td>text</td><td>No-results message. Default: <code>No matches found. Explore our full co...</code></td></tr>
           </tbody>
         </table>
         <h4 class="doc-h4">Blocks</h4>
+        <p><strong>Stage</strong> (<code>quiz_step</code>)</p>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>eyebrow</code></td><td>text</td><td>Stage eyebrow. Default: <code>Stage</code></td></tr>
+            <tr><td><code>question</code></td><td>text</td><td>Question. Default: <code>What are you looking for?</code></td></tr>
+            <tr><td><code>step_img</code></td><td>image_picker</td><td>Stage image</td></tr>
+            <tr><td><code>opt1</code></td><td>text</td><td>Option 1 label. Default: <code>Option 1</code></td></tr>
+            <tr><td><code>opt2</code></td><td>text</td><td>Option 2 label. Default: <code>Option 2</code></td></tr>
+            <tr><td><code>opt3</code></td><td>text</td><td>Option 3 label. Default: <code>Option 3</code></td></tr>
+            <tr><td><code>opt4</code></td><td>text</td><td>Option 4 label. Default: <code>Option 4</code></td></tr>
+          </tbody>
+        </table>
         <p><strong>Recommendation</strong> (<code>recommendation</code>)</p>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
-            <tr><td><code>intention</code></td><td>select</td><td>Stage 1 answer. Default: <code>protection</code>. Options: <code>protection</code>, <code>love</code>, <code>abundance</code>, <code>clarity</code></td></tr>
-            <tr><td><code>form</code></td><td>select</td><td>Stage 2 answer. Default: <code>amulet</code>. Options: <code>amulet</code>, <code>candle</code>, <code>gem</code>, <code>incense</code></td></tr>
-            <tr><td><code>energy</code></td><td>select</td><td>Stage 3 answer. Default: <code>earth</code>. Options: <code>earth</code>, <code>fire</code>, <code>water</code>, <code>air</code></td></tr>
-            <tr><td><code>s4</code></td><td>select</td><td>Stage 4 answer. Default: <code>any</code>. Options: <code>any</code>, <code>s4_1</code>, <code>s4_2</code>, <code>s4_3</code>, <code>s4_4</code></td></tr>
-            <tr><td><code>s5</code></td><td>select</td><td>Stage 5 answer. Default: <code>any</code>. Options: <code>any</code>, <code>s5_1</code>, <code>s5_2</code>, <code>s5_3</code>, <code>s5_4</code></td></tr>
+            <tr><td><code>intention</code></td><td>select</td><td>Stage 1 answer. Default: <code>s1_1</code>. Options: <code>any</code>, <code>s1_1</code>, <code>s1_2</code>, <code>s1_3</code>, <code>s1_4</code></td></tr>
+            <tr><td><code>form</code></td><td>select</td><td>Stage 2 answer. Default: <code>s2_1</code>. Options: <code>any</code>, <code>s2_1</code>, <code>s2_2</code>, <code>s2_3</code>, <code>s2_4</code></td></tr>
+            <tr><td><code>energy</code></td><td>select</td><td>Stage 3 answer. Default: <code>s3_1</code>. Options: <code>any</code>, <code>s3_1</code>, <code>s3_2</code>, <code>s3_3</code>, <code>s3_4</code></td></tr>
             <tr><td><code>products</code></td><td>product_list</td><td>Recommended products</td></tr>
           </tbody>
         </table>
-        <p><strong>Presets:</strong> <strong>Product Finder</strong></p>
+        <p><strong>Presets:</strong> <strong>Product finder</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-testimonials-liquid">testimonials.liquid</h4>
         <div class="section-doc-prose">
 <p><strong>Theme editor:</strong> Testimonials</p>
-        <p>Social proof with an interactive world map (<a href="#snippet-worlds-map">worlds-map</a>), review cards, pins, and auto-advance. Each testimonial block ties a country to quote, rating, and optional product link.</p>
+<p>Social proof with an interactive world map (<a href="#snippet-worlds-map">worlds-map</a>), review cards, pins, and auto-advance. Each testimonial block ties a country to quote, rating, and optional product link.</p>
         <p><strong>Where to use it:</strong> About page, homepage, or social-proof landing sections.</p>
         <p><strong>How to customize:</strong> Add up to <strong>12</strong> <strong>Testimonial</strong> blocks. Pick a country from the dropdown (must match SVG map codes). Set quote, stars (0 hides stars), name, role, avatar, and optional product. Adjust autoplay seconds (3–10) in section settings.</p>
         <p><strong>Limits:</strong> <strong>12</strong> testimonial blocks max. Country list in block settings is curated to match the map — adding countries requires theme code changes.</p>
@@ -3508,20 +3753,21 @@
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
             <tr><td><code>eyebrow</code></td><td>text</td><td>Eyebrow. Default: <code>What our customers say</code></td></tr>
-            <tr><td><code>title</code></td><td>text</td><td>Title. Default: <code>Voices from around the world</code></td></tr>
-            <tr><td><code>autoplay_delay</code></td><td>range</td><td>Seconds per testimonial. Default: <code>5</code>. Range: 3–10</td></tr>
-            <tr><td><code>padding_top</code></td><td>range</td><td>Padding top. Default: <code>72</code>. Range: 0–120px</td></tr>
-            <tr><td><code>padding_bottom</code></td><td>range</td><td>Padding bottom. Default: <code>48</code>. Range: 0–120px</td></tr>
+            <tr><td><code>title</code></td><td>text</td><td>Heading. Default: <code>Voices from around the world</code></td></tr>
+            <tr><td><code>autoplay_delay</code></td><td>range</td><td>Seconds per testimonial. Default: <code>5</code></td></tr>
+            <tr><td><code>padding_top</code></td><td>range</td><td>Padding top. Default: <code>72</code></td></tr>
+            <tr><td><code>padding_bottom</code></td><td>range</td><td>Padding bottom. Default: <code>48</code></td></tr>
           </tbody>
         </table>
         <h4 class="doc-h4">Blocks</h4>
-        <p><strong>Testimonial</strong> (<code>testimonial</code>) (limit 12)</p>
+        <p><strong>Testimonial</strong> (<code>testimonial</code>)</p>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
-            <tr><td><code>country_code</code></td><td>select</td><td>Country. Default: <code>MX|Mexico</code>. Options: <code>AR|Argentina</code>, <code>AU|Australia</code>, <code>AT|Austria</code>, <code>BE|Belgium</code>, <code>BO|Bolivia</code>, <code>BR|Brazil</code>, <code>CA|Canada</code>, <code>CL|Chile</code>, <code>…</code></td></tr>
+            <tr><td><code>country_code</code></td><td>select</td><td>Country. Default: <code>MX</code>. Options: <code>AR</code>, <code>AU</code>, <code>AT</code>, <code>BE</code>, <code>BO</code>, <code>BR</code>, <code>CA</code>, <code>CL</code>, <code>CN</code>, <code>CO</code>, <code>CR</code>, <code>CZ</code>, <code>DK</code>, <code>DO</code>, <code>EC</code>, <code>EG</code>, <code>FI</code>, <code>FR</code>, <code>DE</code>, <code>GT</code>, <code>GR</code>, <code>HU</code>, <code>IN</code>, <code>ID</code>, <code>IE</code>, <code>IL</code>, <code>IT</code>, <code>JP</code>, <code>KE</code>, <code>KR</code>, <code>MY</code>, <code>MX</code>, <code>MA</code>, <code>NL</code>, <code>NZ</code>, <code>NG</code>, <code>NO</code>, <code>PK</code>, <code>PA</code>, <code>PE</code>, <code>PH</code>, <code>PL</code>, <code>PT</code>, <code>RO</code>, <code>RU</code>, <code>SA</code>, <code>SG</code>, <code>ZA</code>, <code>ES</code>, <code>SE</code>, <code>CH</code>, <code>TW</code>, <code>TH</code>, <code>TR</code>, <code>AE</code>, <code>GB</code>, <code>US</code>, <code>UA</code>, <code>UY</code>, <code>VE</code>, <code>VN</code></td></tr>
+            <tr><td><code>country_name</code></td><td>text</td><td>Country display name</td></tr>
             <tr><td><code>quote</code></td><td>textarea</td><td>Quote. Default: <code>An extraordinary experience that exce...</code></td></tr>
-            <tr><td><code>rating</code></td><td>range</td><td>Rating (0 = hide). Default: <code>5</code>. Range: 0–5</td></tr>
+            <tr><td><code>rating</code></td><td>range</td><td>Rating (0 = hide). Default: <code>5</code></td></tr>
             <tr><td><code>name</code></td><td>text</td><td>Customer name. Default: <code>Isabel M.</code></td></tr>
             <tr><td><code>role</code></td><td>text</td><td>Role or location. Default: <code>Mexico City, MX</code></td></tr>
             <tr><td><code>image</code></td><td>image_picker</td><td>Avatar photo</td></tr>
@@ -3532,8 +3778,8 @@
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-signup-flyout-liquid">signup-flyout.liquid</h4>
         <div class="section-doc-prose">
-<p><strong>Theme editor:</strong> Signup Flyout</p>
-        <p>Global newsletter popup: delayed flyout panel with copy, form, and dismiss controls. Lives in the header group so it can appear site-wide.</p>
+<p><strong>Theme editor:</strong> Signup flyout</p>
+<p>Global newsletter popup: delayed flyout panel with copy, form, and dismiss controls. Lives in the header group so it can appear site-wide.</p>
         <p><strong>Where to use it:</strong> <code>enabled_on: header</code> group. Add once in the header section group customize view.</p>
         <p><strong>How to customize:</strong> Set delay, frequency cookie behavior, headline, and success state in settings. Does not use blocks. Test on a fresh browser session to verify timing rules.</p>
         <p><strong>Limits:</strong> One flyout per header group installation. No blocks.</p>
@@ -3543,23 +3789,25 @@
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
             <tr><td><code>enabled</code></td><td>checkbox</td><td>Enable flyout. Default: <code>true</code></td></tr>
-            <tr><td><code>show_delay</code></td><td>range</td><td>Delay before showing. Default: <code>5</code>. Range: 0–30s</td></tr>
-            <tr><td><code>cookie_days</code></td><td>range</td><td>Suppress after dismiss for. Default: <code>7</code>. Range: 1–30day</td></tr>
+            <tr><td><code>show_delay</code></td><td>range</td><td>Delay before showing. Default: <code>5</code></td></tr>
+            <tr><td><code>cookie_days</code></td><td>range</td><td>Suppress after dismiss for. Default: <code>7</code></td></tr>
             <tr><td><code>eyebrow</code></td><td>text</td><td>Eyebrow label. Default: <code>THE COVENANT</code></td></tr>
             <tr><td><code>heading</code></td><td>text</td><td>Heading. Default: <code>Step Beyond the Veil</code></td></tr>
             <tr><td><code>subtext</code></td><td>textarea</td><td>Subtext. Default: <code>The initiated receive word first — ra...</code></td></tr>
             <tr><td><code>input_placeholder</code></td><td>text</td><td>Input placeholder. Default: <code>Your name in the ether…</code></td></tr>
             <tr><td><code>submit_label</code></td><td>text</td><td>Submit button label. Default: <code>Seal the Covenant</code></td></tr>
             <tr><td><code>exit_label</code></td><td>text</td><td>Exit button label. Default: <code>Remain in shadow</code></td></tr>
+            <tr><td><code>success_title</code></td><td>text</td><td>Success heading. Default: <code>The veil has parted.</code></td></tr>
+            <tr><td><code>success_subtext</code></td><td>text</td><td>Success subtext. Default: <code>You are now among the initiated.</code></td></tr>
             <tr><td><code>disclaimer</code></td><td>textarea</td><td>Disclaimer text. Default: <code>Your name is kept sacred. The covenan...</code></td></tr>
           </tbody>
         </table>
-        <p><strong>Presets:</strong> <strong>Signup Flyout</strong></p>
+        <p><strong>Presets:</strong> <strong>Signup flyout</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-faq-liquid">faq.liquid</h4>
         <div class="section-doc-prose">
 <p><strong>Theme editor:</strong> FAQ</p>
-        <p>Tabbed FAQ accordion: category tabs filter <a href="#blocks-faq">faq-item</a> rows with icons, questions, and rich-text answers.</p>
+<p>Tabbed FAQ accordion: category tabs filter <a href="#blocks-faq">faq-item</a> rows with icons, questions, and rich-text answers.</p>
         <p><strong>Where to use it:</strong> Support pages, product help, or homepage trust sections.</p>
         <p><strong>How to customize:</strong> Add up to <strong>20</strong> <strong>FAQ Item</strong> blocks. Assign each a <strong>Category</strong> (General, Orders, Shipping, etc.) for tab grouping. Header via <a href="#snippet-section-title">section-title</a>. Empty section prompts you to add questions in the editor.</p>
         <p><strong>Limits:</strong> <code>max_blocks: 20</code>. Only block type: <code>faq-item</code>. Uses <code>{% content_for 'blocks' %}</code>.</p>
@@ -3582,8 +3830,8 @@
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-contact-hero-liquid">contact-hero.liquid</h4>
         <div class="section-doc-prose">
-<p><strong>Theme editor:</strong> Contact Hero</p>
-        <p>Top-of-page contact hero with eyebrow, <code>h1</code> heading, intro text, and optional contact form or static content area (per section settings).</p>
+<p><strong>Theme editor:</strong> Contact hero</p>
+<p>Top-of-page contact hero with eyebrow, <code>h1</code> heading, intro text, and optional contact form or static content area (per section settings).</p>
         <p><strong>Where to use it:</strong> Any template. Grimoire’s preset stacks it on the dedicated contact page (<code>page.contact.json</code>). Merchants can also add it to the homepage, a landing page, or any page template from <strong>Add section</strong> in the theme editor. The schema has no <code>enabled_on</code> restriction.</p>
         <p><strong>How to customize:</strong> Edit eyebrow and heading in section settings (rendered through <a href="#snippet-section-title">section-title</a> with <code>heading_tag: h1</code>). Configure form labels and success messages if a form is enabled.</p>
         <p><strong>Limits:</strong> No blocks. Preset: Store information.</p>
@@ -3598,47 +3846,17 @@
             <tr><td><code>email</code></td><td>text</td><td>Email address. Default: <code>support@example.com</code></td></tr>
             <tr><td><code>phone</code></td><td>text</td><td>Phone number. Default: <code>(+1) 555 000 0000</code></td></tr>
             <tr><td><code>hours</code></td><td>text</td><td>Business hours. Default: <code>Monday to Friday, 9 AM – 5 PM GMT</code></td></tr>
-            <tr><td><code>form_title</code></td><td>text</td><td>Form title. Default: <code>Let&#x27;s talk</code></td></tr>
+            <tr><td><code>support_label</code></td><td>text</td><td>Contact group label. Default: <code>Customer support</code></td></tr>
+            <tr><td><code>form_title</code></td><td>text</td><td>Form heading. Default: <code>Write to us</code></td></tr>
             <tr><td><code>submit_label</code></td><td>text</td><td>Submit button label. Default: <code>Send message</code></td></tr>
           </tbody>
         </table>
-        <p><strong>Presets:</strong> <strong>Contact Hero</strong></p>
-        <hr class="doc-divider">
-        <h4 class="doc-h4" id="sections-contact-channels-liquid">contact-channels.liquid</h4>
-        <div class="section-doc-prose">
-<p><strong>Theme editor:</strong> Contact Channels</p>
-        <p>Grid of contact cards (email, chat, wholesale, etc.). Each block is a channel with icon, title, description, and link.</p>
-        <p><strong>Where to use it:</strong> Any template. In the default theme it sits on the contact page under <a href="#sections-contact-hero-liquid">contact-hero</a> and <a href="#sections-contact-location-liquid">contact-location</a>. You can reuse the same channel grid on the home page, footer area of a landing page, or anywhere else. No <code>enabled_on</code> limit in schema.</p>
-        <p><strong>How to customize:</strong> Add <strong>Channel</strong> blocks. Reorder cards. Header via <a href="#snippet-section-title">section-title</a>. Preset includes three sample channels.</p>
-        <p><strong>Limits:</strong> No max on channel block count in schema. Settings-only section wrapper.</p>
-        </div>
-        <h4 class="doc-h4">Section settings</h4>
-        <table class="params-table params-table--guide params-table--sections">
-          <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
-          <tbody>
-            <tr><td><code>eyebrow</code></td><td>text</td><td>Eyebrow. Default: <code>Contact</code></td></tr>
-            <tr><td><code>heading</code></td><td>text</td><td>Heading. Default: <code>We&#x27;re here to help</code></td></tr>
-            <tr><td><code>description</code></td><td>textarea</td><td>Description. Default: <code>Explore more options and find what yo...</code></td></tr>
-          </tbody>
-        </table>
-        <h4 class="doc-h4">Blocks</h4>
-        <p><strong>Channel Card</strong> (<code>channel</code>)</p>
-        <table class="params-table params-table--guide params-table--sections">
-          <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
-          <tbody>
-            <tr><td><code>icon</code></td><td>select</td><td>Icon. Default: <code>help</code>. Options: <code>help</code>, <code>support</code>, <code>sales</code>, <code>email</code>, <code>chat</code></td></tr>
-            <tr><td><code>title</code></td><td>text</td><td>Title. Default: <code>Help center</code></td></tr>
-            <tr><td><code>text</code></td><td>textarea</td><td>Description. Default: <code>Our help center is a great resource f...</code></td></tr>
-            <tr><td><code>cta_label</code></td><td>text</td><td>CTA label. Default: <code>Learn more</code></td></tr>
-            <tr><td><code>cta_url</code></td><td>url</td><td>CTA link</td></tr>
-          </tbody>
-        </table>
-        <p><strong>Presets:</strong> <strong>Contact Channels</strong></p>
+        <p><strong>Presets:</strong> <strong>Contact hero</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-contact-location-liquid">contact-location.liquid</h4>
         <div class="section-doc-prose">
-<p><strong>Theme editor:</strong> Contact Location</p>
-        <p>Store address, hours, and optional Google Maps embed with section header.</p>
+<p><strong>Theme editor:</strong> Contact location</p>
+<p>Store address, hours, and optional Google Maps embed with section header.</p>
         <p><strong>Where to use it:</strong> Any template. Grimoire’s preset stacks it on the contact page after <a href="#sections-contact-hero-liquid">contact-hero</a>. You can also add it to the homepage, About, or any Page template from <strong>Add section</strong> in the theme editor. No <code>enabled_on</code> restriction in schema.</p>
         <p><strong>How to customize:</strong> Fill address fields and map embed URL in settings. Eyebrow and heading via <a href="#snippet-section-title">section-title</a>.</p>
         <p><strong>Limits:</strong> No blocks. Preset: Store information.</p>
@@ -3648,20 +3866,31 @@
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
             <tr><td><code>eyebrow</code></td><td>text</td><td>Eyebrow. Default: <code>Our Location</code></td></tr>
-            <tr><td><code>heading</code></td><td>text</td><td>Heading. Default: <code>Find our headquarter</code></td></tr>
-            <tr><td><code>description</code></td><td>textarea</td><td>Description. Default: <code>Where ideas meet innovation. Come vis...</code></td></tr>
-            <tr><td><code>map_embed</code></td><td>html</td><td>Map embed code</td></tr>
-            <tr><td><code>place_name</code></td><td>text</td><td>Location name. Default: <code>Grimoire Headquarters</code></td></tr>
-            <tr><td><code>address</code></td><td>textarea</td><td>Address. Default: <code>500 Market Street, Suite 1200
-San Fra...</code></td></tr>
+            <tr><td><code>heading</code></td><td>text</td><td>Heading. Default: <code>Find us</code></td></tr>
+            <tr><td><code>description</code></td><td>textarea</td><td>Description. Default: <code>Visit one of our locations or get in ...</code></td></tr>
           </tbody>
         </table>
-        <p><strong>Presets:</strong> <strong>Contact Location</strong></p>
+        <h4 class="doc-h4">Blocks</h4>
+        <p><strong>Branch</strong> (<code>branch</code>)</p>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>place_name</code></td><td>text</td><td>Location name. Default: <code>Our Studio</code></td></tr>
+            <tr><td><code>address</code></td><td>textarea</td><td>Address. Default: <code>123 Main Street
+City, State 00000</code></td></tr>
+            <tr><td><code>hours</code></td><td>text</td><td>Hours</td></tr>
+            <tr><td><code>phone</code></td><td>text</td><td>Phone number</td></tr>
+            <tr><td><code>map_embed</code></td><td>html</td><td>Map embed code</td></tr>
+            <tr><td><code>map_url</code></td><td>url</td><td>View on map link</td></tr>
+            <tr><td><code>directions_url</code></td><td>url</td><td>Get directions link</td></tr>
+          </tbody>
+        </table>
+        <p><strong>Presets:</strong> <strong>Contact location</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-chronicle-liquid">chronicle.liquid</h4>
         <div class="section-doc-prose">
-<p><strong>Theme editor:</strong> Chronicle</p>
-        <p>About-page timeline: alternating <strong>Chapter</strong> blocks with eyebrow, heading, rich body, image, and left/right image placement.</p>
+<p><strong>Theme editor:</strong> Image with text</p>
+<p>About-page timeline: alternating <strong>Chapter</strong> blocks with eyebrow, heading, rich body, image, and left/right image placement.</p>
         <p><strong>Where to use it:</strong> Any template. Grimoire’s preset uses it on About (<code>page.about-us.json</code>). You can also add it to the homepage, Contact, or any Page template from <strong>Add section</strong> in the theme editor. No <code>enabled_on</code> restriction in schema.</p>
         <p><strong>How to customize:</strong> Add chapter blocks in narrative order. Toggle image side per chapter. Section-level settings control overall intro (if any). Preset ships three chapters.</p>
         <p><strong>Limits:</strong> No <code>max_blocks</code> cap on chapters in schema. No snippets.</p>
@@ -3672,28 +3901,63 @@ San Fra...</code></td></tr>
           <tbody>
             <tr><td><code>eyebrow</code></td><td>text</td><td>Eyebrow label. Default: <code>Our Story</code></td></tr>
             <tr><td><code>intro_heading</code></td><td>text</td><td>Intro heading. Default: <code>Made by hand, chosen with care</code></td></tr>
-            <tr><td><code>number_color</code></td><td>color</td><td>Chapter number colour. Default: <code>#141414</code></td></tr>
             <tr><td><code>intro_body</code></td><td>textarea</td><td>Intro body. Default: <code>We are a small team of makers and col...</code></td></tr>
           </tbody>
         </table>
         <h4 class="doc-h4">Blocks</h4>
-        <p><strong>Story Chapter</strong> (<code>chapter</code>)</p>
+        <p><strong>Story chapter</strong> (<code>chapter</code>)</p>
         <table class="params-table params-table--guide params-table--sections">
           <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
             <tr><td><code>eyebrow</code></td><td>text</td><td>Eyebrow label</td></tr>
             <tr><td><code>heading</code></td><td>text</td><td>Heading. Default: <code>Where every piece begins</code></td></tr>
             <tr><td><code>body</code></td><td>richtext</td><td>Body. Default: <code>&lt;p&gt;Grimoire started from a shared lov...</code></td></tr>
+            <tr><td><code>cta_label</code></td><td>text</td><td>Button label</td></tr>
+            <tr><td><code>cta_url</code></td><td>url</td><td>Button link</td></tr>
             <tr><td><code>image</code></td><td>image_picker</td><td>Image</td></tr>
-            <tr><td><code>image_position</code></td><td>select</td><td>Image position. Default: <code>left</code>. Options: <code>left</code>, <code>right</code></td></tr>
+            <tr><td><code>video</code></td><td>video</td><td>Video</td></tr>
+            <tr><td><code>image_position</code></td><td>select</td><td>Media position. Default: <code>left</code>. Options: <code>left</code>, <code>right</code></td></tr>
           </tbody>
         </table>
-        <p><strong>Presets:</strong> <strong>Chronicle</strong></p>
+        <p><strong>Presets:</strong> <strong>Image with text</strong></p>
+        <hr class="doc-divider">
+        <h4 class="doc-h4" id="sections-how-we-make-liquid">how-we-make.liquid</h4>
+        <div class="section-doc-prose">
+<p><strong>Theme editor:</strong> Timeline</p>
+        <p>Numbered steps that walk shoppers through a process — how a product is made, how to use it, how an order is fulfilled.</p>
+        <p><strong>Where to use it:</strong> Any template. Grimoire&#x27;s preset uses it on the home page. It works equally well on About or a Page template. It cannot go in the header, footer, or promotional section groups (<code>disabled_on</code>).</p>
+        <p><strong>How to customize:</strong> Add a <strong>Step</strong> block for each stage, in order. Each step takes a short label and a rich-text description; numbering is automatic, so inserting a step later renumbers the rest for you. Header via <a href="#snippet-section-title">section-title</a>.</p>
+        <p><strong>Limits:</strong> Up to <strong>20</strong> steps (<code>max_blocks: 20</code>). Steps are numbered in block order — reorder the blocks to reorder the sequence.</p>
+        </div>
+        <h4 class="doc-h4">Section settings</h4>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>eyebrow</code></td><td>text</td><td>Eyebrow. Default: <code>Our Craft</code></td></tr>
+            <tr><td><code>heading</code></td><td>text</td><td>Heading. Default: <code>How We Make</code></td></tr>
+            <tr><td><code>subtext</code></td><td>textarea</td><td>Subtext. Default: <code>Small-batch pours with clean ingredie...</code></td></tr>
+            <tr><td><code>image</code></td><td>image_picker</td><td>Process image</td></tr>
+            <tr><td><code>image_alt</code></td><td>text</td><td>Image alt text</td></tr>
+            <tr><td><code>image_position</code></td><td>select</td><td>Image position. Default: <code>left</code>. Options: <code>left</code>, <code>right</code></td></tr>
+            <tr><td><code>enable_scroll_storytelling</code></td><td>checkbox</td><td>Enable scroll storytelling. Default: <code>true</code></td></tr>
+            <tr><td><code>marker_shape</code></td><td>select</td><td>Step marker shape. Default: <code>diamond</code>. Options: <code>diamond</code>, <code>circle</code>, <code>square</code></td></tr>
+          </tbody>
+        </table>
+        <h4 class="doc-h4">Blocks</h4>
+        <p><strong>Step</strong> (<code>step</code>)</p>
+        <table class="params-table params-table--guide params-table--sections">
+          <thead><tr><th>Setting</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>label</code></td><td>text</td><td>Heading. Default: <code>Step Title</code></td></tr>
+            <tr><td><code>description</code></td><td>richtext</td><td>Description. Default: <code>&lt;p&gt;A brief description of this step i...</code></td></tr>
+          </tbody>
+        </table>
+        <p><strong>Presets:</strong> <strong>Timeline</strong></p>
         <hr class="doc-divider">
         <h4 class="doc-h4" id="sections-team-liquid">team.liquid</h4>
         <div class="section-doc-prose">
 <p><strong>Theme editor:</strong> Team</p>
-        <p>Staff or founder grid: photo, name, role, and short bio per <strong>Member</strong> block, with section header.</p>
+<p>Staff or founder grid: photo, name, role, and short bio per <strong>Member</strong> block, with section header.</p>
         <p><strong>Where to use it:</strong> Any template. Grimoire’s preset includes it on About (<code>page.about-us.json</code>). You can also add it to the homepage, Contact, or any Page template from <strong>Add section</strong> in the theme editor. No <code>enabled_on</code> restriction in schema.</p>
         <p><strong>How to customize:</strong> Add member blocks with portrait images and bios. Reorder in the editor. Header via <a href="#snippet-section-title">section-title</a>.</p>
         <p><strong>Limits:</strong> No block count cap in schema. Preset includes three members.</p>
