@@ -4465,7 +4465,7 @@ City, State 00000</code></td></tr>
 
             <input type="hidden" name="_template" value="table">
             <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_next" value="https://agmtzg.github.io/docs/grimoire.html?sent=1#support">
+            <input type="hidden" name="_next" value="https://agmtzg.github.io/docs/grimoire.html?sent=1#support-contact">
             <input type="hidden" name="_autoresponse" value="Thanks for contacting Grimoire theme support. Your request has been received and I'll reply within one business day. This is an automated confirmation — there's no need to reply to it.">
             <input type="hidden" name="Theme" value="Grimoire">
             <div class="hp" aria-hidden="true">
@@ -4634,13 +4634,19 @@ City, State 00000</code></td></tr>
   </script>
 
   <script>
-    // FormSubmit returns the merchant here with ?sent=1 after a successful post.
+    // FormSubmit returns the merchant here with ?sent=1#support-contact after a
+    // successful post. The banner starts hidden, so the browser's own scroll to
+    // the fragment happens before it exists — scroll to it explicitly instead,
+    // otherwise the confirmation lands off-screen above the fold.
     (function () {
       if (!new URLSearchParams(location.search).has('sent')) return;
       var b = document.getElementById('sent-banner');
       if (!b) return;
       b.style.display = 'block';
-      history.replaceState(null, '', location.pathname + '#support');
+      history.replaceState(null, '', location.pathname + '#support-contact');
+      requestAnimationFrame(function () {
+        b.scrollIntoView({ block: 'center', behavior: 'auto' });
+      });
     })();
   </script>
 
