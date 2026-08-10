@@ -1616,6 +1616,12 @@
         <!-- product-card -->
         <hr class="doc-divider" id="snippet-product-card">
         <h3 class="doc-h3">product-card.liquid</h3>
+        <div class="callout">
+          <strong>Image size:</strong> product cards display at <strong>3:4 portrait</strong>. Upload product
+          images at least <strong>900 × 1200 px</strong>. Images crop from the center, so keep the product
+          centered and leave a little margin. This ratio applies everywhere cards appear — Trending products,
+          Product recommendations, Recently viewed, Collection, and Search.
+        </div>
         <p>
           The reusable <strong>product tile</strong> in Grimoire: image, sale/sold-out badges, title,
           price (and compare-at when on sale), optional color swatches, and an action button. Sections
@@ -2916,6 +2922,7 @@
 <p>Full-bleed homepage hero carousel powered by <strong>Swiper 11</strong>: background image or video per slide, headline, subcopy, CTA, and slide counter. Touch-friendly with custom prev/next controls.</p>
         <p><strong>Where to use it:</strong> Typically first on <code>templates/index.json</code>. Works on any template that needs a cinematic hero.</p>
         <p><strong>How to customize:</strong> Add <strong>Slide</strong> blocks (image, optional video, text, button link). Set autoplay delay in section settings. Without JavaScript, slides stack vertically for accessibility.</p>
+        <p><strong>Image size:</strong> <strong>16:9 landscape, at least 1920 × 1080 px.</strong> Slides cover the full viewport, so the crop tightens on tall phone screens — keep the subject and any text away from the left and right edges.</p>
         <p><strong>Limits:</strong> Up to <strong>8</strong> slides (<code>max_blocks: 8</code>). Not the same as <a href="#snippet-product-carousel-shell">product-carousel-shell</a> used for product grids.</p>
         </div>
         <h4 class="doc-h4">Section settings</h4>
@@ -2971,6 +2978,7 @@
 <p>Homepage-style carousel of collection cards: image, title, description, and link per category block. Distinct from the <strong>Collection</strong> PLP section (<a href="#sections-collection-liquid">collection.liquid</a>).</p>
         <p><strong>Where to use it:</strong> Homepage (<code>index.json</code>), the collections list (<code>list-collections.json</code>), and the single collection template (<code>collection.json</code>). For example above or below the main PLP section (<a href="#sections-collection-liquid">collection.liquid</a>). Uses <a href="#snippet-section-title">section-title</a> for eyebrow, heading, and optional CTA.</p>
         <p><strong>How to customize:</strong> Toggle <strong>Show featured collection</strong> to show or hide the optional featured category split block (label, title, description, image, link, and reviews stat in section settings). To surface more collections, add <strong>Category</strong> blocks in the Shopify theme editor. Each block becomes a card in the horizontal carousel (max <strong>15</strong>). Pick a collection or custom image and copy per card. Section settings also control header text and carousel behavior. App blocks (<code>@app</code>) can extend the section if an app provides them.</p>
+        <p><strong>Image size:</strong> <strong>Featured panel 3:4, at least 1500 × 2000 px. Cards 3:4, at least 900 × 1200 px.</strong> The card ratio follows the <code>card_image_ratio</code> setting, so it changes if you do.</p>
         <p><strong>Limits:</strong> <strong>15</strong> category blocks max. Uses the section’s own carousel JS, not <code>GrimoireCarousel</code>.</p>
         </div>
         <h4 class="doc-h4">Section settings</h4>
@@ -3033,6 +3041,7 @@
 <p>Tabbed product carousels: each tab is a category label with its own hand-picked product list, quick-view modals, and shared header from <a href="#snippet-section-title">section-title</a>.</p>
         <p><strong>Where to use it:</strong> Homepage and landing pages. Preset included on index.</p>
         <p><strong>How to customize:</strong> Add up to <strong>5</strong> <strong>Category tab</strong> blocks. In each tab, select products (respect <strong>Products to show</strong> per tab, 1–12). Set section eyebrow, heading, and optional “view all” button. Cards use <code>opens_modal: true</code> and one <a href="#snippet-quick-view-modal">quick-view-modal</a> per section instance.</p>
+        <p><strong>Image size:</strong> <strong>3:4 portrait, at least 900 × 1200 px.</strong> This is the product card ratio, shared with Product recommendations, Recently viewed, Collection, and Search. Set it on the product images themselves, not here.</p>
         <p><strong>Limits:</strong> <strong>5</strong> tabs max. Snippets: section-title, product-card, product-carousel-shell, quick-view-modal, quick-view-bindings (via modal).</p>
         </div>
         <h4 class="doc-h4">Section settings</h4>
@@ -3141,6 +3150,7 @@
 <p>Launch or sale hero with live countdown timer, headline, subcopy, optional pill CTA, and background image or color. Wrapped in <code>&lt;countdown-timer-hero&gt;</code>.</p>
         <p><strong>Where to use it:</strong> Landing pages and homepage takeovers for timed campaigns.</p>
         <p><strong>How to customize:</strong> Set end date/time fields in section settings. Style overlay, typography, and button. Timer updates in the browser; verify timezone expectations when scheduling launches.</p>
+        <p><strong>Image size:</strong> <strong>1:1 square, at least 1400 × 1400 px.</strong></p>
         <p><strong>Limits:</strong> No blocks. Settings-only.</p>
         </div>
         <h4 class="doc-h4">Section settings</h4>
@@ -3185,6 +3195,7 @@
 <p>Large lifestyle image with up to ten clickable hotspots. Each hotspot opens a tooltip with title, text, optional product link, or custom URL. Editor preview highlights the active hotspot block.</p>
         <p><strong>Where to use it:</strong> Any template via <strong>Add section</strong> in the theme editor. The schema has no <code>enabled_on</code> limit and Grimoire does not include this section in a default preset JSON. Typical placements: homepage (<code>index.json</code>), About (<code>page.about-us.json</code>), a generic Page (<code>page.json</code>), Contact (<code>page.contact.json</code>), or a collection template (<code>collection.json</code>) above or below <a href="#sections-collection-liquid">collection.liquid</a>.</p>
         <p><strong>How to customize:</strong> Upload the base image. Add <strong>Hotspot</strong> blocks and position pins in the theme editor (percentage-based coordinates). Choose product-linked or custom content per hotspot. A <code>&lt;noscript&gt;</code> list fallback lists items when JS is off.</p>
+        <p><strong>Image size:</strong> <strong>16:9 landscape, at least 2400 × 1350 px.</strong> Hotspots are positioned as percentages of the image, so swapping in a photo with a different crop moves every pin.</p>
         <p><strong>Limits:</strong> <strong>10</strong> hotspot blocks max (<code>max_blocks: 10</code>).</p>
         </div>
         <h4 class="doc-h4">Section settings</h4>
@@ -3214,6 +3225,7 @@
         <p>One lifestyle photo with clickable hotspots pinned to the products in it. Shoppers tap a dot to see the product and add it to the cart without leaving the page.</p>
         <p><strong>Where to use it:</strong> Any template. Grimoire&#x27;s preset uses it on the home page as a lookbook. It cannot go in the header, footer, or promotional section groups (<code>disabled_on</code>).</p>
         <p><strong>How to customize:</strong> Upload the image, then add a <strong>Hotspot</strong> block per product. Position each dot with the horizontal and vertical percentage fields — 0% is the left or top edge, 100% the right or bottom. Watch the preview as you drag the values so a dot never lands on top of a label.</p>
+        <p><strong>Image size:</strong> <strong>3:4 portrait, at least 1800 × 2400 px.</strong> Hotspots are positioned as percentages, so replacing the image with a different crop moves every pin.</p>
         <p><strong>Limits:</strong> Up to <strong>8</strong> hotspots (<code>max_blocks: 8</code>). With no image the section shows placeholder media, and with no products assigned it renders as a plain image — the product panel only appears once at least one hotspot has a product.</p>
         </div>
         <h4 class="doc-h4">Section settings</h4>
@@ -3312,6 +3324,7 @@
         <p>Puts one product, with its full buy experience, anywhere on the store. Same block system as the main product page, so the layout is yours to arrange.</p>
         <p><strong>Where to use it:</strong> Any template. Grimoire&#x27;s preset places it on the home page to spotlight a hero product. Add it from <strong>Add section</strong> in the theme editor. It cannot go in the header, footer, or promotional section groups (<code>disabled_on</code>).</p>
         <p><strong>How to customize:</strong> Pick the product in section settings, then add and reorder blocks to build the buy panel: <strong>Title</strong>, <strong>Price</strong>, <strong>Variant picker</strong>, <strong>Quantity selector</strong>, <strong>Buy buttons</strong>, <strong>Description</strong>, <strong>Pickup availability</strong>, <strong>Payment icons</strong> and <strong>Share</strong>. Drop in <strong>Custom Liquid</strong> for your own markup, or an app block for anything an installed app provides.</p>
+        <p><strong>Image size:</strong> <strong>Follows the <code>image_ratio</code> setting</strong> — portrait is 3:4, square is 1:1, landscape is 4:3. Upload at least 1200 px on the long edge so zoom stays sharp.</p>
         <p><strong>Limits:</strong> One product per section — add the section again to feature a second. No cap on block count. If no product is selected, the section falls back to placeholder media so the layout never collapses.</p>
         </div>
         <h4 class="doc-h4">Section settings</h4>
@@ -3411,6 +3424,7 @@
         <p>Automatic grid of every collection in the store, paginated. This is what powers the <code>/collections</code> page.</p>
         <p><strong>Where to use it:</strong> The <code>list-collections.json</code> template, which Shopify serves at <code>/collections</code>. You can also add it to any other template from <strong>Add section</strong>. It cannot go in the header, footer, or promotional section groups (<code>disabled_on</code>).</p>
         <p><strong>How to customize:</strong> Set how many collections appear per page and how many columns the grid uses on desktop; the grid drops to three columns on tablet and two on mobile on its own. Toggle the product count under each name. Header via <a href="#snippet-section-title">section-title</a>.</p>
+        <p><strong>Image size:</strong> <strong>At least 900 × 1200 px.</strong> The ratio follows the <code>image_ratio</code> setting — portrait is 3:4, square is 1:1, landscape is 4:3. Cards use the collection image, or the first product image when a collection has none.</p>
         <p><strong>Limits:</strong> Lists collections automatically — there is nothing to curate here, and no way to reorder or exclude one. For a hand-picked, ordered set use <a href="#sections-collections-liquid">collections</a> instead. Each card uses the collection&#x27;s featured image; if a collection has none, Shopify falls back to the first product&#x27;s image, and an empty collection gets a placeholder. Runs without JavaScript.</p>
         </div>
         <h4 class="doc-h4">Section settings</h4>
@@ -3670,6 +3684,7 @@
 <p>Split or stacked promo band: copy and button beside a background video (hosted or URL) with poster fallback and overlay controls.</p>
         <p><strong>Where to use it:</strong> Homepage, about, or campaign landing sections.</p>
         <p><strong>How to customize:</strong> Upload video or paste URL. Set poster image for mobile and low-bandwidth. Tune overlay opacity, text alignment, and CTA link. Autoplay respects muted conventions; fallback image persists if autoplay is blocked.</p>
+        <p><strong>Image size:</strong> <strong>16:9 landscape, at least 2400 × 1350 px.</strong> The section height is a setting, so a taller banner crops more off the top and bottom.</p>
         <p><strong>Limits:</strong> No blocks. Settings-only.</p>
         </div>
         <h4 class="doc-h4">Section settings</h4>
@@ -3747,6 +3762,7 @@
 <p>Magazine-style grid: one featured article and a sidebar of smaller cards, with optional category filter tabs.</p>
         <p><strong>Where to use it:</strong> Dedicated news or journal pages (not the default blog template).</p>
         <p><strong>How to customize:</strong> Header via <a href="#snippet-section-title">section-title</a>. Article count is fixed in implementation (one featured + four sidebar items). Configure which blog to pull and filter labels in settings.</p>
+        <p><strong>Image size:</strong> <strong>3:2 landscape, at least 1400 × 933 px.</strong> Comes from each article’s featured image, set in the blog post, not in this section.</p>
         <p><strong>Limits:</strong> No blocks. Behavior is settings-driven.</p>
         </div>
         <h4 class="doc-h4">Section settings</h4>
@@ -3804,6 +3820,7 @@
 <p>Multi-step guided quiz (2–5 stages) with image options per answer. Results map to <strong>Recommendation</strong> blocks that show up to four products when answer paths match.</p>
         <p><strong>Where to use it:</strong> Homepage, landing pages, or a dedicated “find your product” page.</p>
         <p><strong>How to customize:</strong> Set <strong>Number of stages</strong> and label each stage’s question and four options (text + image). Add many <strong>Recommendation</strong> blocks: each ties stage answers to a <strong>product list</strong> (max four products per block). Tune result screen copy and disclaimer.</p>
+        <p><strong>Image size:</strong> <strong>3:4 portrait, at least 1200 × 1600 px.</strong> One image per question step.</p>
         <p><strong>Limits:</strong> Stage option images and questions are section settings (s1–s5). Recommendation blocks are unlimited in count but each product list field caps at <strong>4</strong> products. Heavy configuration. Plan answer keys before adding blocks.</p>
         </div>
         <h4 class="doc-h4">Section settings</h4>
@@ -3998,6 +4015,7 @@ City, State 00000</code></td></tr>
 <p>About-page timeline: alternating <strong>Chapter</strong> blocks with eyebrow, heading, rich body, image, and left/right image placement.</p>
         <p><strong>Where to use it:</strong> Any template. Grimoire’s preset uses it on About (<code>page.about-us.json</code>). You can also add it to the homepage, Contact, or any Page template from <strong>Add section</strong> in the theme editor. No <code>enabled_on</code> restriction in schema.</p>
         <p><strong>How to customize:</strong> Add chapter blocks in narrative order. Toggle image side per chapter. Section-level settings control overall intro (if any). Preset ships three chapters.</p>
+        <p><strong>Image size:</strong> <strong>4:5 portrait, at least 1400 × 1750 px.</strong> One image per chapter.</p>
         <p><strong>Limits:</strong> No <code>max_blocks</code> cap on chapters in schema. No snippets.</p>
         </div>
         <h4 class="doc-h4">Section settings</h4>
@@ -4032,6 +4050,7 @@ City, State 00000</code></td></tr>
         <p>Numbered steps that walk shoppers through a process — how a product is made, how to use it, how an order is fulfilled.</p>
         <p><strong>Where to use it:</strong> Any template. Grimoire&#x27;s preset uses it on the home page. It works equally well on About or a Page template. It cannot go in the header, footer, or promotional section groups (<code>disabled_on</code>).</p>
         <p><strong>How to customize:</strong> Add a <strong>Step</strong> block for each stage, in order. Each step takes a short label and a rich-text description; numbering is automatic, so inserting a step later renumbers the rest for you. Header via <a href="#snippet-section-title">section-title</a>.</p>
+        <p><strong>Image size:</strong> <strong>4:5 portrait, at least 960 × 1200 px.</strong> One image per step, all cropped to the same ratio so the sequence reads evenly.</p>
         <p><strong>Limits:</strong> Up to <strong>20</strong> steps (<code>max_blocks: 20</code>). Steps are numbered in block order — reorder the blocks to reorder the sequence.</p>
         </div>
         <h4 class="doc-h4">Section settings</h4>
@@ -4065,6 +4084,7 @@ City, State 00000</code></td></tr>
 <p>Staff or founder grid: photo, name, role, and short bio per <strong>Member</strong> block, with section header.</p>
         <p><strong>Where to use it:</strong> Any template. Grimoire’s preset includes it on About (<code>page.about-us.json</code>). You can also add it to the homepage, Contact, or any Page template from <strong>Add section</strong> in the theme editor. No <code>enabled_on</code> restriction in schema.</p>
         <p><strong>How to customize:</strong> Add member blocks with portrait images and bios. Reorder in the editor. Header via <a href="#snippet-section-title">section-title</a>.</p>
+        <p><strong>Image size:</strong> <strong>3:4 portrait, at least 900 × 1200 px.</strong> Headshots crop from the center, so leave room above the head.</p>
         <p><strong>Limits:</strong> No block count cap in schema. Preset includes three members.</p>
         </div>
         <h4 class="doc-h4">Section settings</h4>
