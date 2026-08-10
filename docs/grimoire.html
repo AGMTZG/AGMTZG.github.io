@@ -632,6 +632,83 @@
       .ref-grid { grid-template-columns: 1fr; }
       .footer-inner { flex-direction: column; gap: 1rem; text-align: center; }
     }
+
+    /* ── SUPPORT FORM ── */
+    .support-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 2.5rem;
+      align-items: start;
+      margin-top: 1.5rem;
+    }
+    .support-form { display: flex; flex-direction: column; gap: 1.1rem; }
+    .field { display: flex; flex-direction: column; gap: 0.4rem; }
+    .field label {
+      font-size: 0.88rem; font-weight: 600; color: var(--text);
+    }
+    .field .hint { font-weight: 400; color: var(--text-faint); }
+    .field input, .field textarea, .field select {
+      font-family: 'Figtree', sans-serif;
+      font-size: 0.92rem;
+      padding: 0.7rem 0.9rem;
+      border: 1px solid var(--border-2);
+      border-radius: 6px;
+      background: var(--surface);
+      color: var(--text);
+      outline: none;
+      width: 100%;
+      resize: vertical;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .field input::placeholder, .field textarea::placeholder { color: var(--text-faint); }
+    .field input:focus, .field textarea:focus, .field select:focus {
+      border-color: var(--text-soft);
+      box-shadow: 0 0 0 3px rgba(221,219,215,0.08);
+    }
+    .field textarea { min-height: 150px; line-height: 1.6; }
+    .field select option { background: var(--surface); color: var(--text); }
+    .field input[type="file"] { padding: 0.55rem 0.7rem; font-size: 0.86rem; cursor: pointer; }
+    .field input[type="file"]::file-selector-button {
+      font-family: 'Figtree', sans-serif;
+      font-size: 0.82rem; font-weight: 600;
+      color: var(--bg); background: var(--text);
+      border: none; border-radius: 4px;
+      padding: 0.4rem 0.85rem; margin-right: 0.75rem;
+      cursor: pointer; transition: opacity 0.2s;
+    }
+    .field input[type="file"]::file-selector-button:hover { opacity: 0.85; }
+    .field .note { font-size: 0.82rem; color: var(--text-faint); line-height: 1.55; }
+
+    /* FormSubmit honeypot — must never be visible or focusable. */
+    .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+    .support-submit {
+      align-self: flex-start;
+      font-family: 'Figtree', sans-serif;
+      font-size: 0.92rem; font-weight: 600;
+      color: var(--bg); background: var(--text);
+      border: none; border-radius: 6px;
+      padding: 0.75rem 1.6rem; cursor: pointer;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .support-submit:hover { opacity: 0.88; transform: translateY(-1px); }
+    .support-submit:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+
+    .support-banner {
+      background: var(--surface);
+      border: 1px solid var(--border-2);
+      border-left: 3px solid var(--green);
+      border-radius: 6px;
+      padding: 1rem 1.2rem;
+      margin-bottom: 1.8rem;
+      font-size: 0.92rem;
+      color: var(--text-soft);
+    }
+    .support-banner strong { color: var(--text); }
+
+    @media (max-width: 900px) {
+      .support-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
   </style>
 </head>
 <body>
@@ -752,6 +829,16 @@
             <a class="toc-sub" href="#theme-settings-products">Products</a>
             <a class="toc-sub" href="#theme-settings-favicon">Favicon</a>
             <a class="toc-sub" href="#theme-settings-animations">Animations</a>
+          </div>
+
+          <div class="toc-group">
+            <span class="toc-group-label">Help</span>
+            <a class="toc-link" href="#support">
+              <span class="toc-dot"></span>Support
+            </a>
+            <a class="toc-sub" href="#support-policy">What's covered</a>
+            <a class="toc-sub" href="#support-faq">Frequently asked questions</a>
+            <a class="toc-sub" href="#support-contact">Contact</a>
           </div>
         </nav>
       </div>
@@ -4255,6 +4342,180 @@ City, State 00000</code></td></tr>
         </ol>
       </section>
 
+
+      <!-- ── SUPPORT ── -->
+      <section class="doc-section" id="support">
+        <div class="section-eyebrow">Help</div>
+        <h2 class="doc-h2">Support</h2>
+        <p class="doc-lead">
+          Most questions are answered somewhere above — the section reference covers every setting
+          the theme editor exposes. If something is broken or the docs don't cover it, send it over.
+        </p>
+
+        <h3 class="doc-h3" id="support-policy">What's covered</h3>
+        <p>
+          Bug fixes in the theme, and answers to any question about how Grimoire works, are included
+          with your purchase for as long as the theme is sold on the Shopify Theme Store. That
+          includes help understanding a setting, reproducing a problem, and guidance on how to
+          achieve something with the theme's own options.
+        </p>
+        <div class="callout">
+          <strong>Not included:</strong> custom code, app integrations, and design changes beyond the
+          theme's built-in settings. Those aren't part of the theme price. I'm happy to quote them
+          separately, or you can hire a
+          <a href="https://www.shopify.com/partners/directory" target="_blank" rel="noopener nofollow">Shopify Partner</a>.
+        </div>
+        <div class="callout warning">
+          <strong>Before you edit theme code:</strong> duplicate your theme first, from
+          <em>Online Store → Themes → Actions → Duplicate</em>, and make changes on the copy. A
+          modified theme can't be updated in place without losing those edits, and code changes you
+          make yourself fall outside what support covers.
+        </div>
+
+        <h3 class="doc-h3" id="support-faq">Frequently asked questions</h3>
+
+        <h4 class="doc-h4">Will I lose my settings when the theme updates?</h4>
+        <p>
+          No, as long as you haven't edited the theme's code. Settings live in your store, not in the
+          theme files, so they carry over. If you did edit code, those edits do not carry over — see
+          the warning above.
+        </p>
+
+        <h4 class="doc-h4">I added a section and it looks empty</h4>
+        <p>
+          Most sections need content before they render anything. A section that pulls from your
+          catalog needs a collection or product selected, and a block-based one needs at least one
+          block added. Sections that can't fill themselves show placeholder media so you can see the
+          layout while you work.
+        </p>
+
+        <h4 class="doc-h4">Can I use this section on a different page?</h4>
+        <p>
+          Almost always yes. Add it from <strong>Add section</strong> on any template. The exceptions
+          are noted per section under <em>Where to use it</em> — a few can't go in the header, footer,
+          or promotional groups, and the page-specific ones like Product or Cart only make sense on
+          their own template.
+        </p>
+
+        <h4 class="doc-h4">My demo doesn't look like the theme preview</h4>
+        <p>
+          The preview is populated with images and copy from the demo store, and those don't transfer
+          when you install a theme. The layout, colors, and typography do. Add your own products and
+          images and the structure will match.
+        </p>
+
+        <h4 class="doc-h4">Something looks wrong only on mobile</h4>
+        <p>
+          Check it in the theme editor's mobile preview rather than by resizing a desktop window —
+          they aren't equivalent. If it still looks wrong, send a screenshot through the form below
+          and say which device and browser you're on.
+        </p>
+
+        <h4 class="doc-h4">Which browsers are supported?</h4>
+        <p>
+          The last two versions of Chrome, Safari, Firefox, and Edge, on desktop and mobile.
+        </p>
+
+        <h3 class="doc-h3" id="support-contact">Contact</h3>
+        <p>
+          Fill this in and you'll get an automatic confirmation straight away, then a real reply
+          within one business day.
+        </p>
+
+        <div id="sent-banner" class="support-banner" style="display:none" role="status">
+          <strong>Thanks — your request came through.</strong> A confirmation is on its way to your
+          inbox, and I'll reply within one business day.
+        </div>
+
+        <div class="support-grid">
+
+          <!--
+            Posts to FormSubmit, which is what makes this form deliver mail from a
+            static GitHub Pages host. Notes for future edits:
+              - enctype must stay multipart/form-data or file uploads silently drop
+              - every field needs a name attribute; FormSubmit ignores id
+              - _subject sets the email subject line, _autoresponse sends the
+                confirmation back to the merchant, _next returns them here
+              - the very first submission must be confirmed by email before
+                FormSubmit starts forwarding anything
+          -->
+          <form
+            class="support-form"
+            action="https://formsubmit.co/plated-ellipse-wad@duck.com"
+            method="POST"
+            enctype="multipart/form-data">
+
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="https://agmtzg.github.io/docs/grimoire.html?sent=1#support">
+            <input type="hidden" name="_autoresponse" value="Thanks for contacting Grimoire theme support. Your request has been received and I'll reply within one business day. This is an automated confirmation — there's no need to reply to it.">
+            <input type="hidden" name="Theme" value="Grimoire">
+            <div class="hp" aria-hidden="true">
+              <label for="sup-honey">Leave this field empty</label>
+              <input type="text" id="sup-honey" name="_honey" tabindex="-1" autocomplete="off">
+            </div>
+
+            <div class="field">
+              <label for="sup-name">Name</label>
+              <input type="text" id="sup-name" name="Name" placeholder="Jane Smith" autocomplete="name" required>
+            </div>
+
+            <div class="field">
+              <label for="sup-email">Email address</label>
+              <input type="email" id="sup-email" name="Email" placeholder="jane@company.com" autocomplete="email" required>
+            </div>
+
+            <div class="field">
+              <label for="sup-store">Store URL <span class="hint">— for example, https://storename.myshopify.com</span></label>
+              <input type="url" id="sup-store" name="Store URL" placeholder="https://storename.myshopify.com" required>
+            </div>
+
+            <div class="field">
+              <label for="sup-subject">Subject</label>
+              <select id="sup-subject" name="_subject" required>
+                <option value="">Select a topic…</option>
+                <option value="Grimoire — Bug report">Bug report</option>
+                <option value="Grimoire — Setup question">Setup question</option>
+                <option value="Grimoire — Theme settings help">Theme settings help</option>
+                <option value="Grimoire — Theme update">Theme update</option>
+                <option value="Grimoire — Something else">Something else</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="sup-message">Description of the problem</label>
+              <textarea id="sup-message" name="Description" placeholder="What did you expect to happen, and what happened instead? Include the page and section it affects, and the steps to reproduce it." required></textarea>
+            </div>
+
+            <div class="field">
+              <label for="sup-file">Screenshots <span class="hint">— optional, 10&nbsp;MB total</span></label>
+              <input type="file" id="sup-file" name="attachment" accept="image/*,.pdf" multiple>
+              <p class="note">A screenshot of the problem usually saves a round trip.</p>
+            </div>
+
+            <button type="submit" class="support-submit">Send request</button>
+          </form>
+
+          <div>
+            <div class="callout tip">
+              <strong>Before you write</strong>
+              <ul style="margin:0.7rem 0 0; padding-left:1.1rem; line-height:1.9;">
+                <li>Note which page and section the problem appears on.</li>
+                <li>Tell me the browser and device, and whether it happens on mobile, desktop, or both.</li>
+                <li>Say what you already tried.</li>
+                <li>Attach a screenshot if you can.</li>
+              </ul>
+            </div>
+            <div class="callout">
+              Prefer email? Write to
+              <a href="mailto:plated-ellipse-wad@duck.com">plated-ellipse-wad@duck.com</a>
+              with the same details. The form just makes sure nothing important is missing.
+            </div>
+          </div>
+
+        </div>
+      </section>
+
     </main>
   </div>
 
@@ -4351,6 +4612,17 @@ City, State 00000</code></td></tr>
       window.addEventListener('resize', scheduleScrollUpdate, { passive: true });
 
       updateActiveFromScroll();
+    })();
+  </script>
+
+  <script>
+    // FormSubmit returns the merchant here with ?sent=1 after a successful post.
+    (function () {
+      if (!new URLSearchParams(location.search).has('sent')) return;
+      var b = document.getElementById('sent-banner');
+      if (!b) return;
+      b.style.display = 'block';
+      history.replaceState(null, '', location.pathname + '#support');
     })();
   </script>
 
