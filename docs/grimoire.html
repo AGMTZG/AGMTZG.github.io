@@ -3054,6 +3054,19 @@
           The badge and countdown appear as soon as that date is in the future and remove themselves once it passes, so there is nothing to undo afterwards. Products without the metafield are untouched.
           Keep the date within days or weeks: the counter shows days alongside a running clock, so a date years out renders as <code>1240d 00:08:21</code>, which reads as broken rather than urgent.
         </p>
+        <p><strong>Color swatches:</strong> cards show a row of color swatches when the product has a color option, and tapping one swaps the card image and price without leaving the page. Like the badge above, this is per product and shows anywhere that product's card appears.</p>
+        <ol style="color:var(--text-soft); padding-left:1.4rem; margin:0 0 1rem; line-height:1.9;">
+          <li>Open the product and, in <strong>Variants</strong>, name the option exactly <code>Color</code>.</li>
+          <li>Add a value per color and set each one's swatch — Shopify lets you pick a color or upload a small image for every option value.</li>
+          <li>Upload a photo per color and assign it to its variant. This is what makes the swap visible; without it every swatch shows the same picture.</li>
+        </ol>
+        <div class="callout warning">
+          <strong>The option name has to match exactly.</strong> The theme compares the option name against a fixed list, so <code>Color</code> works and <code>Seeds Color</code>, <code>Flower Color</code> or <code>Colorway</code> do not — the swatches simply never appear, with no error to explain why. If this is the one thing that isn't working, check the name first.
+          Localized names are accepted as well: <code>colour</code>, <code>couleur</code>, <code>farbe</code>, <code>colore</code>, <code>kleur</code>, <code>cor</code>, <code>färg</code>, <code>farge</code>, <code>kolor</code>, <code>barva</code>, <code>culoare</code>, <code>szín</code>, <code>väri</code>, <code>χρώμα</code>, <code>цвет</code>, <code>色</code>, <code>颜色</code>, <code>색상</code>.
+        </div>
+        <p>
+          Once the option is recognized, availability is tracked <strong>per color</strong> rather than for the product as a whole: a color that is out of stock gets its swatch struck through, and the <strong>SOLD OUT</strong> badge follows whichever color is currently selected. A product with some colors in stock and others not will show the badge appear and disappear as shoppers move between swatches, which is the intended behavior.
+        </p>
         <p><strong>Limits:</strong> <strong>5</strong> tabs max. Snippets: section-title, product-card, product-badges, product-card-countdown, product-carousel-shell, quick-view-modal, quick-view-bindings (via modal).</p>
         </div>
         <h4 class="doc-h4">Section settings</h4>
