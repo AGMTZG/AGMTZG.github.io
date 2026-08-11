@@ -3067,6 +3067,13 @@
         <p>
           Once the option is recognized, availability is tracked <strong>per color</strong> rather than for the product as a whole: a color that is out of stock gets its swatch struck through, and the <strong>SOLD OUT</strong> badge follows whichever color is currently selected. A product with some colors in stock and others not will show the badge appear and disappear as shoppers move between swatches, which is the intended behavior.
         </p>
+        <p><strong>3D models and video don't show on cards.</strong> If you reorder a product's media so a 3D model or a video comes first, the card keeps showing the first <em>photo</em> instead — reordering media won't change it. The same goes for every section built from product cards.</p>
+        <div class="callout">
+          This is deliberate, not a limitation to work around. A card grid renders four to twelve products at once, and a shopper scrolling through them is scanning, not evaluating. Each 3D viewer is a live WebGL canvas with its own library behind it, so a grid of them would cost far more in load time than it could return in browsing. Rich media belongs where there is one product and a decision to make.
+        </div>
+        <p>
+          Where each one does appear: the <strong>product page</strong> and <strong>Featured product</strong> show the real 3D model, rotatable, with AR on phones that support it. <strong>Quick view</strong> shows the model's preview image rather than the model — it opens from a grid, so the shopper is still browsing. To choose which photo represents a product on cards, reorder the <em>images</em>; the first one wins.
+        </p>
         <p><strong>Limits:</strong> <strong>5</strong> tabs max. Snippets: section-title, product-card, product-badges, product-card-countdown, product-carousel-shell, quick-view-modal, quick-view-bindings (via modal).</p>
         </div>
         <h4 class="doc-h4">Section settings</h4>
